@@ -1,0 +1,200 @@
+.header {
+  padding: 1.25rem 0;
+  border-bottom: 1px solid var(--border-color);
+  display: flex;
+  height: 7.5rem;
+  align-items: center;
+  justify-content: center;
+  position: sticky;
+  flex-direction: column;
+
+  nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    .actions {
+      gap: 1rem;
+      display: flex;
+      margin-left: 0.5rem;
+      justify-content: flex-end;
+      align-items: center;
+      .user_btn {
+        width: 3rem;
+        height: 3rem;
+        background: none;
+        border: none;
+        padding: 0;
+        display: flex;
+        align-items: center;
+        border-radius: 50%;
+        overflow: hidden;
+        img {
+          width: 3rem;
+          height: 3rem;
+          border-radius: 50%;
+        }
+        &:focus {
+          outline: none;
+          box-shadow: none;
+        }
+        &:hover {
+          background-color: transparent;
+        }
+      }
+    }
+    .nav_links {
+      flex: 25;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-decoration: none;
+      margin: 0;
+      padding: 0 0.625rem;
+      gap: 1.25rem;
+
+      li {
+        padding: 10px 0;
+        &:last-child {
+          button {
+            white-space: nowrap;
+          }
+        }
+        a {
+          color: var(--gray-color);
+          text-decoration: none;
+          white-space: nowrap;
+          &.active {
+            color: var(--color-black);
+          }
+          &:hover {
+            color: var(--gray-color);
+          }
+        }
+      }
+    }
+  }
+  .Categories_Slider_item {
+    color: var(--gray-color);
+    a {
+      color: var(--grag-color);
+      text-decoration: none;
+      &:hover {
+        color: var(--gray-hover-color);
+      }
+    }
+  }
+}
+.logo {
+  color: var(--color-black);
+  text-decoration: none;
+  font-size: 1.25rem;
+  margin-right: 1.25rem;
+}
+
+.search_box {
+  display: flex;
+  align-items: center;
+  flex: 1;
+
+  input {
+    padding: 0.625rem 0.75rem;
+    border: 1px solid var(--border-color);
+    border-radius: 0.25rem 0 0 0.25rem;
+    width: 100%;
+    &::placeholder {
+      color: var(--gray-color);
+      padding-left: 10px;
+    }
+    &:focus {
+      outline: none;
+    }
+  }
+  button {
+    display: flex;
+    background-color: var(--secondary-color);
+    color: var(--white-color);
+    height: 2.5rem;
+    padding: 0.5rem 1rem;
+    font-size: 1rem;
+    border-radius: 0 0.25rem 0.25rem 0;
+  }
+}
+
+/*   Open state of the dialog  */
+dialog[open] {
+  transform: translateX(0);
+}
+
+/*   Closed state of the dialog   */
+dialog {
+  transform: translateX(-100%);
+  position: fixed;
+  margin: 0;
+  left: 0;
+  top: 0;
+  z-index: 10;
+  width: 75%;
+  border: none;
+  background-color: var(--white-color);
+  min-height: 100vh;
+  transition: transform 0.7s ease-out, overlay 0.7s ease-out allow-discrete,
+    display 0.7s ease-out allow-discrete;
+
+  header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.5rem;
+
+    button {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 1.25rem;
+      font-size: 1.125rem;
+      border: none;
+      background-color: transparent;
+      height: 1.25rem;
+      width: 1.25rem;
+      border-radius: 50%;
+      cursor: pointer;
+      transition: 0.15s ease-out;
+      color: var(--color-black);
+
+      &:hover {
+        background-color: var(--gray-hover-color);
+      }
+    }
+  }
+  ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    li {
+      width: 100%;
+      cursor: pointer;
+      padding: 1rem 1rem 1rem 0.75rem;
+      transition: 0.15s ease-out;
+
+      &:hover a {
+        color: var(--black-color);
+      }
+      a {
+        width: 100%;
+        text-decoration: none;
+        transition: 0.15s ease-out;
+        color: var(--gray-color);
+
+        &:hover {
+          color: var(--black-color);
+        }
+      }
+    }
+  }
+}
+@starting-style {
+  dialog[open] {
+    transform: translateX(-100%);
+  }
+}

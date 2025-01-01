@@ -1,0 +1,30 @@
+@import "./header.css";
+:root {
+  --main-color: #003912;
+  --secondary-color: #222325;
+  --white-color: #fff;
+  --black-color: #000;
+  --gray-color: #666363;
+  --gray-hover-color: #95979d;
+  --card-border-radius: 0.5rem;
+  --border-color: #e4e5e7;
+}
+
+* {
+  padding: 0;
+  margin: 0;
+  line-height: 1.4;
+  box-sizing: border-box;
+  scroll-behavior: smooth;
+  -webkit-tap-highlight-color: transparent;
+}
+
+ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+a {
+  text-decoration: none;
+}
