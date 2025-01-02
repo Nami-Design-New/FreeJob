@@ -1,5 +1,6 @@
 @import "./header.css";
 @import "./footer.css";
+@import "./cards.css";
 :root {
   --main-color: #003912;
   --secondary-color: #222325;
@@ -9,6 +10,7 @@
   --gray-hover-color: #95979d;
   --card-border-radius: 0.5rem;
   --border-color: #e4e5e7;
+  --service-card-bg: #f6f5f5;
 }
 
 * {
