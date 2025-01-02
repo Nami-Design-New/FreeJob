@@ -1,7 +1,10 @@
-import "./App.css";
+import RootLayout from "./Layout/RootLayout";
 
 function App() {
-  return <>freejob project</>;
+  return (
+    <>
+      <RootLayout />
+    </>
+  );
 }
-
 export default App;
