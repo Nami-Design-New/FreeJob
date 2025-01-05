@@ -1,0 +1,85 @@
+// Import Swiper React components
+import { Swiper, SwiperSlide } from "swiper/react";
+
+// Import Swiper styles
+import "swiper/css";
+import SectionCard from "../cards/SectionCard";
+const sections = [
+  {
+    id: "1",
+    title: "Website Development",
+    backgroundColor: "#00732E",
+    imageUrl: "https://placehold.co/188",
+  },
+  {
+    id: "2",
+    title: "Logo Design",
+    backgroundColor: "#FF7640",
+    imageUrl: "https://placehold.co/188",
+  },
+  {
+    id: "3",
+    title: "SEO",
+    backgroundColor: "#003912",
+    imageUrl: "https://placehold.co/188",
+  },
+  {
+    id: "4",
+    title: "Architecture & Interior Design",
+    backgroundColor: "#4D1727",
+    imageUrl: "https://placehold.co/188",
+  },
+  {
+    id: "5",
+    title: "Social Media Marketing",
+    backgroundColor: "#687200",
+    imageUrl: "https://placehold.co/188",
+  },
+  {
+    id: "6",
+    title: "Voice Over",
+    backgroundColor: "#421300",
+    imageUrl: "https://placehold.co/188",
+  },
+  {
+    id: "7",
+    title: "Logo Design",
+    backgroundColor: "#FF7640",
+    imageUrl: "https://placehold.co/188",
+  },
+  {
+    id: "8",
+    title: "Logo Design",
+    backgroundColor: "#421300",
+    imageUrl: "https://placehold.co/188",
+  },
+  {
+    id: "8",
+    title: "Logo Design",
+    backgroundColor: "#FF7640",
+    imageUrl: "https://placehold.co/188",
+  },
+];
+
+export default function SectionsSwiper() {
+  return (
+    <>
+      <div>
+        <p className="fs-4 px-3 ">Sections</p>
+        <div className="">
+          <Swiper spaceBetween={20} slidesPerView="auto">
+            {sections.map((item) => (
+              <SwiperSlide key={item.id} style={{ width: "12.5rem" }}>
+                <SectionCard
+                  backgroundColor={item.backgroundColor}
+                  title={item.title}
+                  imageUrl={item.imageUrl}
+                />
+              </SwiperSlide>
+            ))}
+          </Swiper>
+        </div>
+      </div>
+    </>
+  );
+}

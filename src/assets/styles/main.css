@@ -2,6 +2,7 @@
 @import "./footer.css";
 @import "./cards.css";
 @import "./login.css";
+@import "./home.css";
 :root {
   --main-color: #003912;
   --secondary-color: #222325;

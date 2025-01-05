@@ -47,10 +47,10 @@ export default function AuthModal() {
     >
       <Modal.Body>
         <div className="row h-100 p-0 g-0">
-          <div className="col-6 p-0">
+          <div className="d-none d-lg-flex col-6  p-0">
             <LoginRightSide />
           </div>
-          <div className="col-6 p-0 h-100">
+          <div className="col-12 col-lg-6   p-0 h-100">
             {renderStep()}
             <p className="copy_right">
               Copy Rights Reserved {new Date().getFullYear()}
