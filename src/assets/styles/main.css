@@ -1,6 +1,7 @@
 @import "./header.css";
 @import "./footer.css";
 @import "./cards.css";
+@import "./login.css";
 :root {
   --main-color: #003912;
   --secondary-color: #222325;
@@ -34,4 +35,22 @@ a {
 
 .langButton {
   white-space: nowrap;
+}
+
+.form_input {
+  label {
+    color: var(--black-color);
+    margin-bottom: 0.5rem;
+    font-size: 1.25rem;
+    font-weight: 400;
+    line-height: 1.75rem;
+    align-self: start;
+  }
+  input {
+    padding: 0.5rem 1rem;
+    border: none;
+    border-radius: 0.5rem;
+    outline: none;
+    background-color: #e8faf4;
+  }
 }
