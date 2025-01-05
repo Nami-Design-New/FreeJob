@@ -1,19 +1,23 @@
 import { useEffect, useState } from "react";
 import { BsGlobe } from "react-icons/bs";
 import { RiMenuUnfold4Fill } from "react-icons/ri";
+import { useDispatch } from "react-redux";
 import { NavLink } from "react-router";
 import { useResponsiveState } from "../hooks/useResponsiveHook";
+import { openModal } from "../redux/slices/authModalSlice";
 import Button from "./Button";
 import HeaderSwiper from "./header/HeaderSwiper";
 import Logo from "./header/Logo";
 import SideMenu from "./header/SideMenu";
 import UserDropDown from "./header/UserDropDown";
 import LanguageToggle from "./LanguageToggle";
+import AuthModal from "./modals/AuthModal";
 
 export default function Header() {
-  const [isLogin, setIsLogin] = useState(true);
+  const [isLogin, setIsLogin] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
   const isMobile = useResponsiveState("(min-width: 768px)");
+  const dispatch = useDispatch();
 
   useEffect(() => {
     if (isMobile) {
@@ -73,7 +77,13 @@ export default function Header() {
             </div>
           ) : (
             <div className="button-group d-none d-sm-block">
-              <button className="btn me-2">Sign Up</button>
+              <button
+                className="btn me-2"
+                onClick={() => dispatch(openModal())}
+              >
+                Sign Up
+              </button>
+              <AuthModal />
               <Button content="Join" />
             </div>
           )}
