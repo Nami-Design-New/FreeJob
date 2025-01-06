@@ -54,7 +54,7 @@ const sections = [
     imageUrl: "https://placehold.co/188",
   },
   {
-    id: "8",
+    id: "9",
     title: "Logo Design",
     backgroundColor: "#FF7640",
     imageUrl: "https://placehold.co/188",
@@ -67,7 +67,29 @@ export default function SectionsSwiper() {
       <div>
         <p className="fs-4 px-3 ">Sections</p>
         <div className="">
-          <Swiper spaceBetween={20} slidesPerView="auto">
+          <Swiper
+            spaceBetween={16}
+            breakpoints={{
+              320: {
+                slidesPerView: 1,
+              },
+              425: {
+                slidesPerView: 2,
+              },
+              575: {
+                slidesPerView: 2,
+              },
+              768: {
+                slidesPerView: 4,
+              },
+              992: {
+                slidesPerView: 5,
+              },
+              1200: {
+                slidesPerView: 7,
+              },
+            }}
+          >
             {sections.map((item) => (
               <SwiperSlide key={item.id} style={{ width: "12.5rem" }}>
                 <SectionCard

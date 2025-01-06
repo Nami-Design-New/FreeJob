@@ -1,6 +1,7 @@
 .category_card {
   border-radius: 1rem;
-  height: 180px;
+  height: 250px;
+  margin: 0 0.5rem;
   background-color: var(--white-color);
   box-shadow: 0px 3px 7px 0px rgba(0, 0, 0, 0.09),
     0px 0.37px 4.43px 0px rgba(0, 0, 0, 0.05),
@@ -25,14 +26,13 @@
   }
 }
 .sections_card {
-  width: 12.5rem;
   border-radius: 1rem;
+  margin: 0 0.25rem;
   display: flex;
   flex-direction: column;
   box-shadow: 0px 3px 10px 0px rgba(0, 0, 0, 0.09);
-  margin: 10px;
-  padding: 1.5rem 0.5rem 0.5rem;
-  height: 266px;
+  padding: 1.5rem 0.5rem;
+  /* height: 266px; */
   .section_card_title {
     font-size: 1rem;
     flex-grow: 1;
@@ -53,11 +53,10 @@
   }
 }
 .service_card {
-  width: 19.5rem;
+  /* width: 19.5rem; */
   border-radius: 1rem;
   box-shadow: 0px 3px 10px 0px rgba(0, 0, 0, 0.09);
   background-color: var(--service-card-bg);
-  margin: 10px;
   overflow: hidden;
   .section_card_title {
     font-size: 1rem;
@@ -144,6 +143,16 @@
     margin: 0 0.25rem;
   }
 }
+@media screen and (min-width: 768px) {
+  .service_info {
+    h3 {
+      font-size: 0.9rem;
+    }
+    p {
+      font-size: 0.75rem;
+    }
+  }
+}
 
 .best_seller_card {
   padding: 0.75rem 1.5rem 1.25rem;
@@ -194,8 +203,8 @@
 }
 
 .stepsToStart_card {
-  margin: 20px;
-  width: 18rem;
+  height: 100%;
+
   color: var(--black-color);
   text-align: center;
   position: relative;
@@ -215,11 +224,61 @@
     left: 50%;
     transform: translate(-50%, -50%);
   }
+  .content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding-top: 1.5rem;
+  }
   h3 {
     padding: 1.5rem 0 0;
     font-size: 1.5rem;
   }
   p {
     font-size: 1rem;
+  }
+}
+.project_card {
+  border-radius: 1rem;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0px 3px 10px 0px rgba(0, 0, 0, 0.09);
+  margin: 10px;
+  padding: 1.5rem 1rem 1rem;
+  h1 {
+    font-size: 1.25rem;
+  }
+  p {
+    font-size: 1rem;
+  }
+
+  .project_owner {
+    padding: 0.5rem;
+    display: flex;
+    align-items: center;
+    .image_user_container {
+      width: 3rem;
+      height: 3rem;
+      border-radius: 50%;
+      margin-right: 0.5rem;
+      img {
+        border-radius: 50%;
+      }
+    }
+    .project_owner_info {
+      display: flex;
+      flex-direction: column;
+      h4 {
+        font-size: 1rem;
+      }
+      .stats {
+        font-size: 0.75rem;
+        color: var(--gray-color);
+        span {
+          color: var(--main-color);
+        }
+      }
+    }
   }
 }
