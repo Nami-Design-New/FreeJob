@@ -1,6 +1,7 @@
 import { Pagination } from "react-bootstrap";
 import SectionHeader from "../SectionHeader";
 import { useState } from "react";
+import PaginationComponent from "../PaginationComponent";
 const companies = [
   { id: "1", imageUrl: "./images/companylogo1.png" },
   { id: "2", imageUrl: "./images/companylogo2.png" },
@@ -15,8 +16,6 @@ const companies = [
 export default function PartnersofSuccess() {
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 4;
-
-  const totalPages = Math.ceil(companies.length / itemsPerPage);
 
   const startIndex = (currentPage - 1) * itemsPerPage;
   const currentCompanies = companies.slice(
@@ -48,33 +47,12 @@ export default function PartnersofSuccess() {
         ))}
       </div>
       <div className="mt-5 d-flex align-items-center justify-content-center">
-        <Pagination>
-          <Pagination.First
-            onClick={() => handlePageChange(1)}
-            disabled={currentPage === 1}
-          />
-          <Pagination.Prev
-            onClick={() => handlePageChange(currentPage - 1)}
-            disabled={currentPage === 1}
-          />
-          {[...Array(totalPages).keys()].map((page) => (
-            <Pagination.Item
-              key={page + 1}
-              active={currentPage === page + 1}
-              onClick={() => handlePageChange(page + 1)}
-            >
-              {page + 1}
-            </Pagination.Item>
-          ))}
-          <Pagination.Next
-            onClick={() => handlePageChange(currentPage + 1)}
-            disabled={currentPage === totalPages}
-          />
-          <Pagination.Last
-            onClick={() => handlePageChange(totalPages)}
-            disabled={currentPage === totalPages}
-          />
-        </Pagination>
+        <PaginationComponent
+          totalItems={companies.length}
+          itemsPerPage={itemsPerPage}
+          currentPage={currentPage}
+          onPageChange={handlePageChange}
+        />
       </div>
     </div>
   );

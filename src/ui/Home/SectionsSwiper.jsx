@@ -1,9 +1,7 @@
-// Import Swiper React components
 import { Swiper, SwiperSlide } from "swiper/react";
-
-// Import Swiper styles
 import "swiper/css";
 import SectionCard from "../cards/SectionCard";
+import ShowAll from "../ShowAll";
 const sections = [
   {
     id: "1",
@@ -64,44 +62,42 @@ const sections = [
 export default function SectionsSwiper() {
   return (
     <>
-      <div>
-        <p className="fs-4 px-3 ">Sections</p>
-        <div className="">
-          <Swiper
-            spaceBetween={16}
-            breakpoints={{
-              320: {
-                slidesPerView: 1,
-              },
-              425: {
-                slidesPerView: 2,
-              },
-              575: {
-                slidesPerView: 2,
-              },
-              768: {
-                slidesPerView: 4,
-              },
-              992: {
-                slidesPerView: 5,
-              },
-              1200: {
-                slidesPerView: 7,
-              },
-            }}
-          >
-            {sections.map((item) => (
-              <SwiperSlide key={item.id} style={{ width: "12.5rem" }}>
-                <SectionCard
-                  backgroundColor={item.backgroundColor}
-                  title={item.title}
-                  imageUrl={item.imageUrl}
-                />
-              </SwiperSlide>
-            ))}
-          </Swiper>
-        </div>
+      <div className="px-3">
+        <ShowAll sectionName="Sections" to="/sections" />
       </div>
+      <Swiper
+        spaceBetween={16}
+        breakpoints={{
+          320: {
+            slidesPerView: 1,
+          },
+          425: {
+            slidesPerView: 2,
+          },
+          575: {
+            slidesPerView: 2,
+          },
+          768: {
+            slidesPerView: 4,
+          },
+          992: {
+            slidesPerView: 5,
+          },
+          1200: {
+            slidesPerView: 7,
+          },
+        }}
+      >
+        {sections.map((item) => (
+          <SwiperSlide key={item.id}>
+            <SectionCard
+              backgroundColor={item.backgroundColor}
+              title={item.title}
+              imageUrl={item.imageUrl}
+            />
+          </SwiperSlide>
+        ))}
+      </Swiper>
     </>
   );
 }

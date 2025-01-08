@@ -1,0 +1,192 @@
+.sercives_container {
+  display: grid;
+  position: relative;
+  gap: 1rem;
+  grid-template-columns: 17rem 1fr;
+  .services_header_mobile {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 1rem;
+    h1 {
+      font-size: 1.5rem;
+    }
+    button {
+      border: none;
+      background-color: transparent;
+
+      svg {
+        font-size: 2rem !important;
+        width: 2rem;
+        height: 2rem;
+      }
+    }
+  }
+  @media (min-width: 768px) {
+    .services_header_mobile {
+      display: none;
+    }
+  }
+  @media (width: 768px) {
+    .services_header_mobile {
+      display: flex;
+    }
+  }
+  .sidebar {
+    position: fixed;
+    display: flex;
+    flex-direction: column;
+    height: calc(100vh - 125px);
+    overflow-y: scroll;
+    justify-content: start;
+    top: 125px;
+    left: 1.5%;
+
+    background-color: var(--white-color);
+    min-width: 17rem;
+    width: 97%;
+    z-index: 20;
+    transform: translate(calc(-100% - 125px), 0);
+    transition: transform 0.3s ease-in-out;
+    &.open {
+      transform: translate(0);
+    }
+    button {
+      border: none;
+      background-color: transparent;
+      svg {
+        font-size: 2rem !important;
+        width: 2rem;
+        height: 2rem;
+      }
+    }
+    .filter_sidebar {
+      background-color: var(--white-color);
+      width: 100%;
+
+      h3 {
+        font-size: 1rem;
+        font-weight: normal;
+      }
+      .sections_filter {
+        margin: 1rem 0;
+        padding: 1rem 0;
+        border-bottom: 1px solid var(--border-color);
+      }
+      .accordion {
+        .accordion-item {
+          background-color: var(--white-color);
+          border: none;
+          .department_header {
+            width: 100%;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            justify-content: space-between;
+            label {
+              flex: 1 0 0;
+              display: flex;
+              align-items: center;
+              gap: 10px;
+            }
+            .accordion-button {
+              width: 12px;
+              height: 12px;
+              position: relative;
+              background-color: var(--white-color);
+              border: none;
+              box-shadow: none;
+              &::after {
+                content: none;
+              }
+              .horizontal {
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                width: 12px;
+                height: 1px;
+                background-color: var(--black-color);
+                transform: translate(-50%, -50%);
+              }
+              &.collapsed {
+                .vertical {
+                  position: absolute;
+                  top: 50%;
+                  left: 50%;
+                  width: 1px;
+                  height: 12px;
+                  background-color: var(--black-color);
+                  transform: translate(-50%, -50%);
+                  transition: all 300ms ease-in-out;
+                }
+              }
+              .vertical {
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                width: 1px;
+                height: 12px;
+                background-color: var(--black-color);
+                transform: translate(-50%, -50%) rotate(90deg);
+                transition: all 300ms ease-in-out;
+              }
+            }
+          }
+          .accordion-collapse {
+            width: 100%;
+            position: relative;
+            .accordion-body {
+              width: 100%;
+              display: flex;
+              flex-direction: column;
+              gap: 10px;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  @media (min-width: 768px) {
+    .sidebar {
+      position: static;
+      transform: none;
+      transition: none;
+      overflow-y: auto;
+      height: fit-content;
+    }
+  }
+  @media (width: 768px) {
+    .sidebar {
+      position: fixed;
+      top: 10rem;
+      left: 0;
+      height: fit-content;
+      background-color: var(--white-color);
+      min-width: 17rem;
+      width: 97%;
+      margin: 0 0.75rem 0 0.75rem;
+      z-index: 20;
+      transform: translate(calc(-100% - 3rem), 0);
+      transition: transform 0.3s ease-in-out;
+    }
+  }
+
+  .services_list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(16rem, 1fr));
+    gap: 1rem;
+    .service_card_filter {
+      min-width: 16rem;
+    }
+  }
+}
+@media (max-width: 768px) {
+  .sercives_container {
+    grid-template-columns: 1fr;
+  }
+}
+
+.css-1nmdiq5-menu {
+  z-index: 1000 !important;
+}

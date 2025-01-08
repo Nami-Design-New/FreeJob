@@ -1,8 +1,6 @@
-import { Link } from "react-router";
-import SectionHeader from "../SectionHeader";
 import ServiceCard from "../cards/ServiceCard";
-import ShowAll from "../ShowAll";
-const popularServices = [
+
+const services = [
   {
     id: "1",
     price: "200$",
@@ -60,22 +58,14 @@ const popularServices = [
     },
   },
 ];
-export default function PopularServices() {
+export default function ServicesList({ filter }) {
   return (
-    <section className="popular_services">
-      <SectionHeader
-        title="Most popular services"
-        description="Most viewed and best selling services ever"
-      />
-      <ShowAll sectionName="Services" />
-
-      <div className="row g-4">
-        {popularServices.map((service) => (
-          <div className=" col-md-6 col-lg-4" key={service.id}>
-            <ServiceCard service={service} />{" "}
-          </div>
-        ))}
-      </div>
-    </section>
+    <>
+      {services.map((service) => (
+        <section key={service.id} className="service_card_filter">
+          <ServiceCard service={service} />
+        </section>
+      ))}
+    </>
   );
 }
