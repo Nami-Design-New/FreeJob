@@ -1,0 +1,196 @@
+.first_section {
+  position: relative;
+}
+
+.search_home {
+  background-image: url(https://placehold.co/1300x535);
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 70vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  .content {
+    h1 {
+      text-align: center;
+      text-transform: capitalize;
+      color: var(--white-color);
+      font-size: 2.5rem;
+      margin-bottom: 1.5rem;
+      p {
+        margin-bottom: 0.25rem;
+      }
+    }
+  }
+}
+.swiper_cntainer {
+  position: relative;
+  bottom: 3.75rem;
+  left: 0;
+  .swiper-wrapper {
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+    .swiper-slide {
+      height: 100%;
+    }
+  }
+}
+
+.section_header {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  justify-content: center;
+
+  h2 {
+    font-size: 1.75rem;
+    color: var(--secondary-color);
+    margin: 0;
+  }
+  p {
+    font-size: 1.5rem;
+    color: var(--gray-color);
+    margin-bottom: 0;
+  }
+}
+@media screen and (max-width: 768px) {
+  .section_header {
+    h2 {
+      font-size: 1.5rem;
+    }
+    p {
+      font-size: 1.125rem;
+    }
+  }
+}
+
+.howToStart {
+  margin: 4.7rem auto;
+  h1 {
+    text-align: center;
+    margin-bottom: 2.5rem;
+  }
+  .howToStart_content {
+    background-color: var(--main-color);
+    position: relative;
+    padding: 1.5rem;
+    border-radius: 1rem;
+    color: var(--white-color);
+    ul {
+      list-style-type: disc;
+      padding-left: 1rem;
+      .main_item {
+        margin-bottom: 1.5rem;
+        span {
+          display: inline-block;
+          margin-bottom: 0.5rem;
+          font-size: 1.3rem;
+        }
+        ul {
+          width: 100%;
+          .sub_item {
+            font-size: 1rem;
+
+            &::marker {
+              margin-left: 4px;
+            }
+          }
+        }
+      }
+    }
+    .howToStart_imgaeContainer {
+      position: absolute;
+      top: -1.625rem;
+      right: 1rem;
+    }
+  }
+}
+@media screen and (min-width: 992px) {
+  .howToStart_content ul {
+    width: 60%;
+  }
+}
+@media screen and (min-width: 992px) {
+  .howToStart_content {
+    min-height: 475px;
+  }
+}
+.popular_services {
+  margin-bottom: 4.7rem;
+}
+
+.promote_card {
+  margin-bottom: 4.7rem;
+  padding: 1.5rem;
+  border-radius: 1rem;
+  background-color: #e8faf4;
+  display: flex;
+  .content {
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    justify-content: space-between;
+  }
+  h1 {
+    font-size: 2rem;
+    margin-bottom: 1.5rem;
+  }
+  p {
+    font-size: 1.3rem;
+    line-height: 2.4rem;
+    color: var(--secondary-color);
+  }
+}
+
+.partner_of_success {
+  margin-bottom: 4.7rem;
+}
+
+.popular_projects {
+  margin-bottom: 4.7rem;
+}
+.work_with_us {
+  margin-bottom: 4.7rem;
+}
+
+.banner {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 3rem 0;
+  align-items: center;
+  background-color: var(--main-color);
+  h1 {
+    text-align: center;
+    color: var(--white-color);
+    font-size: 3rem;
+    font-weight: 400;
+    margin-bottom: 2rem;
+  }
+}
+.bottom_section {
+  height: 1.5rem;
+  background-color: #c2c2c2;
+}
+@media screen and (max-width: 768px) {
+  .banner {
+    h1 {
+      font-size: 1.5rem;
+    }
+  }
+}
+
+.gallery_section {
+  margin-bottom: 4.7rem;
+
+  .masonary {
+    background-color: none;
+    div {
+      gap: 0.5rem !important;
+    }
+  }
+}
+
+.gallery_section {
+  padding: 20px;
+}

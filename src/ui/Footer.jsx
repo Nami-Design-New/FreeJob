@@ -52,16 +52,16 @@ export default function Footer() {
     <footer>
       <div className="container-md">
         <div className="row">
-          <div className="col-md-6 col-lg-3">
+          <div className="col-6 col-lg-3">
             <FooterSection items={categories} title="Categories" />
           </div>
-          <div className="col-md-6 col-lg-3">
+          <div className="col-6 col-lg-3">
             <FooterSection items={forClients} title="For Clients" />
           </div>
-          <div className="col-md-6 col-lg-3">
+          <div className="col-6 col-lg-3">
             <FooterSection items={forFreelancers} title="For Freelancers" />
           </div>
-          <div className="col-md-6 col-lg-3">
+          <div className="col-6 col-lg-3">
             <FooterSection
               items={businessSolutions}
               title="Business Solutions"

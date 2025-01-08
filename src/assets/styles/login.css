@@ -151,6 +151,10 @@ input[type="number"] {
   display: none !important;
 }
 
+react-international-phone-country-selector-dropdown {
+  max-height: 140px;
+}
+
 .introduction_area {
   background-color: #e8faf4;
   border: none;

@@ -1,18 +1,15 @@
 import React from "react";
 
-export default function StepsToStartCard() {
+export default function StepsToStartCard({ step }) {
+  const { title, description, imageUrl } = step;
   return (
     <div className="stepsToStart_card">
       <div className="image_container">
-        <img src="./images/icon1.png" />
+        <img src={imageUrl} />
       </div>
-      <div>
-        <h3>Browse projects</h3>
-        <p>
-          Whatever your skills or experience, you&apos;ll find opportunities
-          that suit you on Yingaz. Discover projects that suit your abilities
-          and start working on what you love.
-        </p>
+      <div className="content">
+        <h3>{title}</h3>
+        <p>{description}</p>
       </div>
     </div>
   );

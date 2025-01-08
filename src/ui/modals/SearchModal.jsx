@@ -20,7 +20,7 @@ export default function SearchModal({ onHide, show }) {
         ></button>
       </Modal.Header>
       <Modal.Body className="mt-5" style={{ height: "300px" }}>
-        <SearchBox closeModal={onHide} />
+        <SearchBox closeModal={onHide} placeholder="Search For Projects" />
       </Modal.Body>
     </Modal>
   );
