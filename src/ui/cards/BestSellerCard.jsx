@@ -11,25 +11,25 @@ export default function BestSellerCard({ item }) {
         vero ipsam quae perspiciatis corporis, quisquam quia autem, deleniti
         possimus hic eligendi, repellat harum!
       </p>
-      <div className="service_owner">
-        <div className="image_user_container">
+      <section className="service_owner">
+        <section className="image_user_container">
           <img src="https://placehold.co/48" />
-        </div>
-        <div className="service_owner_info">
+        </section>
+        <section className="service_owner_info">
           <h4>John Doe</h4>
-          <div className="stats d-flex gap-1 ">
-            <div className="gap-1  d-flex align-items-center justify-content-center">
+          <section className="stats d-flex gap-1 ">
+            <section className="gap-1  d-flex align-items-center justify-content-center">
               <FaFile />
               <span>3 months and 20 days ago</span>
-            </div>
-            <div className="gap-1 d-flex align-items-center justify-content-center">
+            </section>
+            <section className="gap-1 d-flex align-items-center justify-content-center">
               <FaUsers />
               <span>2</span>
               Offers
-            </div>
-          </div>
-        </div>
-      </div>{" "}
+            </section>
+          </section>
+        </section>
+      </section>
     </section>
   );
 }

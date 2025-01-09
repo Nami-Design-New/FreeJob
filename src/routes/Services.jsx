@@ -46,7 +46,7 @@ export default function Services() {
         <section
           className={`p-2 rounded border sidebar ${filterOpen ? "open" : ""}`}
         >
-          <div className="filter_wraper">
+          <section className="filter_wraper">
             {filterOpen && (
               <button
                 className="close-btn"
@@ -56,7 +56,7 @@ export default function Services() {
               </button>
             )}
             <FilterSidebar />
-          </div>
+          </section>
         </section>
 
         <section className="services_list">

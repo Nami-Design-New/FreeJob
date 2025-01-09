@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { BsGlobe } from "react-icons/bs";
 import { RiMenuUnfold4Fill } from "react-icons/ri";
 import { useDispatch } from "react-redux";
-import { NavLink } from "react-router";
+import { NavLink, useNavigate } from "react-router";
 import { useResponsiveState } from "../hooks/useResponsiveHook";
 import { openModal } from "../redux/slices/authModalSlice";
 import Button from "./Button";
@@ -14,11 +14,11 @@ import LanguageToggle from "./LanguageToggle";
 import AuthModal from "./modals/AuthModal";
 
 export default function Header() {
-  const [isLogin, setIsLogin] = useState(false);
+  const [isLogin, setIsLogin] = useState(true);
   const [isOpen, setIsOpen] = useState(false);
   const isMobile = useResponsiveState("(min-width: 768px)");
   const dispatch = useDispatch();
-
+  const navigate = useNavigate();
   useEffect(() => {
     if (isMobile) {
       setIsOpen(false);
@@ -73,7 +73,10 @@ export default function Header() {
           {isLogin ? (
             <div className="button-group d-none d-sm-block ">
               <Button className="me-2" content="Add Project" />
-              <Button content="Add Service" />
+              <Button
+                content="Add Service"
+                onClick={() => navigate("add-service")}
+              />
             </div>
           ) : (
             <div className="button-group d-none d-sm-block">

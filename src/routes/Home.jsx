@@ -13,24 +13,24 @@ import WorkWithUs from "../ui/Home/WorkWithUs";
 export default function Home() {
   return (
     <>
-      <div className="first_section">
+      <section className="first_section">
         <Search />
         <CategoriesSwiper />
-      </div>
-      <div>
+      </section>
+      <section>
         <SectionsSwiper />
-      </div>
-      <div className="container">
-        <div className="row">
+      </section>
+      <section className="container">
+        <section className="row">
           <HowToStart />
-        </div>
+        </section>
         <PopularServices />
         <Promote />
         <PartnersofSuccess />
         <PopularProjects />
         <Gallery />
         <WorkWithUs />
-      </div>
+      </section>
       <Banner />
     </>
   );
