@@ -1,3 +1,4 @@
+import { Link } from "react-router";
 import ServiceCard from "../cards/ServiceCard";
 
 const services = [
@@ -63,7 +64,9 @@ export default function ServicesList({ filter }) {
     <>
       {services.map((service) => (
         <section key={service.id} className="service_card_filter">
-          <ServiceCard service={service} />
+          <Link to={service.id}>
+            <ServiceCard service={service} />
+          </Link>
         </section>
       ))}
     </>

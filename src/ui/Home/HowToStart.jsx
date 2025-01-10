@@ -1,4 +1,7 @@
+import { useSelector } from "react-redux";
+
 export default function HowToStart() {
+  const lang = useSelector((state) => state.language.lang);
   return (
     <div className="howToStart">
       <h1 className="howToStart_header">Do You Have Work To Do?</h1>
@@ -36,7 +39,11 @@ export default function HowToStart() {
             </ul>
           </li>
         </ul>
-        <div className="howToStart_imgaeContainer d-none d-lg-block">
+        <div
+          className={`${
+            lang === "ar" ? "ar" : ""
+          } howToStart_imgaeContainer d-none d-lg-block`}
+        >
           <img src="./images/card1.png" className="img-fluid" />
         </div>
       </div>

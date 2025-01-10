@@ -3,7 +3,7 @@
   top: 0;
   left: 0;
   background-color: var(--white-color);
-  z-index: 10000;
+  z-index: 10;
   padding: 1.25rem 0;
   border-bottom: 1px solid var(--border-color);
   display: flex;
@@ -131,6 +131,19 @@ dialog[open] {
   transform: translateX(0);
 }
 
+dialog.ar[open]{
+  transform: translateX(0);
+}
+
+@starting-style {
+  dialog[open] {
+    transform: translateX(-100%);
+  }
+  dialog.ar[open]{
+    transform: translateX(100%);
+  }
+}
+
 /*   Closed state of the dialog   */
 dialog {
   transform: translateX(-100%);
@@ -145,6 +158,12 @@ dialog {
   min-height: 100vh;
   transition: transform 0.7s ease-out, overlay 0.7s ease-out allow-discrete,
     display 0.7s ease-out allow-discrete;
+
+  &.ar {
+    transform: translateX(100%);
+    left: auto;
+    right: 0;
+  }
 
   header {
     display: flex;
@@ -196,10 +215,5 @@ dialog {
         }
       }
     }
-  }
-}
-@starting-style {
-  dialog[open] {
-    transform: translateX(-100%);
   }
 }

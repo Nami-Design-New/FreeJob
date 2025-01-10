@@ -1,14 +1,17 @@
+import { useTranslation } from "react-i18next";
 import SearchBox from "../header/SearchBox";
 
 export default function Search() {
+  const { t } = useTranslation();
   return (
-    <div className="search_home container-fluid">
-      <div className="content">
-        <h1 className="">
-          <p>The best platform </p>for freelancers and business owners
-        </h1>
+    <section className="search_home container-fluid">
+      <section className="content">
+        <section className="content_text">
+          <p>{t("home.heroSectionTitle")} </p>
+          <p>{t("home.heroSectionSubTitle")}</p>
+        </section>
         <SearchBox placeholder="Search for any service..." />
-      </div>
-    </div>
+      </section>
+    </section>
   );
 }

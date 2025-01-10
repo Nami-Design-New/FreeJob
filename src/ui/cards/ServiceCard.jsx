@@ -1,7 +1,9 @@
 import { FaArrowRight, FaFile, FaUsers } from "react-icons/fa";
 import StarsRate from "../StartRate";
+import { useSelector } from "react-redux";
 
 export default function ServiceCard({ service }) {
+  const lang = useSelector((state) => state.language.lang);
   const {
     imageUrl: serviceImage,
     price,
@@ -13,9 +15,11 @@ export default function ServiceCard({ service }) {
 
   return (
     <section className="service_card">
-      <section className="image_container">
+      <section className="image_container ">
         <img src={serviceImage} />
-        <p className="price">Starts from: {price}</p>
+        <p className={`price  ${lang === "ar" ? "ar" : ""} `}>
+          Starts from: {price}
+        </p>
       </section>
       <section className="d-flex align-items-center justify-content-between">
         <section>

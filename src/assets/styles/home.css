@@ -11,14 +11,19 @@
   align-items: center;
   justify-content: center;
   .content {
-    h1 {
+    .content_text {
       text-align: center;
       text-transform: capitalize;
       color: var(--white-color);
-      font-size: 2.5rem;
       margin-bottom: 1.5rem;
       p {
         margin-bottom: 0.25rem;
+        font-size: 2rem;
+      }
+      @media (max-width: 768px) {
+        p {
+          font-size: 1.5rem;
+        }
       }
     }
   }
@@ -65,10 +70,10 @@
 }
 
 .howToStart {
-  margin: 4.7rem auto;
+  margin: 4.7rem auto !important;
   h1 {
     text-align: center;
-    margin-bottom: 2.5rem;
+    margin-bottom: 1.5rem;
   }
   .howToStart_content {
     background-color: var(--main-color);
@@ -79,6 +84,7 @@
     ul {
       list-style-type: disc;
       padding-left: 1rem;
+      padding-right: 1rem;
       .main_item {
         margin-bottom: 1.5rem;
         span {
@@ -102,15 +108,20 @@
       position: absolute;
       top: -1.625rem;
       right: 1rem;
+      &.ar {
+        top: -1.625rem;
+        left: 1rem;
+        right: auto;
+      }
     }
   }
 }
-@media screen and (min-width: 992px) {
+@media (min-width: 992px) {
   .howToStart_content ul {
     width: 60%;
   }
 }
-@media screen and (min-width: 992px) {
+@media (min-width: 992px) {
   .howToStart_content {
     min-height: 475px;
   }

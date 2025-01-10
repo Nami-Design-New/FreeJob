@@ -1,22 +1,21 @@
-import { useState } from "react";
-import "bootstrap/dist/css/bootstrap.min.css";
 import { BsGlobe } from "react-icons/bs";
+import { useDispatch, useSelector } from "react-redux";
+import { setLanguage } from "../redux/slices/languageSlice";
 
 function LanguageToggle() {
-  const [language, setLanguage] = useState("en");
-
+  const lang = useSelector((state) => state.language.lang);
+  const dispatch = useDispatch();
   const toggleLanguage = () => {
-    const newLang = language === "en" ? "ar" : "en";
-    setLanguage(newLang);
-    localStorage.setItem("language", newLang);
+    const newLang = lang === "en" ? "ar" : "en";
+    dispatch(setLanguage(newLang));
     document.documentElement.lang = newLang;
-    // document.body.dir = newLang === "ar" ? "rtl" : "ltr";
+    document.body.dir = newLang === "ar" ? "rtl" : "ltr";
   };
 
   return (
     <div className="d-flex justify-content-end">
       <button className="langButton btn btn-light " onClick={toggleLanguage}>
-        {language === "en" ? "Arabic" : "الإنجليزية"}
+        {lang === "en" ? "Arabic" : "الإنجليزية"}
         <i className="mx-1">
           <BsGlobe />
         </i>
