@@ -5,6 +5,7 @@
 @import "./home.css";
 @import "./sections.css";
 @import "./services.css";
+@import "./cart.css";
 
 :root {
   --main-color: #003912;

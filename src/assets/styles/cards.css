@@ -288,3 +288,30 @@
     }
   }
 }
+
+/* smilier servises Card  */
+.row_head {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  margin-bottom: 16px;
+  justify-content: space-between;
+  h6 {
+    color: var(--black-color);
+  }
+  a {
+    color: var(--black-color);
+    display: flex;
+    align-items: center;
+    gap: 4px;
+  }
+}
+.mainSliderContainer {
+  .swiper-slide {
+    display: flex;
+    justify-content: end;
+    .info {
+      text-align: left !important;
+    }
+  }
+}

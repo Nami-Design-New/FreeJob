@@ -3,9 +3,25 @@ import { CiEdit } from "react-icons/ci";
 import { LiaFileSolid } from "react-icons/lia";
 import { FaCartPlus, FaMinus, FaPlus } from "react-icons/fa6";
 import { useNavigate } from "react-router";
+import { useState } from "react";
 export default function ServiseDetailsComponent() {
   let islogged = true;
+
   const navigate = useNavigate();
+  const [quantity, setQuantity] = useState(1);
+  function handleIncreaseQuantity() {
+    setQuantity(quantity + 1);
+  }
+  function handleDecreaseQuantity() {
+    if (quantity > 1) {
+      setQuantity(quantity - 1);
+    }
+  }
+
+  function handleAddTocart() {
+    navigate("/cart");
+  }
+
   return (
     <section className="service_details_component">
       <section className="img_card">
@@ -69,12 +85,12 @@ export default function ServiseDetailsComponent() {
             <button
               className="add"
               // disabled={formLoading}
-              // onClick={handleIncreaseQuantity}
+              onClick={handleIncreaseQuantity}
             >
               <FaPlus />
             </button>
-            <input type="number" min={1} readOnly value="1" />
-            <button className="minus">
+            <input type="number" min={1} readOnly value={quantity} />
+            <button className="minus" onClick={handleDecreaseQuantity}>
               <FaMinus />
             </button>
           </div>
@@ -90,7 +106,7 @@ export default function ServiseDetailsComponent() {
           </div>
           <div className="d-flex w-100 gap-2">
             {
-              <button className="request_order">
+              <button className="request_order" onClick={handleAddTocart}>
                 <FaCartPlus />
                 Add to Cart
               </button>
