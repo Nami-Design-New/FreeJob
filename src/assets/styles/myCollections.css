@@ -1,0 +1,122 @@
+.myCollections {
+  margin-bottom: 4.7rem;
+  .empty-section {
+    min-height: calc(100dvh - 350px);
+  }
+
+  .collectionCard {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    padding: 1rem 1.5rem;
+    border-radius: 0.75rem;
+    background: var(--input-background-color);
+    .actions {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      button {
+        width: 32px;
+        height: 32px;
+        border-radius: 50%;
+        box-shadow: var(--card-shadow);
+        background-color: var(--white-color);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        svg {
+          height: 16px;
+        }
+        &:nth-child(2) {
+          svg {
+            color: red;
+          }
+        }
+      }
+    }
+    .info {
+      flex-grow: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.5rem;
+
+      h6 {
+        font-size: 1.25rem;
+        margin-bottom: 0;
+        a {
+          color: var(--black-color);
+        }
+      }
+      ul {
+        padding: 0;
+        margin: 0;
+        li {
+          display: flex;
+          align-items: center;
+          gap: 0.5rem;
+          font-size: 12px;
+          color: var(--input-hint);
+        }
+      }
+      .btn {
+        width: auto;
+        height: auto;
+        border: 0;
+        padding: 0.5rem 1rem;
+        background: var(--main-color);
+        font-size: 1rem;
+        border-radius: 0.5rem;
+        width: 50%;
+
+        color: var(--white-color);
+      }
+    }
+    .actions {
+      display: flex;
+      gap: 12px;
+      button {
+        width: 32px;
+        height: 32px;
+        border-radius: 50%;
+        border: 1px solid var(--input-hint);
+        color: var(--input-hint);
+        svg {
+          height: 16px;
+        }
+        &:nth-child(2) {
+          border-color: red;
+          svg {
+            stroke: red;
+          }
+        }
+        &.btn {
+          width: auto;
+          height: auto;
+          border: 0;
+          padding: 6px 12px;
+          background: var(--main-color);
+          font-size: 14px;
+          border-radius: 8px;
+          color: var(--white-color);
+        }
+      }
+    }
+  }
+}
+.header_container {
+  background-color: #f1fffa;
+  text-transform: capitalize;
+  color: var(--black-color);
+  padding: 2rem 0;
+  margin: 0.5rem 0 2.2rem 0;
+  section {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  p {
+    font-size: 1.5rem;
+    font-weight: 400;
+  }
+}
