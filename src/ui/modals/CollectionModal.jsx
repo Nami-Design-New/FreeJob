@@ -1,19 +1,27 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Modal } from "react-bootstrap";
-import { addToCollection } from "../../services/apiCollections";
 import { toast } from "react-toastify";
-import { useQueryClient } from "@tanstack/react-query";
-import SelectField from "./../../ui/form-elements/SelectField";
-import useCollectionsList from "../../features/collections/useCollectionsList";
-import SubmitButton from "../form-elements/SubmitButton";
-import InputField from "../form-elements/InputField";
-import TextField from "../form-elements/TextField";
+// import SelectField from "./../../ui/form-elements/SelectField";
+// import useCollectionsList from "../../features/collections/useCollectionsList";
+import FormInput from "../form/FormInput";
+import FormTextArea from "../form/FormTextArea";
+import SubmitButton from "../cart/SubmitCart";
+import FormSelector from "../form/FormSelector";
+// import SubmitButton from "../form-elements/SubmitButton";
+// import InputField from "../form-elements/InputField";
+// import TextField from "../form-elements/TextField";
 
 function CollectionModal({ showModal, setShowModal, showDeleteFromCart }) {
   const { t } = useTranslation();
-  const { data: collections } = useCollectionsList();
-  const queryClient = useQueryClient();
+
+  const collections = {
+    data: [
+      { id: 1, title: "Collection 1" },
+      { id: 2, title: "Collection 2" },
+    ],
+  };
+
   const [formType, setFormType] = useState("existing");
   const [formData, setFormData] = useState({
     id: "",
@@ -24,7 +32,7 @@ function CollectionModal({ showModal, setShowModal, showDeleteFromCart }) {
   const [loading, setLoading] = useState(false);
 
   const collectionOptions =
-    collections?.map((collection) => ({
+    collections?.data?.map((collection) => ({
       name: collection.title,
       value: collection.id,
     })) || [];
@@ -78,7 +86,7 @@ function CollectionModal({ showModal, setShowModal, showDeleteFromCart }) {
           return;
         }
       }
-      await addToCollection(requestBody, queryClient);
+      // await addToCollection(requestBody, queryClient);
       toast.success(t("cart.addToCollectionSuccess"));
       handleCloseModal();
     } catch (error) {
@@ -90,8 +98,13 @@ function CollectionModal({ showModal, setShowModal, showDeleteFromCart }) {
   };
 
   return (
-    <Modal show={showModal} onHide={handleCloseModal} centered>
-      <Modal.Header className="pb-0" closeButton>
+    <Modal
+      className="collection_modal_container"
+      show={showModal}
+      onHide={handleCloseModal}
+      centered
+    >
+      <Modal.Header className="custom_modal_header pb-0" closeButton>
         <h5 className="m-0">
           {t(`cart.${formType === 1 ? "addCollection" : "addNewCollection"}`)}
         </h5>
@@ -105,29 +118,25 @@ function CollectionModal({ showModal, setShowModal, showDeleteFromCart }) {
           }}
           className="form"
         >
-          <div className="d-flex flex-column gap-3 w-100">
-            <div className="d-flex align-items-center justify-content-end px-2 py-0">
-              <span
-                className="add-new-collection-btn"
-                onClick={() =>
-                  setFormType(() => (formType === "new" ? "existing" : "new"))
-                }
-              >
-                {formType === "existing" && (
-                  <i className="fa-light fa-plus"></i>
-                )}
-                {t(
-                  `cart.${
-                    formType === "new"
-                      ? "addToExistingCollection"
-                      : "addNewCollection"
-                  }`
-                )}
-              </span>
-            </div>
+          <section className="d-flex flex-column gap-3 w-100">
+            <button
+              className="add-new-collection-btn"
+              onClick={() =>
+                setFormType(() => (formType === "new" ? "existing" : "new"))
+              }
+            >
+              {formType === "existing" && <i className="fa-light fa-plus"></i>}
+              {t(
+                `cart.${
+                  formType === "new"
+                    ? "addToExistingCollection"
+                    : "addNewCollection"
+                }`
+              )}
+            </button>
             {formType === "existing" && (
               <>
-                <SelectField
+                <FormSelector
                   label={t("cart.collection")}
                   id="collection"
                   name="id"
@@ -140,7 +149,7 @@ function CollectionModal({ showModal, setShowModal, showDeleteFromCart }) {
             )}
             {formType === "new" && (
               <>
-                <InputField
+                <FormInput
                   label={t("cart.collectionTitle")}
                   name="title"
                   type="text"
@@ -149,13 +158,16 @@ function CollectionModal({ showModal, setShowModal, showDeleteFromCart }) {
                   value={formData.title}
                   onChange={handleChange}
                 />
-                <TextField
-                  name="description"
-                  id="description"
-                  value={formData.description}
-                  onChange={handleChange}
-                  label={t("cart.collectionDescription")}
-                />
+                <section>
+                  <label className="mb-2">Description</label>
+                  <FormTextArea
+                    name="description"
+                    id="description"
+                    value={formData.description}
+                    onChange={handleChange}
+                    label={t("cart.collectionDescription")}
+                  />
+                </section>
               </>
             )}
             {showDeleteFromCart && (
@@ -172,21 +184,13 @@ function CollectionModal({ showModal, setShowModal, showDeleteFromCart }) {
                 </label>
               </div>
             )}
-            <div className="d-flex justify-content-end gap-3 mt-2">
-              <button
-                onClick={() => setShowModal(false)}
-                className="cancel-btn"
-              >
-                {t("cancel")}
-              </button>
-              <SubmitButton
-                name={t("cart.add")}
-                loading={loading}
-                className={"order-now"}
-                onClick={handleAddToCollection}
-              />
-            </div>
-          </div>
+            <SubmitButton
+              name={t("cart.add")}
+              loading={loading}
+              className="order-now"
+              onClick={handleAddToCollection}
+            />
+          </section>
         </form>
       </Modal.Body>
     </Modal>
