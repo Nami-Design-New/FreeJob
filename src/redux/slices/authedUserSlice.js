@@ -4,7 +4,7 @@ export const authedUser = createSlice({
   name: "authedUser",
   initialState: {
     user: null,
-    isLogged: false,
+    isLogged: true,
   },
   reducers: {
     setUser: (state, action) => {

@@ -1,8 +1,9 @@
-import { useLocation } from "react-router";
+import { useLocation, useNavigate } from "react-router";
 import SimilarServices from "../ui/cards/SimilarServices";
 import DetailsHeader from "../ui/servicesComponents/serviceDetails/DetailsHeader";
 import ServiseDetailsComponent from "../ui/servicesComponents/serviceDetails/ServiseDetailsComponent";
 import ServiseOwner from "../ui/servicesComponents/serviceDetails/ServiseOwner";
+import ServiceRating from "../ui/servicesComponents/serviceDetails/ServiceRating";
 
 const services = [
   {
@@ -63,7 +64,63 @@ const services = [
   },
 ];
 
+const servicesRates = [
+  {
+    id: "1",
+    name: "Programming /Desktop",
+
+    description:
+      "Guinrank tool has recently proven its superiority as the best SEO tool for writing articles with artificial intelligence. We all know that content is the basis of leadership.",
+    user: {
+      name: "Mahmod Ahmed",
+      date: 3 - 10 - 2024,
+      rate: "3",
+      imageUrl: "https://placehold.co/58",
+    },
+  },
+  {
+    id: "2",
+    name: "Programming /Desktop",
+
+    description:
+      "Guinrank tool has recently proven its superiority as the best SEO tool for writing articles with artificial intelligence. We all know that content is the basis of leadership.",
+    user: {
+      name: "Mahmod Ahmed",
+      date: 3 - 10 - 2024,
+      rate: "3",
+      imageUrl: "https://placehold.co/58",
+    },
+  },
+  {
+    id: "3",
+    name: "Programming /Desktop",
+
+    description:
+      "Guinrank tool has recently proven its superiority as the best SEO tool for writing articles with artificial intelligence. We all know that content is the basis of leadership.",
+    user: {
+      name: "Mahmod Ahmed",
+      date: 3 - 10 - 2024,
+      rate: "3",
+      imageUrl: "https://placehold.co/58",
+    },
+  },
+  {
+    id: "4",
+    name: "Programming /Desktop",
+
+    description:
+      "Guinrank tool has recently proven its superiority as the best SEO tool for writing articles with artificial intelligence. We all know that content is the basis of leadership.",
+    user: {
+      name: "Mahmod Ahmed",
+      date: 3 - 10 - 2024,
+      rate: "3",
+      imageUrl: "https://placehold.co/58",
+    },
+  },
+];
+
 export default function ServiceDetails() {
+  const navigate = useNavigate();
   const { pathname } = useLocation();
   const segments = pathname
     .split("/")
@@ -84,9 +141,21 @@ export default function ServiceDetails() {
           </section>
           <section className="col-lg-3">
             <ServiseOwner />
+            <button
+              onClick={() => navigate("/profile")}
+              className="go_profile_btn"
+            >
+              Go to Profile
+            </button>
           </section>
-        </section>
-        <section className="row ">
+          <section className="row g-2  rating_container">
+            <h6 className="header_rate">Service Rates</h6>
+            {servicesRates.map((service) => (
+              <section key={service.id} className="col-md-6 ">
+                {<ServiceRating service={service} />}
+              </section>
+            ))}
+          </section>
           <SimilarServices services={services} />
         </section>
       </section>

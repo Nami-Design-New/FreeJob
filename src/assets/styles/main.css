@@ -9,6 +9,8 @@
 
 :root {
   --main-color: #003912;
+  --main30-color: #00391254;
+  --main-hover-color: #00451a;
   --secondary-color: #222325;
   --white-color: #fff;
   --black-color: #000;
@@ -19,6 +21,7 @@
   --service-card-bg: #f6f5f5;
   --input-background-color: #f1fffa;
   --card-shadow: 0px 4px 15px 0px rgba(0, 0, 0, 0.15);
+  --main-transtion: all 300ms ease;
 }
 
 * {

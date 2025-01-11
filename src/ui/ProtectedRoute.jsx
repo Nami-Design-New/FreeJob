@@ -4,9 +4,9 @@ import { redirect, useNavigate } from "react-router";
 import { useEffect } from "react";
 
 export default function ProtectedRoute({ children }) {
-  const isAuthenticated = Boolean(localStorage.getItem("authToken"));
+  const isAuthenticated = true;
   console.log(isAuthenticated);
-  const navigate = useNavigate("/");
+  const navigate = useNavigate();
   const dispatch = useDispatch();
   const show = useSelector((state) => state.authModal.show);
   console.log(show);
@@ -14,7 +14,7 @@ export default function ProtectedRoute({ children }) {
   useEffect(() => {
     if (!isAuthenticated) {
       navigate("/", { replace: false });
-      dispatch(openModal());
+      // dispatch(openModal());
     }
   }, [isAuthenticated]);
 

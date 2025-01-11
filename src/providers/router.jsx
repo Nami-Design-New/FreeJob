@@ -4,13 +4,15 @@ import RootLayout from "../Layout/RootLayout";
 import ProtectedRoute from "../ui/ProtectedRoute";
 import Sections from "../routes/Sections";
 import AddService from "../routes/AddService";
+import Cart from "../routes/Carts";
+import Carts from "../routes/Carts";
 
 // Lazy-loaded components
 const Home = lazy(() => import("../routes/Home"));
 const About = lazy(() => import("../routes/About"));
 const Contact = lazy(() => import("../routes/Contact"));
 const Chats = lazy(() => import("../routes/Chats"));
-const Cart = lazy(() => import("../routes/Cart"));
+
 const Profile = lazy(() => import("../routes/Profile"));
 const ProjectDetails = lazy(() => import("../routes/ProjectDetails"));
 const Purchases = lazy(() => import("../routes/Purchases"));
@@ -86,7 +88,7 @@ export const router = createBrowserRouter([
           // service routes
           { path: "/add-service", element: <AddService /> },
           { path: "/edit-service/:id", element: <AddService /> },
-          { path: "/cart", element: <Cart /> },
+          { path: "/cart", element: <Carts /> },
           { path: "/purchases", element: <Purchases /> },
           { path: "/purchases/:id", element: <OrderDetails /> },
           { path: "/recieved-orders", element: <RecievedOrders /> },
