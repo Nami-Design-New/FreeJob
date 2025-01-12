@@ -21,7 +21,7 @@ const MyCollections = () => {
   return (
     <>
       <section className="myCollections">
-        <section className="header_container ">
+        <section className="collections_header_container ">
           <section className="container-md">
             <DetailsHeader links={segments} />
           </section>

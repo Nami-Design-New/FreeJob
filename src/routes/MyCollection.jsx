@@ -1,27 +1,11 @@
-// import React, { useState } from "react";
-// import SectionHeader from "../ui/SectionHeader";
-// import useGetCollection from "../features/collections/useGetCollection";
-// import { useNavigate, useParams } from "react-router-dom";
-// import { useTranslation } from "react-i18next";
-// import EmptyData from "../ui/EmptyData";
-// import ServiceCard from "../ui/cards/ServiceCard";
-// import DataLoader from "./../ui/DataLoader";
-// import { IconPencil, IconTrash } from "@tabler/icons-react";
-// import { addCollectionToCart } from "../services/apiCollections";
-// import { useQueryClient } from "@tanstack/react-query";
-// import { toast } from "react-toastify";
-// import useCartList from "../features/cart/useCartList";
-// import ConfirmationModal from "../ui/modals/ConfirmationModal";
-// import EditCollectionModal from "../ui/modals/EditCollectionModal";
-
-import { useLocation, useNavigate, useParams } from "react-router";
-import DetailsHeader from "../ui/servicesComponents/serviceDetails/DetailsHeader";
-import { FaTrash } from "react-icons/fa";
-import { CiEdit } from "react-icons/ci";
-import ServiceCard from "../ui/cards/ServiceCard";
-import { toast } from "react-toastify";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
+import { CiEdit } from "react-icons/ci";
+import { FaTrash } from "react-icons/fa";
+import { useLocation, useNavigate } from "react-router";
+import { toast } from "react-toastify";
+import ServiceCard from "../ui/cards/ServiceCard";
+import DetailsHeader from "../ui/servicesComponents/serviceDetails/DetailsHeader";
 
 const collection = {
   id: "1",
@@ -116,13 +100,11 @@ const MyCollection = () => {
 
   return (
     <>
-   
-
       <section className="collections_header_container ">
         <section className="container-md">
           <DetailsHeader links={segments} />
           <section className="actions_collecion">
-            <button className="btn" onClick={handleAddtoCart}>
+            <button className="add_btn" onClick={handleAddtoCart}>
               Add to Cart
             </button>
             <section className="edit_delete_btns">
@@ -135,8 +117,7 @@ const MyCollection = () => {
             </section>{" "}
           </section>
         </section>
-      
-    </section>
+      </section>
       <section className="myCollections">
         <div className="container">
           <div className="row g-3">

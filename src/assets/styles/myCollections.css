@@ -97,16 +97,7 @@
   align-items: center;
   gap: 1rem;
   gap: 1rem;
-  .btn {
-    width: fit-content;
-    white-space: no-wrap;
-    border: 0;
-    padding: 0.5rem 1rem;
-    background: var(--main-color);
-    font-size: 1rem;
-    border-radius: 0.5rem;
-    color: var(--white-color);
-  }
+
   .edit_delete_btns {
     display: flex;
     flex-direction: column;
@@ -132,4 +123,18 @@
       }
     }
   }
+}
+.add_btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  width: fit-content;
+  white-space: no-wrap;
+  border: 0;
+  padding: 0.5rem 1rem;
+  background: var(--main-color);
+  font-size: 1rem;
+  border-radius: 0.5rem;
+  color: var(--white-color);
 }

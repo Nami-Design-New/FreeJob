@@ -385,6 +385,7 @@
 
 .service_details_header {
   background-color: transparent;
+  text-transform: capitalize;
   .breadcrumb {
     padding: 0;
     margin: 0;

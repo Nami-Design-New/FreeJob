@@ -1,0 +1,49 @@
+.empty_bank_account {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3rem;
+  .add_bank_account {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    gap: 1rem;
+    margin: 1rem 0;
+    h3 {
+      font-size: 2rem;
+    }
+  }
+}
+
+/* add bank account styles  */
+
+.checkbox-group {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+  margin-bottom: 0.75rem;
+  input[type="checkbox"] {
+    accent-color: var(--main-color);
+  }
+}
+
+.submit_add_account_button {
+  background-color: var(--main-color);
+  width: 50%;
+}
+
+.add_banks_form_container {
+  padding: 0 1rem;
+  @media (min-width: 768px) {
+    background-image: url("../../../public/images/bank-building.png"),
+      url("../../../public/images/bankbuildingrate.png");
+    background-repeat: no-repeat, no-repeat;
+    background-position: -430px bottom, right -130px;
+  }
+  form {
+    width: 100%;
+    @media (min-width: 768px) {
+      width: 65%;
+    }
+  }
+}
