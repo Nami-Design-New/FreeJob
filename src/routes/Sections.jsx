@@ -118,20 +118,20 @@ export default function Sections() {
   const handleCloseModal = () => setShow(false);
   const handleOpenModal = () => setShow(true);
   return (
-    <div className="sections">
-      <div className="sections_breadcrumb">
-        <div className="container">
+    <section className="sections">
+      <section className="sections_breadcrumb">
+        <section className="container">
           <Breadcrumb as="nav">
             <Breadcrumb.Item href="/">Home</Breadcrumb.Item>
             <Breadcrumb.Item active>Sections</Breadcrumb.Item>
           </Breadcrumb>
-        </div>
-      </div>
-      <div className="container">
+        </section>
+      </section>
+      <section className="container">
         {
-          <div className="row mt-5">
+          <section className="row mt-5">
             {currentSections.map((section) => (
-              <div
+              <section
                 key={section.id}
                 onClick={handleOpenModal}
                 className="col-sm-6 col-md-4 col-lg-3 col-xl-2 g-3 section_link"
@@ -140,20 +140,20 @@ export default function Sections() {
                   backgroundColor={section.backgroundColor}
                   section={section}
                 />
-              </div>
+              </section>
             ))}
-          </div>
+          </section>
         }
-      </div>
-      <div className="mt-5 d-flex align-items-center justify-content-center">
+      </section>
+      <section className="mt-5 d-flex align-items-center justify-content-center">
         <PaginationComponent
           totalItems={sections.length}
           itemsPerPage={itemsPerPage}
           currentPage={currentPage}
           onPageChange={handlePageChange}
         />
-      </div>
+      </section>
       <ChooseCategoryPath show={show} close={handleCloseModal} />
-    </div>
+    </section>
   );
 }

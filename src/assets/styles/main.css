@@ -81,6 +81,35 @@ a {
   }
 }
 
+.form_textarea {
+  background-color: #e8faf4;
+  border: none;
+  border-radius: 0.5rem;
+  padding: 0.5rem;
+  resize: vertical;
+  width: 100%;
+  &:focus-visible,
+  &:focus-visible,
+  &:focus-within {
+    border: none;
+    outline: none;
+  }
+}
+.form_select {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  position: relative;
+  width: 100%;
+  select {
+    padding: 0.5rem 1rem;
+    border: none;
+    border-radius: 0.5rem;
+    outline: none;
+    background-color: #e8faf4;
+  }
+}
+
 .links {
   display: flex;
   justify-content: space-between;
