@@ -66,19 +66,16 @@ export default function UserDropDown() {
           </Dropdown.Item>
           <Dropdown.Item>
             {" "}
-            <Link to="/profile">
+            <Link to="/notifications">
               <BsBell /> Notifications
             </Link>
           </Dropdown.Item>
-          <Dropdown.Item onClick={handleShow}>
-            {" "}
-            <Link to="/profile">
-              <BsSearch /> Search
-            </Link>
-          </Dropdown.Item>{" "}
-          <Link>
-            <SearchModal show={show} onHide={handleClose} />
-          </Link>
+          <Dropdown.Item>
+  <Link to="/freelancers">
+    <BsSearch /> {t("navbar.freelancers")}
+  </Link>
+</Dropdown.Item>
+
           <Dropdown.Item>
             {" "}
             <Link to="/profile">

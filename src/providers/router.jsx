@@ -26,6 +26,7 @@ const OrderDetails = lazy(() => import("../routes/OrderDetails"));
 const RecievedOrders = lazy(() => import("../routes/RecievedOrders"));
 const Terms = lazy(() => import("../routes/Terms"));
 const Notifications = lazy(() => import("../routes/Notifications"));
+const Freelancers = lazy(() => import("../routes/Freelancers"));
 const Projects = lazy(() => import("../routes/Projects"));
 const ServiceDetails = lazy(() => import("../routes/ServiceDetails"));
 const Services = lazy(() => import("../routes/Services"));
@@ -111,6 +112,7 @@ export const router = createBrowserRouter([
           { path: "/bids/:id", element: <MyBidDetails /> },
           { path: "/verify-identity", element: <VerifyIdentity /> },
           { path: "/notifications", element: <Notifications /> },
+          { path: "/freelancers", element: <Freelancers /> },
           { path: "/balance", element: <Balance /> },
           { path: "/manage-accounts", element: <ManageAccounts /> },
 
