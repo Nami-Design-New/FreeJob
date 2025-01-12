@@ -67,7 +67,7 @@ export default function UserDropDown() {
           <Dropdown.Item>
             {" "}
             <Link to="/notifications">
-              <BsBell /> Notifications
+              <BsBell /> {t("navbar.allNotifications")}
             </Link>
           </Dropdown.Item>
           <Dropdown.Item>
