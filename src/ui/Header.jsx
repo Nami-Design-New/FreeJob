@@ -69,7 +69,11 @@ export default function Header() {
         <div className="d-flex align-items-center gap-2 justify-content-end flex-grow-1 ">
           {isLogin ? (
             <div className="button-group d-flex align-items-center gap-2 d-none  d-sm-flex ">
-              <Button className="" content="Add Project" />
+              <Button
+                className=""
+                content="Add Project"
+                onClick={() => navigate("add-project")}
+              />
               <Button
                 content="Add Service"
                 onClick={() => navigate("add-service")}

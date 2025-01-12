@@ -254,9 +254,11 @@
   padding: 1.5rem 1rem 1rem;
   h1 {
     font-size: 1.25rem;
+    color: var(--black-color);
   }
   p {
     font-size: 1rem;
+    color: var(--secondary-color);
   }
 
   .project_owner {
@@ -277,6 +279,7 @@
       flex-direction: column;
       h4 {
         font-size: 1rem;
+        color: var(--black-color);
       }
       .stats {
         font-size: 0.75rem;
@@ -315,3 +318,4 @@
     }
   }
 }
+

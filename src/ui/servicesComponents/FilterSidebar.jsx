@@ -1,11 +1,10 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { useSearchParams } from "react-router";
-import SearchInput from "./SearchInput";
-import Sections from "./SectionsFilter";
+import FormButton from "../form/FormButton";
 import DropdownMenu from "./DropdownMenu";
 import RangeInput from "./RangeInput";
+import SearchInput from "./SearchInput";
 import SectionsFilter from "./SectionsFilter";
-import FormButton from "../form/FormButton";
 
 const FilterSidebar = () => {
   const [searchParams, setSearchParams] = useSearchParams();

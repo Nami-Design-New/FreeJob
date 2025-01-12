@@ -152,7 +152,7 @@ export default function ServiceDetails() {
             <h6 className="header_rate">Service Rates</h6>
             {servicesRates.map((service) => (
               <section key={service.id} className="col-md-6 ">
-                {<ServiceRating service={service} />}
+                {<ServiceRating item={service} />}
               </section>
             ))}
           </section>
