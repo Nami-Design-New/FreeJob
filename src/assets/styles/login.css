@@ -1,3 +1,10 @@
+.modal-backdrop {
+  z-index: 100;
+}
+.modal {
+  z-index: 100;
+}
+
 .modal-content {
   padding: 0 !important;
   overflow: hidden;

@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { BsGlobe } from "react-icons/bs";
 import { RiMenuUnfold4Fill } from "react-icons/ri";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { NavLink, useNavigate } from "react-router";
 import { useResponsiveState } from "../hooks/useResponsiveHook";
 import { openModal } from "../redux/slices/authModalSlice";
@@ -14,10 +14,12 @@ import LanguageToggle from "./LanguageToggle";
 import AuthModal from "./modals/AuthModal";
 
 export default function Header() {
-  const [isLogin, setIsLogin] = useState(true);
+  const isLogin = useSelector((state) => state.authedUser.isLogged);
+
   const [isOpen, setIsOpen] = useState(false);
   const isMobile = useResponsiveState("(min-width: 768px)");
   const dispatch = useDispatch();
+  const show = useSelector((state) => state.authModal.show);
   const navigate = useNavigate();
   useEffect(() => {
     if (isMobile) {
@@ -45,12 +47,7 @@ export default function Header() {
               <NavLink to="/">In Progress</NavLink>
             </li>
             <li className="d-flex align-items-center justify-content-center ">
-              <button className="btn btn-light">
-                English
-                <i className="mx-1">
-                  <BsGlobe />
-                </i>
-              </button>
+              <LanguageToggle />
             </li>
           </ul>
         ) : (
@@ -69,24 +66,21 @@ export default function Header() {
             </li>
           </ul>
         )}{" "}
-        <div className="d-flex align-items-center justify-content-end flex-grow-1 ">
+        <div className="d-flex align-items-center gap-2 justify-content-end flex-grow-1 ">
           {isLogin ? (
-            <div className="button-group d-none d-sm-block ">
-              <Button className="me-2" content="Add Project" />
+            <div className="button-group d-flex align-items-center gap-2 d-none  d-sm-flex ">
+              <Button className="" content="Add Project" />
               <Button
                 content="Add Service"
                 onClick={() => navigate("add-service")}
               />
             </div>
           ) : (
-            <div className="button-group d-none d-sm-block">
-              <button
-                className="btn me-2"
-                onClick={() => dispatch(openModal())}
-              >
+            <div className=" align-items-center gap-2 d-none d-sm-flex">
+              <button className="btn " onClick={() => dispatch(openModal())}>
                 Sign Up
               </button>
-              <AuthModal />
+              {show && <AuthModal />}
               <Button content="Join" />
             </div>
           )}

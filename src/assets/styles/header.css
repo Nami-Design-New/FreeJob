@@ -3,7 +3,7 @@
   top: 0;
   left: 0;
   background-color: var(--white-color);
-  z-index: 10000;
+  z-index: 10;
   padding: 1.25rem 0;
   border-bottom: 1px solid var(--border-color);
   display: flex;
@@ -20,6 +20,7 @@
 
     .actions {
       gap: 1rem;
+
       display: flex;
       margin-left: 0.5rem;
       justify-content: flex-end;
@@ -45,6 +46,33 @@
         }
         &:hover {
           background-color: transparent;
+        }
+      }
+
+      .dropdown-menu {
+        padding: 0;
+        section {
+          border-bottom: 1px solid var(--border-color);
+          padding: 1rem 0;
+          .dropdown-item {
+            padding: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            a {
+              color: var(--black-color);
+              display: flex;
+              align-items: center;
+              gap: 0.5rem;
+              svg {
+                color: var(--main-color);
+                margin: 0 !important;
+              }
+            }
+            &:hover a {
+              color: var(--main-color);
+            }
+          }
         }
       }
     }
@@ -131,6 +159,19 @@ dialog[open] {
   transform: translateX(0);
 }
 
+dialog.ar[open] {
+  transform: translateX(0);
+}
+
+@starting-style {
+  dialog[open] {
+    transform: translateX(-100%);
+  }
+  dialog.ar[open] {
+    transform: translateX(100%);
+  }
+}
+
 /*   Closed state of the dialog   */
 dialog {
   transform: translateX(-100%);
@@ -145,6 +186,12 @@ dialog {
   min-height: 100vh;
   transition: transform 0.7s ease-out, overlay 0.7s ease-out allow-discrete,
     display 0.7s ease-out allow-discrete;
+
+  &.ar {
+    transform: translateX(100%);
+    left: auto;
+    right: 0;
+  }
 
   header {
     display: flex;
@@ -196,10 +243,5 @@ dialog {
         }
       }
     }
-  }
-}
-@starting-style {
-  dialog[open] {
-    transform: translateX(-100%);
   }
 }

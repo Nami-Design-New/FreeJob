@@ -3,9 +3,11 @@ import { NavLink } from "react-router";
 import Button from "../Button";
 import LanguageToggle from "../LanguageToggle";
 import Logo from "./Logo";
+import { useSelector } from "react-redux";
 
 export default function SideMenu({ state, onClose }) {
-  const [isLogin, setIsLogin] = useState(true);
+  const isLogin = useSelector((state) => state.authedUser.isLogged);
+  const lang = useSelector((state) => state.language.lang);
   const dialogRef = useRef(null);
   function handleCloseMenu() {
     onClose();
@@ -16,7 +18,11 @@ export default function SideMenu({ state, onClose }) {
     dialogRef.current?.close();
   }
   return (
-    <dialog ref={dialogRef} onClose={handleCloseMenu} className=" d-md-hidden">
+    <dialog
+      ref={dialogRef}
+      onClose={handleCloseMenu}
+      className={`"d-md-hidden"  ${lang === "ar" ? "ar" : ""}    `}
+    >
       <header onClick={handleCloseMenu} className="py-3">
         <Logo />
         <button aria-label="Close Menu">&#10005;</button>

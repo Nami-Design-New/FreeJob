@@ -1,16 +1,17 @@
 import { useState } from "react";
 import { Dropdown } from "react-bootstrap";
-import {
-  BsBell,
-  BsBoxArrowRight,
-  BsChatSquareText,
-  BsSearch,
-} from "react-icons/bs";
+import { BiSupport } from "react-icons/bi";
+import { BsBank2, BsBell, BsBoxArrowRight, BsSearch } from "react-icons/bs";
+import { FaEdit, FaRegMoneyBillAlt, FaTrash, FaUser } from "react-icons/fa";
+import { IoMdInformationCircleOutline } from "react-icons/io";
+import { MdCollections } from "react-icons/md";
 import SearchModal from "../modals/SearchModal";
+import { Link } from "react-router";
+import { useTranslation } from "react-i18next";
 
 export default function UserDropDown() {
   const [show, setShow] = useState(false);
-
+  const { t } = useTranslation();
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
   return (
@@ -20,19 +21,79 @@ export default function UserDropDown() {
       </Dropdown.Toggle>
 
       <Dropdown.Menu>
-        <Dropdown.Item>
-          <BsChatSquareText className="me-2" /> Chat
-        </Dropdown.Item>
-        <Dropdown.Item>
-          <BsBell className="me-2" /> Notifications
-        </Dropdown.Item>
-        <Dropdown.Item onClick={handleShow}>
-          <BsSearch className="me-2" /> Search
-        </Dropdown.Item>
-        <SearchModal show={show} onHide={handleClose} />
-        <Dropdown.Item>
-          <BsBoxArrowRight className="me-2" /> Logout
-        </Dropdown.Item>
+        <section>
+          <Dropdown.Item>
+            <Link to="/profile">
+              <FaUser /> Mahmoud Abbas
+            </Link>
+          </Dropdown.Item>
+          <Dropdown.Item>
+            <Link to="/balance">
+              <FaRegMoneyBillAlt /> {t("navbar.balance")}
+            </Link>
+          </Dropdown.Item>
+          <Dropdown.Item>
+            {" "}
+            <Link to="/manage-accounts">
+              <BsBank2 />
+              {t("navbar.manageAccounts")}
+            </Link>
+          </Dropdown.Item>
+        </section>
+        <section>
+          <Dropdown.Item>
+            <Link to="/edit-profile">
+              <FaEdit /> {t("navbar.editProfile")}
+            </Link>
+          </Dropdown.Item>
+          <Dropdown.Item>
+            {" "}
+            <Link to="/contact">
+              <BiSupport /> {t("navbar.support")}
+            </Link>
+          </Dropdown.Item>
+          <Dropdown.Item>
+            {" "}
+            <Link to="/my-collections">
+              <MdCollections /> {t("navbar.myCollections")}
+            </Link>
+          </Dropdown.Item>
+          <Dropdown.Item>
+            {" "}
+            <Link to="/complaints-suggestions">
+              <IoMdInformationCircleOutline /> {t("navbar.report")}
+            </Link>
+          </Dropdown.Item>
+          <Dropdown.Item>
+            {" "}
+            <Link to="/profile">
+              <BsBell /> Notifications
+            </Link>
+          </Dropdown.Item>
+          <Dropdown.Item onClick={handleShow}>
+            {" "}
+            <Link to="/profile">
+              <BsSearch /> Search
+            </Link>
+          </Dropdown.Item>{" "}
+          <Link>
+            <SearchModal show={show} onHide={handleClose} />
+          </Link>
+          <Dropdown.Item>
+            {" "}
+            <Link to="/profile">
+              <FaTrash /> {t("navbar.deleteAccount")}
+            </Link>
+          </Dropdown.Item>
+        </section>
+        <section>
+          <Dropdown.Item>
+            {" "}
+            <Link to="/profile">
+              <BsBoxArrowRight /> {t("navbar.logout")}
+            </Link>
+          </Dropdown.Item>
+        </section>
       </Dropdown.Menu>
     </Dropdown>
   );
