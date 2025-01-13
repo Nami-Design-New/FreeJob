@@ -1,0 +1,23 @@
+.notification {
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    background-color: #f5f5f5ba;
+    display: flex;
+    justify-content: center;
+    align-items: center;  
+  }
+ /* .card{
+  background-color: #f1fffa;
+ } */
+  .notification-icon {
+    width: 25px;
+    height: 25px;
+    object-fit: cover;
+  }
+  .notification-time  {
+    display: flex;
+    justify-content: flex-end;  
+    align-items: end;
+  }
+  

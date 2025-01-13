@@ -61,18 +61,16 @@ export default function UserDropDown() {
             </Link>
           </Dropdown.Item>
           <Dropdown.Item>
+            {" "}
             <Link to="/notifications">
-              <BsBell /> Notifications
+              <BsBell /> {t("navbar.allNotifications")}
             </Link>
           </Dropdown.Item>
-          <Dropdown.Item onClick={handleShow}>
-            <Link to="/profile">
-              <BsSearch /> Search
+          <Dropdown.Item>
+            <Link to="/freelancers">
+              <BsSearch /> {t("navbar.freelancers")}
             </Link>
-          </Dropdown.Item>{" "}
-          <Link>
-            <SearchModal show={show} onHide={handleClose} />
-          </Link>
+          </Dropdown.Item>
           <Dropdown.Item>
             <Link to="/profile">
               <FaTrash /> {t("navbar.deleteAccount")}
