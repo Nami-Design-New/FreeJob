@@ -23,7 +23,7 @@ export default function ChooseCategoryPath({ show, close }) {
               </Link>
             </div>
             <div className="choise">
-              <Link to>
+              <Link to="/projects">
                 <div>
                   <img
                     className="img-fluid"

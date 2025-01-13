@@ -18,6 +18,8 @@
       button {
         width: 32px;
         height: 32px;
+        border: none;
+        outline: none;
         border-radius: 50%;
         box-shadow: var(--card-shadow);
         background-color: var(--white-color);
@@ -72,39 +74,9 @@
         color: var(--white-color);
       }
     }
-    .actions {
-      display: flex;
-      gap: 12px;
-      button {
-        width: 32px;
-        height: 32px;
-        border-radius: 50%;
-        border: 1px solid var(--input-hint);
-        color: var(--input-hint);
-        svg {
-          height: 16px;
-        }
-        &:nth-child(2) {
-          border-color: red;
-          svg {
-            stroke: red;
-          }
-        }
-        &.btn {
-          width: auto;
-          height: auto;
-          border: 0;
-          padding: 6px 12px;
-          background: var(--main-color);
-          font-size: 14px;
-          border-radius: 8px;
-          color: var(--white-color);
-        }
-      }
-    }
   }
 }
-.header_container {
+.collections_header_container {
   background-color: #f1fffa;
   text-transform: capitalize;
   color: var(--black-color);
@@ -119,4 +91,50 @@
     font-size: 1.5rem;
     font-weight: 400;
   }
+}
+.actions_collecion {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  gap: 1rem;
+
+  .edit_delete_btns {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    button {
+      width: 2rem;
+      height: 2rem;
+      border: none;
+      outline: none;
+      border-radius: 50%;
+      box-shadow: var(--card-shadow);
+      background-color: var(--white-color);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    svg {
+      height: 16px;
+    }
+    &:nth-child(2) {
+      svg {
+        color: red;
+      }
+    }
+  }
+}
+.add_btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  width: fit-content;
+  white-space: no-wrap;
+  border: 0;
+  padding: 0.5rem 1rem;
+  background: var(--main-color);
+  font-size: 1rem;
+  border-radius: 0.5rem;
+  color: var(--white-color);
 }

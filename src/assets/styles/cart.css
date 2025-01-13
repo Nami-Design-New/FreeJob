@@ -1,20 +1,20 @@
+.header_container {
+  background-color: #f1fffa;
+  color: var(--black-color);
+  padding: 2rem 0;
+  margin: 0.5rem 0 2.2rem 0;
+  section {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  p {
+    font-size: 1.5rem;
+    font-weight: 400;
+  }
+}
 .cart-section {
   padding: 60px 0;
-  .header_container {
-    background-color: #f1fffa;
-    color: var(--black-color);
-    padding: 2rem 0;
-    margin: 0.5rem 0 2.2rem 0;
-    section {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-    }
-    p {
-      font-size: 1.5rem;
-      font-weight: 400;
-    }
-  }
 
   .add-to-collection-btn {
     cursor: pointer;

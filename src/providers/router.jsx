@@ -1,11 +1,11 @@
-import { Suspense, lazy } from "react";
+import { lazy, Suspense } from "react";
 import { createBrowserRouter, Outlet } from "react-router";
 import RootLayout from "../Layout/RootLayout";
-import ProtectedRoute from "../ui/ProtectedRoute";
-import Sections from "../routes/Sections";
+import AddBankAccount from "../routes/AddBankAccount";
 import AddService from "../routes/AddService";
-import Cart from "../routes/Carts";
 import Carts from "../routes/Carts";
+import Sections from "../routes/Sections";
+import ProtectedRoute from "../ui/ProtectedRoute";
 
 // Lazy-loaded components
 const Home = lazy(() => import("../routes/Home"));
@@ -113,6 +113,7 @@ export const router = createBrowserRouter([
           { path: "/notifications", element: <Notifications /> },
           { path: "/balance", element: <Balance /> },
           { path: "/manage-accounts", element: <ManageAccounts /> },
+          { path: "/add-bank-account", element: <AddBankAccount /> },
 
           // support routes
           { path: "/complaints-suggestions", element: <Complaints /> },
