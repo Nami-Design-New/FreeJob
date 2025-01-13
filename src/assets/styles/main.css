@@ -10,6 +10,7 @@
 @import "./projects.css";
 @import "./account.css";
 @import "./orders.css";
+@import "./chats.css";
 
 :root {
   --main-color: #003912;
