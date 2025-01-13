@@ -1,7 +1,9 @@
 import { FaFile, FaUsers } from "react-icons/fa";
+import { Link } from "react-router";
 
 export default function ProjectCard({ project }) {
   const {
+    id,
     name: projecteName,
     description,
     owner: { imageUrl: ownerImage, name: username, offers },
@@ -13,7 +15,7 @@ export default function ProjectCard({ project }) {
         <h1>{projecteName}</h1>
         <p>{description}</p>
       </section>
-      <section className="project_owner">
+      <Link to={"profiles/" + id} className="project_owner gap-3">
         <section className="image_user_container">
           <img src={ownerImage} />
         </section>
@@ -31,7 +33,7 @@ export default function ProjectCard({ project }) {
             </section>
           </section>
         </section>
-      </section>
+      </Link>
     </section>
   );
 }

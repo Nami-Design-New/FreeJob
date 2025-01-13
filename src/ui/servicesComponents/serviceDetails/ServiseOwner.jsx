@@ -39,7 +39,6 @@ export default function ServiseOwner() {
       <ul className="card_ul">
         <li className="rate d-flex justify-content-between">
           <p>Puplish Date</p>3 jan
-          {/* <StarsRate rate="0" /> */}
         </li>
         <li className="d-flex justify-content-between">
           <p>Buyers</p>
@@ -60,20 +59,18 @@ export default function ServiseOwner() {
       </ul>
       {instructions && (
         <>
-          <div className="label d-flex align-items-center gap-2 mt-3">
+          <section className="label d-flex align-items-center gap-2 mt-3">
             <IoMdInformationCircleOutline />
             <p className="p-0 m-0">instructions</p>
-          </div>
+          </section>
           <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
         </>
       )}
       <section className="share_chat_buttons">
         <Dropdown>
           <Dropdown.Toggle className="butn" id="dropdown-basic">
-            <button>
-              <BsShare />
-              Share
-            </button>
+            <BsShare />
+            Share
           </Dropdown.Toggle>
           <Dropdown.Menu>
             <h5>{t("services.share")}</h5>

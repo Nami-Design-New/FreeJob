@@ -21,7 +21,7 @@ export default function SideMenu({ state, onClose }) {
     <dialog
       ref={dialogRef}
       onClose={handleCloseMenu}
-      className={`"d-md-hidden"  ${lang === "ar" ? "ar" : ""}    `}
+      className={`d-md-hidden  ${lang === "ar" ? "ar" : ""}    `}
     >
       <header onClick={handleCloseMenu} className="py-3">
         <Logo />
@@ -39,7 +39,29 @@ export default function SideMenu({ state, onClose }) {
             <NavLink to="/">Incoming Requests</NavLink>
           </li>
           <li>
-            <NavLink to="/">In Progress</NavLink>
+            <NavLink to="/projects-orders">In Progress</NavLink>
+          </li>
+          <li>
+            <NavLink to="/projects">Projects</NavLink>
+          </li>
+          <li>
+            <NavLink to="/services">Services</NavLink>
+          </li>
+          <li>
+            <NavLink to="/portfolios">PortFolios</NavLink>
+          </li>
+          <li>
+            <NavLink to="/freelancers">Find FreeLancers</NavLink>
+          </li>
+          <li>
+            <NavLink to="/about/1">About FREEJOP</NavLink>
+          </li>
+          <li>
+            <NavLink to="/community">FREEJOP&apos;s Community</NavLink>
+          </li>
+
+          <li>
+            <NavLink to="/blogs">Blogs</NavLink>
           </li>
           <li className="d-flex align-items-center justify-content-start ">
             <LanguageToggle />
@@ -51,13 +73,26 @@ export default function SideMenu({ state, onClose }) {
           onClick={handleCloseMenu}
         >
           <li>
-            <NavLink>Projects</NavLink>
+            <NavLink to="/projects">Projects</NavLink>
           </li>
           <li>
-            <NavLink>Services</NavLink>
+            <NavLink to="/services">Services</NavLink>
           </li>
           <li>
-            <NavLink>Community</NavLink>
+            <NavLink to="/portfolios">PortFolios</NavLink>
+          </li>
+          <li>
+            <NavLink to="/freelancers">Find FreeLancers</NavLink>
+          </li>
+          <li>
+            <NavLink to="/about/1">About FREEJOP</NavLink>
+          </li>
+          <li>
+            <NavLink to="/community">FREEJOP&apos;s Community</NavLink>
+          </li>
+
+          <li>
+            <NavLink to="/blogs">Blogs</NavLink>
           </li>
           <li className="d-flex align-items-center justify-content-start ">
             <LanguageToggle />
@@ -66,12 +101,12 @@ export default function SideMenu({ state, onClose }) {
       )}
 
       {isLogin ? (
-        <div className="button-group d-sm-none ms-2">
+        <div className="button-group d-sm-none d-flex gap-2 mt-2">
           <Button className=" me-2 mb-2 mb-xs-0" content="Add Project" />
           <Button content="Add Service" className="mb-2 mb-xs-0" />
         </div>
       ) : (
-        <div className="button-group d-sm-none ms-2">
+        <div className="button-group d-sm-none ms-2 mt-3">
           <button className="btn me-2 mb-2 mb-xs-0">Sign Up</button>
           <Button content="Join" />
         </div>

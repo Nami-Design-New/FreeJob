@@ -6,7 +6,7 @@ const orderListItems = [
     id: "1",
     title: "Songs and broadcasting application",
     price: "200",
-    status: "deleiverd",
+    status: "new",
     imageUrl: "./images/order.png",
     user: {
       image: "./images/user.png",
@@ -17,7 +17,7 @@ const orderListItems = [
     id: "2",
     title: "Songs and broadcasting application",
     price: "200",
-    status: "canceled",
+    status: "in_progress",
     imageUrl: "./images/order.png",
     user: {
       image: "./images/user.png",
@@ -28,7 +28,29 @@ const orderListItems = [
     id: "3",
     title: "Songs and broadcasting application",
     price: "200",
-    status: "new",
+    status: "canceled",
+    imageUrl: "./images/order.png",
+    user: {
+      image: "./images/user.png",
+      name: "Mohamed Ahmed",
+    },
+  },
+  {
+    id: "4",
+    title: "Songs and broadcasting application",
+    price: "200",
+    status: "received",
+    imageUrl: "./images/order.png",
+    user: {
+      image: "./images/user.png",
+      name: "Mohamed Ahmed",
+    },
+  },
+  {
+    id: "5",
+    title: "Songs and broadcasting application",
+    price: "200",
+    status: "ready",
     imageUrl: "./images/order.png",
     user: {
       image: "./images/user.png",

@@ -1,4 +1,4 @@
-import { FaArrowRight, FaFile, FaUsers } from "react-icons/fa";
+import { FaArrowLeft, FaArrowRight, FaFile, FaUsers } from "react-icons/fa";
 import StarsRate from "../StartRate";
 import { useSelector } from "react-redux";
 
@@ -53,7 +53,7 @@ export default function ServiceCard({ service }) {
         </section>
         <section>
           <button className="">
-            <FaArrowRight />
+            {lang === "ar" ? <FaArrowLeft /> : <FaArrowRight />}
           </button>
         </section>
       </section>

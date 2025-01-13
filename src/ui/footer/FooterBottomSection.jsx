@@ -14,13 +14,13 @@ import LanguageToggle from "../LanguageToggle";
 export default function FooterBottomSection() {
   return (
     <section className="footer_bottom_sec row gy-3 gx-3 ">
-      <div className="copy_rights col col-md-12 col-lg-5 ">
+      <section className="copy_rights  col-md-12 col-lg-5 ">
         <Logo />
         <p>
           &copy; <Link to="/"> tet International Ltd. </Link>{" "}
           {new Date().getFullYear()}
         </p>
-      </div>
+      </section>
       <div className="social_media_links col-md-4 ">
         <Link>
           <FaTiktok />
@@ -41,7 +41,7 @@ export default function FooterBottomSection() {
           <FaXTwitter />
         </Link>
       </div>
-      <div className="d-flex align-items-center gap-2 col-md-3 ">
+      <div className="access_lang col-md-3 ">
         <div className="d-flex align-items-center justify-content-center">
           <LanguageToggle />
         </div>

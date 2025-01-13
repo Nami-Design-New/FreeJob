@@ -1,8 +1,7 @@
-import React from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation } from "react-router";
 import { Container, Row, Col, Tabs, Tab, Card } from "react-bootstrap";
 import StarsRate from "../ui/StartRate";
-import "../assets/styles/Profile.css"; 
+import "../assets/styles/Profile.css";
 
 const ProfilePage = () => {
   const location = useLocation();

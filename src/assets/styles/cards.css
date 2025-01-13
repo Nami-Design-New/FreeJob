@@ -1,6 +1,11 @@
 .category_card {
   border-radius: 1rem;
-  height: 250px;
+  height: 100%;
+  gap: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
   margin: 0 0.5rem;
   background-color: var(--white-color);
   box-shadow: 0px 3px 7px 0px rgba(0, 0, 0, 0.09),
@@ -21,19 +26,18 @@
     text-align: center;
     line-height: 1.5rem;
     color: var(--secondary-color);
-    margin-top: 1rem;
     font-weight: 700;
   }
 }
 .sections_card {
   cursor: pointer;
   border-radius: 1rem;
+  height: 100%;
   margin: 0 0.25rem;
   display: flex;
   flex-direction: column;
   box-shadow: 0px 3px 10px 0px rgba(0, 0, 0, 0.09);
   padding: 1.5rem 0.5rem;
-  /* height: 266px; */
   .section_card_title {
     font-size: 1rem;
     flex-grow: 1;
@@ -441,6 +445,12 @@
         margin: 0;
         padding-left: 0.5rem;
         border-left: 2px solid #000;
+        &.ar {
+          padding-left: 0;
+          padding-right: 0.5rem;
+          border-right: 2px solid #000;
+          border-left: none;
+        }
       }
     }
     .order_user {
@@ -476,6 +486,20 @@
       }
     }
   }
+  .order_status {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    font-size: 1rem;
+    p {
+      margin: 0;
+    }
+    .progress-bar {
+      width: 70px;
+      height: 70px;
+      border-radius: 50%;
+    }
+  }
 }
 
 .order_details_button {
@@ -494,7 +518,12 @@
   border-radius: 0.5rem;
   cursor: pointer;
   color: var(--white-color);
+  transition: var(--main-transition);
   &:hover {
     background-color: var(--main-hover-color);
+  }
+  &.ar {
+    right: auto;
+    left: auto;
   }
 }

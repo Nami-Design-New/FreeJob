@@ -67,13 +67,17 @@ export default function PopularServices() {
         title="Most popular services"
         description="Most viewed and best selling services ever"
       />
-      <ShowAll sectionName="Services" />
+      <ShowAll to="/services" sectionName="Services" />
 
       <div className="row g-4">
         {popularServices.map((service) => (
-          <div className=" col-md-6 col-lg-4" key={service.id}>
+          <Link
+            to={"/services/" + service.id}
+            className=" col-md-6 col-lg-4"
+            key={service.id}
+          >
             <ServiceCard service={service} />{" "}
-          </div>
+          </Link>
         ))}
       </div>
     </section>
