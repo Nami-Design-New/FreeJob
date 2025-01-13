@@ -9,6 +9,7 @@
 @import "./myCollections.css";
 @import "./projects.css";
 @import "./account.css";
+@import "./orders.css";
 
 :root {
   --main-color: #003912;
@@ -80,7 +81,6 @@ a {
     font-weight: 400;
     line-height: 1.75rem;
     align-self: start;
-
   }
   input {
     padding: 0.5rem 1rem;

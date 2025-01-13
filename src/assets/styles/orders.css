@@ -1,0 +1,49 @@
+.sidebar_orders_filter {
+  padding: 1rem;
+  background-color: var(--white-color);
+  border-radius: 0.5rem;
+  box-shadow: var(--card-shadow);
+  h2 {
+    font-size: 1.25rem;
+    color: var(--black-color);
+    font-weight: 400;
+  }
+  .order_filter_input_group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    margin-top: 1.5rem;
+    li {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      input[type="checkbox"] {
+        cursor: pointer;
+        accent-color: var(--main-color);
+      }
+      label {
+        font-size: 1rem;
+        cursor: pointer;
+        color: var(--black-color);
+      }
+    }
+  }
+  .submit_Filter_button {
+    background-color: var(--main-color);
+    display: felx;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    border: none;
+    border-radius: 0.5rem;
+    padding: 0.5rem 1rem;
+    margin-top: 1.5rem;
+    font-size: 1rem;
+    color: var(--white-color);
+    transition: var(--main-transtion);
+    cursor: pointer;
+    &:hover {
+      background-color: var(--main-hover-color);
+    }
+  }
+}
