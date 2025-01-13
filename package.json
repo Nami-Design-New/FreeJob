@@ -11,6 +11,7 @@
   },
   "dependencies": {
     "@reduxjs/toolkit": "^2.5.0",
+    "@tabler/icons-react": "^3.28.1",
     "bootstrap": "^5.3.3",
     "framer-motion": "^11.15.0",
     "i18next": "^24.2.1",
@@ -27,8 +28,10 @@
     "react-international-phone": "^4.4.0",
     "react-layout-masonry": "^1.2.0",
     "react-otp-input": "^3.1.1",
+    "react-paginate": "^8.2.0",
     "react-redux": "^9.2.0",
     "react-router": "^7.1.1",
+    "react-router-dom": "^7.1.1",
     "react-select": "^5.9.0",
     "react-toastify": "^11.0.2",
     "swiper": "^11.1.15"
