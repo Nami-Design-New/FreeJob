@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link } from "react-router";
 import StarsRate from "../StartRate";
 import { useTranslation } from "react-i18next";
 import { FaCubes } from "react-icons/fa";
@@ -15,7 +15,7 @@ function FreelancerCard({ freelancer }) {
   return (
     <Link
       to={`/profile/${freelancer.id}`}
-      state={{ freelancer }} 
+      state={{ freelancer }}
       className="freelancerCard"
     >
       <div

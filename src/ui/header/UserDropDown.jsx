@@ -33,7 +33,6 @@ export default function UserDropDown() {
             </Link>
           </Dropdown.Item>
           <Dropdown.Item>
-            {" "}
             <Link to="/manage-accounts">
               <BsBank2 />
               {t("navbar.manageAccounts")}
@@ -47,19 +46,16 @@ export default function UserDropDown() {
             </Link>
           </Dropdown.Item>
           <Dropdown.Item>
-            {" "}
             <Link to="/contact">
               <BiSupport /> {t("navbar.support")}
             </Link>
           </Dropdown.Item>
           <Dropdown.Item>
-            {" "}
             <Link to="/my-collections">
               <MdCollections /> {t("navbar.myCollections")}
             </Link>
           </Dropdown.Item>
           <Dropdown.Item>
-            {" "}
             <Link to="/complaints-suggestions">
               <IoMdInformationCircleOutline /> {t("navbar.report")}
             </Link>
@@ -71,13 +67,11 @@ export default function UserDropDown() {
             </Link>
           </Dropdown.Item>
           <Dropdown.Item>
-  <Link to="/freelancers">
-    <BsSearch /> {t("navbar.freelancers")}
-  </Link>
-</Dropdown.Item>
-
+            <Link to="/freelancers">
+              <BsSearch /> {t("navbar.freelancers")}
+            </Link>
+          </Dropdown.Item>
           <Dropdown.Item>
-            {" "}
             <Link to="/profile">
               <FaTrash /> {t("navbar.deleteAccount")}
             </Link>
@@ -85,7 +79,6 @@ export default function UserDropDown() {
         </section>
         <section>
           <Dropdown.Item>
-            {" "}
             <Link to="/profile">
               <BsBoxArrowRight /> {t("navbar.logout")}
             </Link>

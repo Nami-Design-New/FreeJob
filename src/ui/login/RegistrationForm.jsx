@@ -6,9 +6,22 @@ import FormButton from "../form/FormButton";
 import FormInput from "../form/FormInput";
 import BackButton from "./BackButton";
 import { useDispatch } from "react-redux";
+import ImageUpload from "./ImageUpload";
 export default function RegistrationForm() {
   const [phone, setPhone] = useState("");
   const dispatch = useDispatch();
+  const [showOtp, setShowOtp] = useState(false);
+  const [otpData, setOtpData] = useState({});
+  const [formData, setFormData] = useState({
+    image: "",
+    name: "",
+    email: "",
+    phone: "",
+    password: "",
+    is_freelance: false,
+    job_title: "",
+    categories: [],
+  });
   return (
     <div className="left_side">
       <BackButton />
@@ -17,7 +30,14 @@ export default function RegistrationForm() {
       </header>
       <form action="" className="user_data row row-gap-2 ">
         <div className="col-12 ">
-          <input type="file" />
+          <ImageUpload
+            type="file"
+            name="userImage"
+            id="img-upload"
+            accept="image/*"
+            formData={formData}
+            setFormData={setFormData}
+          />
         </div>
         <div className="col-12">
           <FormInput label="Name" />

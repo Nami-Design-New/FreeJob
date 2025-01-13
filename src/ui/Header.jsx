@@ -41,10 +41,10 @@ export default function Header() {
               <NavLink to="/">Purchases</NavLink>
             </li>
             <li>
-              <NavLink to="/">Incoming Requests</NavLink>
+              <NavLink to="/recieved-orders">Incoming Requests</NavLink>
             </li>
             <li>
-              <NavLink to="/">In Progress</NavLink>
+              <NavLink to="/projects-orders">In Progress</NavLink>
             </li>
             <li className="d-flex align-items-center justify-content-center ">
               <LanguageToggle />
@@ -68,7 +68,7 @@ export default function Header() {
         )}{" "}
         <div className="d-flex align-items-center gap-2 justify-content-end flex-grow-1 ">
           {isLogin ? (
-            <div className="button-group d-flex align-items-center gap-2 d-none  d-sm-flex ">
+            <section className="button-group d-flex align-items-center gap-2 d-none  d-sm-flex ">
               <Button
                 className=""
                 content="Add Project"
@@ -78,7 +78,7 @@ export default function Header() {
                 content="Add Service"
                 onClick={() => navigate("add-service")}
               />
-            </div>
+            </section>
           ) : (
             <div className=" align-items-center gap-2 d-none d-sm-flex">
               <button className="btn " onClick={() => dispatch(openModal())}>

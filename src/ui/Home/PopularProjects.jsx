@@ -1,6 +1,7 @@
 import React from "react";
 import ProjectCard from "../cards/ProjectCard";
 import SectionHeader from "../SectionHeader";
+import { Link } from "react-router";
 
 const popularProjects = [
   {
@@ -40,9 +41,13 @@ export default function PopularProjects() {
       />
       <div className="row mt-5">
         {popularProjects.map((project) => (
-          <div key={project.id} className="  col-md-6 ">
+          <Link
+            to={"projects/" + project.id}
+            key={project.id}
+            className="  col-md-6 "
+          >
             <ProjectCard project={project} />
-          </div>
+          </Link>
         ))}
       </div>
     </div>

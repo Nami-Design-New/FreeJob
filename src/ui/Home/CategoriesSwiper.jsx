@@ -36,7 +36,7 @@ export default function CategoriesSwiper() {
             slidesPerView: 2,
           },
           575: {
-            slidesPerView: 2,
+            slidesPerView: 3,
           },
           768: {
             slidesPerView: 4,
@@ -45,12 +45,12 @@ export default function CategoriesSwiper() {
             slidesPerView: 5,
           },
           1200: {
-            slidesPerView: 7,
+            slidesPerView: 6,
           },
         }}
       >
         {categories.map((item) => (
-          <SwiperSlide key={item.id} style={{ width: "16rem" }}>
+          <SwiperSlide key={item.id} style={{ height: "250px" }}>
             <CategoryCard title={item.title} imageUrl={item.imageUrl} />
           </SwiperSlide>
         ))}

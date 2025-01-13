@@ -9,10 +9,13 @@ import RegistrationForm from "../login/RegistrationForm";
 import UserNameEntry from "../login/UserNameEntry";
 import RegistrationForm2 from "../login/RegistrationForm2";
 import RegistrationForm3 from "../login/RegistrationForm3";
+import { useState } from "react";
 
 export default function AuthModal() {
   const show = useSelector((state) => state.authModal.show);
   const dispatch = useDispatch();
+  const [formData, setFormData] = useState({});
+  const [errors, setErrors] = useState({});
   const currentStep = useSelector((state) => state.authModal.currentStep);
   const renderStep = () => {
     switch (currentStep) {
@@ -21,15 +24,23 @@ export default function AuthModal() {
       case 2:
         return <EmailLogin />;
       case 3:
-        return <UserNameEntry />;
+        return <UserNameEntry formData={formData} setFormData={setFormData} />;
       case 4:
-        return <EmailVerification />;
+        return (
+          <EmailVerification formData={formData} setFormData={setFormData} />
+        );
       case 5:
-        return <RegistrationForm />;
+        return (
+          <RegistrationForm formData={formData} setFormData={setFormData} />
+        );
       case 6:
-        return <RegistrationForm2 />;
+        return (
+          <RegistrationForm2 formData={formData} setFormData={setFormData} />
+        );
       case 7:
-        return <RegistrationForm3 />;
+        return (
+          <RegistrationForm3 formData={formData} setFormData={setFormData} />
+        );
       default:
         return <LoginOptions />;
     }
@@ -37,15 +48,13 @@ export default function AuthModal() {
 
   return (
     <Modal
-      contentClassName="modal_height"
-      dialogClassName="modal_height"
       centered
       size="lg"
       show={show}
       backdrop="static"
       onHide={() => dispatch(closeModal())}
     >
-      <Modal.Body>
+      <Modal.Body scrollable={true}>
         <div className="row h-100 p-0 g-0">
           <div className="d-none d-lg-flex col-6  p-0">
             <LoginRightSide />

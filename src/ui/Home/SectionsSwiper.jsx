@@ -75,7 +75,7 @@ export default function SectionsSwiper() {
             slidesPerView: 2,
           },
           575: {
-            slidesPerView: 2,
+            slidesPerView: 3,
           },
           768: {
             slidesPerView: 4,
@@ -84,12 +84,12 @@ export default function SectionsSwiper() {
             slidesPerView: 5,
           },
           1200: {
-            slidesPerView: 7,
+            slidesPerView: 6,
           },
         }}
       >
         {sections.map((item) => (
-          <SwiperSlide key={item.id}>
+          <SwiperSlide key={item.id} style={{ height: "300px" }}>
             <SectionCard
               backgroundColor={item.backgroundColor}
               title={item.title}
