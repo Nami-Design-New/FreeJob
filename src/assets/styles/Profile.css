@@ -1,0 +1,61 @@
+.profile-page {
+    margin-top: 5rem;
+  }
+.card-img-top {
+    height: 150px;
+    object-fit: cover;
+    border-radius: 10px;
+  }
+  .position-relative .overlay-image {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    border: 3px solid #fff;
+    z-index: 1;
+  }
+  .position-relative .overlay-image img.freelancer-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+  }
+  
+  .position-relative .overlay-image.overlay-initial {
+    background-color: #6c757d;
+    color: #fff;
+    font-size: 36px;
+    font-weight: bold;
+    text-transform: uppercase;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .card-body-adjust {
+    margin-top: 40px;
+  }
+  
+  .tabs-container {
+    padding: 10px;
+    border-radius: 10px;
+  }
+  
+  .tab-content {
+    background: #fff;
+    border-radius: 10px;
+    padding: 20px;
+    min-height: 150px;
+  }
+  .tab-content p{
+font-weight: 600;
+font-size: 23px;
+color: #6c757d8d;}
+ 
+@media (max-width: 768px) {
+    .profile-page .card {
+      margin-bottom: 20px; }
+    }
+  

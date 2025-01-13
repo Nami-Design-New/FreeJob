@@ -61,7 +61,7 @@ const Freelancers = () => {
     },
     {
       id: 2,
-      name: "Ahmed Ali",
+      name: "jihad ahmed",
       image: avatarPlaceholder,
       verified: 2,
       service_count: 6,
@@ -101,7 +101,7 @@ const Freelancers = () => {
     },
     {
       id: 2,
-      name: "Ahmed Ali",
+      name: "mostafa samir",
       image: avatarPlaceholder,
       verified: 2,
       service_count: 6,

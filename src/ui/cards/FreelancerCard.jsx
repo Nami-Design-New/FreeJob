@@ -13,7 +13,11 @@ function FreelancerCard({ freelancer }) {
   };
 
   return (
-    <Link to={`/profile/${freelancer.id}`} className="freelancerCard">
+    <Link
+      to={`/profile/${freelancer.id}`}
+      state={{ freelancer }} 
+      className="freelancerCard"
+    >
       <div
         className="card d-flex align-items-center p-3 rounded-3 shadow-sm"
         style={{ backgroundColor: "#fff", border: "1px solid #ddd" }}
