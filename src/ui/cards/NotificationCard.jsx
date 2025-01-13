@@ -7,9 +7,8 @@ export default function NotificationCard({ notification }) {
   const { t } = useTranslation();
 
   return (
-    <Card className="my-2 border-0 shadow-sm"
+    <Card className="my-3 border-0 bg-light shadow-sm"
     style={{
-      backgroundColor: "#fff",
       height: "fit-content",
       border: "1px solid #ddd",
     }}>
@@ -19,7 +18,7 @@ export default function NotificationCard({ notification }) {
             <img
               src="./images/bell.png"
               alt="Notification Icon"
-              className="notification-icon"
+              className="notification-icon "
             />
           </div>
           <div>

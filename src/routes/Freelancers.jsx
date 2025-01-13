@@ -78,7 +78,7 @@ const Freelancers = () => {
     {
       id: 2,
       name: "Ahmed Ali",
-      image: avatarPlaceholder,
+      image: "",
       verified: 2,
       service_count: 6,
       rate: 5,
