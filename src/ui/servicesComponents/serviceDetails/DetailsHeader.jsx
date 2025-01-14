@@ -5,7 +5,7 @@ export default function DetailsHeader({ links }) {
   console.log(typeof links !== "string");
 
   return (
-    <section className="service_details_header">
+    <section className="details_header">
       <Breadcrumb>
         <Breadcrumb.Item href="/">Home</Breadcrumb.Item>
         {typeof links !== "string" ? (

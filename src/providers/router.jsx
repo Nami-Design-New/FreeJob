@@ -80,9 +80,9 @@ export const router = createBrowserRouter([
         path: "",
         element: (
           <ProtectedRoute>
-            <Suspense fallback={<div>Loading...</div>}>
+            {/* <Suspense fallback={<div>Loading...</div>}> */}
               <Outlet />
-            </Suspense>
+            {/* </Suspense> */}
           </ProtectedRoute>
         ),
         children: [

@@ -33,9 +33,7 @@ export default function ProjectList() {
     <>
       {projects.map((project) => (
         <section key={project.id} className="projects_card_filter">
-          <Link to={project.id}>
-            <ProjectCard project={project} />
-          </Link>
+          <ProjectCard project={project} />
         </section>
       ))}
     </>
