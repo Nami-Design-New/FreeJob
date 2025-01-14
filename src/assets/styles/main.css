@@ -184,3 +184,7 @@ a {
     }
   }
 }
+
+empty_section {
+  min-height: calc(100dvh - 350px);
+}

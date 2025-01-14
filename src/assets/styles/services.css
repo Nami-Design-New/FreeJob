@@ -793,7 +793,7 @@
 }
 
 .rating_container {
-  margin: 4.7rem;
+  margin: 4.7rem 0;
   .header_rate {
     padding: 1rem;
   }

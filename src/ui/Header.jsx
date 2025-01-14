@@ -38,7 +38,7 @@ export default function Header() {
         {isLogin ? (
           <ul className="nav_links d-lg-flex d-none">
             <li>
-              <NavLink to="/">Purchases</NavLink>
+              <NavLink to="/purchases">Purchases</NavLink>
             </li>
             <li>
               <NavLink to="/recieved-orders">Incoming Requests</NavLink>
@@ -90,7 +90,7 @@ export default function Header() {
           )}
           {isLogin && <UserDropDown />}
         </div>
-        <button className="btn fs-4 d-lg-none" onClick={toggleMenu}>
+        <button className="btn fs-4" onClick={toggleMenu}>
           <RiMenuUnfold4Fill />
         </button>
       </nav>

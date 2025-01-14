@@ -9,8 +9,6 @@ export default function ProtectedRoute({ children }) {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const show = useSelector((state) => state.authModal.show);
-  console.log(show);
-
   useEffect(() => {
     if (!isAuthenticated) {
       navigate("/", { replace: false });

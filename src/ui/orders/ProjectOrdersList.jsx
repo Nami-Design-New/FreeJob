@@ -1,4 +1,4 @@
-import OrderCardSecond from "../cards/OrderCardSecond";
+import OrderCard from "../cards/OrderCard";
 
 const orderListItems = [
   {
@@ -58,12 +58,12 @@ const orderListItems = [
   },
 ];
 
-export default function OrdersList() {
+export default function ProjectOrdersList() {
   return (
     <section className="row g-4">
       {orderListItems.map((order) => (
         <section key={order.id}>
-          <OrderCardSecond order={order} />
+          <OrderCard order={order} />
         </section>
       ))}
     </section>

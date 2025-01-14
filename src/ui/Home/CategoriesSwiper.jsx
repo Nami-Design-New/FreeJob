@@ -1,6 +1,7 @@
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import CategoryCard from "../cards/CategoryCard";
+import useCategoriesList from "../../hooks/categories/useCategories";
 const categories = [
   {
     id: "1",
@@ -23,6 +24,9 @@ const categories = [
 ];
 
 export default function CategoriesSwiper() {
+  // const { data: categories, error, isLoading } = useCategoriesList();
+  console.log(categories);
+
   return (
     <div className="swiper_cntainer">
       <Swiper
