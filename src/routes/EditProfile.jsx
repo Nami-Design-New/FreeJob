@@ -2,12 +2,12 @@ import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import Form from "react-bootstrap/Form";
 import FormInput from "../ui/form/FormInput";
-import FormSelector from "../ui/form/FormSelector";
+import SelectFeild from "../ui/form/SelectField";
 import FormTextArea from "../ui/form/FormTextArea";
 import MultiSelect from "../ui/form/MaltiSelect";
+import PasswordField from "../ui/form/PasswordField";
 import { FaRegEdit } from "react-icons/fa";
 import { useTranslation } from "react-i18next";
-// import Vector from "../../public/images/Vector.svg";
 
 const EditProfile = () => {
   const { t } = useTranslation();
@@ -22,6 +22,7 @@ const EditProfile = () => {
     country_id: user?.country_id || "",
     is_freelance: user?.is_freelance || 0,
     skills: user?.skills?.map((skill) => skill?.id) || [],
+    password: "",
   });
 
   const [wantChangePassword, setWantChangePassword] = useState(false);
@@ -51,6 +52,14 @@ const EditProfile = () => {
     console.log("Form submitted:", formData);
   };
 
+  const countryOptions = [
+    { value: "us", label: "United States" },
+    { value: "uk", label: "United Kingdom" },
+    { value: "in", label: "India" },
+    { value: "eg", label: "Egypt" },
+    { value: "sa", label: "Saudi Arabia" },
+  ];
+
   const options = [
     { value: "+1", label: "+1 (USA)" },
     { value: "+44", label: "+44 (UK)" },
@@ -66,7 +75,7 @@ const EditProfile = () => {
 
   return (
     <section className="edit-profile">
-      <div className="container my-5">
+      <div className="container col-lg-8 my-5">
         <div className="profile-image-container text-center mb-4">
           <div className="profile-image-wrapper position-relative">
             <img
@@ -81,7 +90,7 @@ const EditProfile = () => {
             />
             <label
               htmlFor="imageUpload"
-              className="image-upload-label position-absolute bg-white shadow-lg"
+              className="image-upload-label position-absolute bg-white shadow-sm"
               style={{
                 height: "26px",
                 width: "26px",
@@ -101,6 +110,7 @@ const EditProfile = () => {
             />
           </div>
         </div>
+
         <form onSubmit={handleSubmit}>
           <section className="row m-0">
             <section className="col-lg-6 col-12 p-2">
@@ -139,29 +149,35 @@ const EditProfile = () => {
               />
             </section>
             <section className="col-lg-6 col-12 p-2">
-              <FormSelector
-                label={t("manageAccounts.country")}
+              <SelectFeild
+                label="Country"
                 name="country_id"
-                value={formData?.country_id}
+                value={formData.country_id}
                 onChange={handleChange}
-                options={[]}
+                options={countryOptions}
+                disabledOption="Select your country"
               />
             </section>
 
             <section className="col-lg-6 col-12 p-2">
               <div className="d-flex">
-                <section className="col-auto " style={{ marginTop: "35px" }}>
-                  <FormSelector
+                <section className="col-auto ">
+                  <SelectFeild
+                    label={t("auth.phone")}
                     name="phoneCountryCode"
-                    value={formData?.phoneCountryCode}
+                    value={formData.phoneCountryCode}
                     onChange={handleChange}
                     options={options}
+                    disabledOption="code"
                   />
                 </section>
 
-                <section className="flex-grow-1 ">
+                <section
+                  className="flex-grow-1 p-2"
+                  style={{ marginTop: "15px" }}
+                >
                   <FormInput
-                    label={t("auth.phone")}
+                    // label={t("auth.phone")}
                     name="phoneNumber"
                     type="text"
                     id="phoneNumber"
@@ -190,7 +206,7 @@ const EditProfile = () => {
                 label={t("auth.interestes")}
                 id="interest"
                 name="interest"
-                options={[]} 
+                options={[]}
                 selectedOptions={formData.skills}
                 handleChange={handleSkillsChange}
               />
@@ -209,35 +225,70 @@ const EditProfile = () => {
 
             {/* Are you a seller input */}
             <section className="col-12 p-2">
-              <label className="form-label">{t("auth.areYouSeller")}</label>
-              <div className="question p-0">
-              <Form.Switch
-                id="isFreelancer"
-                name="isFreelancer"
-                checked={formData?.is_freelance === 1 ? true : false}
-                onChange={() =>
-                  setFormData({
-                    ...formData,
-                    is_freelance: formData?.is_freelance === 1 ? 0 : 1
-                  })
-                }
-              />
-            </div>
-            <div className="question p-0 pt-2">
-              <label htmlFor="wantChangePassword" className="quest">
-                {t("auth.doYouWantChangePassword")}
+              <label htmlFor="isFreelancer" className="d-block mb-2">
+                {t("auth.areYouSeller")}
               </label>
-              <Form.Switch
-                id="wantChangePassword"
-                name="wantChangePassword"
-                checked={wantChangePassword}
-                onChange={() => setWantChangePassword(!wantChangePassword)}
-              />
-            </div>
+              <div
+                className="btn-group w-100"
+                role="group"
+                aria-label="Seller toggle"
+              >
+                <button
+                  type="button"
+                  style={{
+                    backgroundColor:
+                      formData?.is_freelance === 0 ? "#157347" : "#E8FAF4",
+                    color: formData?.is_freelance === 0 ? "#fff" : "#6c757d",
+                  }}
+                  className={`btn `}
+                  onClick={() => setFormData({ ...formData, is_freelance: 0 })}
+                >
+                  {t("auth.NotSeller")}
+                </button>
+                <button
+                  type="button"
+                  style={{
+                    backgroundColor:
+                      formData?.is_freelance === 1 ? "#157347" : "#E8FAF4",
+                    color: formData?.is_freelance === 1 ? "#fff" : "#6c757d",
+                  }}
+                  className={`btn`}
+                  onClick={() => setFormData({ ...formData, is_freelance: 1 })}
+                >
+                  {t("auth.Seller")}
+                </button>
+              </div>
             </section>
 
-            <section className="p-2 d-flex justify-content-center">
-              <button type="submit" className="btn btn-success col-6 ">
+            <section className="col-12 p-4 d-flex justify-content-center">
+              <button
+                type="button"
+                className={`btn btn-link text-success text-decoration-none p-0`}
+                onClick={() => setWantChangePassword(!wantChangePassword)}
+              >
+                {wantChangePassword
+                  ? `${t("auth.newPasswordSuccess")}`
+                  : `${t("auth.doYouWantChangePassword")}`}
+              </button>
+            </section>
+
+            {wantChangePassword && (
+              <section className="col-12 p-2">
+                <PasswordField
+                  label={t("auth.newPasswordTitle")}
+                  name="password"
+                  id="password"
+                  minLength={6}
+                  value={formData?.password}
+                  onChange={handleChange}
+                  style={{ backgroundColor: "#E8FAF4" }}
+                />
+                <p>{t("auth.newPasswordSubTitle")}</p>
+              </section>
+            )}
+
+            <section className="col-12 p-2">
+              <button type="submit" className="btn btn-success col-12">
                 Save Changes
               </button>
             </section>
