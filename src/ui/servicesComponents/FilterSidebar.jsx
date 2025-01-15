@@ -5,8 +5,9 @@ import DropdownMenu from "./DropdownMenu";
 import RangeInput from "./RangeInput";
 import SearchInput from "./SearchInput";
 import SectionsFilter from "./SectionsFilter";
+import { IoMdClose } from "react-icons/io";
 
-const FilterSidebar = () => {
+const FilterSidebar = ({ isOpen, setIsOpen }) => {
   const [searchParams, setSearchParams] = useSearchParams();
 
   const [filters, setFilters] = useState({
@@ -82,7 +83,16 @@ const FilterSidebar = () => {
   };
 
   return (
-    <aside aria-labelledby="filter-sidebar-title" className="filter_sidebar">
+    <aside
+      aria-labelledby="filter-sidebar-title"
+      className={`p-2 rounded border sidebar ${isOpen ? "active" : ""}`}
+    >
+      {" "}
+      <section className="filter_sidebar_header">
+        <button onClick={() => setIsOpen(false)}>
+          <IoMdClose />
+        </button>
+      </section>
       <form
         onSubmit={(e) => e.preventDefault()}
         aria-label="Filter options"

@@ -11,8 +11,6 @@ import {
 export default function OrderCard({ order }) {
   const navigate = useNavigate();
   const lang = useSelector((state) => state.language.lang);
-  console.log(order);
-
   return (
     <section className="position-relative">
       <section className="order_card ">

@@ -11,7 +11,6 @@ import {
 export default function PurchaseCard({ purchase }) {
   const navigate = useNavigate();
   const lang = useSelector((state) => state.language.lang);
-  console.log(purchase);
 
   return (
     <section className="position-relative">
@@ -45,7 +44,6 @@ export default function PurchaseCard({ purchase }) {
         </section>
         <section className="order_status">
           <p>
-            {" "}
             {lang === "ar"
               ? ORDER_STATUS_AR[purchase?.status]
               : ORDER_STATUS_EN[purchase?.status]}
@@ -65,7 +63,7 @@ export default function PurchaseCard({ purchase }) {
         </section>
       </section>
       <button
-        onClick={() => navigate(purchase.id)}
+        onClick={() => navigate(`${purchase.id}`)}
         className={`${lang === "ar" ? "ar" : ""} order_details_button`}
       >
         Order Details

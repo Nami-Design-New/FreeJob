@@ -188,3 +188,16 @@ a {
 empty_section {
   min-height: calc(100dvh - 350px);
 }
+
+.small_header_filter {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  h6 {
+    font-size: 1rem;
+    font-weight: 600;
+  }
+  svg {
+    cursor: pointer;
+  }
+}

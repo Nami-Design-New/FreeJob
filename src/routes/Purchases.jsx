@@ -1,17 +1,10 @@
-// import React, { useState } from "react";
-// import { useTranslation } from "react-i18next";
-// import PurchaseCard from "../ui/cards/PurchaseCard";
-// import useGetPurchases from "./../features/purchases/useGetPurchases";
-// import CustomPagination from "../ui/CustomPagination";
-// import EmptyData from "../ui/EmptyData";
-// import DataLoader from "./../ui/DataLoader";
-
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import DataLoader from "../ui/DataLoader";
 import EmptyData from "../ui/EmptyData";
 import PurchaseCard from "../ui/cards/PurchasesCard";
 import SideBarOrdersFilter from "../ui/orders/SideBarOrdersFilter";
+import { CiFilter } from "react-icons/ci";
 
 const purchases = {
   data: [
@@ -70,19 +63,21 @@ const Purchases = () => {
   const { t } = useTranslation();
   const isLoading = false;
   // const { data: purchases, isLoading } = useGetPurchases();
-  const [isFilterOpen, setIsFilterOpen] = useState(false);
-  console.log(purchases.total);
-
-  function handleTogglingFilter() {
-    setIsFilterOpen((open) => !open);
+  const [isOpen, setIsOpen] = useState(false);
+  function toggleMenu() {
+    setIsOpen(!isOpen);
   }
 
   return (
     <main>
-      <section className="cart-section container">
+      <section className=" container my-4">
+        <section className="small_header_filter d-md-none">
+          <h6>Purchases</h6>
+          <CiFilter className=" my-3 fs-3" onClick={toggleMenu} />
+        </section>
         <div className="row ">
           <section className=" col-md-3">
-            <SideBarOrdersFilter />
+            <SideBarOrdersFilter isOpen={isOpen} setIsOpen={setIsOpen} />
           </section>
           <section className="col-md-9 ">
             {isLoading ? (

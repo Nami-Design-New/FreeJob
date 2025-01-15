@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import { BsGlobe } from "react-icons/bs";
 import { RiMenuUnfold4Fill } from "react-icons/ri";
 import { useDispatch, useSelector } from "react-redux";
 import { NavLink, useNavigate } from "react-router";

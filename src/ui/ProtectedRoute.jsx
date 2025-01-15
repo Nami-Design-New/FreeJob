@@ -5,7 +5,6 @@ import { useEffect } from "react";
 
 export default function ProtectedRoute({ children }) {
   const isAuthenticated = true;
-  console.log(isAuthenticated);
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const show = useSelector((state) => state.authModal.show);

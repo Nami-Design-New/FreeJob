@@ -2,8 +2,8 @@ import { useTranslation } from "react-i18next";
 import { FILTER_STATUS } from "../../utils/contants";
 import { useSearchParams } from "react-router";
 import { useState } from "react";
-
-export default function SideBarOrdersFilter() {
+import { IoMdClose } from "react-icons/io";
+export default function SideBarOrdersFilter({ isOpen, setIsOpen }) {
   const { t } = useTranslation();
   const [searchParams, setSearchParams] = useSearchParams();
   const statusParam = searchParams.get("status") || "";
@@ -55,8 +55,13 @@ export default function SideBarOrdersFilter() {
   }
 
   return (
-    <section className="sidebar_orders_filter">
-      <h2>Orders Status</h2>
+    <section className={`sidebar_orders_filter ${isOpen ? "active" : ""}`}>
+      <section className="sidebar_orders_filter_header">
+        <h2>Orders Status</h2>
+        <button>
+          <IoMdClose onClick={() => setIsOpen(false)} />
+        </button>
+      </section>
       <form onSubmit={handleSubmit}>
         <ul className="order_filter_input_group">
           {FILTER_STATUS.map((status) => (

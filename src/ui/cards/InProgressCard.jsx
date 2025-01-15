@@ -9,10 +9,9 @@ import {
 } from "../../utils/contants";
 import { TbArrowGuide } from "react-icons/tb";
 import StarsRate from "../StartRate";
-export default function OrderCardSecond({ order }) {
+export default function InProgressCard({ order }) {
   const navigate = useNavigate();
   const lang = useSelector((state) => state.language.lang);
-  console.log(order);
 
   return (
     <section className="">
@@ -42,7 +41,7 @@ export default function OrderCardSecond({ order }) {
                 <p>Regester from 2024</p>
               </section>
             </section>
-            <TbArrowGuide />
+            <TbArrowGuide className="tb_arrow" />
             <section className="user">
               <section className="user_image_container">
                 <img
