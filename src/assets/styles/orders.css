@@ -3,10 +3,44 @@
   background-color: var(--white-color);
   border-radius: 0.5rem;
   box-shadow: var(--card-shadow);
-  h2 {
-    font-size: 1.25rem;
-    color: var(--black-color);
-    font-weight: 400;
+  transition: var(--main-transition);
+  @media (max-width: 768px) {
+    position: fixed;
+    top: 125px;
+    left: -100%;
+    z-index: 10;
+    width: 100%;
+    height: 100%;
+  }
+  &.active {
+    left: 0;
+  }
+  .sidebar_orders_filter_header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    h2 {
+      font-size: 1.25rem;
+      color: var(--black-color);
+      font-weight: 400;
+    }
+    button {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 2rem;
+      width: 2rem;
+      border-radius: 50%;
+      border: none;
+      outline: none;
+      background-color: var(--main-color);
+      @media (min-width: 768px) {
+        display: none;
+      }
+      svg {
+        color: var(--white-color);
+      }
+    }
   }
   .order_filter_input_group {
     display: flex;

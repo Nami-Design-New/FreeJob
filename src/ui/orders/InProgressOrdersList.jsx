@@ -1,5 +1,4 @@
-import React from "react";
-import OrderCard from "../cards/OrderCard";
+import InProgressCard from "../cards/InProgressCard";
 
 const orderListItems = [
   {
@@ -59,12 +58,12 @@ const orderListItems = [
   },
 ];
 
-export default function OrdersList() {
+export default function InProgressOrdersList() {
   return (
     <section className="row g-4">
       {orderListItems.map((order) => (
         <section key={order.id}>
-          <OrderCard order={order} />
+          <InProgressCard order={order} />
         </section>
       ))}
     </section>

@@ -211,8 +211,8 @@ const ChatRoom = ({ chat }) => {
               chat?.apply
                 ? user?.id === chat?.apply?.id
                   ? chat?.owner?.image
-                  : chat?.apply?.image || "./images/avatar.png"
-                : "./images/avatar.png"
+                  : chat?.apply?.image || "./images/avatar.jpg"
+                : "./images/avatar.jpg"
             }
             alt="user"
           />

@@ -1,7 +1,14 @@
 import { useState } from "react";
 import { Dropdown } from "react-bootstrap";
 import { BiSupport } from "react-icons/bi";
-import { BsBank2, BsBell, BsBoxArrowRight, BsSearch } from "react-icons/bs";
+import {
+  BsBank2,
+  BsBell,
+  BsBoxArrowRight,
+  BsCart,
+  BsChat,
+  BsSearch,
+} from "react-icons/bs";
 import { FaEdit, FaRegMoneyBillAlt, FaTrash, FaUser } from "react-icons/fa";
 import { IoMdInformationCircleOutline } from "react-icons/io";
 import { MdCollections } from "react-icons/md";
@@ -64,6 +71,18 @@ export default function UserDropDown() {
             {" "}
             <Link to="/notifications">
               <BsBell /> {t("navbar.allNotifications")}
+            </Link>
+          </Dropdown.Item>
+          <Dropdown.Item>
+            {" "}
+            <Link to="/chat">
+              <BsChat /> {t("chat.chats")}
+            </Link>
+          </Dropdown.Item>
+          <Dropdown.Item>
+            {" "}
+            <Link to="/cart">
+              <BsCart /> {t("navbar.cart")}
             </Link>
           </Dropdown.Item>
           <Dropdown.Item>

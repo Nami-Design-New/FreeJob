@@ -32,9 +32,9 @@ export default function ProjectList() {
   return (
     <>
       {projects.map((project) => (
-        <section key={project.id} className="projects_card_filter">
+        <Link to={project.id} key={project.id} className="projects_card_filter">
           <ProjectCard project={project} />
-        </section>
+        </Link>
       ))}
     </>
   );

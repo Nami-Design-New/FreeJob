@@ -81,7 +81,7 @@ export const router = createBrowserRouter([
         element: (
           <ProtectedRoute>
             {/* <Suspense fallback={<div>Loading...</div>}> */}
-              <Outlet />
+            <Outlet />
             {/* </Suspense> */}
           </ProtectedRoute>
         ),
