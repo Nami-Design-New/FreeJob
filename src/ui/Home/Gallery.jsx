@@ -1,8 +1,8 @@
-
 import { motion } from "framer-motion";
 import SectionHeader from "../SectionHeader";
 import { useEffect, useState } from "react";
 import Masonry from "react-layout-masonry";
+import { useTranslation } from "react-i18next";
 
 const galleryItems = [
   { id: 1, imageUrl: "./images/gallery1.png", alt: "Item 1" },
@@ -20,6 +20,8 @@ const galleryItems = [
 ];
 
 export default function FramerScrollGallery() {
+  const { t } = useTranslation();
+
   const [visibleItems, setVisibleItems] = useState([]);
 
   useEffect(() => {
@@ -45,8 +47,8 @@ export default function FramerScrollGallery() {
   return (
     <div className="gallery_section">
       <SectionHeader
-        title="Some freelance work"
-        description="Most viewed and best-selling projects ever"
+        title={t("home.freelancework")}
+        description={t("home.freelanceworkSubTitle")}
       />
       <Masonry
         className="mt-5"

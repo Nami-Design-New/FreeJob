@@ -10,7 +10,7 @@ export default function Search() {
           <p>{t("home.heroSectionTitle")} </p>
           <p>{t("home.heroSectionSubTitle")}</p>
         </section>
-        <SearchBox placeholder="Search for any service..." />
+        <SearchBox placeholder={t("home.searchServices")} />
       </section>
     </section>
   );

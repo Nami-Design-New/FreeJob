@@ -2,6 +2,7 @@ import { Pagination } from "react-bootstrap";
 import SectionHeader from "../SectionHeader";
 import { useState } from "react";
 import PaginationComponent from "../PaginationComponent";
+import { useTranslation } from "react-i18next";
 const companies = [
   { id: "1", imageUrl: "./images/companylogo1.png" },
   { id: "2", imageUrl: "./images/companylogo2.png" },
@@ -14,6 +15,7 @@ const companies = [
   { id: "9", imageUrl: "./images/companylogo4.png" },
 ];
 export default function PartnersofSuccess() {
+  const { t } = useTranslation();
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 4;
 
@@ -30,8 +32,8 @@ export default function PartnersofSuccess() {
   return (
     <div className="partner_of_success">
       <SectionHeader
-        title="Partners of Success"
-        description="Most viewed and best selling projects ever"
+        title={t("home.parteners")}
+        description={t("home.partenersSubTitle")}
       />
       <div className="row mt-5">
         {currentCompanies.map((company) => (

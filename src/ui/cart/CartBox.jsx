@@ -10,7 +10,7 @@ function CartBox({ item, cartObjList }) {
   const [totalPrice, setTotalPrice] = useState(0);
   const [formLoading, setFormLoading] = useState(0);
   const [boxDevs, setBoxDevs] = useState([]);
-  
+
   // Check for undefined item
   useEffect(() => {
     if (cartObjList && item) {
@@ -18,7 +18,6 @@ function CartBox({ item, cartObjList }) {
     }
   }, [item, cartObjList]);
 
-  
   useEffect(() => {
     const developmentsPrice = item?.service?.developments
       ?.filter((dev) => dev.in_cart)
@@ -48,13 +47,13 @@ function CartBox({ item, cartObjList }) {
 
   const handleCheckboxChange = async (dev_id, cart_id) => {
     try {
-      await updateDevelopmentsInCart(
-        {
-          cart_id: cart_id,
-          development_id: dev_id,
-        },
-        queryClient
-      );
+      // await updateDevelopmentsInCart(
+      //   {
+      //     cart_id: cart_id,
+      //     development_id: dev_id,
+      //   },
+      //   queryClient
+      // );
     } catch (error) {
       console.log(error);
     }
@@ -122,10 +121,10 @@ function CartBox({ item, cartObjList }) {
 
         <div className="add_cart col-lg-4">
           <div className="total">
-            <p className="total_price">
+            <div className="total_price">
               <h6>{t("services.total")} :</h6>
               <p className="mb-0">{totalPrice}$</p>{" "}
-            </p>
+            </div>
             <p className="added_develop">
               {item?.service?.developments?.filter((e) => e.in_cart).length >
                 0 && (

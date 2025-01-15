@@ -2,6 +2,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import SectionCard from "../cards/SectionCard";
 import ShowAll from "../ShowAll";
+import { useTranslation } from "react-i18next";
 const sections = [
   {
     id: "1",
@@ -60,10 +61,11 @@ const sections = [
 ];
 
 export default function SectionsSwiper() {
+  const { t } = useTranslation();
   return (
     <>
       <div className="px-3">
-        <ShowAll sectionName="Sections" to="/sections" />
+        <ShowAll sectionName={t("navbar.categories")} to="/sections" />
       </div>
       <Swiper
         spaceBetween={16}

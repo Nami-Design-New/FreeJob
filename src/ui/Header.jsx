@@ -11,10 +11,11 @@ import SideMenu from "./header/SideMenu";
 import UserDropDown from "./header/UserDropDown";
 import LanguageToggle from "./LanguageToggle";
 import AuthModal from "./modals/AuthModal";
+import { useTranslation } from "react-i18next";
 
 export default function Header() {
   const isLogin = useSelector((state) => state.authedUser.isLogged);
-
+  const { t } = useTranslation();
   const [isOpen, setIsOpen] = useState(false);
   const isMobile = useResponsiveState("(min-width: 768px)");
   const dispatch = useDispatch();
@@ -37,13 +38,18 @@ export default function Header() {
         {isLogin ? (
           <ul className="nav_links d-lg-flex d-none">
             <li>
-              <NavLink to="/purchases">Purchases</NavLink>
+              <NavLink to="/purchases">{t("routes.purchases")}</NavLink>
             </li>
             <li>
-              <NavLink to="/recieved-orders">Incoming Requests</NavLink>
+              <NavLink to="/recieved-orders">
+                {t("routes.recieved-request")}
+              </NavLink>
             </li>
             <li>
-              <NavLink to="/projects-orders">In Progress</NavLink>
+              <NavLink to="/projects-orders">
+                {" "}
+                {t("navbar.projectsOrders")}
+              </NavLink>
             </li>
             <li className="d-flex align-items-center justify-content-center ">
               <LanguageToggle />
@@ -52,13 +58,13 @@ export default function Header() {
         ) : (
           <ul className="nav_links d-lg-flex d-none">
             <li>
-              <NavLink>Projects</NavLink>
+              <NavLink> {t("navbar.projects")}</NavLink>
             </li>
             <li>
-              <NavLink>Services</NavLink>
+              <NavLink>{t("navbar.services")}</NavLink>
             </li>
             <li>
-              <NavLink>Community</NavLink>
+              <NavLink>{t("communities.community")}</NavLink>
             </li>
             <li className="d-flex align-items-center justify-content-start ">
               <LanguageToggle />
@@ -70,21 +76,21 @@ export default function Header() {
             <section className="button-group d-flex align-items-center gap-2 d-none  d-sm-flex ">
               <Button
                 className=""
-                content="Add Project"
+                content={t("routes.add-project")}
                 onClick={() => navigate("add-project")}
               />
               <Button
-                content="Add Service"
+                content={t("routes.add-service")}
                 onClick={() => navigate("add-service")}
               />
             </section>
           ) : (
             <div className=" align-items-center gap-2 d-none d-sm-flex">
               <button className="btn " onClick={() => dispatch(openModal())}>
-                Sign Up
+                {t("routes.login")}
               </button>
               {show && <AuthModal />}
-              <Button content="Join" />
+              <Button content={t("navbar.join")} />
             </div>
           )}
           {isLogin && <UserDropDown />}
