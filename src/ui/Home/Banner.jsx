@@ -1,13 +1,15 @@
 import React from "react";
 import FormButton from "../form/FormButton";
+import { useTranslation } from "react-i18next";
 
 export default function Banner() {
+  const { t } = useTranslation();
   return (
     <>
       <div className="banner">
-        <h1>Join now and become FreeLancer with FREEJOB</h1>
+        <h1>{t("home.withFREEJOB")}</h1>
         <FormButton
-          content="Join Now"
+          content={t("home.joinNow")}
           style={{
             color: "black",
             backgroundColor: "white",

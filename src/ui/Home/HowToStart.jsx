@@ -1,41 +1,31 @@
+import { useTranslation } from "react-i18next";
 import { useSelector } from "react-redux";
 
 export default function HowToStart() {
   const lang = useSelector((state) => state.language.lang);
+  const { t } = useTranslation();
   return (
     <div className="howToStart">
-      <h1 className="howToStart_header">Do You Have Work To Do?</h1>
+      <h1 className="howToStart_header">{t("home.doYouhaveProject")}</h1>
       <div className="howToStart_content">
         <ul className="howToStart_text">
           <li className="main_item">
-            <span>Add Project</span>
+            <span>{t("home.addProject")}</span>
             <ul>
-              <li className="sub_item">
-                Add details of the project you need done and the skills required
-                and get quotes <br></br> from specialized freelancers in
-                minutes.
-              </li>{" "}
+              <li className="sub_item">{t("home.addProjectDesc")}</li>{" "}
             </ul>
           </li>
           <li className="main_item">
-            <span> Choose the right freelancer</span>
+            <span> {t("home.choosefreelancer")}</span>
             <ul>
-              <li className="sub_item">
-                Compare freelancers&apos; offers, browse their profiles, ratings
-                and work, negotiate with them via messages and choose the best
-                one to implement your project.
-              </li>
+              <li className="sub_item">{t("home.choosefreelancerDec")}</li>
             </ul>
           </li>
           <li className="main_item">
-            <span> Receive the project</span>
+            <span> {t("home.receiveProject")}</span>
             <ul>
               {" "}
-              <li className="sub_item">
-                The freelancer you choose will work on your project and follow
-                up with you until you get the agreed upon work results and
-                deliver the project.
-              </li>{" "}
+              <li className="sub_item">{t("home.receiveProjectDec")}</li>{" "}
             </ul>
           </li>
         </ul>
