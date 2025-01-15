@@ -1,3 +1,5 @@
+import OrdersList from "../ui/orders/ProjectOrdersList";
+import SideBarOrdersFilter from "../ui/orders/SideBarOrdersFilter";
 import { CiFileOn } from "react-icons/ci";
 import { useSelector } from "react-redux";
 import {
@@ -22,6 +24,9 @@ const order = {
 };
 const ProjectsOrdersDetails = () => {
   const lang = useSelector((state) => state.language.lang);
+  function handleChat() {
+    // open chat
+  }
   return (
     <section className="container">
       <section className="row my-5  ">
@@ -94,8 +99,9 @@ const ProjectsOrdersDetails = () => {
             </li>
           </ul>
           <section className="buttons_container">
-            <button className="add">Finshed</button>
-            <button className="delete">Request denied</button>
+            <button onClick={handleChat} className="add ">
+              Chat Now
+            </button>
           </section>
         </section>
       </section>

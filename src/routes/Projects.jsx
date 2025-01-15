@@ -7,18 +7,11 @@ import { CiFilter } from "react-icons/ci";
 import ProjectList from "../ui/projects/ProjectList";
 
 export default function Projects() {
-  const [filterOpen, setFilterOpen] = useState(true);
+  const [isOpen, setIsOpen] = useState(false);
+  function toggleMenu() {
+    setIsOpen(!isOpen);
+  }
   const [searchParams] = useSearchParams();
-  const isMobile = useResponsiveState("(max-width: 768px)");
-
-  useEffect(
-    function () {
-      if (!isMobile) {
-        setFilterOpen(false);
-      }
-    },
-    [isMobile, setFilterOpen]
-  );
 
   let filter = {
     searchQuery: searchParams.get("search") || "",
@@ -39,27 +32,12 @@ export default function Projects() {
   return (
     <section className="container">
       <section className="sercives_container my-5">
-        <section className="services_header_mobile ">
-          <h1>Projects</h1>
-          <button onClick={() => setFilterOpen(true)}>
-            <CiFilter />
-          </button>
+        {" "}
+        <section className="small_header_filter d-md-none">
+          <h6>Services</h6>
+          <CiFilter className=" my-3 fs-3" onClick={toggleMenu} />
         </section>
-        <section
-          className={`p-2 rounded border sidebar ${filterOpen ? "open" : ""}`}
-        >
-          <section className="filter_wraper">
-            {filterOpen && (
-              <button
-                className="close-btn"
-                onClick={() => setFilterOpen(false)}
-              >
-                <IoClose />
-              </button>
-            )}
-            <FilterSidebar />
-          </section>
-        </section>
+        <FilterSidebar isOpen={isOpen} setIsOpen={setIsOpen} />
         <section className="project_list">
           <ProjectList filter={filter} />
         </section>

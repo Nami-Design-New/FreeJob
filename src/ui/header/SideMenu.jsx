@@ -33,10 +33,10 @@ export default function SideMenu({ state, onClose }) {
           onClick={handleCloseMenu}
         >
           <li>
-            <NavLink to="/">Purchases</NavLink>
+            <NavLink to="/purchases">Purchases</NavLink>
           </li>
           <li>
-            <NavLink to="/">Incoming Requests</NavLink>
+            <NavLink to="/recieved-orders">Incoming Requests</NavLink>
           </li>
           <li>
             <NavLink to="/projects-orders">In Progress</NavLink>

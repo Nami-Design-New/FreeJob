@@ -17,11 +17,11 @@ import ChatRoom from "../ui/Chats/ChatRoom";
 const chats = [
   {
     id: 1,
-    apply: { id: 2, name: "John Doe", image: "https://via.placeholder.com/50" },
+    apply: { id: 2, name: "John Doe", image: "./images/avatar.jpg" },
     owner: {
       id: 1,
       name: "Alice Smith",
-      image: "https://via.placeholder.com/50",
+      image: "./images/avatar.jpg",
     },
     service: {
       id: 101,
@@ -61,12 +61,12 @@ const chats = [
     apply: {
       id: 3,
       name: "Mike Johnson",
-      image: "https://via.placeholder.com/50",
+      image: "./images/avatar.jpg",
     },
     owner: {
       id: 1,
       name: "Alice Smith",
-      image: "https://via.placeholder.com/50",
+      image: "./images/avatar.jpg",
     },
     service: null,
     project: {
