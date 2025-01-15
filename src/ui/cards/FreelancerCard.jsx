@@ -19,8 +19,8 @@ function FreelancerCard({ freelancer }) {
       className="freelancerCard"
     >
       <div
-        className="card d-flex align-items-center p-3 rounded-3 shadow-sm"
-        style={{ backgroundColor: "#fff", border: "1px solid #ddd" }}
+        className="card d-flex align-items-center p-3 rounded-3 shadow-sm bg-light border-0"
+        // style={{ backgroundColor: "#fff", border: "1px solid #ddd" }}
       >
         <div className="d-flex align-items-center w-100">
           <div className="img me-3">

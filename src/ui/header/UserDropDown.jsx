@@ -54,7 +54,7 @@ export default function UserDropDown() {
           </Dropdown.Item>
           <Dropdown.Item>
             <Link to="/contact">
-              <BiSupport /> {t("navbar.support")}
+              <BiSupport /> {t("navbar.contact")}
             </Link>
           </Dropdown.Item>
           <Dropdown.Item>
@@ -74,7 +74,6 @@ export default function UserDropDown() {
             </Link>
           </Dropdown.Item>
           <Dropdown.Item>
-            {" "}
             <Link to="/chat">
               <BsChat /> {t("chat.chats")}
             </Link>
