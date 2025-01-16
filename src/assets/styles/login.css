@@ -12,7 +12,21 @@
 .modal-body {
   padding: 0 !important;
 }
-
+.close_modal {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  font-size: 2rem;
+  color: var(--black-color);
+  cursor: pointer;
+  border: none;
+  width: 1.5rem;
+  height: 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--white-color);
+}
 .right_side {
   height: 100%;
   width: 100%;

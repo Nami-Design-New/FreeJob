@@ -6,9 +6,12 @@ import BackButton from "./BackButton";
 import FormInput from "../form/FormInput";
 import TabSelector from "./TapSelector";
 import { useState } from "react";
+import { toast } from "react-toastify";
 export default function RegistrationForm3() {
   const [selected, setSelected] = useState("Seller");
+  const [isLoading, setIsLoading] = useState("");
   const dispatch = useDispatch();
+
   return (
     <div className="left_side">
       <BackButton />
