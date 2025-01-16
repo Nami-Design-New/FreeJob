@@ -1,39 +1,53 @@
 import { FaFile, FaUsers } from "react-icons/fa";
 import { Link } from "react-router";
+import { formatTimeDifference, getTimeDifference } from "../../utils/helper";
+import { useTranslation } from "react-i18next";
+import useTruncateText from "../../hooks/useTruncateText";
 
 export default function ProjectCard({ project }) {
+  const { t } = useTranslation();
   const {
     id,
-    name: projecteName,
+    title,
+    requests_count,
     description,
-    owner: { imageUrl: ownerImage, name: username, offers },
+    user: { image, name },
   } = project;
-
+  const truncateText = useTruncateText(description, 150);
+  const timeDifference = getTimeDifference(project?.created_at);
+  const formattedTime = formatTimeDifference(
+    timeDifference.years,
+    timeDifference.months,
+    timeDifference.days,
+    timeDifference.hours,
+    timeDifference.minutes,
+    t
+  );
   return (
     <section className="project_card">
       <section className="project_content">
-        <h1>{projecteName}</h1>
-        <p>{description}</p>
+        <h1>{title}</h1>
+        <p>{truncateText}</p>
       </section>
-      <Link to={"profiles/" + id} className="project_owner gap-3">
+      <div to={"profiles/" + id} className="project_owner gap-3">
         <section className="image_user_container">
-          <img src={ownerImage} />
+          <img src={image} />
         </section>
         <section className="project_owner_info">
-          <h4>{username}</h4>
+          <h4>{name}</h4>
           <section className="stats d-flex gap-1 ">
             <section className="gap-1  d-flex align-items-center justify-content-center">
               <FaFile />
-              <span>3 months and 20 days ago</span>
+              <span>{formattedTime}</span>
             </section>
             <section className="gap-1 d-flex align-items-center justify-content-center">
               <FaUsers />
-              <span>{offers}</span>
+              <span>{requests_count}</span>
               Offers
             </section>
           </section>
         </section>
-      </Link>
+      </div>
     </section>
   );
 }

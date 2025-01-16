@@ -58,13 +58,13 @@ export default function Header() {
         ) : (
           <ul className="nav_links d-lg-flex d-none">
             <li>
-              <NavLink> {t("navbar.projects")}</NavLink>
+              <NavLink to={"/projects"}> {t("navbar.projects")}</NavLink>
             </li>
             <li>
-              <NavLink>{t("navbar.services")}</NavLink>
+              <NavLink to={"/services"}>{t("navbar.services")}</NavLink>
             </li>
             <li>
-              <NavLink>{t("communities.community")}</NavLink>
+              <NavLink to={"/community"}>{t("communities.community")}</NavLink>
             </li>
             <li className="d-flex align-items-center justify-content-start ">
               <LanguageToggle />

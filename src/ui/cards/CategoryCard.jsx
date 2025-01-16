@@ -1,11 +1,13 @@
-export default function CategoryCard({ imageUrl, title }) {
+export default function CategoryCard({ category }) {
+  console.log(category);
+
   return (
     <section className="category_card">
       <section className="image_container">
-        <img src={imageUrl || "https://placehold.co/80"} />
+        <img src={category.image || "https://placehold.co/80"} />
       </section>
       <h3 className="category_card_title ">
-        {title || "E-commerce Website Development"}
+        {category.name || "E-commerce Website Development"}
       </h3>
     </section>
   );

@@ -111,6 +111,10 @@
   }
   .rating {
     padding: 0 0.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    font-size: 0.8rem;
   }
   .service_owner {
     padding: 0.5rem;
@@ -251,11 +255,22 @@
 }
 .project_card {
   border-radius: 1rem;
+  height: 250px;
   display: flex;
   flex-direction: column;
+  gap: 1rem;
   box-shadow: 0px 3px 10px 0px rgba(0, 0, 0, 0.09);
-  margin: 10px;
   padding: 1.5rem 1rem 1rem;
+  @media (max-width: 768px) {
+    height: auto;
+    h1 {
+      font-size: 8px;
+      margin-bottom: 1rem;
+    }
+    p {
+      font-size: 0.75rem;
+    }
+  }
   h1 {
     font-size: 1.25rem;
     color: var(--black-color);
@@ -275,6 +290,9 @@
       border-radius: 50%;
       margin-right: 0.5rem;
       img {
+        border-radius: 50%;
+        width: 3rem;
+        height: 3rem;
         border-radius: 50%;
       }
     }

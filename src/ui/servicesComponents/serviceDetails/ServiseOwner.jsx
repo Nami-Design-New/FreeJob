@@ -42,26 +42,26 @@ export default function ServiseOwner() {
         </li>
         <li className="d-flex justify-content-between">
           <p>Buyers</p>
-          <span>0</span>
+          {/* <span>0</span> */}
         </li>
         <li className=" d-flex justify-content-between">
           <p>Orders in Progress</p>
-          <span>0</span>
+          {/* <span>0</span> */}
         </li>
         <li className=" d-flex justify-content-between">
           <p>Service Price Starts From</p>
-          <span>$100</span>
+          {/* <span>$100</span> */}
         </li>
         <li className=" d-flex justify-content-between">
           <p>Delivery Time</p>
-          <span>3 days</span>
+          {/* <span>3 days</span> */}
         </li>
       </ul>
       {instructions && (
         <>
           <section className="label d-flex align-items-center gap-2 mt-3">
             <IoMdInformationCircleOutline />
-            <p className="p-0 m-0">instructions</p>
+            <p className="p-0 m-0">Instructions</p>
           </section>
           <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
         </>
@@ -131,9 +131,9 @@ export default function ServiseOwner() {
               <button onClick={handleCopy}>
                 <FaRegCopy />
               </button>
-              <span onClick={handleCopy} id="url">
-                <span>{currentPageLink}</span>
-              </span>
+                {/* <span onClick={handleCopy} id="url">
+                  <span>{currentPageLink}</span>
+                </span> */}
             </div>
           </Dropdown.Menu>
         </Dropdown>
