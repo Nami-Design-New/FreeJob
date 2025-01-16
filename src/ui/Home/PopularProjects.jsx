@@ -3,37 +3,16 @@ import ProjectCard from "../cards/ProjectCard";
 import SectionHeader from "../SectionHeader";
 import { Link } from "react-router";
 import { useTranslation } from "react-i18next";
-
-const popularProjects = [
-  {
-    id: "1",
-    name: "10 second 3D video designer wanted",
-    description:
-      "Guinrank tool has recently proven its superiority as the best SEO tool for writing articles with artificial intelligence. We all know that content is the basis of leadership.",
-    owner: {
-      imageUrl: "https://placehold.co/48",
-      name: "Ahmed Mohamed",
-      servicesNo: "2",
-      clients: "2",
-      offers: "2",
-    },
-  },
-  {
-    id: "2",
-    name: "10 second 3D video designer wanted",
-    description:
-      "Guinrank tool has recently proven its superiority as the best SEO tool for writing articles with artificial intelligence. We all know that content is the basis of leadership.",
-    owner: {
-      imageUrl: "https://placehold.co/48",
-      name: "Ahmed Mohamed",
-      servicesNo: "2",
-      clients: "2",
-      offers: "2",
-    },
-  },
-];
+import useGetLatestProjects from "../../hooks/projects/useGetLatestProjects";
+import DataLoader from "../DataLoader";
+import { useSelector } from "react-redux";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Autoplay } from "swiper/modules";
 
 export default function PopularProjects() {
+  const { data: latestProjects, isLoading, erroe } = useGetLatestProjects();
+  const lang = useSelector((state) => state.language.lang);
+
   const { t } = useTranslation();
   return (
     <div className="popular_projects">
@@ -42,15 +21,36 @@ export default function PopularProjects() {
         description={t("home.bestProjectsSubTitle")}
       />
       <div className="row mt-5">
-        {popularProjects.map((project) => (
-          <Link
-            to={"projects/" + project.id}
-            key={project.id}
-            className="  col-md-6 "
+        {isLoading ? (
+          <DataLoader />
+        ) : (
+          <Swiper
+            spaceBetween={15}
+            slidesPerView={2}
+            speed={1000}
+            loop={true}
+            modules={[Autoplay]}
+            autoplay={{ delay: 3000, disableOnInteraction: false }}
+            className="mainSliderContainer"
+            breakpoints={{
+              0: {
+                slidesPerView: 1,
+              },
+              786: {
+                slidesPerView: 2,
+              },
+            }}
+            style={{ padding: "30px", height: "100%" }}
           >
-            <ProjectCard project={project} />
-          </Link>
-        ))}
+            {latestProjects.map((project) => (
+              <SwiperSlide key={project.id} style={{ height: "100%" }}>
+                <Link to={"projects/" + project.id}>
+                  <ProjectCard project={project} />
+                </Link>
+              </SwiperSlide>
+            ))}
+          </Swiper>
+        )}
       </div>
     </div>
   );

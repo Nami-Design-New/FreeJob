@@ -79,7 +79,7 @@ const AddOffer = ({ id }) => {
           <section className="col-lg-4 col-12 p-1">
             <FormInput
               required
-              readonly
+              readOnly
               label={`${t("After fees")} 15% `}
               value={(formData.price * (100 - 15)) / 100}
             />
@@ -95,7 +95,7 @@ const AddOffer = ({ id }) => {
             />
           </section>
           <section className="col-12 p-1 mt-2 d-flex justify-content-end">
-            <FormButton content={t("projects.send")} loading={loading} />
+            <FormButton content={t("projects.send")} disabled={loading} />
           </section>
         </section>
       </form>

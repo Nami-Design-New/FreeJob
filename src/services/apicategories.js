@@ -1,9 +1,9 @@
-import axios from "../utils/axios";
+import axiosInstance from "../utils/axios";
 
 export async function getCategories() {
   try {
-    const req = await axios.get("/get_categories");
-    console.log(req);
+    const req = await axiosInstance.get("/get_categories");
+    console.log(req.data.data);
 
     return req.data.data;
   } catch (err) {
@@ -13,7 +13,7 @@ export async function getCategories() {
 getCategories();
 export async function getGategoriesWithSubcategories() {
   try {
-    const req = await axios.get("/get_categories_with_subcategory");
+    const req = await axiosInstance.get("/get_categories_with_subcategory");
 
     return req.data.data;
   } catch (err) {
@@ -23,7 +23,7 @@ export async function getGategoriesWithSubcategories() {
 
 export async function getPopularCategories() {
   try {
-    const req = await axios.get("/get_popular_categories");
+    const req = await axiosInstance.get("/get_popular_categories");
     return req.data.data;
   } catch (err) {
     throw new Error(err.message);
@@ -31,7 +31,7 @@ export async function getPopularCategories() {
 }
 export async function getSubCategories(categoryId) {
   try {
-    const req = await axios.post("/get_sub_categories", {
+    const req = await axiosInstance.post("/get_sub_categories", {
       id: categoryId,
     });
     return req.data.data;
@@ -42,7 +42,7 @@ export async function getSubCategories(categoryId) {
 
 export async function getCategory(id) {
   try {
-    const req = await axios.get(`/get_category/${id}`);
+    const req = await axiosInstance.get(`/get_category/${id}`);
     return req.data.data;
   } catch (err) {
     throw new Error(err.message);

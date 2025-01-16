@@ -1,15 +1,17 @@
-export default function SectionCard({ id, title, backgroundColor, imageUrl }) {
+export default function SectionCard({ section }) {
+  console.log(section);
+
   return (
     // <Link to={`/section/${id}`} className="">
     <section
       className="sections_card"
       style={{
-        backgroundColor: backgroundColor ? backgroundColor : "#00732E",
+        backgroundColor: section.color ? "#" + section.color : "#00732E",
       }}
     >
-      <h3 className="section_card_title">{title || "Website Development"}</h3>
+      <h3 className="section_card_title">{section.name}</h3>
       <section className="image_container">
-        <img src={imageUrl || "https://placehold.co/188"} alt="section1" />
+        <img src={section.image} alt={section.name} />
       </section>
     </section>
     // </Link>

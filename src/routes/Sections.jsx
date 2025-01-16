@@ -3,6 +3,8 @@ import Breadcrumb from "react-bootstrap/Breadcrumb";
 import PaginationComponent from "../ui/PaginationComponent";
 import SectionCard from "../ui/cards/SectionCard";
 import ChooseCategoryPath from "../ui/modals/ChooseCategoryPath";
+import useCategoriesList from "../hooks/categories/useCategories";
+import DataLoader from "../ui/DataLoader";
 const sections = [
   {
     id: "1",
@@ -106,6 +108,7 @@ const sections = [
 ];
 
 export default function Sections() {
+  const { categories, error, isLoading } = useCategoriesList();
   const [currentPage, setCurrentPage] = useState(1);
   const [show, setShow] = useState(false);
   const itemsPerPage = 10;
@@ -128,9 +131,11 @@ export default function Sections() {
         </section>
       </section>
       <section className="container">
-        {
+        {isLoading ? (
+          <DataLoader />
+        ) : (
           <section className="row mt-5">
-            {currentSections.map((section) => (
+            {categories.map((section) => (
               <section
                 key={section.id}
                 onClick={handleOpenModal}
@@ -143,7 +148,7 @@ export default function Sections() {
               </section>
             ))}
           </section>
-        }
+        )}
       </section>
       <section className="mt-5 d-flex align-items-center justify-content-center">
         <PaginationComponent

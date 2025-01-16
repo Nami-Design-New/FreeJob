@@ -9,23 +9,27 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ToastContainer } from "react-toastify";
 
 /*---------- bootstrap ------------*/
-
 import "../node_modules/bootstrap/dist/css/bootstrap.min.css";
 import "../node_modules/bootstrap/dist/js/bootstrap.bundle.min";
 /*---------- main styles ------------*/
 import "./assets/styles/main.css";
 
-const queryClient = new QueryClient();
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      staleTime: 0,
+    },
+  },
+});
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
-    {" "}
     <QueryClientProvider client={queryClient}>
       <Provider store={store}>
         <ToastContainer />
         <App />
-        <ReactQueryDevtools initialIsOpen={false} />
       </Provider>
+        <ReactQueryDevtools initialIsOpen={false} />
     </QueryClientProvider>
   </StrictMode>
 );
