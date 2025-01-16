@@ -71,7 +71,8 @@ export default function FramerScrollGallery() {
             <img
               src={item.imageUrl}
               alt={item.alt}
-              className="img-fluid rounded"
+              className="rounded"
+              style={{ width: "100%", objectFit: "cover" }}
             />
           </motion.div>
         ))}

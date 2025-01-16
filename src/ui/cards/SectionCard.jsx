@@ -2,7 +2,6 @@ export default function SectionCard({ section }) {
   console.log(section);
 
   return (
-    // <Link to={`/section/${id}`} className="">
     <section
       className="sections_card"
       style={{
@@ -14,6 +13,5 @@ export default function SectionCard({ section }) {
         <img src={section.image} alt={section.name} />
       </section>
     </section>
-    // </Link>
   );
 }

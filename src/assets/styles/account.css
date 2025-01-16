@@ -35,8 +35,8 @@
 .add_banks_form_container {
   padding: 0 1rem;
   @media (min-width: 768px) {
-    background-image: url("../../../public/images/bank-building.png"),
-      url("../../../public/images/bankbuildingrate.png");
+    background-image: url("../../../images/bank-building.png"),
+      url("../../../images/bankbuildingrate.png");
     background-repeat: no-repeat, no-repeat;
     background-position: -430px bottom, right -130px;
   }

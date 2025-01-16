@@ -1,35 +1,25 @@
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
-import { StrictMode } from "react";
+import { ToastContainer } from "react-toastify";
 import { createRoot } from "react-dom/client";
 import { Provider } from "react-redux";
 import store from "./redux/store.js";
 import App from "./App.jsx";
 import "./utils/i18n.js";
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { ToastContainer } from "react-toastify";
 
-/*---------- bootstrap ------------*/
+const queryClient = new QueryClient();
+
 import "../node_modules/bootstrap/dist/css/bootstrap.min.css";
-import "../node_modules/bootstrap/dist/js/bootstrap.bundle.min";
-/*---------- main styles ------------*/
+import "../node_modules/react-toastify/dist/ReactToastify.css";
+import "./assets/styles/all.min.css";
 import "./assets/styles/main.css";
 
-const queryClient = new QueryClient({
-  defaultOptions: {
-    queries: {
-      staleTime: 0,
-    },
-  },
-});
-
 createRoot(document.getElementById("root")).render(
-  <StrictMode>
-    <QueryClientProvider client={queryClient}>
-      <Provider store={store}>
-        <ToastContainer />
-        <App />
-      </Provider>
-        <ReactQueryDevtools initialIsOpen={false} />
-    </QueryClientProvider>
-  </StrictMode>
+  <QueryClientProvider client={queryClient}>
+    <ReactQueryDevtools initialIsOpen={false} />
+    <ToastContainer autoClose={2000} />
+    <Provider store={store}>
+      <App />
+    </Provider>
+  </QueryClientProvider>
 );

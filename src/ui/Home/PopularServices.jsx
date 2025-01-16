@@ -1,14 +1,11 @@
-import { Link } from "react-router";
-import SectionHeader from "../SectionHeader";
-import ServiceCard from "../cards/ServiceCard";
-import ShowAll from "../ShowAll";
 import { useTranslation } from "react-i18next";
+import SectionHeader from "../SectionHeader";
 import useGetHomeServices from "../../hooks/services/useGetHomeServices";
 import DataLoader from "../DataLoader";
 import Department from "./Department";
 
 export default function PopularServices() {
-  const { data: popularServices, isLoading, error } = useGetHomeServices();
+  const { data: popularServices, isLoading } = useGetHomeServices();
   const { t } = useTranslation();
   return (
     <section className="popular_services ">

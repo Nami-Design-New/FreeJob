@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from "react";
+import  { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useLocation, useSearchParams } from "react-router";
 import DetailsHeader from "../ui/servicesComponents/serviceDetails/DetailsHeader";
 import FreelancerCard from "../ui/cards/FreelancerCard";
-import avatarPlaceholder from "../.././public/images/avatar-placeholder-2.svg";
+import avatarPlaceholder from "../.././images/avatar-placeholder-2.svg";
 import StarsList from "../ui/modals/StarsList";
 
 const Freelancers = () => {

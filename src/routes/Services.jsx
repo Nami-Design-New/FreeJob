@@ -1,15 +1,13 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { CiFilter } from "react-icons/ci";
 import { useSearchParams } from "react-router";
 import FilterSidebar from "../ui/servicesComponents/FilterSidebar";
 import ServicesList from "../ui/servicesComponents/ServicesList";
-import { IoClose } from "react-icons/io5";
-import { useResponsiveState } from "../hooks/useResponsiveHook";
 
 export default function Services() {
   const [isOpen, setIsOpen] = useState(false);
   function toggleMenu() {
-    setIsOpen(!isOpen); 
+    setIsOpen(!isOpen);
   }
   const [searchParams] = useSearchParams();
 
@@ -28,6 +26,7 @@ export default function Services() {
       parseInt(searchParams.get("deliveryMax")) || 360,
     ],
   };
+
   return (
     <section className="container">
       <section className="sercives_container my-5">

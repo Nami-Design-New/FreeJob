@@ -3,7 +3,7 @@ footer {
   padding: 2rem 0;
   ul {
     li {
-      padding: 0.5rem 0;
+      padding: 0.25rem 0;
       display: flex;
       flex-direction: column;
       a.title {

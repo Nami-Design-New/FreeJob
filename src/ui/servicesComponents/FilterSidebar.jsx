@@ -85,7 +85,7 @@ const FilterSidebar = ({ isOpen, setIsOpen }) => {
   return (
     <aside
       aria-labelledby="filter-sidebar-title"
-      className={`p-2 rounded border sidebar ${isOpen ? "active" : ""}`}
+      className={`p-3 rounded border sidebar ${isOpen ? "active" : ""}`}
     >
       {" "}
       <section className="filter_sidebar_header">
@@ -98,28 +98,28 @@ const FilterSidebar = ({ isOpen, setIsOpen }) => {
         aria-label="Filter options"
         className="filter-form "
       >
-        <section className="my-3">
+        <section className="mb-4">
           <SearchInput
             value={filters.searchQuery}
             onSearch={handleSearch}
             aria-label="Search items"
           />
         </section>
-        <section className="my-3">
+        <section className="my-4">
           <h3>Sections</h3>
           <SectionsFilter
             selectedSections={filters.selectedSections}
             onSectionChange={handleSectionChange}
           />
         </section>
-        <section className="my-3">
+        <section className="my-4">
           <h3>Skills</h3>
           <DropdownMenu
             selectedSkill={filters.selectedSkill}
             onSelect={handleSkillChange}
           />
         </section>
-        <section className="my-3">
+        <section className="my-4">
           <h3>Price Range</h3>
           <RangeInput
             label="$"
@@ -130,7 +130,7 @@ const FilterSidebar = ({ isOpen, setIsOpen }) => {
             aria-label="Select price range"
           />
         </section>
-        <section className="my-3">
+        <section className="my-4">
           <h3>Delivery Duration</h3>
           <RangeInput
             label="Days"
@@ -141,7 +141,7 @@ const FilterSidebar = ({ isOpen, setIsOpen }) => {
             aria-label="Select delivery duration"
           />
         </section>
-        <footer className="d-flex align-item-center gap-2 justify-content-center">
+        <footer className="d-flex align-item-center gap-2 justify-content-center p-0 pt-3">
           <FormButton
             content="Apply"
             style={{

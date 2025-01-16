@@ -3,23 +3,26 @@
 }
 
 .search_home {
-  background-image: url(https://placehold.co/1300x535);
+  background-image: url("/images/hero.jpg");
   background-repeat: no-repeat;
   background-size: cover;
   height: 70vh;
   display: flex;
   align-items: center;
   justify-content: center;
+
   .content {
     .content_text {
       text-align: center;
       text-transform: capitalize;
       color: var(--white-color);
       margin-bottom: 1.5rem;
+
       p {
         margin-bottom: 0.25rem;
         font-size: 2rem;
       }
+
       @media (max-width: 768px) {
         p {
           font-size: 1.5rem;
@@ -28,15 +31,21 @@
     }
   }
 }
+
 .swiper_cntainer {
   position: relative;
-  bottom: 3.75rem;
+  padding: 0 24px;
   left: 0;
+  margin-top: -64px;
+
   .swiper-wrapper {
     padding-top: 0.5rem;
     padding-bottom: 0.5rem;
+    display: flex;
+    justify-content: center;
+
     .swiper-slide {
-      height: 100%;
+      height: auto !important;
     }
   }
 }
@@ -52,17 +61,20 @@
     color: var(--secondary-color);
     margin: 0;
   }
+
   p {
     font-size: 1.5rem;
     color: var(--gray-color);
     margin-bottom: 0;
   }
 }
+
 @media screen and (max-width: 768px) {
   .section_header {
     h2 {
       font-size: 1.5rem;
     }
+
     p {
       font-size: 1.125rem;
     }
@@ -71,29 +83,36 @@
 
 .howToStart {
   margin: 4.7rem auto !important;
+
   h1 {
     text-align: center;
     margin-bottom: 1.5rem;
   }
+
   .howToStart_content {
     background-color: var(--main-color);
     position: relative;
     padding: 1.5rem;
     border-radius: 1rem;
     color: var(--white-color);
+
     ul {
       list-style-type: disc;
       padding-left: 1rem;
       padding-right: 1rem;
+
       .main_item {
         margin-bottom: 1.5rem;
+
         span {
           display: inline-block;
           margin-bottom: 0.5rem;
           font-size: 1.3rem;
         }
+
         ul {
           width: 100%;
+
           .sub_item {
             font-size: 1rem;
 
@@ -104,10 +123,12 @@
         }
       }
     }
+
     .howToStart_imgaeContainer {
       position: absolute;
       top: -1.625rem;
       right: 1rem;
+
       &.ar {
         top: -1.625rem;
         left: 1rem;
@@ -116,16 +137,19 @@
     }
   }
 }
+
 @media (min-width: 992px) {
   .howToStart_content ul {
     width: 60%;
   }
 }
+
 @media (min-width: 992px) {
   .howToStart_content {
     min-height: 475px;
   }
 }
+
 .popular_services {
   margin-bottom: 4.7rem;
 }
@@ -136,16 +160,19 @@
   border-radius: 1rem;
   background-color: #e8faf4;
   display: flex;
+
   .content {
     display: flex;
     flex-direction: column;
     align-items: start;
     justify-content: space-between;
   }
+
   h1 {
     font-size: 2rem;
     margin-bottom: 1.5rem;
   }
+
   p {
     font-size: 1.3rem;
     line-height: 2.4rem;
@@ -160,6 +187,7 @@
 .popular_projects {
   margin-bottom: 4.7rem;
 }
+
 .work_with_us {
   margin-bottom: 4.7rem;
 }
@@ -171,6 +199,7 @@
   padding: 3rem 0;
   align-items: center;
   background-color: var(--main-color);
+
   h1 {
     text-align: center;
     color: var(--white-color);
@@ -179,10 +208,12 @@
     margin-bottom: 2rem;
   }
 }
+
 .bottom_section {
   height: 1.5rem;
   background-color: #c2c2c2;
 }
+
 @media screen and (max-width: 768px) {
   .banner {
     h1 {
@@ -196,6 +227,7 @@
 
   .masonary {
     background-color: none;
+
     div {
       gap: 0.5rem !important;
     }

@@ -120,6 +120,7 @@ export default function Sections() {
 
   const handleCloseModal = () => setShow(false);
   const handleOpenModal = () => setShow(true);
+
   return (
     <section className="sections">
       <section className="sections_breadcrumb">
@@ -130,6 +131,7 @@ export default function Sections() {
           </Breadcrumb>
         </section>
       </section>
+
       <section className="container">
         {isLoading ? (
           <DataLoader />
@@ -150,6 +152,7 @@ export default function Sections() {
           </section>
         )}
       </section>
+
       <section className="mt-5 d-flex align-items-center justify-content-center">
         <PaginationComponent
           totalItems={sections.length}

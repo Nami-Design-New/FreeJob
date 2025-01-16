@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { NavLink, useNavigate } from "react-router";
 import { useResponsiveState } from "../hooks/useResponsiveHook";
 import { openModal } from "../redux/slices/authModalSlice";
+import { useTranslation } from "react-i18next";
 import Button from "./Button";
 import HeaderSwiper from "./header/HeaderSwiper";
 import Logo from "./header/Logo";
@@ -11,7 +12,6 @@ import SideMenu from "./header/SideMenu";
 import UserDropDown from "./header/UserDropDown";
 import LanguageToggle from "./LanguageToggle";
 import AuthModal from "./modals/AuthModal";
-import { useTranslation } from "react-i18next";
 
 export default function Header() {
   const isLogin = useSelector((state) => state.authedUser.isLogged);
@@ -33,7 +33,7 @@ export default function Header() {
 
   return (
     <header className="header">
-      <nav className="container-md">
+      <nav>
         <Logo />
         {isLogin ? (
           <ul className="nav_links d-lg-flex d-none">
@@ -99,9 +99,10 @@ export default function Header() {
           <RiMenuUnfold4Fill />
         </button>
       </nav>
-      <div className="container-md">
+      <div className="header_swiper">
         <HeaderSwiper />
       </div>
+
       <SideMenu state={isOpen} onClose={() => setIsOpen(false)} />
     </header>
   );

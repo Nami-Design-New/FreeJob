@@ -6,7 +6,7 @@ export default function HowToStart() {
   const { t } = useTranslation();
   return (
     <div className="howToStart">
-      <h1 className="howToStart_header">{t("home.doYouhaveProject")}</h1>
+      <h1 className="howToStart_header mb-5">{t("home.doYouhaveProject")}</h1>
       <div className="howToStart_content">
         <ul className="howToStart_text">
           <li className="main_item">

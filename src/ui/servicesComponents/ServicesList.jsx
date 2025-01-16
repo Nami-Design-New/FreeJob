@@ -1,68 +1,38 @@
 import { Link } from "react-router";
+import { useEffect } from "react";
 import ServiceCard from "../cards/ServiceCard";
+import useSearchServicesList from "../../hooks/services/useSearchServicesList";
+import DataLoader from "../DataLoader";
 
-const services = [
-  {
-    id: "1",
-    price: "200$",
-    imageUrl: "https://placehold.co/313",
-    name: "Songs and live broadcast application for PC",
-    category: "Programming /Desktop",
-    rate: "3",
-    user: {
-      imageUrl: "https://placehold.co/48",
-      name: "Ahmed Mohamed",
-      servicesNo: "2",
-      clients: "2",
-    },
-  },
-  {
-    id: "2",
-    price: "200$",
-    imageUrl: "https://placehold.co/250",
-    name: "Songs and live broadcast application for PC",
-    category: "Programming /Desktop",
-    rate: "3",
-    user: {
-      imageUrl: "https://placehold.co/48",
-      name: "Ahmed Mohamed",
-      servicesNo: "2",
-      clients: "2",
-    },
-  },
-  {
-    id: "3",
-    price: "200$",
-    imageUrl: "https://placehold.co/250",
-    name: "Songs and live broadcast application for PC",
-    category: "Programming /Desktop",
-    rate: "3",
-    user: {
-      imageUrl: "https://placehold.co/48",
-      name: "Ahmed Mohamed",
-      servicesNo: "2",
-      clients: "2",
-    },
-  },
-  {
-    id: "4",
-    price: "200$",
-    imageUrl: "https://placehold.co/250",
-    name: "Songs and live broadcast application for PC",
-    category: "Programming /Desktop",
-    rate: "3",
-    user: {
-      imageUrl: "https://placehold.co/48",
-      name: "Ahmed Mohamed",
-      servicesNo: "2",
-      clients: "2",
-    },
-  },
-];
-export default function ServicesList({ filter }) {
-  return (
+export default function ServicesList() {
+  const {
+    data: searchServicesList,
+    fetchNextPage,
+    hasNextPage,
+    isFetching,
+    isFetchingNextPage,
+  } = useSearchServicesList();
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (
+        window.innerHeight + document.documentElement.scrollTop >=
+        document.documentElement.offsetHeight - 1000
+      ) {
+        if (!isFetchingNextPage && hasNextPage) {
+          fetchNextPage();
+        }
+      }
+    };
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, [isFetchingNextPage, hasNextPage, fetchNextPage]);
+
+  return isFetching ? (
+    <DataLoader />
+  ) : (
     <>
-      {services.map((service) => (
+      {searchServicesList.map((service) => (
         <section key={service.id} className="service_card_filter">
           <Link to={service.id}>
             <ServiceCard service={service} />

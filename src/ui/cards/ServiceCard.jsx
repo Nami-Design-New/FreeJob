@@ -1,7 +1,7 @@
 import { FaArrowLeft, FaArrowRight, FaFile, FaUsers } from "react-icons/fa";
-import StarsRate from "../StartRate";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router";
+import StarsRate from "../StartRate";
 
 export default function ServiceCard({ service }) {
   const lang = useSelector((state) => state.language.lang);

@@ -14,9 +14,12 @@
   flex-direction: column;
 
   nav {
+    width: 100%;
+    padding: 0 16px;
     display: flex;
     align-items: center;
     justify-content: space-between;
+
     .actions {
       gap: 1rem;
 
@@ -24,6 +27,7 @@
       margin-left: 0.5rem;
       justify-content: flex-end;
       align-items: center;
+
       .user_btn {
         width: 3rem;
         height: 3rem;
@@ -34,15 +38,18 @@
         align-items: center;
         border-radius: 50%;
         overflow: hidden;
+
         img {
           width: 3rem;
           height: 3rem;
           border-radius: 50%;
         }
+
         &:focus {
           outline: none;
           box-shadow: none;
         }
+
         &:hover {
           background-color: transparent;
         }
@@ -50,24 +57,29 @@
 
       .dropdown-menu {
         padding: 0;
+
         section {
           border-bottom: 1px solid var(--border-color);
           padding: 1rem 0;
+
           .dropdown-item {
             padding: 0.5rem;
             display: flex;
             align-items: center;
             gap: 0.5rem;
+
             a {
               color: var(--black-color);
               display: flex;
               align-items: center;
               gap: 0.5rem;
+
               svg {
                 color: var(--main-color);
                 margin: 0 !important;
               }
             }
+
             &:hover a {
               color: var(--main-color);
             }
@@ -75,30 +87,34 @@
         }
       }
     }
+
     .nav_links {
       flex: 25;
       display: flex;
       align-items: center;
-      justify-content: center;
       text-decoration: none;
       margin: 0;
-      padding: 0 0.625rem;
-      gap: 1.25rem;
+      padding: 0 3rem;
+      gap: 2rem;
 
       li {
         padding: 10px 0;
+
         &:last-child {
           button {
             white-space: nowrap;
           }
         }
+
         a {
           color: var(--gray-color);
           text-decoration: none;
           white-space: nowrap;
+
           &.active {
             color: var(--color-black);
           }
+
           &:hover {
             color: var(--gray-color);
           }
@@ -106,50 +122,68 @@
       }
     }
   }
+
   .Categories_Slider_item {
     color: var(--gray-color);
+
     a {
       color: var(--grag-color);
       text-decoration: none;
+
       &:hover {
         color: var(--gray-hover-color);
       }
     }
   }
 }
+
 .logo {
   color: var(--color-black);
   text-decoration: none;
   font-size: 1.25rem;
-  margin-right: 1.25rem;
+
+  img {
+    height: 28px;
+  }
 }
 
 .search_box {
   display: flex;
   align-items: center;
+  gap: 12px;
+  background: var(--white-color);
+  height: 64px;
+  border-radius: 12px;
+  padding: 8px;
   flex: 1;
 
   input {
-    padding: 0.625rem 0.75rem;
-    border: 1px solid var(--border-color);
-    border-radius: 0.25rem 0 0 0.25rem;
+    border: 0;
     width: 100%;
+    height: 100%;
+    padding: 0 8px;
+
     &::placeholder {
       color: var(--gray-color);
-      padding-left: 10px;
     }
+
     &:focus {
       outline: none;
     }
   }
+
   button {
-    /* display: flex; */
-    background-color: var(--secondary-color);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--main-color);
     color: var(--white-color);
-    height: 2.75rem;
+    outline: none;
+    border: none;
+    height: 100%;
     padding: 0.5rem 1rem;
     font-size: 1rem;
-    border-radius: 0 0.25rem 0.25rem 0;
+    border-radius: 12px;
   }
 }
 
@@ -166,6 +200,7 @@ dialog.ar[open] {
   dialog[open] {
     transform: translateX(-100%);
   }
+
   dialog.ar[open] {
     transform: translateX(100%);
   }
@@ -219,6 +254,7 @@ dialog {
       }
     }
   }
+
   ul {
     list-style: none;
     padding: 0;
@@ -227,13 +263,16 @@ dialog {
     gap: 1.25rem;
     padding-left: 1rem;
     padding-right: 1rem;
+
     li {
       width: 100%;
       cursor: pointer;
       transition: var(--main-transition);
+
       &:hover a {
         color: var(--black-color);
       }
+
       a {
         width: 100%;
         text-decoration: none;
@@ -244,6 +283,40 @@ dialog {
           color: var(--black-color);
         }
       }
+    }
+  }
+}
+
+.header_swiper {
+  width: 100%;
+  margin-top: 8px;
+
+  .swiper {
+    padding: 0 48px;
+  }
+
+  .swiper-button-next,
+  .swiper-button-prev {
+    background: var(--white-color);
+    color: var(--gray-color);
+    border-radius: 50%;
+    width: 48px;
+    right: -4px;
+
+    &::after {
+      content: "\f105";
+      background: none;
+      font-size: 20px;
+      margin-top: 4px;
+      font-family: "Font Awesome 6 Pro";
+    }
+  }
+
+  .swiper-button-prev {
+    left: -4px;
+
+    &::after {
+      content: "\f104";
     }
   }
 }

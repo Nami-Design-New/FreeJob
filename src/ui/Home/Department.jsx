@@ -1,15 +1,11 @@
-import React from "react";
 import ServiceCard from "../../ui/cards/ServiceCard";
-import { Link } from "react-router";
-import { useTranslation } from "react-i18next";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay } from "swiper/modules";
-import "swiper/swiper-bundle.css";
 import { useSelector } from "react-redux";
+import "swiper/swiper-bundle.css";
 import ShowAll from "../ShowAll";
 
 const Department = ({ category }) => {
-  const { t } = useTranslation();
   const lang = useSelector((state) => state.language.lang);
 
   return (
@@ -17,7 +13,6 @@ const Department = ({ category }) => {
       <ShowAll to="/services" sectionName={category?.name || "برمجة وتطوير"} />
       <div className="row mb-5 py-2">
         <Swiper
-          spaceBetween={20}
           slidesPerView={4}
           speed={1000}
           loop={true}
@@ -31,7 +26,6 @@ const Department = ({ category }) => {
             575: {
               slidesPerView: 2,
             },
-
             992: {
               slidesPerView: 3,
             },

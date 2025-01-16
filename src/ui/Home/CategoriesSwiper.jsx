@@ -5,7 +5,7 @@ import useCategoriesList from "../../hooks/categories/useCategories";
 import DataLoader from "../DataLoader";
 
 export default function CategoriesSwiper() {
-  const { categories, isLoading, error } = useCategoriesList();
+  const { categories, isLoading } = useCategoriesList();
 
   return (
     <div className="swiper_cntainer">
@@ -13,7 +13,7 @@ export default function CategoriesSwiper() {
         <DataLoader />
       ) : (
         <Swiper
-          spaceBetween={16}
+          spaceBetween={24}
           slidesPerView="auto"
           breakpoints={{
             320: {

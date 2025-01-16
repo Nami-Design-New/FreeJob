@@ -7,11 +7,11 @@ import useCategoriesList from "../../hooks/categories/useCategories";
 import DataLoader from "../DataLoader";
 
 export default function SectionsSwiper() {
-  const { categories, isLoading, error } = useCategoriesList();
+  const { categories, isLoading } = useCategoriesList();
   const { t } = useTranslation();
   return (
     <>
-      <div className="px-3">
+      <div className="">
         <ShowAll sectionName={t("navbar.categories")} to="/sections" />
       </div>
       {isLoading ? (

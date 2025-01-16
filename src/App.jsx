@@ -12,6 +12,7 @@ function App() {
     document.body.dir = lang === "ar" ? "rtl" : "ltr";
     i18n.changeLanguage(lang);
   }, [lang]);
+
   return <RouterProvider router={router} />;
 }
 export default App;

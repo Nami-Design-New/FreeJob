@@ -17,13 +17,16 @@ export default function Home() {
         <Search />
         <CategoriesSwiper />
       </section>
-      <section>
+
+      <section className="sections_slider">
         <SectionsSwiper />
       </section>
+
       <section className="container">
         <section className="row">
           <HowToStart />
         </section>
+        
         <PopularServices />
         <Promote />
         <PartnersofSuccess />
@@ -31,6 +34,7 @@ export default function Home() {
         <Gallery />
         <WorkWithUs />
       </section>
+      
       <Banner />
     </>
   );

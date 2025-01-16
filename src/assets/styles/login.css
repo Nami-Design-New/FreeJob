@@ -16,7 +16,7 @@
 .right_side {
   height: 100%;
   width: 100%;
-  background-image: url("../../../public/images/logincover.png");
+  background-image: url("../../../images/logincover.png");
   background-size: cover;
   background-repeat: no-repeat;
   h6 {
