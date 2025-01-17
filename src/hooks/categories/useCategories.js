@@ -9,7 +9,7 @@ function useCategoriesList() {
   } = useQuery({
     queryKey: ["categoryList"],
     queryFn: getCategories,
-    // retry: false,
+    retry: false,
     refetchOnWindowFocus: false,
     refetchOnMount: false,
     refetchOnReconnect: false,

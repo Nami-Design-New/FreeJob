@@ -1,28 +1,23 @@
 import { useState } from "react";
+import { useTranslation } from "react-i18next";
 import { PhoneInput } from "react-international-phone";
 import "react-international-phone/style.css";
+import { useDispatch } from "react-redux";
+import useCountriesList from "../../hooks/useCountries";
 import { setStep } from "../../redux/slices/authModalSlice";
 import FormButton from "../form/FormButton";
 import FormInput from "../form/FormInput";
-import BackButton from "./BackButton";
-import { useDispatch } from "react-redux";
-import ImageUpload from "./ImageUpload";
-import useCountriesList from "../../hooks/useCountries";
 import FormSelector from "../form/FormSelector";
-import { useTranslation } from "react-i18next";
+import BackButton from "./BackButton";
+import ImageUpload from "./ImageUpload";
 export default function RegistrationForm({ formData, setFormData }) {
   const { t } = useTranslation();
   const { isLoading: isCountriesLoading, data: countries } = useCountriesList();
   const [countryId, setCountryId] = useState("");
-  const [phoneData, setPhoneData] = useState({
-    phone_code: "",
-    phone: "",
-  });
-  function handleChange(value, { country }) {
-    setPhoneData({
-      phone_code: country.dialCode,
-      phone: value.slice(country.dialCode.length),
-    });
+
+  function handlePhoneChange(value, { country }) {
+    let code = country.dialCode;
+    setFormData({ ...formData, phone: value.slice(code.length), code });
   }
   const handleCountrytSelect = (e) => {
     setCountryId(e.target.value);
@@ -32,7 +27,7 @@ export default function RegistrationForm({ formData, setFormData }) {
     });
   };
 
-  const handleChangeInput = (e) => {
+  const handleChange = (e) => {
     setFormData({
       ...formData,
       [e.target.name]: e.target.value,
@@ -52,7 +47,7 @@ export default function RegistrationForm({ formData, setFormData }) {
       <header className="modal_header pb-3 ">
         <h1 className="text-center">Complete your information</h1>
       </header>
-      <form onSubmit={handleSubmit} className="user_data row row-gap-2 ">
+      <form onSubmit={handleSubmit} className="user_data row g-2 ">
         <div className="col-12 ">
           <ImageUpload
             type="file"
@@ -72,11 +67,10 @@ export default function RegistrationForm({ formData, setFormData }) {
             id="name"
             required={true}
             value={formData.name}
-            onChange={(e) => handleChangeInput(e)}
+            onChange={(e) => handleChange(e)}
           />
         </div>
-
-        <div className="col-6">
+        <div className="col-12">
           <FormInput
             label={t("auth.email")}
             placeholder="example@example.com"
@@ -85,17 +79,18 @@ export default function RegistrationForm({ formData, setFormData }) {
             id="email"
             required={true}
             formData={formData.email}
-            onChange={(e) => handleChangeInput(e)}
+            onChange={(e) => handleChange(e)}
           />
         </div>
-        <div className="col-6">
+        <div className="col-12">
           <FormInput
             label={t("auth.password")}
             name={"password"}
             id={"password"}
+            type="password"
             minLength={6}
             value={formData.password}
-            onChange={(e) => handleChangeInput(e)}
+            onChange={(e) => handleChange(e)}
           />
         </div>
 
@@ -105,7 +100,7 @@ export default function RegistrationForm({ formData, setFormData }) {
             name={"age"}
             id={"age"}
             value={formData.age}
-            onChange={(e) => handleChangeInput(e)}
+            onChange={(e) => handleChange(e)}
           />
         </div>
         <div className="col-6">
@@ -123,8 +118,8 @@ export default function RegistrationForm({ formData, setFormData }) {
         <div className=" col-12 mt-3">
           <label className="fw-normal">Phone Number</label>
           <PhoneInput
-            defaultCountry="ua"
-            onChange={(value, country) => handleChange(value, country)}
+            defaultCountry="sa"
+            onChange={(value, country) => handlePhoneChange(value, country)}
             style={{ width: "100%", marginTop: "0.5rem" }}
             inputStyle={{
               border: "none",

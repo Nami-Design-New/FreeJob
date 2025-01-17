@@ -43,7 +43,7 @@ export default function SectionsSwiper() {
           }}
         >
           {categories.map((item) => (
-            <SwiperSlide key={item.id} style={{ height: "300px" }}>
+            <SwiperSlide key={item.id} style={{ height: "auto" }}>
               <SectionCard section={item} />
             </SwiperSlide>
           ))}

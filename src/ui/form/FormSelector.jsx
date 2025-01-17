@@ -5,7 +5,9 @@ export default function FormSelector({ options, disabledOption, ...props }) {
     <div className="form_select">
       {props.label && <label>{props.label}</label>}
       <Form.Select {...props}>
-        <option value={""}>{disabledOption}</option>
+        <option value={""} disabled>
+          {disabledOption}
+        </option>
         {options?.map((option, index) => (
           <option key={index} value={option.value}>
             {option.name}

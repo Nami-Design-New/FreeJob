@@ -1,56 +1,71 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
+import { IoMdClose } from "react-icons/io";
 import { useSearchParams } from "react-router";
+import { handleApplyFilters } from "../../utils/helper";
 import FormButton from "../form/FormButton";
-import DropdownMenu from "./DropdownMenu";
+import MultiSelect from "./MultiSelect";
 import RangeInput from "./RangeInput";
 import SearchInput from "./SearchInput";
 import SectionsFilter from "./SectionsFilter";
-import { IoMdClose } from "react-icons/io";
+import useCategorieListWithSub from "../../hooks/projects/useCategorieListWithSub";
+import DataLoader from "../DataLoader";
+import useGetSkills from "../../hooks/useGetSkills";
 
 const FilterSidebar = ({ isOpen, setIsOpen }) => {
+  const { t } = useTranslation();
+  const { isLoading: categoriesIsLoading, data: categoriesWithSubCategories } =
+    useCategorieListWithSub();
+  const { data: skills } = useGetSkills();
+  const [selectedOptions, setSelectedOptions] = useState([]);
   const [searchParams, setSearchParams] = useSearchParams();
-
   const [filters, setFilters] = useState({
     searchQuery: searchParams.get("search") || "",
-    selectedSections: searchParams.get("sections")
-      ? searchParams.get("sections").split(",")
+    price_from: Number(searchParams.get("price_from")) || 5,
+    price_to: Number(searchParams.get("price_to")) || 2000,
+    duration_from: Number(searchParams.get("duration_from")) || 1,
+    duration_to: Number(searchParams.get("duration_to")) || 360,
+    page: Number(searchParams.get("page")) || null,
+    categories: searchParams.get("categories")
+      ? searchParams
+          .get("categories")
+          .split("-")
+          .map((category) => Number(category))
       : [],
-    selectedSkill: searchParams.get("skill") || "",
-    priceRange: [
-      parseInt(searchParams.get("priceMin")) || 0,
-      parseInt(searchParams.get("priceMax")) || 1000,
-    ],
-    deliveryDuration: [
-      parseInt(searchParams.get("deliveryMin")) || 1,
-      parseInt(searchParams.get("deliveryMax")) || 360,
-    ],
+    sub_categories: searchParams.get("sub_categories")
+      ? searchParams
+          .get("sub_categories")
+          .split("-")
+          .map((subcategory) => Number(subcategory))
+      : [],
+    skills: searchParams.get("skills")
+      ? searchParams.get("skills").split("-")
+      : [],
   });
 
-  // Apply filters: Update query parameters
-  const applyFilters = () => {
-    const params = {};
-    if (filters.searchQuery) params.search = filters.searchQuery;
-    if (filters.selectedSections.length > 0)
-      params.sections = filters.selectedSections.join(",");
-    if (filters.selectedSkill) params.skill = filters.selectedSkill;
-    if (filters.priceRange) {
-      params.priceMin = filters.priceRange[0];
-      params.priceMax = filters.priceRange[1];
-    }
-    if (filters.deliveryDuration) {
-      params.deliveryMin = filters.deliveryDuration[0];
-      params.deliveryMax = filters.deliveryDuration[1];
-    }
-    setSearchParams(params);
-  };
+  useEffect(() => {
+    const options = filters?.skills?.map((id) => {
+      const skill = skills?.find((s) => s?.id === Number(id));
+      return { value: id, label: skill?.name };
+    });
+
+    setSelectedOptions(options);
+  }, [filters, skills]);
+  function handleSubmit(e) {
+    e.preventDefault();
+    handleApplyFilters(setSearchParams, filters);
+  }
 
   const resetFilters = () => {
     setFilters({
       searchQuery: "",
-      selectedSections: [],
-      selectedSkill: "",
-      priceRange: [0, 1000],
-      deliveryDuration: [1, 360],
+      price_from: 5,
+      price_to: 2000,
+      duration_from: 1,
+      duration_to: 360,
+      categories: [],
+      sub_categories: [],
+      skills: [],
     });
     setSearchParams({});
   };
@@ -59,27 +74,30 @@ const FilterSidebar = ({ isOpen, setIsOpen }) => {
     setFilters((prev) => ({ ...prev, searchQuery: query }));
   };
 
-  const handleSectionChange = (section) => {
-    setFilters((prev) => ({
-      ...prev,
-      selectedSections: prev.selectedSections.includes(section)
-        ? prev.selectedSections.filter((sec) => sec !== section)
-        : [...prev.selectedSections, section],
-    }));
+  const handleSkillChange = (selectedItems) => {
+    const selectedValues = selectedItems
+      ? selectedItems?.map((option) => option.value)
+      : [];
+    setFilters({
+      ...filters,
+      skills: selectedValues,
+    });
   };
 
-  const handleSkillChange = (skill) => {
-    console.log(skill);
-
-    setFilters((prev) => ({ ...prev, selectedSkill: skill }));
-  };
-
-  const handlePriceRangeChange = (range) => {
-    setFilters((prev) => ({ ...prev, priceRange: range }));
-  };
-
-  const handleDeliveryRangeChange = (range) => {
-    setFilters((prev) => ({ ...prev, deliveryDuration: range }));
+  const handleSliderChange = (name, value) => {
+    if (name === "duration") {
+      setFilters((prevState) => ({
+        ...prevState,
+        duration_from: value[0],
+        duration_to: value[1],
+      }));
+    } else if (name === "price") {
+      setFilters((prevState) => ({
+        ...prevState,
+        price_from: value[0],
+        price_to: value[1],
+      }));
+    }
   };
 
   return (
@@ -87,14 +105,14 @@ const FilterSidebar = ({ isOpen, setIsOpen }) => {
       aria-labelledby="filter-sidebar-title"
       className={`p-3 rounded border sidebar ${isOpen ? "active" : ""}`}
     >
-      {" "}
-      <section className="filter_sidebar_header">
+      <header className="filter_sidebar_header">
+        <h2>Services</h2>
         <button onClick={() => setIsOpen(false)}>
           <IoMdClose />
         </button>
-      </section>
+      </header>
       <form
-        onSubmit={(e) => e.preventDefault()}
+        onSubmit={handleSubmit}
         aria-label="Filter options"
         className="filter-form "
       >
@@ -105,18 +123,29 @@ const FilterSidebar = ({ isOpen, setIsOpen }) => {
             aria-label="Search items"
           />
         </section>
+        {categoriesIsLoading ? (
+          <DataLoader />
+        ) : (
+          <section className="my-4">
+            <h3>Sections</h3>
+            <SectionsFilter
+              categoriesValue={filters.categories}
+              sub_categoriesValue={filters.sub_categories}
+              filters={filters}
+              setFilters={setFilters}
+              categoriesWithSubCategories={categoriesWithSubCategories}
+            />
+          </section>
+        )}
         <section className="my-4">
-          <h3>Sections</h3>
-          <SectionsFilter
-            selectedSections={filters.selectedSections}
-            onSectionChange={handleSectionChange}
-          />
-        </section>
-        <section className="my-4">
-          <h3>Skills</h3>
-          <DropdownMenu
-            selectedSkill={filters.selectedSkill}
-            onSelect={handleSkillChange}
+          <MultiSelect
+            label={t("search.skills")}
+            handleChange={handleSkillChange}
+            selectedOptions={selectedOptions}
+            options={skills?.map((skill) => ({
+              label: skill?.name,
+              value: skill?.id,
+            }))}
           />
         </section>
         <section className="my-4">
@@ -125,8 +154,8 @@ const FilterSidebar = ({ isOpen, setIsOpen }) => {
             label="$"
             min={1}
             max={1000}
-            value={filters.priceRange}
-            onChange={handlePriceRangeChange}
+            value={[filters.price_from, filters.price_to]}
+            handleSlide={(value) => handleSliderChange("price", value)}
             aria-label="Select price range"
           />
         </section>
@@ -136,8 +165,8 @@ const FilterSidebar = ({ isOpen, setIsOpen }) => {
             label="Days"
             min={1}
             max={360}
-            value={filters.deliveryDuration}
-            onChange={handleDeliveryRangeChange}
+            value={[filters.duration_from, filters.duration_to]}
+            handleSlide={(value) => handleSliderChange("duration", value)}
             aria-label="Select delivery duration"
           />
         </section>
@@ -149,12 +178,9 @@ const FilterSidebar = ({ isOpen, setIsOpen }) => {
               package: "0.5rem 0.75rem",
               margin: "0",
             }}
-            type="button"
-            className=""
-            onClick={applyFilters}
-          >
-            Apply
-          </FormButton>
+            type="submit"
+          />
+
           <FormButton
             content="Reset"
             style={{
@@ -165,9 +191,7 @@ const FilterSidebar = ({ isOpen, setIsOpen }) => {
             type="button"
             className="hover"
             onClick={resetFilters}
-          >
-            Reset
-          </FormButton>
+          />
         </footer>
       </form>
     </aside>

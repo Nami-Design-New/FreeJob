@@ -14,13 +14,14 @@ getCategories();
 export async function getGategoriesWithSubcategories() {
   try {
     const req = await axiosInstance.get("/get_categories_with_subcategory");
+    console.log(req);
 
     return req.data.data;
   } catch (err) {
     throw new Error(err.message);
   }
 }
-
+getGategoriesWithSubcategories();
 export async function getPopularCategories() {
   try {
     const req = await axiosInstance.get("/get_popular_categories");
