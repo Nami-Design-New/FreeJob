@@ -26,7 +26,7 @@ export default function ProjectCard({ project }) {
   return (
     <section className="project_card">
       <header className="project_content">
-        <Link to={`/projects/${id}`}>
+        <Link to={`/projects/${title}`}>
           <h1>{title}</h1>
           <p>{truncateText}</p>
         </Link>

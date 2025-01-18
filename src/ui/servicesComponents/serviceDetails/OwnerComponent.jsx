@@ -1,15 +1,18 @@
+import { useTranslation } from "react-i18next";
+import { calculateDate } from "../../../utils/helper";
 import StarsRate from "../../StartRate";
 
-export default function OwnerComponent() {
+export default function OwnerComponent({ item }) {
+  const { t } = useTranslation();
   return (
     <section className="owner_card">
-      <img className="user_img" src="https://placehold.co/64" />
+      <img className="user_img" src={item.user.image} />
       <section className="user_info">
-        <h6>Mahmoud Abbas</h6>
-        <StarsRate rate={0} />
+        <h6>{item.user.name}</h6>
+        <StarsRate rate={item.user.rate} />
         <p>
-          <span>Register Date</span>
-          <span>2024</span>
+          <span>{t("projects.signUpDate")}</span>
+          <span>{calculateDate(item?.user?.created_at)}</span>
         </p>
       </section>
     </section>

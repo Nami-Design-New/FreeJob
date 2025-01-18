@@ -16,7 +16,6 @@ export default function ProjectList() {
     isFetchingNextPage,
   } = useProjectsList();
   useEffect(() => {
-    console.log(searchProjectsList);
     const handleScroll = () => {
       if (
         window.innerHeight + document.documentElement.scrollTop >=
@@ -37,15 +36,11 @@ export default function ProjectList() {
       {searchProjectsList && searchProjectsList?.length > 0 ? (
         <main className="row g-3">
           {searchProjectsList.map((project) => (
-            <Link
-              to={project.id}
-              key={project.id}
-              className="projects_card_filter"
-            >
+            <div key={project.id} className="projects_card_filter">
               <section className="col-12">
                 <ProjectCard project={project} />
               </section>
-            </Link>
+            </div>
           ))}
           {isFetching && <DataLoader />}
         </main>

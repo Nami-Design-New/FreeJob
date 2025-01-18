@@ -115,11 +115,11 @@ export const router = createBrowserRouter([
 
       // service routes
       { path: "/services", element: <Services /> },
-      { path: "/services/:id", element: <ServiceDetails /> },
+      { path: "/services/:id/:title", element: <ServiceDetails /> },
 
       // project routes
       { path: "/projects", element: <Projects /> },
-      { path: "/projects/:id", element: <ProjectDetails /> },
+      { path: "/projects/:title", element: <ProjectDetails /> },
 
       // profile routes
       { path: "/profile/:id", element: <Profile /> },

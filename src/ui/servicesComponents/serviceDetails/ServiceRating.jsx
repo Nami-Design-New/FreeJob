@@ -1,12 +1,14 @@
-import React from "react";
+import useTruncateText from "../../../hooks/useTruncateText";
 import UserAvatar from "./UserAvatar";
 
-export default function ServiceRating({ item }) {
+export default function ServuceRating({ item }) {
+  const description = useTruncateText(item.description, 150);
+
   return (
-    <section className="service_rating">
-      <div className="row_head" data-aos="fade-up"></div>
-      <UserAvatar user={item.user} />
-      <p>{item.description}</p>
+    <section className="offers_card">
+      <div className="row_head" data-aos="fade-up">
+        <UserAvatar request={item} /> <p>{description}</p>
+      </div>
     </section>
   );
 }

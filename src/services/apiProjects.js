@@ -1,4 +1,4 @@
-import axios from "./../utils/axios";
+import axiosInstance from "./../utils/axios";
 
 export async function getProjectsByFilter(
   search,
@@ -24,7 +24,7 @@ export async function getProjectsByFilter(
   if (sort) requestBody.sort = sort;
 
   try {
-    const req = await axios.post("/get_projects", requestBody);
+    const req = await axiosInstance.post("/get_projects", requestBody);
     return {
       data: req.data.data,
       total: req.data.total,
@@ -36,7 +36,7 @@ export async function getProjectsByFilter(
 
 export async function getUserProjects(id) {
   try {
-    const req = await axios.post("/get_my_projects", {
+    const req = await axiosInstance.post("/get_my_projects", {
       user_id: id,
     });
     return req.data.data;
@@ -51,7 +51,10 @@ export async function getMyProjectRequests(sort) {
   if (sort) requestBody.sort = sort;
 
   try {
-    const req = await axios.get("/user/get_my_project_requests", requestBody);
+    const req = await axiosInstance.get(
+      "/user/get_my_project_requests",
+      requestBody
+    );
     return req.data.data;
   } catch (error) {
     throw new Error(error.message);
@@ -60,7 +63,7 @@ export async function getMyProjectRequests(sort) {
 
 export const createProject = async (data, queryClient) => {
   try {
-    await axios.post("/user/create_project", data, {
+    await axiosInstance.post("/user/create_project", data, {
       headers: {
         "Content-Type": "multipart/form-data",
       },
@@ -73,7 +76,7 @@ export const createProject = async (data, queryClient) => {
 
 export const editProject = async (data, queryClient) => {
   try {
-    await axios.post("/user/update_project", data, {
+    await axiosInstance.post("/user/update_project", data, {
       headers: {
         "Content-Type": "multipart/form-data",
       },
@@ -86,7 +89,7 @@ export const editProject = async (data, queryClient) => {
 
 export async function deleteProject(id, queryClient) {
   try {
-    await axios.post("/user/delete_project", {
+    await axiosInstance.post("/user/delete_project", {
       id,
     });
     queryClient.invalidateQueries(["userProjects"]);
@@ -97,10 +100,10 @@ export async function deleteProject(id, queryClient) {
 
 export async function getLatestProjects() {
   try {
-    const req = await axios.post("/get_projects", {
+    const req = await axiosInstance.post("/get_projects", {
       page: 1,
     });
-    console.log(req.data);
+    console.log(req.headers["content-type"]);
 
     return req.data.data;
   } catch (error) {
@@ -108,10 +111,10 @@ export async function getLatestProjects() {
   }
 }
 
-export async function getProjectById(id) {
+export async function getProjectByName(title) {
   try {
-    const req = await axios.post("/get_project_details", {
-      id,
+    const req = await axiosInstance.post("/get_project_details", {
+      title,
     });
     return req.data.data;
   } catch (error) {
@@ -121,7 +124,7 @@ export async function getProjectById(id) {
 
 export async function getProjectRequests(id, type) {
   try {
-    const req = await axios.post(
+    const req = await axiosInstance.post(
       `${type === "global" ? "" : "/user"}/get_project_request`,
       {
         id,
@@ -138,7 +141,10 @@ export async function getProjectsOrders({ page, status }) {
   if (page) requestBody.page = page;
   if (status) requestBody.status = status;
   try {
-    const req = await axios.post("/user/get_project_orders", requestBody);
+    const req = await axiosInstance.post(
+      "/user/get_project_orders",
+      requestBody
+    );
     return {
       data: req.data.data,
       total: req.data.total,
@@ -150,7 +156,7 @@ export async function getProjectsOrders({ page, status }) {
 
 export async function addProjectRequest(data, querClinet) {
   try {
-    await axios.post("/user/create_request", data);
+    await axiosInstance.post("/user/create_request", data);
     querClinet.invalidateQueries(["projectRequests"]);
   } catch (error) {
     throw new Error(error.message);
@@ -159,7 +165,7 @@ export async function addProjectRequest(data, querClinet) {
 
 export async function editProjectRequest(data, querClinet) {
   try {
-    await axios.post("/user/update_request", data);
+    await axiosInstance.post("/user/update_request", data);
     querClinet.invalidateQueries(["projectRequests"]);
   } catch (error) {
     throw new Error(error.message);
@@ -168,7 +174,7 @@ export async function editProjectRequest(data, querClinet) {
 
 export async function updateRequestStatus(id, status, querClinet) {
   try {
-    await axios.post("/user/change_request_status", {
+    await axiosInstance.post("/user/change_request_status", {
       id,
       status,
     });
@@ -180,7 +186,7 @@ export async function updateRequestStatus(id, status, querClinet) {
 
 export async function updateProject(id, status, queryClient) {
   try {
-    await axios.post("/user/update_project_order", {
+    await axiosInstance.post("/user/update_project_order", {
       id: id,
       status: status,
     });

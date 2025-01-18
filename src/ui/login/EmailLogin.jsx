@@ -47,7 +47,7 @@ export default function EmailLogin() {
           secure: true,
           sameSite: "Strict",
         });
-        axiosInstance.defaults.headers.common[
+        axios.defaults.headers.common[
           "Authorization"
         ] = `${res.data.data.token}`;
       } else {

@@ -476,7 +476,9 @@
     "youDontHaveEnoughBalance": "You don't have enough balance to pay the amount of:",
     "chargeWallet": "Charge Wallet",
     "addToCart": "Add to Cart",
-    "collectionAddedToCart": "Collection added to cart successfully"
+    "collectionAddedToCart": "Collection added to cart successfully",
+    "valueWillbediscountedfromyourballance": "Value will be discount from your ballance",
+    "currentBallance": "Current ballance"
   },
   "recievedOrders": {
     "title": "Received Orders",
@@ -543,7 +545,8 @@
     "requestAccepted": "Request Accepted",
     "refused": "Rejected",
     "offer": "Offers",
-    "addFirst": "Add First Offer"
+    "addFirst": "Add First Offer",
+    "gotoProfile": "Go to Profile"
   },
   "chat": {
     "block": "Block",

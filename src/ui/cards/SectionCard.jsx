@@ -1,6 +1,4 @@
 export default function SectionCard({ section }) {
-  console.log(section);
-
   return (
     <section
       className="sections_card"

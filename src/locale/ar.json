@@ -543,7 +543,8 @@
     "requestAccepted": "تم قبول الطلب",
     "refused": "مرفوض",
     "offer": "عروض",
-    "addFirst": "اضف أول عرض"
+    "addFirst": "اضف أول عرض",
+    "gotoProfile": "انتقل إلى الملف الشخصي"
   },
   "chat": {
     "block": "حظر",

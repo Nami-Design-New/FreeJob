@@ -7,7 +7,6 @@ import usePartenersList from "../../hooks/usePartenersList";
 
 export default function PartnersofSuccess() {
   const { data: parteners, isLoading, error } = usePartenersList();
-  console.log(parteners);
 
   const { t } = useTranslation();
   const [currentPage, setCurrentPage] = useState(1);

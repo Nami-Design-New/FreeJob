@@ -1,16 +1,14 @@
-import React from "react";
-import ProjectCard from "../cards/ProjectCard";
-import SectionHeader from "../SectionHeader";
-import { Link } from "react-router";
 import { useTranslation } from "react-i18next";
-import useGetLatestProjects from "../../hooks/projects/useGetLatestProjects";
-import DataLoader from "../DataLoader";
 import { useSelector } from "react-redux";
-import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay } from "swiper/modules";
+import { Swiper, SwiperSlide } from "swiper/react";
+import useGetLatestProjects from "../../hooks/projects/useGetLatestProjects";
+import ProjectCard from "../cards/ProjectCard";
+import DataLoader from "../DataLoader";
+import SectionHeader from "../SectionHeader";
 
 export default function PopularProjects() {
-  const { data: latestProjects, isLoading, erroe } = useGetLatestProjects();
+  const { data: latestProjects, isLoading, error } = useGetLatestProjects();
   const lang = useSelector((state) => state.language.lang);
 
   const { t } = useTranslation();
@@ -44,9 +42,7 @@ export default function PopularProjects() {
           >
             {latestProjects.map((project) => (
               <SwiperSlide key={project.id} style={{ height: "100%" }}>
-                <Link to={"projects/" + project.id}>
-                  <ProjectCard project={project} />
-                </Link>
+                <ProjectCard project={project} />
               </SwiperSlide>
             ))}
           </Swiper>

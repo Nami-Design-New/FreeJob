@@ -1,6 +1,4 @@
 export default function CategoryCard({ category }) {
-  console.log(category);
-
   return (
     <section className="category_card">
       <section className="image_container">

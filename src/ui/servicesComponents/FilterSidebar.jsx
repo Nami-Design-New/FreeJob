@@ -8,9 +8,9 @@ import MultiSelect from "./MultiSelect";
 import RangeInput from "./RangeInput";
 import SearchInput from "./SearchInput";
 import SectionsFilter from "./SectionsFilter";
-import useCategorieListWithSub from "../../hooks/projects/useCategorieListWithSub";
 import DataLoader from "../DataLoader";
 import useGetSkills from "../../hooks/useGetSkills";
+import useCategorieListWithSub from "../../hooks/categories/useCategorieListWithSub";
 
 const FilterSidebar = ({ isOpen, setIsOpen }) => {
   const { t } = useTranslation();

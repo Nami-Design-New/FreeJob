@@ -7,17 +7,25 @@ import { setIsLogged, setUser } from "./redux/slices/authedUserSlice";
 import DataLoader from "./ui/DataLoader";
 import axiosInstance from "./utils/axios";
 import i18n from "./utils/i18n";
+import { router } from "./providers/router";
+import { RouterProvider } from "react-router";
 function App() {
   const dispatch = useDispatch();
   const lang = useSelector((state) => state.language.lang);
 
   const [cookies] = useCookies(["token", "id"]);
-  // const [searchParams] = useSearchParams();
   const token = cookies?.token;
   const id = cookies?.id;
-
   const { decodedToken, isExpired } = useJwt(token);
-  axiosInstance.defaults.headers.common["Authorization"] = `${token}`;
+  // axiosInstance.defaults.headers.common["Authorization"] = `${token}`;
+  // Update the Authorization header dynamically
+  useEffect(() => {
+    if (token && !isExpired) {
+      axiosInstance.defaults.headers.common["Authorization"] = `${token}`;
+    } else {
+      delete axiosInstance.defaults.headers.common["Authorization"];
+    }
+  }, [token, isExpired]);
   const {
     data: profile,
     isLoading,
@@ -47,6 +55,6 @@ function App() {
     i18n.changeLanguage(lang);
   }, [lang]);
 
-  return <></>; //isLoading ? <DataLoader /> : <></>;
+  return isLoading ? <DataLoader /> : <RouterProvider router={router} />;
 }
 export default App;

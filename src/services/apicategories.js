@@ -3,19 +3,14 @@ import axiosInstance from "../utils/axios";
 export async function getCategories() {
   try {
     const req = await axiosInstance.get("/get_categories");
-    console.log(req.data.data);
-
     return req.data.data;
   } catch (err) {
     throw new Error(err.message);
   }
 }
-getCategories();
 export async function getGategoriesWithSubcategories() {
   try {
     const req = await axiosInstance.get("/get_categories_with_subcategory");
-    console.log(req);
-
     return req.data.data;
   } catch (err) {
     throw new Error(err.message);

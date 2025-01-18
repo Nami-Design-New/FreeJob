@@ -15,7 +15,7 @@ import {
 } from "react-icons/fa";
 import { FaXTwitter } from "react-icons/fa6";
 
-export default function ServiseOwner() {
+export default function ServiseOwner({ service }) {
   let instructions = true;
   const navigate = useNavigate();
   const { t } = useTranslation();
@@ -35,38 +35,32 @@ export default function ServiseOwner() {
 
   return (
     <section className="service_card_owner">
-      <OwnerComponent />
+      <OwnerComponent item={service} />
       <ul className="card_ul">
         <li className="rate d-flex justify-content-between">
           <p>Puplish Date</p>3 jan
         </li>
         <li className="d-flex justify-content-between">
-          <p>Buyers</p>
-          {/* <span>0</span> */}
+          <p>{t("services.buyers")}</p>
+          <span>{service?.orders_count || 0}</span>
         </li>
         <li className=" d-flex justify-content-between">
-          <p>Orders in Progress</p>
-          {/* <span>0</span> */}
+          <p>{t("services.oredersInProgress")}</p>
+          <span>{service?.current_orders_count || 0}</span>
         </li>
         <li className=" d-flex justify-content-between">
-          <p>Service Price Starts From</p>
-          {/* <span>$100</span> */}
+          <p>{t("services.serviceMinimumPrice")}</p>
+          <span>${service?.price}</span>
         </li>
         <li className=" d-flex justify-content-between">
-          <p>Delivery Time</p>
-          {/* <span>3 days</span> */}
+          <p>{t("services.deliveryTime")}</p>
+          <span>
+            {service?.days} {t("day")}
+          </span>
         </li>
       </ul>
-      {instructions && (
-        <>
-          <section className="label d-flex align-items-center gap-2 mt-3">
-            <IoMdInformationCircleOutline />
-            <p className="p-0 m-0">Instructions</p>
-          </section>
-          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
-        </>
-      )}
-      <section className="share_chat_buttons">
+
+      <section className="share_chat_buttons mt-4">
         <Dropdown>
           <Dropdown.Toggle className="butn" id="dropdown-basic">
             <BsShare />
@@ -131,7 +125,7 @@ export default function ServiseOwner() {
               <button onClick={handleCopy}>
                 <FaRegCopy />
               </button>
-                {/* <span onClick={handleCopy} id="url">
+              {/* <span onClick={handleCopy} id="url">
                   <span>{currentPageLink}</span>
                 </span> */}
             </div>

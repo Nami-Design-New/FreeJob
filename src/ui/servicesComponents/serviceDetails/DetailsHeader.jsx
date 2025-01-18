@@ -1,10 +1,12 @@
 import { Breadcrumb } from "react-bootstrap";
+import { useTranslation } from "react-i18next";
 
 export default function DetailsHeader({ links }) {
+  const { t } = useTranslation();
   return (
     <section className="details_header">
       <Breadcrumb>
-        <Breadcrumb.Item href="/">Home</Breadcrumb.Item>
+        <Breadcrumb.Item href="/">{t("routes.home")}</Breadcrumb.Item>
         {typeof links !== "string" ? (
           links.map((link, index) => (
             <Breadcrumb.Item key={index} href={`/${link}`}>
@@ -12,7 +14,7 @@ export default function DetailsHeader({ links }) {
             </Breadcrumb.Item>
           ))
         ) : (
-          <Breadcrumb.Item href={`/${links.split(" ").join("-")}`}>
+          <Breadcrumb.Item active href={`/${links.split(" ").join("-")}`}>
             {links}
           </Breadcrumb.Item>
         )}

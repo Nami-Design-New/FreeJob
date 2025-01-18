@@ -1,9 +1,9 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { Modal } from "react-bootstrap";
-import { useTranslation } from "react-i18next";
-import { Link } from "react-router-dom";
 import { useCookies } from "react-cookie";
-import InputField from "../form-elements/InputField";
+import { useTranslation } from "react-i18next";
+import { Link } from "react-router";
+import FormInput from "../form/FormInput";
 
 const ChargeModal = ({ showModal, setShowModal, cartTotalPrice }) => {
   const { t } = useTranslation();
@@ -17,7 +17,7 @@ const ChargeModal = ({ showModal, setShowModal, cartTotalPrice }) => {
       <Modal.Body className="pay_modal">
         {cartTotalPrice && (
           <h3 className="text-center">
-            {t("cart.youDontHaveEnoughBallance")}{" "}
+            {t("cart.youDontHaveEnoughBalance")}
             <span>
               {cartTotalPrice}
               <i className="fa-solid fa-dollar-sign"></i>
@@ -26,7 +26,7 @@ const ChargeModal = ({ showModal, setShowModal, cartTotalPrice }) => {
         )}
 
         <form className="form">
-          <InputField
+          <FormInput
             type="number"
             id="chargeValue"
             name="chargeValue"
