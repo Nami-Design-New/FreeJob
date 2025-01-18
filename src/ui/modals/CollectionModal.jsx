@@ -2,15 +2,10 @@ import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Modal } from "react-bootstrap";
 import { toast } from "react-toastify";
-// import SelectField from "./../../ui/form-elements/SelectField";
-// import useCollectionsList from "../../features/collections/useCollectionsList";
 import FormInput from "../form/FormInput";
 import FormTextArea from "../form/FormTextArea";
 import SubmitButton from "../cart/SubmitCart";
 import FormSelector from "../form/FormSelector";
-// import SubmitButton from "../form-elements/SubmitButton";
-// import InputField from "../form-elements/InputField";
-// import TextField from "../form-elements/TextField";
 
 function CollectionModal({ showModal, setShowModal, showDeleteFromCart }) {
   const { t } = useTranslation();

@@ -1,59 +1,50 @@
-import { lazy, Suspense } from "react";
 import { createBrowserRouter, Outlet } from "react-router";
 import RootLayout from "../Layout/RootLayout";
+import Home from "../routes/Home";
 import AddBankAccount from "../routes/AddBankAccount";
 import AddService from "../routes/AddService";
 import Carts from "../routes/Carts";
 import Sections from "../routes/Sections";
 import ProtectedRoute from "../ui/ProtectedRoute";
-
-// Lazy-loaded components
-const Home = lazy(() => import("../routes/Home"));
-const About = lazy(() => import("../routes/About"));
-const Contact = lazy(() => import("../routes/Contact"));
-const Chats = lazy(() => import("../routes/Chats"));
-
-const Profile = lazy(() => import("../routes/Profile"));
-const ProjectDetails = lazy(() => import("../routes/ProjectDetails"));
-const Purchases = lazy(() => import("../routes/Purchases"));
-const Categories = lazy(() => import("../routes/Categories"));
-const EditProfile = lazy(() => import("../routes/EditProfile"));
-// const AddService = lazy(() => import("../routes/AddService"));
-const VerifyPhone = lazy(() => import("../routes/VerifyPhone"));
-const ForgetPassword = lazy(() => import("../routes/ForgetPassword"));
-const VerifyIdentity = lazy(() => import("../routes/VerifyIdentity"));
-const OrderDetails = lazy(() => import("../routes/OrderDetails"));
-const RecievedOrders = lazy(() => import("../routes/RecievedOrders"));
-const Terms = lazy(() => import("../routes/Terms"));
-const Notifications = lazy(() => import("../routes/Notifications"));
-const Freelancers = lazy(() => import("../routes/Freelancers"));
-const Projects = lazy(() => import("../routes/Projects"));
-const ServiceDetails = lazy(() => import("../routes/ServiceDetails"));
-const Services = lazy(() => import("../routes/Services"));
-const ProjectsOrders = lazy(() => import("../routes/ProjectsOrders"));
-const ProjectsOrdersDetails = lazy(() =>
-  import("../routes/ProjectsOrdersDetails")
-);
-const Privacy = lazy(() => import("../routes/Privacy"));
-const AddProject = lazy(() => import("../routes/AddProject"));
-const AboutPreview = lazy(() => import("../routes/AboutPreview"));
-const SubCategories = lazy(() => import("../routes/SubCategories"));
-const Complaints = lazy(() => import("../routes/Complaints"));
-const MyCollections = lazy(() => import("../routes/MyCollections"));
-const MyCollection = lazy(() => import("../routes/MyCollection"));
-const BestFreeLancers = lazy(() => import("../routes/BestFreeLancers"));
-const ErrorPage = lazy(() => import("../routes/ErrorPage"));
-const Blogs = lazy(() => import("../routes/Blogs"));
-const BlogDetails = lazy(() => import("../routes/BlogDetails"));
-const Portfolios = lazy(() => import("../routes/Portfolios"));
-const CommunityPosts = lazy(() => import("../routes/CommunityPosts"));
-const CommunitySubjectDetails = lazy(() =>
-  import("../routes/CommunitySubjectDetails")
-);
-const MyBids = lazy(() => import("../routes/MyBids"));
-const Balance = lazy(() => import("../routes/Balance"));
-const ManageAccounts = lazy(() => import("../routes/ManageAccounts"));
-const MyBidDetails = lazy(() => import("../routes/MyBidDetails"));
+import ProjectDetails from "../routes/ProjectDetails";
+import Purchases from "../routes/Purchases";
+import Categories from "../routes/Categories";
+import EditProfile from "../routes/EditProfile";
+import VerifyPhone from "../routes/VerifyPhone";
+import ForgetPassword from "../routes/ForgetPassword";
+import VerifyIdentity from "../routes/VerifyIdentity";
+import OrderDetails from "../routes/OrderDetails";
+import RecievedOrders from "../routes/RecievedOrders";
+import Terms from "../routes/Terms";
+import Notifications from "../routes/Notifications";
+import Freelancers from "../routes/Freelancers";
+import Projects from "../routes/Projects";
+import ServiceDetails from "../routes/ServiceDetails";
+import Services from "../routes/Services";
+import ProjectsOrders from "../routes/ProjectsOrders";
+import ProjectsOrdersDetails from "../routes/ProjectsOrdersDetails";
+import Privacy from "../routes/Privacy";
+import AddProject from "../routes/AddProject";
+import AboutPreview from "../routes/AboutPreview";
+import SubCategories from "../routes/SubCategories";
+import Complaints from "../routes/Complaints";
+import MyCollections from "../routes/MyCollections";
+import MyCollection from "../routes/MyCollection";
+import BestFreeLancers from "../routes/BestFreeLancers";
+import ErrorPage from "../routes/ErrorPage";
+import Blogs from "../routes/Blogs";
+import BlogDetails from "../routes/BlogDetails";
+import Portfolios from "../routes/Portfolios";
+import CommunityPosts from "../routes/CommunityPosts";
+import CommunitySubjectDetails from "../routes/CommunitySubjectDetails";
+import MyBids from "../routes/MyBids";
+import Balance from "../routes/Balance";
+import ManageAccounts from "../routes/ManageAccounts";
+import MyBidDetails from "../routes/MyBidDetails";
+import Profile from "../routes/Profile";
+import Chats from "../routes/Chats";
+import Contact from "../routes/Contact";
+import About from "../routes/About";
 
 export const router = createBrowserRouter([
   {
@@ -124,11 +115,11 @@ export const router = createBrowserRouter([
 
       // service routes
       { path: "/services", element: <Services /> },
-      { path: "/services/:id", element: <ServiceDetails /> },
+      { path: "/services/:id/:title", element: <ServiceDetails /> },
 
       // project routes
       { path: "/projects", element: <Projects /> },
-      { path: "/projects/:id", element: <ProjectDetails /> },
+      { path: "/projects/:title", element: <ProjectDetails /> },
 
       // profile routes
       { path: "/profile/:id", element: <Profile /> },

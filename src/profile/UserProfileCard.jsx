@@ -1,7 +1,6 @@
-import React from "react";
 import { Card } from "react-bootstrap";
 import StarsRate from "../ui/StartRate";
-import "../assets/styles/profile.css"
+import "../assets/styles/profile.css";
 const UserProfileCard = ({ user }) => {
   if (!user) {
     return null;
@@ -15,15 +14,9 @@ const UserProfileCard = ({ user }) => {
         alt="card_img"
         className="card-img-top"
       />
-      <div
-        className={`overlay-image ${user.image ? "" : "overlay-initial"}`}
-      >
+      <div className={`overlay-image ${user.image ? "" : "overlay-initial"}`}>
         {user.image ? (
-          <img
-            src={user.image}
-            alt="user"
-            className="freelancer-image"
-          />
+          <img src={user.image} alt="user" className="freelancer-image" />
         ) : (
           user.name?.charAt(0)
         )}

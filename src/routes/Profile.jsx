@@ -1,6 +1,6 @@
 import React from "react";
 import { Container, Row, Col } from "react-bootstrap";
-import useGetProfile from "../profile/useGetProfile";
+import useGetProfile from "../profile/useGetUserProfile";
 import UserProfileCard from "../profile/UserProfileCard";
 import ProfileTabs from "../profile/ProfileTabs";
 

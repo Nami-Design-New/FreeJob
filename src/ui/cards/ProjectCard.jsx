@@ -1,8 +1,8 @@
-import { FaFile, FaUsers } from "react-icons/fa";
-import { Link } from "react-router";
-import { formatTimeDifference, getTimeDifference } from "../../utils/helper";
 import { useTranslation } from "react-i18next";
+import { FaFile, FaUsers } from "react-icons/fa";
 import useTruncateText from "../../hooks/useTruncateText";
+import { formatTimeDifference, getTimeDifference } from "../../utils/helper";
+import { Link } from "react-router";
 
 export default function ProjectCard({ project }) {
   const { t } = useTranslation();
@@ -11,7 +11,7 @@ export default function ProjectCard({ project }) {
     title,
     requests_count,
     description,
-    user: { image, name },
+    user: { image, name, id: userId },
   } = project;
   const truncateText = useTruncateText(description, 150);
   const timeDifference = getTimeDifference(project?.created_at);
@@ -25,11 +25,16 @@ export default function ProjectCard({ project }) {
   );
   return (
     <section className="project_card">
-      <section className="project_content">
-        <h1>{title}</h1>
-        <p>{truncateText}</p>
-      </section>
-      <div to={"profiles/" + id} className="project_owner gap-3">
+      <header className="project_content">
+        <Link to={`/projects/${title}`}>
+          <h1>{title}</h1>
+          <p>{truncateText}</p>
+        </Link>
+      </header>
+      <Link
+        to={`/profile/${project?.user?.id}`}
+        className="project_owner gap-3"
+      >
         <section className="image_user_container">
           <img src={image} />
         </section>
@@ -47,7 +52,7 @@ export default function ProjectCard({ project }) {
             </section>
           </section>
         </section>
-      </div>
+      </Link>
     </section>
   );
 }

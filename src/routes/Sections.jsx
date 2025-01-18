@@ -127,7 +127,9 @@ export default function Sections() {
         <section className="container">
           <Breadcrumb as="nav">
             <Breadcrumb.Item href="/">Home</Breadcrumb.Item>
-            <Breadcrumb.Item active>Sections</Breadcrumb.Item>
+            <Breadcrumb.Item href="/sections" active>
+              Sections
+            </Breadcrumb.Item>
           </Breadcrumb>
         </section>
       </section>

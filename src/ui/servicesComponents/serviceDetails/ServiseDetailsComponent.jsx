@@ -1,132 +1,144 @@
-import ServiceDetailsSectionHeader from "./ServiceDetailsSectionHeader";
-import { CiEdit } from "react-icons/ci";
-import { LiaFileSolid } from "react-icons/lia";
-import { FaCartPlus, FaMinus, FaPlus } from "react-icons/fa6";
-import { useNavigate } from "react-router";
 import { useState } from "react";
-export default function ServiseDetailsComponent() {
-  let islogged = true;
+import { useTranslation } from "react-i18next";
+import { CiEdit } from "react-icons/ci";
+import { FaCartPlus, FaMinus, FaPlus } from "react-icons/fa6";
+import { LiaFileSolid } from "react-icons/lia";
+import { useDispatch, useSelector } from "react-redux";
+import { openModal } from "../../../redux/slices/authModalSlice";
+import CollectionModal from "../../modals/CollectionModal";
+import ServiceDetailsSectionHeader from "./ServiceDetailsSectionHeader";
+import ServiceSlider from "./ServiceSlider";
+export default function ServiseDetailsComponent({
+  service,
+  handleDecreaseQuantity,
+  handleIncreaseQuantity,
+  handleAddTocart,
+  handleCheckboxChange,
+  cartObj,
+  formLoading,
+  totalPrice,
+  inCart,
+}) {
+  const isLogged = useSelector((state) => state.authedUser.isLogged);
+  console.log(isLogged);
 
-  const navigate = useNavigate();
-  const [quantity, setQuantity] = useState(1);
-  function handleIncreaseQuantity() {
-    setQuantity(quantity + 1);
-  }
-  function handleDecreaseQuantity() {
-    if (quantity > 1) {
-      setQuantity(quantity - 1);
-    }
-  }
-
-  function handleAddTocart() {
-    navigate("/cart");
-  }
+  const { t } = useTranslation();
+  const dispatch = useDispatch();
+  const [showCollectionModel, setShowCollectionModel] = useState(false);
 
   return (
     <section className="service_details_component">
-      <section className="img_card">
-        <img
-          className="img-fluid"
-          src="/images/tempServiceImage.png"
-          alt="service name"
-        />
-      </section>
+      <ServiceSlider images={service?.images} />
       <section className="service_description">
         <ServiceDetailsSectionHeader title="Service Description">
           <LiaFileSolid />
         </ServiceDetailsSectionHeader>
-        <p>
-          Dear customer: If you need distinctive designs, here is my offer.. You
-          will get one image design (number 1) from the following list: - Images
-          for your website - Facebook and Instagram stories - Facebook and
-          Instagram posts and many services related to image design such as
-          banners, infographics and presentations. Service features: In return
-          for the service, you will get: - Unique, high-quality designs. -
-          Design in the language of your choice. - Deliver the work in JPG or
-          PNG format - I accept your criticism with open arms. - I guarantee
-          that the work will be completed as quickly as possible and with the
-          best quality. *** Notes please focus on them - The design is modified
-          only once - Design using Canva
-        </p>
+        <p>{service?.description}</p>
       </section>
-      <section className="buyer_instructions">
-        <ServiceDetailsSectionHeader title="Buyer Instructions">
-          <CiEdit />
-        </ServiceDetailsSectionHeader>
-        <ul>
-          <li>I am not responsible for the Apple account. And the domains.</li>
-          <li>I am not responsible for the Apple account. And the domains.</li>
-        </ul>
-      </section>
-      <section className="adds_on">
-        <ServiceDetailsSectionHeader title="Available Add-ons for This Service">
-          <LiaFileSolid />
-        </ServiceDetailsSectionHeader>
-        <ul>
-          <li>
-            <input type="checkbox" />
-            <label>
-              <p>3d photo design</p>
-              <p>For an additional 10 to the service price</p>
-            </label>
-          </li>
-          <li>
-            <input type="checkbox" />
-            <label>
-              <p>3d photo design</p>
-              <p>For an additional 10 to the service price</p>
-            </label>
-          </li>
-        </ul>
-      </section>
-      <section>
-        <div className="add_cart">
-          <div className="input_field">
-            <button
-              className="add"
-              // disabled={formLoading}
-              onClick={handleIncreaseQuantity}
-            >
-              <FaPlus />
-            </button>
-            <input type="number" min={1} readOnly value={quantity} />
-            <button className="minus" onClick={handleDecreaseQuantity}>
-              <FaMinus />
-            </button>
-          </div>
-          <div className="total d-flex justify-content-between align-items-center">
-            <p>
-              Total : <br />
-              <span>
-                + <span id="num">1</span>
-                Additional Service
-              </span>
-            </p>
-            <h6>200 $</h6>
-          </div>
-          <div className="d-flex w-100 gap-2">
-            {
-              <button className="request_order" onClick={handleAddTocart}>
-                <FaCartPlus />
-                Add to Cart
-              </button>
-            }
-            <button
-              className="request_order"
-              onClick={() => {
-                if (islogged === true) {
-                  navigate("/login");
-                } else {
-                  // setShowCollectionModel(true);
-                }
-              }}
-            >
-              <FaPlus />
-              Add To Collection
-            </button>
-          </div>
-        </div>
-      </section>
+      {service?.instructions && (
+        <section className="buyer_instructions">
+          <ServiceDetailsSectionHeader title={t("services.instructions")}>
+            <CiEdit />
+          </ServiceDetailsSectionHeader>
+          <ul>
+            <li>{service?.instructions}</li>
+          </ul>
+        </section>
+      )}
+      {service?.is_my_service === false && (
+        <>
+          {service?.developments && service?.developments.length > 0 && (
+            <section className="adds_on">
+              <ServiceDetailsSectionHeader
+                title={t("services.developmentsAvailable")}
+              >
+                <LiaFileSolid />
+              </ServiceDetailsSectionHeader>
+              <ul>
+                {service?.developments.map((development) => (
+                  <li key={development?.id}>
+                    <input
+                      type="checkbox"
+                      id={`check-${development.id}`}
+                      name={`check-${development.id}`}
+                      checked={cartObj.developments.includes(development.id)}
+                      onChange={() => handleCheckboxChange(development.id)}
+                    />
+                    <label htmlFor={`check-${development.id}`}>
+                      <p> {development.description}</p>
+                      <p>
+                        {" "}
+                        {t("services.compare")} {development.price}{" "}
+                        {t("services.percentageofExtraService")}
+                      </p>
+                    </label>
+                  </li>
+                ))}
+              </ul>
+            </section>
+          )}
+          <section>
+            <div className="add_cart">
+              <div className="input_field">
+                <button
+                  className="add"
+                  disabled={formLoading}
+                  onClick={handleIncreaseQuantity}
+                >
+                  <FaPlus />
+                </button>
+                <input
+                  type="number"
+                  min={1}
+                  readOnly
+                  value={cartObj.quantity}
+                />
+                <button className="minus" onClick={handleDecreaseQuantity}>
+                  <FaMinus />
+                </button>
+              </div>
+              <div className="total d-flex justify-content-between align-items-center">
+                <p>
+                  {t("services.total")} : <br />
+                  {cartObj.developments.length > 0 && (
+                    <span>
+                      + <span id="num"> {cartObj.developments.length}</span>
+                      {t("services.extraService")}
+                    </span>
+                  )}
+                </p>
+                <h6> {totalPrice || 0}</h6>
+              </div>
+              <div className="d-flex w-100 gap-2">
+                {!inCart && (
+                  <button className="request_order" onClick={handleAddTocart}>
+                    <FaCartPlus />
+                    {t("services.addToCart")}
+                  </button>
+                )}
+                <button
+                  className="request_order"
+                  onClick={() => {
+                    if (isLogged !== true) {
+                      dispatch(openModal());
+                    } else {
+                      setShowCollectionModel(true);
+                    }
+                  }}
+                >
+                  <FaPlus />
+                  {t("cart.addToCollection")}
+                </button>
+              </div>
+            </div>
+          </section>{" "}
+          <CollectionModal
+            setShowModal={setShowCollectionModel}
+            showModal={showCollectionModel}
+            showDeleteFromCart={false}
+          />
+        </>
+      )}
     </section>
   );
 }

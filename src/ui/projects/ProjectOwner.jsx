@@ -2,36 +2,48 @@ import { Badge } from "react-bootstrap";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router";
 import OwnerComponent from "../servicesComponents/serviceDetails/OwnerComponent";
+import { formatTimeDifference, getTimeDifference } from "../../utils/helper";
 
-export default function ServiseOwner() {
+export default function ServiseOwner({ project }) {
+  const { t } = useTranslation();
+  const timeDifference = getTimeDifference(project?.created_at);
+  const formattedTime = formatTimeDifference(
+    timeDifference.years,
+    timeDifference.months,
+    timeDifference.days,
+    timeDifference.hours,
+    timeDifference.minutes,
+    t
+  );
   return (
     <section className="service_card_owner">
-      <OwnerComponent />
+      <OwnerComponent project={project} />
       <ul className="card_ul">
         <li className="rate d-flex justify-content-between">
-          <p>Project State</p>
+          <p>{t("projects.status")}</p>
           <Badge bg="success" p>
-            New
+            {project.status}
           </Badge>
         </li>
         <li className="rate d-flex justify-content-between">
-          <p>Puplish Date</p>3 jan
+          <p>{t("projects.publishTime")}</p>
+          {formattedTime}
         </li>
         <li className="d-flex justify-content-between">
-          <p>Budget</p>
-          <span>200$</span>
+          <p>{t("projects.budget")}</p>
+          <span> {project.price}$</span>
         </li>
         <li className=" d-flex justify-content-between">
-          <p>Execution Time</p>
-          <span>12 days</span>
+          <p>{t("projects.deliveryTime")}</p>
+          <span> {project.days} days</span>
         </li>
         <li className=" d-flex justify-content-between">
-          <p>Average Offers</p>
-          <span>$25400</span>
+          <p>{t("projects.averageOffers")}</p>
+          <span>{project?.request_average || 0} $</span>
         </li>
         <li className=" d-flex justify-content-between">
-          <p>Number of Offers</p>
-          <span>3</span>
+          <p>{t("projects.offers")}</p>
+          <span>{project.requests_count || 0}</span>
         </li>
       </ul>
     </section>

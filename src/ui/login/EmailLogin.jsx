@@ -3,49 +3,63 @@ import FormButton from "../form/FormButton";
 import { useDispatch } from "react-redux";
 import { setStep } from "../../redux/slices/authModalSlice";
 import { useState } from "react";
+import { useTranslation } from "react-i18next";
+import { useNavigate } from "react-router";
+import { useCookies } from "react-cookie";
+import axiosInstance from "../../utils/axios";
+import { toast } from "react-toastify";
+import { setIsLogged, setUser } from "../../redux/slices/authedUserSlice";
 
 export default function EmailLogin() {
+  const { t } = useTranslation();
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const [, setCookie] = useCookies(["token", "id"]);
+  const [loading, setLoading] = useState(false);
   const [formData, setFormData] = useState({
     email: "",
     password: "",
   });
-  const [errors, setErrors] = useState({});
-
-  function validate(field, value) {
-    let error = "";
-    if (field === "email" && !/^\S+@\S+\.\S+$/.test(value)) {
-      error = "Invalid Email Address.";
-    } else if (field === "password" && value.length < 6) {
-      error = "Password must be at least 6 characters long.";
-    }
-    return error;
-  }
 
   function handleChange(e) {
     const { name, value } = e.target;
-    const error = validate(name, value);
-    setErrors({ ...errors, [name]: error });
     setFormData({ ...formData, [name]: value });
   }
 
-  function handleSubmit(e) {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const newErrors = {};
-    for (const field in formData) {
-      const error = validate(field, formData[field]);
-      if (error) newErrors[field] = error;
+    setLoading(true);
+    try {
+      const res = await axiosInstance.post("/user/login", formData);
+      if (res.data.code === 200) {
+        toast.success(t("auth.loginSuccess"));
+        dispatch(setUser(res.data.data));
+        dispatch(setIsLogged(true));
+        navigate("/");
+        setCookie("token", res.data.data.token, {
+          path: "/",
+          secure: true,
+          sameSite: "Strict",
+        });
+        setCookie("id", res.data.data.id, {
+          path: "/",
+          secure: true,
+          sameSite: "Strict",
+        });
+        axios.defaults.headers.common[
+          "Authorization"
+        ] = `${res.data.data.token}`;
+      } else {
+        toast.error(t("auth.emailOrPasswordWrong"));
+      }
+    } catch (error) {
+      toast.error(t("auth.loginErorr"));
+      throw new Error(error.message);
+    } finally {
+      setLoading(false);
     }
-    setErrors(newErrors);
-    if (Object.keys(newErrors).length === 0) {
-      console.log("Form submitted successfully!", formData);
-      return;
-    } else {
-      console.log("Form has errors, cannot submit.");
-    }
-  }
-
-  const dispatch = useDispatch();
+  };
   return (
     <div className="left_side">
       <header className="modal_header ">
@@ -69,11 +83,7 @@ export default function EmailLogin() {
           value={formData.email}
           onChange={handleChange}
         />
-        {errors.email && (
-          <p style={{ fontSize: "0.6rem" }} className="my-1  text-danger">
-            {errors.email}
-          </p>
-        )}
+
         <FormInput
           name="password"
           label="Password"

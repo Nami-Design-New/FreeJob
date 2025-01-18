@@ -1,16 +1,19 @@
+import { useQueryClient } from "@tanstack/react-query";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { FaPlus } from "react-icons/fa";
-import { useSelector } from "react-redux";
-import { useNavigate } from "react-router";
+import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
+import { openModal } from "../../redux/slices/authModalSlice";
+import { addProjectRequest } from "../../services/apiProjects";
+import FormButton from "../form/FormButton";
 import FormInput from "../form/FormInput";
 import FormTextArea from "../form/FormTextArea";
-import FormButton from "../form/FormButton";
 
 const AddOffer = ({ id }) => {
   const { t } = useTranslation();
   const [loading, setLoading] = useState(false);
+  const queryClient = useQueryClient();
   const [formData, setFormData] = useState({
     project_id: id,
     price: "",
@@ -18,13 +21,13 @@ const AddOffer = ({ id }) => {
     days: "",
   });
   const isLogged = useSelector((state) => state.authedUser.isLogged);
-  const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const handleChange = (e) => {
     if (isLogged) {
       setFormData({ ...formData, [e.target.name]: e.target.value });
     } else {
-      navigate("/login");
+      dispatch(openModal());
     }
   };
 
@@ -33,7 +36,7 @@ const AddOffer = ({ id }) => {
     if (isLogged) {
       setLoading(true);
       try {
-        // await addProjectRequest(formData, queryClient);
+        await addProjectRequest(formData, queryClient);
         toast.success(t("projects.offerAddedSuccessfully"));
       } catch (error) {
         console.log(error);
@@ -41,7 +44,7 @@ const AddOffer = ({ id }) => {
         setLoading(false);
       }
     } else {
-      navigate("/login");
+      dispatch(openModal());
     }
   };
 
@@ -94,8 +97,12 @@ const AddOffer = ({ id }) => {
               required
             />
           </section>
-          <section className="col-12 p-1 mt-2 d-flex justify-content-end">
-            <FormButton content={t("projects.send")} disabled={loading} />
+          <section className="col-12 p-1 d-flex justify-content-start">
+            <FormButton
+              className="go_profile_btn w-25 mt-0"
+              content={t("projects.send")}
+              disabled={loading}
+            />
           </section>
         </section>
       </form>

@@ -29,6 +29,7 @@ export default function AuthModal() {
     is_freelance: false,
     job_title: "",
     categories: [],
+    skills: [],
   });
   const [errors, setErrors] = useState({});
   const currentStep = useSelector((state) => state.authModal.currentStep);
@@ -48,10 +49,6 @@ export default function AuthModal() {
         );
       case 6:
         return (
-          <RegistrationForm2 formData={formData} setFormData={setFormData} />
-        );
-      case 7:
-        return (
           <RegistrationForm3 formData={formData} setFormData={setFormData} />
         );
       default:
@@ -62,7 +59,7 @@ export default function AuthModal() {
   return (
     <Modal
       centered
-      size="lg"
+      size="xl"
       show={show}
       backdrop="static"
       onHide={() => dispatch(closeModal())}
@@ -75,10 +72,10 @@ export default function AuthModal() {
           >
             <IoMdClose />
           </button>
-          <div className="d-none d-lg-flex col-6  p-0">
+          <div className="d-none d-lg-flex col-6 p-0">
             <LoginRightSide />
           </div>
-          <div className="col-12 col-lg-6   p-0 h-100">
+          <div className=" col-lg-6 p-0 h-100">
             {renderStep()}
             <p className="copy_right">
               Copy Rights Reserved {new Date().getFullYear()}

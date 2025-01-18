@@ -1,4 +1,4 @@
-import axios from "./../utils/axios";
+import axiosInstance from "./../utils/axios";
 
 export async function getServicesByFilter(
   search,
@@ -41,7 +41,7 @@ export async function getServicesByFilter(
   if (sort) requestBody.sort = sort;
 
   try {
-    const req = await axios.post("/get_services", requestBody);
+    const req = await axiosInstance.post("/get_services", requestBody);
     return {
       data: req.data.data,
       total: req.data.total,
@@ -53,7 +53,7 @@ export async function getServicesByFilter(
 
 export async function getUserServices(id) {
   try {
-    const req = await axios.post("/get_user_services", {
+    const req = await axiosInstance.post("/get_user_services", {
       id,
     });
     return req.data.data;
@@ -62,10 +62,10 @@ export async function getUserServices(id) {
   }
 }
 
-export async function getServiceDetails(id) {
+export async function getServiceDetails(title) {
   try {
-    const req = await axios.post("/get_service_details", {
-      id,
+    const req = await axiosInstance.post("/get_service_details", {
+      title,
     });
     return req.data.data;
   } catch (error) {
@@ -75,7 +75,7 @@ export async function getServiceDetails(id) {
 
 export async function createService(data, queryClient) {
   try {
-    const req = await axios.post("/user/create_service", data, {
+    const req = await axiosInstance.post("/user/create_service", data, {
       headers: {
         "Content-Type": "multipart/form-data",
       },
@@ -89,7 +89,7 @@ export async function createService(data, queryClient) {
 
 export async function updateService(data, queryClient) {
   try {
-    const req = await axios.post("/user/update_service", data, {
+    const req = await axiosInstance.post("/user/update_service", data, {
       headers: {
         "Content-Type": "multipart/form-data",
       },
@@ -103,7 +103,7 @@ export async function updateService(data, queryClient) {
 
 export async function deleteService(id, queryClient) {
   try {
-    const req = await axios.post("/user/delete_service", {
+    const req = await axiosInstance.post("/user/delete_service", {
       id,
     });
     queryClient.invalidateQueries("userServices");
@@ -115,7 +115,7 @@ export async function deleteService(id, queryClient) {
 
 export async function getRates(id) {
   try {
-    const req = await axios.post("/get_rates", {
+    const req = await axiosInstance.post("/get_rates", {
       id,
     });
     return req.data;
@@ -126,7 +126,7 @@ export async function getRates(id) {
 
 export async function getComments(id) {
   try {
-    const req = await axios.post("/get_comments", {
+    const req = await axiosInstance.post("/get_comments", {
       id,
     });
     return req.data;
@@ -137,7 +137,7 @@ export async function getComments(id) {
 
 export async function createRate(data) {
   try {
-    const req = await axios.post("/user/create_rate", {
+    const req = await axiosInstance.post("/user/create_rate", {
       ...data,
     });
     return {
@@ -151,9 +151,7 @@ export async function createRate(data) {
 
 export async function getHomeServices() {
   try {
-    const req = await axios.get("/get_home_services");
-    console.log(req.data);
-
+    const req = await axiosInstance.get("/get_home_services");
     return req.data.data;
   } catch (error) {
     throw new Error(error.message);

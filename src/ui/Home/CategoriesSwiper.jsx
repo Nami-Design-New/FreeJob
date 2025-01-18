@@ -37,7 +37,7 @@ export default function CategoriesSwiper() {
           }}
         >
           {categories.map((item) => (
-            <SwiperSlide key={item.id} style={{ height: "250px" }}>
+            <SwiperSlide key={item.id} style={{ height: "auto" }}>
               <CategoryCard category={item} />
             </SwiperSlide>
           ))}

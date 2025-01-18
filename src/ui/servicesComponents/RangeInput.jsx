@@ -1,12 +1,9 @@
 import Slider from "rc-slider";
 import "rc-slider/assets/index.css";
 
-export default function RangeInput({ label, value, min, max, onChange }) {
-  const handleChange = (val) => {
-    onChange(val);
-  };
+export default function RangeInput({ label, value, min, max, handleSlide }) {
   return (
-    <div className="px-3">
+    <div >
       <Slider
         range
         min={min}
@@ -15,7 +12,7 @@ export default function RangeInput({ label, value, min, max, onChange }) {
         value={value}
         reverse
         step={1}
-        onChange={handleChange}
+        onChange={handleSlide}
         trackStyle={[{ backgroundColor: "#003912", opacity: 1 }]}
         railStyle={{ backgroundColor: "#d3d3d3" }}
         handleStyle={[

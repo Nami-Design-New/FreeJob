@@ -46,7 +46,7 @@ export default function ServiceCard({ service }) {
         </section>
         <section>
           <button
-            onClick={() => navigate(`/services/${service.id}`)}
+            onClick={() => navigate(`/services/${service.id}/${service.title}`)}
             className=""
           >
             {lang === "ar" ? <FaArrowLeft /> : <FaArrowRight />}

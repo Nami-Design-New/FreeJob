@@ -1,29 +1,191 @@
+import { useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
 import "react-international-phone/style.css";
 import { useDispatch } from "react-redux";
-import { setStep } from "../../redux/slices/authModalSlice";
+import useCategoriesList from "../../hooks/categories/useCategories";
+import useGetSkills from "../../hooks/useGetSkills";
+import { closeModal } from "../../redux/slices/authModalSlice";
 import FormButton from "../form/FormButton";
+import MultiSelect from "../servicesComponents/MultiSelect";
 import BackButton from "./BackButton";
-import FormInput from "../form/FormInput";
 import TabSelector from "./TapSelector";
-import { useState } from "react";
 import { toast } from "react-toastify";
-export default function RegistrationForm3() {
+import axiosInstance from "../../utils/axios";
+import { useNavigate } from "react-router";
+import { setIsLogged, setUser } from "../../redux/slices/authedUserSlice";
+import { useCookies } from "react-cookie";
+import FormInput from "../form/FormInput";
+
+export default function RegistrationForm3({ formData, setFormData }) {
   const [selected, setSelected] = useState("Seller");
+  const { t } = useTranslation();
+  const navigate = useNavigate();
+  const { categories } = useCategoriesList();
+  const { data: skills } = useGetSkills();
   const [isLoading, setIsLoading] = useState("");
+  const [options, setOptions] = useState([]);
+  const [skillsSelectedOptisons, setSkillsSelectedOptions] = useState([]);
+  const [selectedOptions, setSelectedOptions] = useState([]);
+  const [, setCookie] = useCookies(["token"]);
   const dispatch = useDispatch();
 
+  useEffect(() => {
+    if (categories) {
+      const options = categories?.map((category) => ({
+        value: category.id,
+        label: category.name,
+      }));
+      setOptions(options);
+    }
+  }, [categories]);
+
+  useEffect(() => {
+    if (options.length > 0 && formData.categories?.length > 0) {
+      const selectedOptions = formData.categories.map((categoryId) => {
+        const option = options.find((opt) => opt.value === categoryId);
+        return {
+          value: option?.value,
+          label: option?.label,
+        };
+      });
+      setSelectedOptions(selectedOptions);
+    }
+  }, [formData.categories, options]);
+
+  const handleChangeInput = (e) => {
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value,
+    });
+  };
+
+  const handleSelectSkills = (selectedItems) => {
+    setSkillsSelectedOptions(selectedItems);
+    const selectedValues = selectedItems
+      ? selectedItems?.map((option) => option.value)
+      : [];
+    setFormData({
+      ...formData,
+      skills: selectedValues,
+    });
+  };
+
+  const handleSelect = (selectedItems) => {
+    setSelectedOptions(selectedItems);
+    const selectedValues = selectedItems
+      ? selectedItems.map((option) => option.value)
+      : [];
+    setFormData({
+      ...formData,
+      categories: selectedValues,
+    });
+    console.log(formData);
+  };
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setIsLoading(true);
+    try {
+      const res = await axiosInstance.post(
+        "/user/register",
+        {
+          ...formData,
+          is_freelance: selected === "Seller" ? 1 : 0,
+        },
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        }
+      );
+      if (res.data.code === 200) {
+        toast.success(t("auth.registerSuccess"));
+        setFormData({
+          image: "",
+          name: "",
+          email: "",
+          phone: "",
+          age: "",
+          password: "",
+          is_freelance: false,
+          job_title: "",
+          categories: [],
+        });
+        dispatch(closeModal());
+        const login = await axiosInstance.post("/user/login", {
+          email: formData.email,
+          password: formData.password,
+        });
+        if (login.data.code === 200) {
+          navigate("/");
+          dispatch(setUser(login.data.data));
+          dispatch(setIsLogged(true));
+          setCookie("token", login.data.data.token, {
+            path: "/",
+            secure: true,
+            sameSite: "Strict",
+          });
+          setCookie("id", login.data.data.id, {
+            path: "/",
+            secure: true,
+            sameSite: "Strict",
+          });
+          axiosInstance.defaults.headers.common[
+            "Authorization"
+          ] = `${login.data.data.token}`;
+        } else {
+          toast.error(login.data.message);
+        }
+      } else {
+        toast.error(res.data.message);
+      }
+    } catch (error) {
+      console.error("Register error:", error);
+      throw new Error(error.message);
+    } finally {
+      setIsLoading(false);
+      console.log(formData);
+    }
+  };
   return (
     <div className="left_side">
       <BackButton />
       <header className="modal_header pb-3 ">
         <h1 className="text-center">Complete your information</h1>
       </header>
-      <form action="" className="user_data row row-gap-2 ">
+      <form onSubmit={handleSubmit} className="user_data row row-gap-2 ">
         <div className="col-12 p-0">
-          <FormInput label="Field" />
+          <FormInput
+            label={t("auth.jobTitle")}
+            name="job_title"
+            type="text"
+            id="job_title"
+            required={true}
+            value={formData.job_title}
+            onChange={(e) => handleChangeInput(e)}
+          />
         </div>
         <div className="col-12 p-0">
-          <FormInput label="Skills used" />
+          <MultiSelect
+            label={t("auth.interestes")}
+            id="interest"
+            name="interest"
+            options={options}
+            selectedOptions={selectedOptions}
+            handleChange={handleSelect}
+          />
+        </div>
+        <div className="col-12 p-0">
+          <MultiSelect
+            label={t("search.skills")}
+            id="skills"
+            name="skills"
+            selectedOptions={skillsSelectedOptisons}
+            handleChange={handleSelectSkills}
+            options={skills?.map((skill) => ({
+              label: skill?.name,
+              value: skill?.id,
+            }))}
+          />
         </div>
         <div className="p-0 col-12">
           <label className="mb-2" htmlFor="">
@@ -37,7 +199,7 @@ export default function RegistrationForm3() {
           />
         </div>
 
-        <FormButton content="Submit" onClick={() => dispatch(setStep(6))} />
+        <FormButton content="Submit" type="submit" />
       </form>
     </div>
   );

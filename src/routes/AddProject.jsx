@@ -1,78 +1,32 @@
-import React, { useEffect, useState } from "react";
-import { ProgressBar } from "react-bootstrap";
+import { useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
+import { IoIosCloseCircle } from "react-icons/io";
 import { Link, useNavigate, useParams } from "react-router";
+import { toast } from "react-toastify";
+import useCategorieListWithSub from "../hooks/categories/useCategorieListWithSub";
+import useGetProject from "../hooks/projects/useGetProject";
+import useGetSkills from "../hooks/useGetSkills";
+import FormButton from "../ui/form/FormButton";
 import FormInput from "../ui/form/FormInput";
 import FormSelector from "../ui/form/FormSelector";
 import FormTextArea from "../ui/form/FormTextArea";
 import MultiSelect from "../ui/form/MaltiSelect";
-import FormButton from "../ui/form/FormButton";
-import { useTranslation } from "react-i18next";
-import { toast } from "react-toastify";
-import { FaTrash } from "react-icons/fa";
-import { IoIosCloseCircle } from "react-icons/io";
-
-// fake data for categories
-const categories = [
-  {
-    id: "1",
-    name: "Category 1",
-    value: "1",
-    sub_categories: [
-      { id: "1", name: "subCategory1" },
-      { id: "2", name: "subCategory2" },
-      { id: "3", name: "subCategory3" },
-      { id: "4", name: "subCategory4" },
-    ],
-  },
-  {
-    id: "2",
-    name: "Category 2",
-    value: "2",
-    sub_categories: [
-      { id: "1", name: "subCategory5" },
-      { id: "2", name: "subCategory6" },
-    ],
-  },
-  {
-    id: "3",
-    name: "Category 3",
-    value: "3",
-    sub_categories: [
-      { id: "1", name: "subCategory9" },
-      { id: "2", name: "subCategory10" },
-      { id: "3", name: "subCategory11" },
-    ],
-  },
-];
-
-//fake data for Skills
-
-const skills = [
-  { id: "1", name: "HTML" },
-  { id: "2", name: "CSS" },
-  { id: "3", name: "JavaScript" },
-  { id: "4", name: "React" },
-  { id: "5", name: "Node.js" },
-  { id: "6", name: "Redux" },
-  { id: "7", name: "MongoDB" },
-  { id: "8", name: "Bootstrap" },
-  { id: "9", name: "Tailwind CSS" },
-  { id: "10", name: "Firebase" },
-  { id: "11", name: "GraphQL" },
-  { id: "12", name: "Docker" },
-  { id: "13", name: "Python" },
-  { id: "14", name: "Django" },
-];
+import { createProject, editProject } from "../services/apiProjects";
+import { useQueryClient } from "@tanstack/react-query";
+import ErrorPage from "./ErrorPage";
 
 export default function AddProject() {
   const { id } = useParams();
   const navigate = useNavigate();
   const { t } = useTranslation();
+  const queryClient = useQueryClient();
   const [categoryId, setCategoryId] = useState("");
   const [loading, setLoading] = useState(false);
   const [selectedOptions, setSelectedOptions] = useState([]);
   const [subCategories, setSubCategories] = useState([]);
-
+  const { data: categories } = useCategorieListWithSub();
+  const { data: projectDetails, isLoading } = useGetProject();
+  const { data: skills } = useGetSkills();
   const [formData, setFormData] = useState({
     title: "",
     sub_category_id: "",
@@ -83,6 +37,23 @@ export default function AddProject() {
     delete_files: [],
     skills: [],
   });
+  useEffect(() => {
+    if (projectDetails) {
+      setCategoryId(projectDetails?.category?.id);
+      const initialData = {
+        id: projectDetails?.id,
+        title: projectDetails?.title,
+        sub_category_id: projectDetails?.sub_category_id,
+        price: projectDetails?.price,
+        days: projectDetails?.days,
+        skills: projectDetails?.skills?.map((skill) => skill?.id) || [],
+        description: projectDetails?.description,
+        project_files: projectDetails?.files,
+        delete_files: [],
+      };
+      setFormData(initialData);
+    }
+  }, [projectDetails]);
 
   useEffect(() => {
     if (formData.skills?.length > 0) {
@@ -158,10 +129,10 @@ export default function AddProject() {
     setLoading(true);
     try {
       if (id) {
-        // await editProject(dataToSendForUpdate, queryClient);
+        await editProject(dataToSendForUpdate, queryClient);
         toast.success(t("projects.projectEditedSuccessfully"));
       } else {
-        // await createProject(formData, queryClient);
+        await createProject(formData, queryClient);
         toast.success(t("projects.projectCreatedSuccessfully"));
       }
       navigate("/profile");
@@ -171,6 +142,10 @@ export default function AddProject() {
       setLoading(false);
     }
   };
+
+  if (id && !isLoading && !projectDetails) {
+    return <ErrorPage />;
+  }
 
   return (
     <section>
@@ -346,6 +321,7 @@ export default function AddProject() {
             <FormButton
               loading={loading}
               content={id ? t("projects.update") : t("projects.publish")}
+              type="submit"
             />
           </section>
         </form>

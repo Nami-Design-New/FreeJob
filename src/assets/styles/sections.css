@@ -1,16 +1,19 @@
-.breadcrumb {
-  color: var(--main-color);
-
-  padding: 1.7rem;
-  .breadcrumb-item {
-    a {
-      color: var(--main-color);
-    }
-  }
-}
-
 .sections {
   margin-bottom: 4.7rem;
+
+  .sections_breadcrumb {
+    margin-top: 1rem;
+    .breadcrumb {
+      color: var(--main-color);
+
+      padding: 1.7rem;
+      .breadcrumb-item {
+        a {
+          color: var(--main-color);
+        }
+      }
+    }
+  }
   .sections_breadcrumb {
     background-color: #f1fffa;
   }
