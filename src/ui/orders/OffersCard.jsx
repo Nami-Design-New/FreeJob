@@ -5,12 +5,12 @@ import { useTranslation } from "react-i18next";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router";
 import { toast } from "react-toastify";
-import useTruncateText from "../../hooks/useTruncateText";
 import { updateRequestStatus } from "../../services/apiProjects";
 import ChargeModal from "../modals/ChargrModal";
 import EditProjectOfferModal from "../modals/EditProjectOfferModal";
 import OrderModal from "../modals/OrderModal";
 import UserAvatar from "../servicesComponents/serviceDetails/UserAvatar";
+import useTruncateText from "../../hooks/helpers/useTruncateText";
 
 export default function OffersCard({ request, isMyProject }) {
   const description = useTruncateText(request.description, 150);

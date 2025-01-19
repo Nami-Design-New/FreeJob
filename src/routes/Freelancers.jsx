@@ -3,7 +3,6 @@ import { useTranslation } from "react-i18next";
 import { useLocation, useSearchParams } from "react-router";
 import DetailsHeader from "../ui/servicesComponents/serviceDetails/DetailsHeader";
 import FreelancerCard from "../ui/cards/FreelancerCard";
-import avatarPlaceholder from "../../public/images/avatar-placeholder-2.svg";
 import StarsList from "../ui/modals/StarsList";
 
 const Freelancers = () => {
@@ -46,7 +45,7 @@ const Freelancers = () => {
     {
       id: 1,
       name: "Mariam Samir",
-      image: avatarPlaceholder,
+      image: "/images/avatar-placeholder-2.svg",
       verified: 1,
       service_count: 5,
       rate: 4.5,
@@ -62,7 +61,7 @@ const Freelancers = () => {
     {
       id: 2,
       name: "jihad ahmed",
-      image: avatarPlaceholder,
+      image: "/images/avatar-placeholder-2.svg",
       verified: 2,
       service_count: 6,
       rate: 5,
@@ -70,7 +69,7 @@ const Freelancers = () => {
     {
       id: 2,
       name: "Ahmed Ali",
-      image: avatarPlaceholder,
+      image: "/images/avatar-placeholder-2.svg",
       verified: 2,
       service_count: 6,
       rate: 5,
@@ -94,7 +93,7 @@ const Freelancers = () => {
     {
       id: 2,
       name: "Ahmed Ali",
-      image: avatarPlaceholder,
+      image: "/images/avatar-placeholder-2.svg",
       verified: 2,
       service_count: 6,
       rate: 5,
@@ -102,7 +101,7 @@ const Freelancers = () => {
     {
       id: 2,
       name: "mostafa samir",
-      image: avatarPlaceholder,
+      image: "/images/avatar-placeholder-2.svg",
       verified: 2,
       service_count: 6,
       rate: 5,

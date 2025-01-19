@@ -1,5 +1,5 @@
-import FooterBottomSection from "./footer/FooterBottomSection";
-import FooterSection from "./footer/FooterSection";
+import FooterBottomSection from "../ui/footer/FooterBottomSection";
+import FooterSection from "../ui/footer/FooterSection";
 
 const categories = [
   { title: "Graphics & Design", subtitle: "" },

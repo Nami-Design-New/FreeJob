@@ -1,12 +1,12 @@
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import DataLoader from "../DataLoader";
-import PaginationComponent from "../PaginationComponent";
 import SectionHeader from "../SectionHeader";
-import usePartenersList from "../../hooks/usePartenersList";
+import PaginationComponent from "../PaginationComponent";
+import usePartenersList from "./../../hooks/home/usePartenersList";
 
 export default function PartnersofSuccess() {
-  const { data: parteners, isLoading, error } = usePartenersList();
+  const { data: parteners, isLoading } = usePartenersList();
 
   const { t } = useTranslation();
   const [currentPage, setCurrentPage] = useState(1);

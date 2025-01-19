@@ -1,6 +1,3 @@
-import { Card } from "react-bootstrap";
-import StarsRate from "../ui/StartRate";
-import "../assets/styles/profile.css";
 import {
   IconCirclePlus,
   IconInfoCircle,

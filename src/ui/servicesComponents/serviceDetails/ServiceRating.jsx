@@ -1,7 +1,7 @@
-import useTruncateText from "../../../hooks/useTruncateText";
+import useTruncateText from "../../../hooks/helpers/useTruncateText";
 import UserAvatar from "./UserAvatar";
 
-export default function ServuceRating({ item }) {
+export default function ServiceRating({ item }) {
   const description = useTruncateText(item.description, 150);
 
   return (

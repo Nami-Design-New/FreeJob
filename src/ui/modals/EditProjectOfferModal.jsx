@@ -2,13 +2,11 @@ import { useQueryClient } from "@tanstack/react-query";
 import { useState } from "react";
 import { Modal } from "react-bootstrap";
 import { useTranslation } from "react-i18next";
-
+import { toast } from "react-toastify";
+import { editProjectRequest } from "../../services/apiProjects";
 import FormInput from "../form/FormInput";
 import FormTextArea from "../form/FormTextArea";
 import SubmitButton from "../form/SubmitButton";
-import { toast } from "react-toastify";
-import useGetSettings from "../../hooks/useGetSettings";
-import { editProjectRequest } from "../../services/apiProjects";
 
 const EditProjectOfferModal = ({ showModal, setShowModal, request }) => {
   const { data: settings } = useGetSettings();

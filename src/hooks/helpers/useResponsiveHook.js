@@ -5,14 +5,11 @@ export const useResponsiveState = (query) => {
 
   useEffect(() => {
     const mediaQuery = window.matchMedia(query);
-
     const handleResize = () => setIsMatch(mediaQuery.matches);
-    handleResize(); // Set initial value based on current match
-
-    mediaQuery.addEventListener("change", handleResize); // Attach listener
-
+    mediaQuery.addEventListener("change", handleResize);
+    handleResize();
     return () => {
-      mediaQuery.removeEventListener("change", handleResize); // Clean up listener
+      mediaQuery.removeEventListener("change", handleResize);
     };
   }, [query]);
 

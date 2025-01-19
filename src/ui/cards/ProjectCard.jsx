@@ -1,6 +1,6 @@
 import { useTranslation } from "react-i18next";
 import { FaFile, FaUsers } from "react-icons/fa";
-import useTruncateText from "../../hooks/useTruncateText";
+import { Link } from "react-router";
 import { formatTimeDifference, getTimeDifference } from "../../utils/helper";
 import { Link } from "react-router";
 import { useSelector } from "react-redux";
@@ -9,11 +9,10 @@ import { IconEdit, IconTrash } from "@tabler/icons-react";
 export default function ProjectCard({ project }) {
   const { t } = useTranslation();
   const {
-    id,
     title,
     requests_count,
     description,
-    user: { image, name, id: userId },
+    user: { image, name },
   } = project;
   const user = useSelector((state) => state.authedUser.user);
   const truncateText = useTruncateText(description, 150);
@@ -26,6 +25,7 @@ export default function ProjectCard({ project }) {
     timeDifference.minutes,
     t
   );
+
 
   return (
     <section className="project_card">

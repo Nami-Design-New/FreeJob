@@ -1,5 +1,8 @@
+<<<<<<< HEAD:src/profile/ProfileTabs.jsx
 import { useQueryClient } from "@tanstack/react-query";
 import { useState } from "react";
+=======
+>>>>>>> main:src/ui/profile/ProfileTabs.jsx
 import { Tabs, Tab } from "react-bootstrap";
 import { useTranslation } from "react-i18next";
 import useGetUserProjects from "../hooks/projects/useGetUserProjects";

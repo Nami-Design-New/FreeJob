@@ -1,5 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
-import { getParteners } from "../services/apiPartners";
+import { getParteners } from "../../services/apiPartners";
+
 function usePartenersList() {
   const { data, isLoading, error } = useQuery({
     queryKey: ["partenersList"],

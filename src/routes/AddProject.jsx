@@ -3,23 +3,25 @@ import { useTranslation } from "react-i18next";
 import { IoIosCloseCircle } from "react-icons/io";
 import { Link, useNavigate, useParams } from "react-router";
 import { toast } from "react-toastify";
+import { createProject, editProject } from "../services/apiProjects";
+import { useQueryClient } from "@tanstack/react-query";
 import useCategorieListWithSub from "../hooks/categories/useCategorieListWithSub";
 import useGetProject from "../hooks/projects/useGetProject";
-import useGetSkills from "../hooks/useGetSkills";
 import FormButton from "../ui/form/FormButton";
 import FormInput from "../ui/form/FormInput";
 import FormSelector from "../ui/form/FormSelector";
 import FormTextArea from "../ui/form/FormTextArea";
 import MultiSelect from "../ui/form/MaltiSelect";
-import { createProject, editProject } from "../services/apiProjects";
-import { useQueryClient } from "@tanstack/react-query";
 import ErrorPage from "./ErrorPage";
+import useGetSkills from "../hooks/settings/useGetSkills";
 
 export default function AddProject() {
   const { id } = useParams();
-  const navigate = useNavigate();
   const { t } = useTranslation();
+
+  const navigate = useNavigate();
   const queryClient = useQueryClient();
+  
   const [categoryId, setCategoryId] = useState("");
   const [loading, setLoading] = useState(false);
   const [selectedOptions, setSelectedOptions] = useState([]);

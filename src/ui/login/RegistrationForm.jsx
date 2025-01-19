@@ -1,18 +1,19 @@
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { PhoneInput } from "react-international-phone";
-import "react-international-phone/style.css";
 import { useDispatch } from "react-redux";
-import useCountriesList from "../../hooks/useCountries";
 import { setStep } from "../../redux/slices/authModalSlice";
 import FormButton from "../form/FormButton";
 import FormInput from "../form/FormInput";
 import FormSelector from "../form/FormSelector";
 import BackButton from "./BackButton";
 import ImageUpload from "./ImageUpload";
+import useCountriesList from "./../../hooks/settings/useCountries";
+import "react-international-phone/style.css";
+
 export default function RegistrationForm({ formData, setFormData }) {
   const { t } = useTranslation();
-  const { isLoading: isCountriesLoading, data: countries } = useCountriesList();
+  const { data: countries } = useCountriesList();
   const [countryId, setCountryId] = useState("");
 
   function handlePhoneChange(value, { country }) {

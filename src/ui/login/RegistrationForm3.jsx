@@ -1,20 +1,20 @@
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
-import "react-international-phone/style.css";
-import { useDispatch } from "react-redux";
-import useCategoriesList from "../../hooks/categories/useCategories";
-import useGetSkills from "../../hooks/useGetSkills";
 import { closeModal } from "../../redux/slices/authModalSlice";
+import { toast } from "react-toastify";
+import { useNavigate } from "react-router";
+import { useDispatch } from "react-redux";
+import { useCookies } from "react-cookie";
+import { setIsLogged, setUser } from "../../redux/slices/authedUserSlice";
+import useGetSkills from "./../../hooks/settings/useGetSkills";
+import useCategoriesList from "../../hooks/categories/useCategories";
 import FormButton from "../form/FormButton";
 import MultiSelect from "../servicesComponents/MultiSelect";
 import BackButton from "./BackButton";
 import TabSelector from "./TapSelector";
-import { toast } from "react-toastify";
 import axiosInstance from "../../utils/axios";
-import { useNavigate } from "react-router";
-import { setIsLogged, setUser } from "../../redux/slices/authedUserSlice";
-import { useCookies } from "react-cookie";
 import FormInput from "../form/FormInput";
+import "react-international-phone/style.css";
 
 export default function RegistrationForm3({ formData, setFormData }) {
   const [selected, setSelected] = useState("Seller");
@@ -22,7 +22,7 @@ export default function RegistrationForm3({ formData, setFormData }) {
   const navigate = useNavigate();
   const { categories } = useCategoriesList();
   const { data: skills } = useGetSkills();
-  const [isLoading, setIsLoading] = useState("");
+  const [, setIsLoading] = useState("");
   const [options, setOptions] = useState([]);
   const [skillsSelectedOptisons, setSkillsSelectedOptions] = useState([]);
   const [selectedOptions, setSelectedOptions] = useState([]);
@@ -81,6 +81,7 @@ export default function RegistrationForm3({ formData, setFormData }) {
     });
     console.log(formData);
   };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsLoading(true);
@@ -146,6 +147,7 @@ export default function RegistrationForm3({ formData, setFormData }) {
       console.log(formData);
     }
   };
+
   return (
     <div className="left_side">
       <BackButton />
