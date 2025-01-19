@@ -32,9 +32,9 @@ import ErrorPage from "../routes/ErrorPage";
 import Blogs from "../routes/Blogs";
 import MyBids from "../routes/MyBids";
 import Balance from "../routes/Balance";
-import Chats from "../routes/Chats";
-import Profile from "../routes/Profile";
-import ProjectDetails from "../routes/ProjectDetails";
+// import Chats from "../routes/Chats";
+// import Profile from "../routes/Profile";
+// import ProjectDetails from "../routes/ProjectDetails";
 import Contact from "../routes/Contact";
 import About from "../routes/About";
 import DataLoader from "../ui/DataLoader";
@@ -60,8 +60,8 @@ export const router = createBrowserRouter([
       { path: "/services", element: <Services /> },
       { path: "/services/:id/:title", element: <ServiceDetails /> },
       { path: "/projects", element: <Projects /> },
-      { path: "/projects/:title", element: <ProjectDetails /> },
-      { path: "/profile/:id", element: <Profile /> },
+      // { path: "/projects/:title", element: <ProjectDetails /> },
+      // { path: "/profile/:id", element: <Profile /> },
       { path: "/community/:name", element: <CommunityPosts /> },
       { path: "/community/:name/:id", element: <CommunitySubjectDetails /> },
       { path: "/freelancers", element: <BestFreeLancers /> },
@@ -95,8 +95,8 @@ export const router = createBrowserRouter([
             { path: "/edit-project/:id", element: <AddProject /> },
             { path: "/projects-orders", element: <ProjectsOrders /> },
             { path: "/projects-orders/:id", element: <ProjectsOrdersDetails /> },
-            { path: "/profile", element: <Profile /> },
-            { path: "/chat", element: <Chats /> },
+            // { path: "/profile", element: <Profile /> },
+            // { path: "/chat", element: <Chats /> },
             { path: "/edit-profile", element: <EditProfile /> },
             { path: "/verify-phone", element: <VerifyPhone /> },
             { path: "/my-collections", element: <MyCollections /> },
