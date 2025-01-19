@@ -45,6 +45,8 @@ import Profile from "../routes/Profile";
 import Chats from "../routes/Chats";
 import Contact from "../routes/Contact";
 import About from "../routes/About";
+import { Suspense } from "react";
+import DataLoader from "../ui/DataLoader";
 
 export const router = createBrowserRouter([
   {
@@ -71,9 +73,9 @@ export const router = createBrowserRouter([
         path: "",
         element: (
           <ProtectedRoute>
-            {/* <Suspense fallback={<div>Loading...</div>}> */}
-            <Outlet />
-            {/* </Suspense> */}
+            <Suspense fallback={<DataLoader />}>
+              <Outlet />
+            </Suspense>
           </ProtectedRoute>
         ),
         children: [
