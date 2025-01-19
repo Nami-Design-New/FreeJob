@@ -4,6 +4,7 @@ import StarsRate from "../../StartRate";
 
 export default function OwnerComponent({ item }) {
   const { t } = useTranslation();
+
   return (
     <section className="owner_card">
       <img className="user_img" src={item.user.image} />

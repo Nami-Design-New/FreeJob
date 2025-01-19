@@ -19,13 +19,13 @@ function App() {
   const { decodedToken, isExpired } = useJwt(token);
   // axiosInstance.defaults.headers.common["Authorization"] = `${token}`;
   // Update the Authorization header dynamically
-  useEffect(() => {
-    if (token && !isExpired) {
-      axiosInstance.defaults.headers.common["Authorization"] = `${token}`;
-    } else {
-      delete axiosInstance.defaults.headers.common["Authorization"];
-    }
-  }, [token, isExpired]);
+  // useEffect(() => {
+  //   if (token && !isExpired) {
+  //     axiosInstance.defaults.headers.common["Authorization"] = `${token}`;
+  //   } else {
+  //     delete axiosInstance.defaults.headers.common["Authorization"];
+  //   }
+  // }, [token, isExpired]);
   const {
     data: profile,
     isLoading,

@@ -45,7 +45,6 @@ export default function EmailVerification({ otpData, setOtpData }) {
     headers: headers,
     data: {
       ...otpData,
-      type: "register",
     },
     url: "/user/check_code",
   };

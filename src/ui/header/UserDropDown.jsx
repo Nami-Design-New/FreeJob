@@ -15,23 +15,28 @@ import { MdCollections } from "react-icons/md";
 import SearchModal from "../modals/SearchModal";
 import { Link } from "react-router";
 import { useTranslation } from "react-i18next";
+import { useSelector } from "react-redux";
 
 export default function UserDropDown() {
   const [show, setShow] = useState(false);
   const { t } = useTranslation();
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
+  const user = useSelector((state) => state.authedUser.user);
+  console.log(user);
+
+  // const
   return (
     <Dropdown className="actions">
       <Dropdown.Toggle as="button" className="user_btn">
-        <img src="https://placehold.co/48" alt="User Avatar" />
+        <img src={user.image} alt={`${user.name} 's Avatar`} />
       </Dropdown.Toggle>
 
       <Dropdown.Menu>
         <section>
           <Dropdown.Item>
             <Link to="/profile">
-              <FaUser /> Mahmoud Abbas
+              <FaUser /> {user.name}
             </Link>
           </Dropdown.Item>
           <Dropdown.Item>

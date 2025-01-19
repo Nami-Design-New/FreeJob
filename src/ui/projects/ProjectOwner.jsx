@@ -5,6 +5,8 @@ import OwnerComponent from "../servicesComponents/serviceDetails/OwnerComponent"
 import { formatTimeDifference, getTimeDifference } from "../../utils/helper";
 
 export default function ServiseOwner({ project }) {
+  console.log(project);
+
   const { t } = useTranslation();
   const timeDifference = getTimeDifference(project?.created_at);
   const formattedTime = formatTimeDifference(
@@ -17,7 +19,7 @@ export default function ServiseOwner({ project }) {
   );
   return (
     <section className="service_card_owner">
-      <OwnerComponent project={project} />
+      <OwnerComponent item={project} />
       <ul className="card_ul">
         <li className="rate d-flex justify-content-between">
           <p>{t("projects.status")}</p>
