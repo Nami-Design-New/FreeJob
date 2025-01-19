@@ -4,7 +4,6 @@
 // import ChatSideBar from "../features/chat/ChatSideBar";
 // import ChatRoom from "../features/chat/ChatRoom";
 // import useGetChats from "../features/chat/useGetChats";
-// import Lottie from "react-lottie";
 // import DataLoader from "./../ui/DataLoader";
 // import useGetChat from "../features/chat/useGetChat";
 
@@ -12,7 +11,6 @@ import { IconBrandWechat } from "@tabler/icons-react";
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import ChatSideBar from "../ui/Chats/ChatsSideBar";
-import Lottie from "react-lottie";
 import ChatRoom from "../ui/Chats/ChatRoom";
 const chats = [
   {
@@ -132,7 +130,6 @@ const Chats = () => {
   const defaultOptions = {
     loop: true,
     autoplay: true,
-    // animationData: require("../Assets/lotties/chat.json"),
     rendererSettings: {
       preserveAspectRatio: "xMidYMid slice",
     },
@@ -156,6 +153,7 @@ const Chats = () => {
     } else {
       setTargetChat(null);
     }
+    // eslint-disable-next-line
   }, [chat]);
 
   return (
@@ -183,16 +181,12 @@ const Chats = () => {
                     <ChatRoom chat={chat} />
                   </>
                 ) : (
-                  <div className="lottie_player_holder">
-                    <Lottie options={defaultOptions} height={250} width={250} />
-                  </div>
+                  <div className="lottie_player_holder"></div>
                 )}
               </div>
             </>
           ) : (
-            <div className="lottie_player_holder">
-              <Lottie options={defaultOptions} height={250} width={250} />
-            </div>
+            <div className="lottie_player_holder"></div>
           )}
         </div>
       </div>

@@ -1,10 +1,10 @@
 import { useQuery } from "@tanstack/react-query";
-import getSettings from "../services/apiSettings";
+import { getHomeServices } from "../../services/apiServices";
 
-export default function useGetSettings() {
+export default function useGetHomeServices() {
   const { isLoading, data, error } = useQuery({
-    queryKey: ["settings"],
-    queryFn: getSettings,
+    queryKey: ["homeServices"],
+    queryFn: getHomeServices,
     retry: false,
     refetchOnWindowFocus: false,
     refetchOnMount: false,

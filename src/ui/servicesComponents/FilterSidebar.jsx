@@ -9,7 +9,7 @@ import RangeInput from "./RangeInput";
 import SearchInput from "./SearchInput";
 import SectionsFilter from "./SectionsFilter";
 import DataLoader from "../DataLoader";
-import useGetSkills from "../../hooks/useGetSkills";
+import useGetSkills from "../../hooks/settings/useGetSkills";
 import useCategorieListWithSub from "../../hooks/categories/useCategorieListWithSub";
 
 const FilterSidebar = ({ isOpen, setIsOpen }) => {

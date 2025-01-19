@@ -4,8 +4,8 @@ import { createRoot } from "react-dom/client";
 import { Provider } from "react-redux";
 import { ToastContainer } from "react-toastify";
 import App from "./App.jsx";
-import InterceptorProvider from "./providers/InterceptorProvider.jsx";
 import store from "./redux/store.js";
+import InterceptorProvider from "./providers/InterceptorProvider.jsx";
 
 import "./utils/i18n.js";
 
@@ -22,7 +22,6 @@ createRoot(document.getElementById("root")).render(
     <ReactQueryDevtools initialIsOpen={false} />
     <Provider store={store}>
       <ToastContainer autoClose={2000} />
-
       <InterceptorProvider>
         <App />
       </InterceptorProvider>

@@ -9,7 +9,7 @@ function useTruncateText(inputString, chars = 100) {
     } else {
       setTruncatedString(inputString);
     }
-  }, [inputString]);
+  }, [inputString, chars]);
 
   return truncatedString;
 }

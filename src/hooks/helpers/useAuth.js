@@ -1,10 +1,10 @@
-import { jwtDecode } from "jwt-decode";
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useState, useMemo } from "react";
 import { useCookies } from "react-cookie";
 import { useDispatch } from "react-redux";
-import { setIsLogged, setUser } from "../redux/slices/authedUserSlice";
-import axiosInstance from "../utils/axiosInstance";
-import useGetProfile from "./useGetProfile";
+import { jwtDecode } from "jwt-decode";
+import { setUser } from "../../redux/slices/authedUserSlice";
+import useGetAuthedUser from "../settings/useGetAuthedUser";
+import axiosInstance from "../../utils/axios";
 
 export default function useAuth() {
   const dispatch = useDispatch();
@@ -39,15 +39,15 @@ export default function useAuth() {
     data: profile,
     isFetched,
     refetch,
-  } = useGetProfile(Boolean(token && id && !isExpired));
+  } = useGetAuthedUser(Boolean(token && id && !isExpired), id);
 
   useEffect(() => {
     if (isExpired || Number(decodedToken?.sub) !== Number(id)) {
-      dispatch(setIsLogged(false));
+      dispatch(setUser({}));
       removeCookie("token");
       removeCookie("id");
       setLoading(false);
-      dispatch(setUser({}));
+      setIsAuthed(false);
       return;
     }
 
@@ -56,7 +56,7 @@ export default function useAuth() {
         if (isFetched) {
           if (profile) {
             dispatch(setUser(profile));
-            dispatch(setIsLogged(true));
+            setIsAuthed(true);
           } else {
             console.log("Profile data not available, refetching...");
             await refetch();
@@ -66,7 +66,7 @@ export default function useAuth() {
         }
       } catch (error) {
         console.error("Error fetching profile:", error);
-        dispatch(setIsLogged(false));
+        setIsAuthed(false);
       } finally {
         setLoading(false);
       }

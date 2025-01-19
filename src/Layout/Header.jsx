@@ -2,16 +2,16 @@ import { useEffect, useState } from "react";
 import { RiMenuUnfold4Fill } from "react-icons/ri";
 import { useDispatch, useSelector } from "react-redux";
 import { NavLink, useNavigate } from "react-router";
-import { useResponsiveState } from "../hooks/useResponsiveHook";
 import { openModal } from "../redux/slices/authModalSlice";
 import { useTranslation } from "react-i18next";
-import Button from "./Button";
-import HeaderSwiper from "./header/HeaderSwiper";
-import Logo from "./header/Logo";
-import SideMenu from "./header/SideMenu";
-import UserDropDown from "./header/UserDropDown";
-import LanguageToggle from "./LanguageToggle";
-import AuthModal from "./modals/AuthModal";
+import { useResponsiveState } from "./../hooks/helpers/useResponsiveHook";
+import Logo from "./../ui/header/Logo";
+import LanguageToggle from "./../ui/LanguageToggle";
+import Button from "./../ui/Button";
+import AuthModal from "./../ui/modals/AuthModal";
+import UserDropDown from "./../ui/header/UserDropDown";
+import HeaderSwiper from "./../ui/header/HeaderSwiper";
+import SideMenu from "./../ui/header/SideMenu";
 
 export default function Header() {
   const isLogin = useSelector((state) => state.authedUser.isLogged);

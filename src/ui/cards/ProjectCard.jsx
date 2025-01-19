@@ -1,18 +1,18 @@
 import { useTranslation } from "react-i18next";
 import { FaFile, FaUsers } from "react-icons/fa";
-import useTruncateText from "../../hooks/useTruncateText";
-import { formatTimeDifference, getTimeDifference } from "../../utils/helper";
 import { Link } from "react-router";
+import { formatTimeDifference, getTimeDifference } from "../../utils/helper";
+import useTruncateText from "../../hooks/helpers/useTruncateText";
 
 export default function ProjectCard({ project }) {
   const { t } = useTranslation();
   const {
-    id,
     title,
     requests_count,
     description,
-    user: { image, name, id: userId },
+    user: { image, name },
   } = project;
+
   const truncateText = useTruncateText(description, 150);
   const timeDifference = getTimeDifference(project?.created_at);
   const formattedTime = formatTimeDifference(
@@ -23,6 +23,7 @@ export default function ProjectCard({ project }) {
     timeDifference.minutes,
     t
   );
+
   return (
     <section className="project_card">
       <header className="project_content">

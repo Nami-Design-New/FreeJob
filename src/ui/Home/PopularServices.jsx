@@ -1,8 +1,8 @@
 import { useTranslation } from "react-i18next";
 import SectionHeader from "../SectionHeader";
-import useGetHomeServices from "../../hooks/services/useGetHomeServices";
 import DataLoader from "../DataLoader";
 import Department from "./Department";
+import useGetHomeServices from "../../hooks/home/useGetHomeServices";
 
 export default function PopularServices() {
   const { data: popularServices, isLoading } = useGetHomeServices();

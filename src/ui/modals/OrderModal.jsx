@@ -1,7 +1,5 @@
 import { Modal } from "react-bootstrap";
 import { useTranslation } from "react-i18next";
-import Lottie from "react-lottie";
-import animationData from "../../Assets/lotties/wallet.json";
 import SubmitButton from "../form/SubmitButton";
 
 const OrderModal = ({
@@ -14,26 +12,14 @@ const OrderModal = ({
 }) => {
   const { t } = useTranslation();
 
-  const defaultOptions = {
-    loop: true,
-    autoplay: true,
-    animationData: animationData,
-    rendererSettings: {
-      preserveAspectRatio: "xMidYMid slice",
-    },
-  };
+
 
   return (
     <Modal show={showModal} onHide={() => setShowModal(false)} centered>
       <Modal.Header className="pb-0 border-0" closeButton />
       <Modal.Body className="pay_modal">
         <div className="current_ballance">
-          <Lottie
-            options={defaultOptions}
-            height={150}
-            width={150}
-            className="icon"
-          />
+          
         </div>
         <h3>
           {t("cart.currentBallance")}:

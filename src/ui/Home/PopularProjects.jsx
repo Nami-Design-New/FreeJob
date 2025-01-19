@@ -1,17 +1,15 @@
 import { useTranslation } from "react-i18next";
-import { useSelector } from "react-redux";
 import { Autoplay } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
-import useGetLatestProjects from "../../hooks/projects/useGetLatestProjects";
 import ProjectCard from "../cards/ProjectCard";
 import DataLoader from "../DataLoader";
 import SectionHeader from "../SectionHeader";
+import useGetLatestProjects from "./../../hooks/projects/useGetLatestProjects";
 
 export default function PopularProjects() {
-  const { data: latestProjects, isLoading, error } = useGetLatestProjects();
-  const lang = useSelector((state) => state.language.lang);
-
+  const { data: latestProjects, isLoading } = useGetLatestProjects();
   const { t } = useTranslation();
+  
   return (
     <div className="popular_projects">
       <SectionHeader

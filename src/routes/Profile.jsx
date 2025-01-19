@@ -1,13 +1,12 @@
-import { Container, Row, Col } from "react-bootstrap";
-import UserProfileCard from "../profile/UserProfileCard";
-import ProfileTabs from "../profile/ProfileTabs";
-import EmptyData from "../ui/EmptyData";
-import { useSelector } from "react-redux";
-import useGetProfile from "../hooks/useGetProfile";
-import DataLoader from "../ui/DataLoader";
-import ErrorPage from "./ErrorPage";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router";
+import { Container, Row, Col } from "react-bootstrap";
+import { useSelector } from "react-redux";
+import UserProfileCard from "../ui/profile/UserProfileCard"
+import ErrorPage from "./ErrorPage";
+import EmptyData from "../ui/EmptyData";
+import DataLoader from "../ui/DataLoader";
+import ProfileTabs from './../ui/profile/ProfileTabs';
 
 const Profile = () => {
   const authedUser = useSelector((state) => state.authedUser.user);
