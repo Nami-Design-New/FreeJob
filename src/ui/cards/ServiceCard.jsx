@@ -1,9 +1,9 @@
 import { FaArrowLeft, FaArrowRight, FaFile, FaUsers } from "react-icons/fa";
 import { useSelector } from "react-redux";
-import { useNavigate } from "react-router";
+import { Link, useNavigate } from "react-router";
 import StarsRate from "../StartRate";
 
-export default function ServiceCard({ service }) {
+export default function ServiceCard({ service, canEdit, handleDelete }) {
   const lang = useSelector((state) => state.language.lang);
   const navigate = useNavigate();
   return (
@@ -44,13 +44,23 @@ export default function ServiceCard({ service }) {
             </section>
           </section>{" "}
         </section>
-        <section>
+        <section className="service_settings">
           <button
             onClick={() => navigate(`/services/${service.id}/${service.title}`)}
             className=""
           >
             {lang === "ar" ? <FaArrowLeft /> : <FaArrowRight />}
           </button>
+          {canEdit && (
+            <div className="editService">
+              <Link to={`/edit-service/${service?.id}`}>
+                <i className="fa-regular fa-file-pen"></i>
+              </Link>
+              <Link onClick={() => handleDelete(service?.id)}>
+                <i className="fa-regular fa-trash-can"></i>
+              </Link>
+            </div>
+          )}
         </section>
       </section>
     </section>
