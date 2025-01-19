@@ -3,6 +3,8 @@ import { FaFile, FaUsers } from "react-icons/fa";
 import useTruncateText from "../../hooks/useTruncateText";
 import { formatTimeDifference, getTimeDifference } from "../../utils/helper";
 import { Link } from "react-router";
+import { useSelector } from "react-redux";
+import { IconEdit, IconTrash } from "@tabler/icons-react";
 
 export default function ProjectCard({ project }) {
   const { t } = useTranslation();
@@ -13,6 +15,7 @@ export default function ProjectCard({ project }) {
     description,
     user: { image, name, id: userId },
   } = project;
+  const user = useSelector((state) => state.authedUser.user);
   const truncateText = useTruncateText(description, 150);
   const timeDifference = getTimeDifference(project?.created_at);
   const formattedTime = formatTimeDifference(
@@ -23,6 +26,7 @@ export default function ProjectCard({ project }) {
     timeDifference.minutes,
     t
   );
+
   return (
     <section className="project_card">
       <header className="project_content">
@@ -30,6 +34,31 @@ export default function ProjectCard({ project }) {
           <h1>{title}</h1>
           <p>{truncateText}</p>
         </Link>
+        {user?.id === project?.user?.id && (
+          <div className="status_action">
+            <span className="status">
+              {project?.accepted === 0 && project?.refuse_reason !== null
+                ? t("projects.refused")
+                : project?.status}
+            </span>
+            {(project?.status === "جديد" || project?.status === "new") && (
+              <>
+                <Link to={`/edit-project/${project?.id}`}>
+                  <IconEdit stroke={2} />
+                </Link>
+                <button
+                  onClick={(e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    // setShowModal(true);
+                  }}
+                >
+                  <IconTrash stroke={2} />
+                </button>
+              </>
+            )}
+          </div>
+        )}
       </header>
       <Link
         to={`/profile/${project?.user?.id}`}
@@ -47,10 +76,12 @@ export default function ProjectCard({ project }) {
             </section>
             <section className="gap-1 d-flex align-items-center justify-content-center">
               <FaUsers />
-              <span>{requests_count}</span>
-              Offers
+
+              {project?.requests_count > 0
+                ? project?.requests_count + " " + t("projects.offer")
+                : t("projects.addFirst")}
             </section>
-          </section>
+          </section>{" "}
         </section>
       </Link>
     </section>
