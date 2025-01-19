@@ -317,7 +317,8 @@
     "deleteService": "Delete",
     "profileEditedSuccessfully": "Profile edited successfully",
     "skills": "Skills",
-    "country": "Country"
+    "country": "Country",
+    "puplidhedServices": "Puplised Services"  
   },
   "addService": {
     "serviceTitle": "Service Title",

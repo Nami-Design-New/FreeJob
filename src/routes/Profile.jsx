@@ -15,6 +15,8 @@ const Profile = () => {
   const { data: profile, isLoading } = useGetProfile(id);
 
   const isMyAccount = !id || id === String(authedUser?.id);
+  console.log(isMyAccount);
+
   useEffect(() => {
     if (isMyAccount) {
       setUser(authedUser);
@@ -46,7 +48,7 @@ const Profile = () => {
           <UserProfileCard isMyAccount={isMyAccount} user={user} />
         </Col>
         <Col md={8}>
-          <ProfileTabs user={user} />
+          <ProfileTabs user={user} isMyAccount={isMyAccount} />
         </Col>
       </Row>
     </Container>
