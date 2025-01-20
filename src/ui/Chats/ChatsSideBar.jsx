@@ -1,4 +1,3 @@
-import { IconPaperclip, IconX } from "@tabler/icons-react";
 import { useSelector } from "react-redux";
 import { useTranslation } from "react-i18next";
 import { formatMessageTime } from "../../utils/helper";
@@ -27,7 +26,7 @@ const ChatSideBar = ({
   return (
     <div className={`side-menu p-2 pt-3 ${showChatsMenu ? "active" : ""}`}>
       <div className="colse" onClick={() => setShowChatsMenu(false)}>
-        <IconX stroke={2} />
+        <i className="fa fa-times" aria-hidden="true"></i>
       </div>
       {chats?.map((chat) => (
         <button
@@ -64,7 +63,7 @@ const ChatSideBar = ({
             <p className="lastMessage unread">
               {chat?.last_message?.type !== "text" ? (
                 <div className="icon">
-                  <IconPaperclip stroke={2} />
+                  <i className="fa fa-paperclip" aria-hidden="true"></i>
                   <span>{t("chat.attachment")}</span>
                 </div>
               ) : (

@@ -1,23 +1,24 @@
 import { useQueryClient } from "@tanstack/react-query";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
-import useUserServices from "../../hooks/services/useUserServices";
-import useGetWorks from "../../hooks/works/useGetWorks";
-import useGetUserProjects from "../../hooks/projects/useGetUserProjects";
-import { deleteService } from "../../services/apiServices";
 import { toast } from "react-toastify";
 import { Tab, Tabs } from "react-bootstrap";
-import { Link } from "react-router-dom";
 import { FaPlus } from "react-icons/fa";
 import { FaCirclePlus } from "react-icons/fa6";
-import ServiceCard from "../cards/ServiceCard";
-import DataLoader from "../DataLoader";
-import ProjectCard from "../cards/ProjectCard";
 import { HiOutlineBadgeCheck } from "react-icons/hi";
 import { BsPatchCheck } from "react-icons/bs";
+import { deleteService } from "../services/apiServices";
+import { Link } from "react-router";
+import useUserServices from "../../hooks/services/useUserServices";
+import ProjectCard from "../cards/ProjectCard";
+import useGetWorks from "../../hooks/works/useGetWorks";
+import useGetUserProjects from "../../hooks/projects/useGetUserProjects";
+import ServiceCard from "../ui/cards/ServiceCard";
+import DataLoader from "../ui/DataLoader";
 import WorksTap from "./WorksTap";
-import ConfirmationModal from "./ConfirmationModal";
 import CertificatesTab from "./CertificatesTab";
+import ConfirmationModal from "./ConfirmationModal";
+
 function ProfileTabs({ user, isMyAccount }) {
   const queryClient = useQueryClient();
   const { t } = useTranslation();
@@ -57,7 +58,7 @@ function ProfileTabs({ user, isMyAccount }) {
               <>
                 {isMyAccount && (
                   <Link to="/edit-profile">
-                    <FaPlus stroke={1} /> {t("profile.noAbout")}
+                    {t("profile.noAbout")}
                   </Link>
                 )}
               </>
@@ -74,7 +75,7 @@ function ProfileTabs({ user, isMyAccount }) {
           <div className="services-container">
             {isMyAccount && (
               <Link to="/add-service" className="add-service">
-                <FaCirclePlus stroke={2} /> {t("profile.addService")}
+                {t("profile.addService")}
               </Link>
             )}
 
@@ -109,7 +110,7 @@ function ProfileTabs({ user, isMyAccount }) {
           <div className="services-container">
             {isMyAccount && (
               <Link to="/add-project" className="add-service mb-3">
-                <FaCirclePlus stroke={2} /> {t("routes.add-project")}
+                {t("routes.add-project")}
               </Link>
             )}
             {isLoading ? (
@@ -142,22 +143,22 @@ function ProfileTabs({ user, isMyAccount }) {
             <ul className="verify-list">
               <li className="d-flex gap-2">
                 {user?.verified === 1 ? (
-                  <BsPatchCheck stroke={2} />
+                  <span>✔</span>
                 ) : (
-                  <BsPatchCheck className="tabler-danger" stroke={2} />
+                  <span>✘</span>
                 )}
                 {t("profile.personalIdentification")}
               </li>
               <li className="d-flex gap-2">
                 {user?.phone_verified === 1 ? (
-                  <BsPatchCheck stroke={2} />
+                  <span>✔</span>
                 ) : (
-                  <BsPatchCheck className="tabler-danger" stroke={2} />
+                  <span>✘</span>
                 )}
                 {t("profile.phoneNumber")}
               </li>
               <li className="d-flex gap-2">
-                <BsPatchCheck stroke={2} />
+                <span>✔</span>
                 {t("profile.emailAddress")}
               </li>
             </ul>

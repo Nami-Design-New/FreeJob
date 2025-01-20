@@ -2,7 +2,6 @@ import { useTranslation } from "react-i18next";
 import { FaFile, FaUsers } from "react-icons/fa";
 import { Link } from "react-router";
 import { useSelector } from "react-redux";
-import { IconEdit, IconTrash } from "@tabler/icons-react";
 import { formatTimeDifference, getTimeDifference } from "../../utils/helper";
 import useTruncateText from "../../hooks/helpers/useTruncateText";
 
@@ -43,7 +42,7 @@ export default function ProjectCard({ project }) {
             {(project?.status === "جديد" || project?.status === "new") && (
               <>
                 <Link to={`/edit-project/${project?.id}`}>
-                  <IconEdit stroke={2} />
+                  Edit
                 </Link>
                 <button
                   onClick={(e) => {
@@ -52,7 +51,7 @@ export default function ProjectCard({ project }) {
                     // setShowModal(true);
                   }}
                 >
-                  <IconTrash stroke={2} />
+                  Delete
                 </button>
               </>
             )}
@@ -75,7 +74,6 @@ export default function ProjectCard({ project }) {
             </section>
             <section className="gap-1 d-flex align-items-center justify-content-center">
               <FaUsers />
-
               {project?.requests_count > 0
                 ? project?.requests_count + " " + t("projects.offer")
                 : t("projects.addFirst")}

@@ -1,4 +1,4 @@
-import { IconEdit, IconTrash } from "@tabler/icons-react";
+import { FaEdit, FaTrash } from "react-icons/fa";
 
 const CertificateCard = ({
   certificate,
@@ -18,10 +18,10 @@ const CertificateCard = ({
         {canEdit && (
           <div className="icons">
             <button onClick={() => onEditModalShow(certificate)}>
-              <IconEdit stroke={2} />
+              <FaEdit />
             </button>
             <button onClick={() => onDeleteModalShow(certificate?.id)}>
-              <IconTrash stroke={2} />
+              <FaTrash />
             </button>
           </div>
         )}
