@@ -13,18 +13,45 @@ import { FaEdit, FaRegMoneyBillAlt, FaTrash, FaUser } from "react-icons/fa";
 import { IoMdInformationCircleOutline } from "react-icons/io";
 import { MdCollections } from "react-icons/md";
 import SearchModal from "../modals/SearchModal";
-import { Link } from "react-router";
+import { Link, useNavigate } from "react-router";
 import { useTranslation } from "react-i18next";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import axiosInstance from "../../utils/axios";
+import { useCookies } from "react-cookie";
+import { useQueryClient } from "@tanstack/react-query";
+import { setIsLogged, setUser } from "../../redux/slices/authedUserSlice";
 
 export default function UserDropDown() {
   const [show, setShow] = useState(false);
   const { t } = useTranslation();
-  const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
   const user = useSelector((state) => state.authedUser.user);
-  console.log(user);
 
+  const [, , deleteCookie] = useCookies();
+  const [cookies] = useCookies(["token"]);
+  const token = cookies?.token;
+  const queryClient = useQueryClient();
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const performLogout = async () => {
+    try {
+      const deleteToken = await axiosInstance.post("/user/logout", {
+        token: token,
+      });
+      if (deleteToken.data.code === 200) {
+        deleteCookie("token");
+        deleteCookie("id");
+        delete axiosInstance.defaults.headers.common["Authorization"];
+        dispatch(setUser({}));
+        dispatch(setIsLogged(false));
+        navigate("/");
+        queryClient.clear();
+        sessionStorage.clear();
+      }
+    } catch (error) {
+      console.error("Error during logout:", error);
+      throw new Error(error.message);
+    }
+  };
   // const
   return (
     <Dropdown className="actions">
@@ -102,7 +129,7 @@ export default function UserDropDown() {
         </section>
         <section>
           <Dropdown.Item>
-            <Link to="/profile">
+            <Link onClick={performLogout}>
               <BsBoxArrowRight /> {t("navbar.logout")}
             </Link>
           </Dropdown.Item>

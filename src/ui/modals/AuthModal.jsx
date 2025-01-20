@@ -63,6 +63,7 @@ export default function AuthModal() {
       show={show}
       backdrop="static"
       onHide={() => dispatch(closeModal())}
+      className="auth_modal"
     >
       <Modal.Body scrollable={true}>
         <div className="row position-relative h-100 p-0 g-0">

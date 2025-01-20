@@ -15,7 +15,6 @@ const Profile = () => {
   const { data: profile, isLoading } = useGetProfile(id);
 
   const isMyAccount = !id || id === String(authedUser?.id);
-  console.log(isMyAccount);
 
   useEffect(() => {
     if (isMyAccount) {

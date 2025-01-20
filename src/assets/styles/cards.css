@@ -358,7 +358,7 @@
   .project_content {
     display: flex;
     align-items: start;
-    gap: 1rem;
+    justify-content: space-between;
     .status_action {
       display: flex;
       align-items: start;

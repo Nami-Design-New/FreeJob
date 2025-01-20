@@ -521,6 +521,41 @@ a {
       height: 0.75rem !important;
     }
   }
+  .image_field {
+    width: 100%;
+    gap: 8px;
+    display: flex;
+    flex-direction: column;
+    label {
+      color: var(--black-color);
+      i {
+        color: var(--main-color);
+      }
+    }
+    .imagewrap {
+      border-radius: 12px;
+      padding: 12px;
+      border: 1px solid var(--LightGray);
+      height: 160px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      input {
+        display: none;
+      }
+      .img {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        img {
+          height: 100%;
+          object-fit: scale-down;
+        }
+      }
+    }
+  }
   .form {
     button {
       display: flex;
