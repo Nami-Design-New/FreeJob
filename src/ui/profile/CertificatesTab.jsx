@@ -1,8 +1,7 @@
 import { useQueryClient } from "@tanstack/react-query";
-import React, { useState } from "react";
+import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import CertificateCard from "./CertificateCard";
-import { IconCirclePlus } from "@tabler/icons-react";
 import { toast } from "react-toastify";
 import { deleteCertificate } from "../services/apiCertificate";
 import useGetCertificates from "../hooks/useCertificates";
@@ -55,7 +54,7 @@ export default function CertificatesTab({ user, isMyAccount }) {
             onClick={() => setShowAddCertificateModal(true)}
             className="add-service"
           >
-            <IconCirclePlus stroke={2} /> {t("profile.addCertificate")}
+            {t("profile.addCertificate")}
           </button>
         )}
         <div className="services_grid">

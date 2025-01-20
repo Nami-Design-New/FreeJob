@@ -1,11 +1,8 @@
-import {
-  IconCirclePlus,
-  IconInfoCircle,
-  IconRosetteDiscountCheckFilled,
-} from "@tabler/icons-react";
 import { Link } from "react-router";
 import { useTranslation } from "react-i18next";
 import { OverlayTrigger, Tooltip } from "react-bootstrap";
+import StarsRate from "../StartRate";
+
 const UserProfileCard = ({ user, isMyAccount }) => {
   console.log(user);
   const { t } = useTranslation();
@@ -26,7 +23,7 @@ const UserProfileCard = ({ user, isMyAccount }) => {
           <img src={user?.image} alt="user-avatar" />
           {user?.verified === 1 && (
             <span className="status">
-              <IconRosetteDiscountCheckFilled />
+              {/* Removed IconRosetteDiscountCheckFilled */}
             </span>
           )}
         </div>
@@ -77,7 +74,8 @@ const UserProfileCard = ({ user, isMyAccount }) => {
             <div className="col-12 p-2">
               <div className="head">
                 <h4>
-                  <IconInfoCircle stroke={2} /> {t("profile.balance")}
+                  {/* Removed IconInfoCircle */}
+                  {t("profile.balance")}
                 </h4>
                 <Link to="/balance">{t("profile.withdraw")}</Link>
               </div>
@@ -159,7 +157,8 @@ const UserProfileCard = ({ user, isMyAccount }) => {
             </div>
             <div className="col-12 p-2 d-flex align-items-center justify-content-center">
               <Link to="/balance" className="deposit-link">
-                <IconCirclePlus stroke={2} /> {t("profile.deposit")}
+                {/* Removed IconCirclePlus */}
+                {t("profile.deposit")}
               </Link>
             </div>
           </div>

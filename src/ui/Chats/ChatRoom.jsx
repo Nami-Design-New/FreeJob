@@ -1,30 +1,3 @@
-// import React, { useRef, useState, useEffect } from "react";
-// import { Link } from "react-router-dom";
-// import { useTranslation } from "react-i18next";
-// import { useSelector } from "react-redux";
-// import { createMessage } from "../../services/apiChats";
-// import { formatMessageTime } from "../../utils/helpers";
-// import {
-//   IconFileFilled,
-//   IconMicrophone,
-//   IconPaperclip,
-//   IconPlayerPause,
-//   IconSend,
-//   IconTrash
-// } from "@tabler/icons-react";
-// import Pusher from "pusher-js";
-// import avatar from "../../Assets/images/avatar.jpg";
-// import deletedAccount from "../../Assets/images/deleted-account.jpg";
-// import service from "../../Assets/images/bann.webp";
-
-import {
-  IconFileFilled,
-  IconMicrophone,
-  IconPaperclip,
-  IconPlayerPause,
-  IconSend,
-  IconTrash,
-} from "@tabler/icons-react";
 import { useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useSelector } from "react-redux";
@@ -55,23 +28,6 @@ const ChatRoom = ({ chat }) => {
       setMessages(chat?.messages.slice() || []);
     }
   }, [chat]);
-
-  // useEffect(() => {
-  //   const pusher = new Pusher("40956cc89171b3e710e6", {
-  //     cluster: "eu",
-  //   });
-
-  //   const channel = pusher.subscribe(`chat_${chat?.id}`);
-
-  //   channel.bind("new_message", function (data) {
-  //     pushMessage(data?.message);
-  //   });
-
-  //   return () => {
-  //     channel.unbind_all();
-  //     channel.unsubscribe();
-  //   };
-  // }, [chat?.id]);
 
   useEffect(() => {
     if (chatContainerRef.current) {
@@ -271,7 +227,8 @@ const ChatRoom = ({ chat }) => {
                     <div className="doc_message">
                       <p>{extractTextAfterMessages(message?.message)}</p>
                       <div className="icon">
-                        <IconFileFilled />
+                        {/* Replace with an alternative icon */}
+                        📄
                       </div>
                     </div>
                   </Link>
@@ -306,9 +263,10 @@ const ChatRoom = ({ chat }) => {
               />
             ) : (
               <div className="file_place">
-                <IconTrash
+                {/* Replace with an alternative icon */}
+                🗑️
+                <span
                   style={{ cursor: "pointer" }}
-                  stroke={1}
                   onClick={() => {
                     setMessage({ ...message, message: "", type: "" });
                     setRecordingTime(0);
@@ -325,7 +283,8 @@ const ChatRoom = ({ chat }) => {
             )}
 
             <label className="files-input">
-              <IconPaperclip stroke={2} />
+              {/* Replace with an alternative icon */}
+              📎
               <input
                 onChange={(e) => {
                   const file = e.target.files[0];
@@ -347,12 +306,14 @@ const ChatRoom = ({ chat }) => {
             </label>
             {isRecording ? (
               <label className="files-input" onClick={stopRecording}>
-                <IconPlayerPause stroke={2} />
+                {/* Replace with an alternative icon */}
+                ⏸️
                 <input type="" />
               </label>
             ) : (
               <label className="files-input" onClick={startRecording}>
-                <IconMicrophone stroke={2} />
+                {/* Replace with an alternative icon */}
+                🎤
                 <input type="" />
               </label>
             )}
@@ -362,7 +323,8 @@ const ChatRoom = ({ chat }) => {
           </div>
 
           <button type="submit" disabled={loading}>
-            <IconSend stroke={2} />
+            {/* Replace with an alternative icon */}
+            📤
           </button>
         </form>
       </div>

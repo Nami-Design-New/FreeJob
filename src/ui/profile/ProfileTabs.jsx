@@ -1,8 +1,5 @@
-<<<<<<< HEAD:src/profile/ProfileTabs.jsx
 import { useQueryClient } from "@tanstack/react-query";
 import { useState } from "react";
-=======
->>>>>>> main:src/ui/profile/ProfileTabs.jsx
 import { Tabs, Tab } from "react-bootstrap";
 import { useTranslation } from "react-i18next";
 import useGetUserProjects from "../hooks/projects/useGetUserProjects";
@@ -11,12 +8,6 @@ import useGetWorks from "../hooks/works/useGetWorks";
 import { toast } from "react-toastify";
 import { deleteService } from "../services/apiServices";
 import { Link } from "react-router";
-import {
-  IconBrandXamarin,
-  IconCirclePlus,
-  IconPlus,
-  IconRosetteDiscountCheck,
-} from "@tabler/icons-react";
 import ServiceCard from "../ui/cards/ServiceCard";
 import DataLoader from "../ui/DataLoader";
 import ProjectCard from "../ui/cards/ProjectCard";
@@ -63,7 +54,7 @@ function ProfileTabs({ user, isMyAccount }) {
               <>
                 {isMyAccount && (
                   <Link to="/edit-profile">
-                    <IconPlus stroke={1} /> {t("profile.noAbout")}
+                    {t("profile.noAbout")}
                   </Link>
                 )}
               </>
@@ -80,7 +71,7 @@ function ProfileTabs({ user, isMyAccount }) {
           <div className="services-container">
             {isMyAccount && (
               <Link to="/add-service" className="add-service">
-                <IconCirclePlus stroke={2} /> {t("profile.addService")}
+                {t("profile.addService")}
               </Link>
             )}
 
@@ -115,7 +106,7 @@ function ProfileTabs({ user, isMyAccount }) {
           <div className="services-container">
             {isMyAccount && (
               <Link to="/add-project" className="add-service mb-3">
-                <IconCirclePlus stroke={2} /> {t("routes.add-project")}
+                {t("routes.add-project")}
               </Link>
             )}
             {isLoading ? (
@@ -148,22 +139,22 @@ function ProfileTabs({ user, isMyAccount }) {
             <ul className="verify-list">
               <li className="d-flex gap-2">
                 {user?.verified === 1 ? (
-                  <IconRosetteDiscountCheck stroke={2} />
+                  <span>✔</span>
                 ) : (
-                  <IconBrandXamarin className="tabler-danger" stroke={2} />
+                  <span>✘</span>
                 )}
                 {t("profile.personalIdentification")}
               </li>
               <li className="d-flex gap-2">
                 {user?.phone_verified === 1 ? (
-                  <IconRosetteDiscountCheck stroke={2} />
+                  <span>✔</span>
                 ) : (
-                  <IconBrandXamarin className="tabler-danger" stroke={2} />
+                  <span>✘</span>
                 )}
                 {t("profile.phoneNumber")}
               </li>
               <li className="d-flex gap-2">
-                <IconRosetteDiscountCheck stroke={2} />
+                <span>✔</span>
                 {t("profile.emailAddress")}
               </li>
             </ul>

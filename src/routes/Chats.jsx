@@ -1,17 +1,8 @@
-// import { useEffect, useState } from "react";
-// import { IconBrandWechat } from "@tabler/icons-react";
-// import { useTranslation } from "react-i18next";
-// import ChatSideBar from "../features/chat/ChatSideBar";
-// import ChatRoom from "../features/chat/ChatRoom";
-// import useGetChats from "../features/chat/useGetChats";
-// import DataLoader from "./../ui/DataLoader";
-// import useGetChat from "../features/chat/useGetChat";
-
-import { IconBrandWechat } from "@tabler/icons-react";
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import ChatSideBar from "../ui/Chats/ChatsSideBar";
 import ChatRoom from "../ui/Chats/ChatRoom";
+
 const chats = [
   {
     id: 1,
@@ -138,14 +129,6 @@ const Chats = () => {
   const { t } = useTranslation();
   const [showChatsMenu, setShowChatsMenu] = useState(false);
   const [targetChat, setTargetChat] = useState(null);
-  // const { data: chats, isLoading } = useGetChats();
-
-  // const { data: chat, isLoading: isChatLoading } = useGetChat({
-  //   request_type: sessionStorage.getItem("request_type"),
-  //   owner_id: sessionStorage.getItem("owner_id"),
-  //   applied_id: sessionStorage.getItem("applied_id"),
-  //   request_id: sessionStorage.getItem("request_id"),
-  // });
 
   useEffect(() => {
     if (chat?.id) {
@@ -160,7 +143,6 @@ const Chats = () => {
     <section className="chat-section">
       <div className="container d-block">
         <button className="openTaps" onClick={() => setShowChatsMenu(true)}>
-          <IconBrandWechat stroke={2} />
           <span> {t("chat.chats")} </span>
         </button>
         <div className="row">
