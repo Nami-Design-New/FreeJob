@@ -1,4 +1,3 @@
-import { IconCheck, IconPencil, IconX } from "@tabler/icons-react";
 import { useQueryClient } from "@tanstack/react-query";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
@@ -91,7 +90,7 @@ export default function OffersCard({ request, isMyProject }) {
                   className="refuse_btn"
                   onClick={() => setShowEditModal(true)}
                 >
-                  <IconPencil stroke={2} /> {t("projects.editOffer")}
+                  <i className="fa fa-pencil"></i> {t("projects.editOffer")}
                 </button>
               ) : (
                 <>
@@ -103,10 +102,10 @@ export default function OffersCard({ request, isMyProject }) {
                         : setShowConfirmPayModel(true)
                     }
                   >
-                    <IconCheck stroke={1.25} /> {t("projects.acceptOffer")}
+                    <i className="fa fa-check"></i> {t("projects.acceptOffer")}
                   </button>
                   <button className="refuse_btn" onClick={handleRefuseOffer}>
-                    <IconX stroke={1.25} /> {t("projects.refuseOffer")}
+                    <i className="fa fa-times"></i> {t("projects.refuseOffer")}
                   </button>
                 </>
               )}

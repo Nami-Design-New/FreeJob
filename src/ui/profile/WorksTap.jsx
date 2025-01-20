@@ -1,4 +1,3 @@
-import { IconCirclePlus } from "@tabler/icons-react";
 import { useQueryClient } from "@tanstack/react-query";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
@@ -54,7 +53,7 @@ export default function WorksTap({ works, isMyAccount }) {
               onClick={() => setShowAddWorkModal(true)}
               className="add-service"
             >
-              <IconCirclePlus stroke={2} /> {t("profile.addWork")}
+              {t("profile.addWork")}
             </button>
           )}
           <div className="services_grid">
