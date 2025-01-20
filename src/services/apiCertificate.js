@@ -26,7 +26,7 @@ export async function addCertificate(data, queryClient) {
 
 export async function updateCertificate(data, queryClient) {
   try {
-    await axios.post("/user/update_certificate", data, {
+    await axiosInstance.post("/user/update_certificate", data, {
       headers: {
         "Content-Type": "multipart/form-data",
       },
@@ -39,7 +39,7 @@ export async function updateCertificate(data, queryClient) {
 
 export async function deleteCertificate(id, queryClient) {
   try {
-    await axios.post("/user/delete_certificate", {
+    await axiosInstance.post("/user/delete_certificate", {
       id,
     });
     queryClient.invalidateQueries(["userCertificates"]);

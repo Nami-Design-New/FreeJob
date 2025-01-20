@@ -1,18 +1,22 @@
 import { useQueryClient } from "@tanstack/react-query";
 import { useState } from "react";
-import { Tabs, Tab } from "react-bootstrap";
 import { useTranslation } from "react-i18next";
-import useGetUserProjects from "../hooks/projects/useGetUserProjects";
-import useUserServices from "../hooks/services/useUserServices";
-import useGetWorks from "../hooks/works/useGetWorks";
 import { toast } from "react-toastify";
+import { Tab, Tabs } from "react-bootstrap";
+import { FaPlus } from "react-icons/fa";
+import { FaCirclePlus } from "react-icons/fa6";
+import { HiOutlineBadgeCheck } from "react-icons/hi";
+import { BsPatchCheck } from "react-icons/bs";
 import { deleteService } from "../services/apiServices";
 import { Link } from "react-router";
+import useUserServices from "../../hooks/services/useUserServices";
+import ProjectCard from "../cards/ProjectCard";
+import useGetWorks from "../../hooks/works/useGetWorks";
+import useGetUserProjects from "../../hooks/projects/useGetUserProjects";
 import ServiceCard from "../ui/cards/ServiceCard";
 import DataLoader from "../ui/DataLoader";
-import ProjectCard from "../ui/cards/ProjectCard";
+import WorksTap from "./WorksTap";
 import CertificatesTab from "./CertificatesTab";
-import WorksTap from "./worksTap";
 import ConfirmationModal from "./ConfirmationModal";
 
 function ProfileTabs({ user, isMyAccount }) {

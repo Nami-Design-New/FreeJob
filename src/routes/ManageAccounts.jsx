@@ -1,25 +1,21 @@
-import DetailsHeader from "../ui/servicesComponents/serviceDetails/DetailsHeader";
-import { useLocation, useNavigate } from "react-router";
 import { useTranslation } from "react-i18next";
 import { FaPlus } from "react-icons/fa";
+import { useNavigate } from "react-router";
+import useBanksList from "../hooks/accounts/useBankList";
 import BankList from "../ui/bankAccounts/BankList";
+import DataLoader from "../ui/DataLoader";
+import DetailsHeader from "../ui/servicesComponents/serviceDetails/DetailsHeader";
 
 const ManageAccounts = () => {
-  let account = true;
-
   const navigate = useNavigate();
-  const { pathname } = useLocation();
-  const segments = pathname
-    .split("/")
-    .filter((segment) => segment === "manage-accounts")[0]
-    .split("-")
-    .join(" ");
   const { t } = useTranslation();
+
+  const { isLoading, data: banks } = useBanksList();
   return (
     <section>
       <section className="header_container  ">
         <section className="container-md flex-column flex-md-row align-items-start gap-2   ">
-          <DetailsHeader links={segments} />
+          <DetailsHeader links={t("manageAccounts.headerText")} />
           <button
             className="add_btn"
             onClick={() => navigate("/add-bank-account")}
@@ -30,10 +26,11 @@ const ManageAccounts = () => {
         </section>
       </section>
 
-      {account ? (
+      {isLoading ? (
+        <DataLoader />
+      ) : banks?.length > 0 ? (
         <section className="banks">
-
-        <BankList />
+          <BankList banks={banks} />
         </section>
       ) : (
         <section className="empty_bank_account">

@@ -1,13 +1,14 @@
 import { useTranslation } from "react-i18next";
-import useSearchWorks from "../hooks/works/useSearchWorks";
 import { useSelector } from "react-redux";
 import { useEffect, useState } from "react";
-import axiosInstance from "../utils/axios";
+
 import { Modal } from "react-bootstrap";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay } from "swiper/modules";
 import { Link } from "react-router";
-import { calculateDate } from "../utils/helper";
+import { calculateDate } from "../../utils/helper";
+import useSearchWorks from "../../hooks/works/useSearchWorks";
+import axiosInstance from "../../utils/axios";
 
 function WorkViewModal({ showModal, setShowModal, targetWork }) {
   const { t } = useTranslation();

@@ -39,3 +39,17 @@ export const ORDER_STATUS_COLORS = {
   received: "#1DBF73",
   canceled: "#D50000",
 };
+export const TRANSACTIONS_STATUS = [
+  "charge",
+  "app_service_percentage",
+  "app_project_percentage",
+  "project_accept",
+  "refund_project",
+  "project_complete",
+  "service_order_finish",
+  "service_order_create",
+  "refund_service_order",
+  "withdraw_balance_complete",
+  "withdraw_balance_request",
+  "withdraw_balance_canceled",
+];

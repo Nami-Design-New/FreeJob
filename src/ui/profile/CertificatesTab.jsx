@@ -1,13 +1,13 @@
 import { useQueryClient } from "@tanstack/react-query";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
-import CertificateCard from "./CertificateCard";
 import { toast } from "react-toastify";
-import { deleteCertificate } from "../services/apiCertificate";
-import useGetCertificates from "../hooks/useCertificates";
+import { deleteCertificate } from "../../services/apiCertificate";
+import useGetCertificates from "../../hooks/useCertificates";
 import ConfirmationModal from "./ConfirmationModal";
-import AddCertificateModal from "./AddCertificateModal";
-import CertificateViewModal from "./CertificateViewModal";
+import AddCertificateModal from "../../profile/AddCertificateModal";
+import CertificateViewModal from "../../profile/CertificateViewModal";
+import CertificateCard from "../../profile/CertificateCard";
 
 export default function CertificatesTab({ user, isMyAccount }) {
   const queryClient = useQueryClient();

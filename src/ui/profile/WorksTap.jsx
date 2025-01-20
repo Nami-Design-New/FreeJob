@@ -2,11 +2,11 @@ import { useQueryClient } from "@tanstack/react-query";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { toast } from "react-toastify";
-import { deleteWork } from "../services/apiWorks";
-import WorkCard from "../ui/cards/worksCard";
 import AddWorkModal from "./AddWorkModal";
 import ConfirmationModal from "./ConfirmationModal";
 import WorkViewModal from "./WorkViewModal";
+import { deleteWork } from "../../services/apiWorks";
+import WorkCard from "../cards/worksCard";
 
 export default function WorksTap({ works, isMyAccount }) {
   const { t } = useTranslation();

@@ -2,7 +2,6 @@ import { Link } from "react-router";
 import { useTranslation } from "react-i18next";
 import { OverlayTrigger, Tooltip } from "react-bootstrap";
 import StarsRate from "../StartRate";
-
 const UserProfileCard = ({ user, isMyAccount }) => {
   console.log(user);
   const { t } = useTranslation();
@@ -34,16 +33,14 @@ const UserProfileCard = ({ user, isMyAccount }) => {
       </div>
       {user?.country_id && (user?.country?.name || user?.country?.image) && (
         <div className="cash profile-country-box mt-3">
-          <div className="row">
-            <div className="col-6 p-2">
-              <div className="head">
-                <h4>{t("profile.country")}</h4>
-              </div>
+          <div>
+            <div className="head">
+              <h4>{t("profile.country")}</h4>
             </div>
-            <div className="country-wrapper col-6 p-2">
-              <img src={user?.country?.image} alt="country" />
-              <h6 className="">{user?.country?.name}</h6>
-            </div>
+          </div>
+          <div className="country-wrapper ">
+            <img src={user?.country?.image} alt="country" />
+            <h6 className="">{user?.country?.name}</h6>
           </div>
         </div>
       )}

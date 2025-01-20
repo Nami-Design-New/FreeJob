@@ -12,7 +12,6 @@ import { useTranslation } from "react-i18next";
 const EditProfile = () => {
   const { t } = useTranslation();
   const user = useSelector((state) => state.authedUser.user);
-
   const [formData, setFormData] = useState({
     name: user?.name || "",
     email: user?.email || "",
@@ -177,7 +176,7 @@ const EditProfile = () => {
                   style={{ marginTop: "15px" }}
                 >
                   <FormInput
-                    // label={t("auth.phone")}
+                    label={t("auth.phone")}
                     name="phoneNumber"
                     type="text"
                     id="phoneNumber"

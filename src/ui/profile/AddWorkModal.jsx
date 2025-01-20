@@ -4,12 +4,17 @@ import { useTranslation } from "react-i18next";
 import { useQueryClient } from "@tanstack/react-query";
 import { toast } from "react-toastify";
 
-import FormInput from "../ui/form/FormInput";
-import { addWork, updateWork } from "../services/apiWorks";
-import MultiSelect from "../ui/servicesComponents/MultiSelect";
-import FormTextArea from "../ui/form/FormTextArea";
-import SubmitButton from "../ui/form/SubmitButton";
-import useGetSkills from "../hooks/useGetSkills";
+import { addWork, updateWork } from "../../services/apiWorks";
+import useGetSkills from "../../hooks/settings/useGetSkills";
+import FormInput from "../form/FormInput";
+import MultiSelect from "../servicesComponents/MultiSelect";
+import FormTextArea from "../form/FormTextArea";
+import SubmitButton from "../form/SubmitButton";
+// import MultiSelect from "../ui/servicesComponents/MultiSelect";
+// import FormTextArea from "../ui/form/FormTextArea";
+// import SubmitButton from "../ui/form/SubmitButton";
+// import useGetSkills from "../hooks/useGetSkills";
+// import FormInput from "../form/FormInput";
 
 const AddWorkModal = ({
   showModal,
@@ -52,7 +57,7 @@ const AddWorkModal = ({
 
       setSelectedOptions(options);
     }
-  }, [targetWork]);
+  }, [targetWork, skills]);
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });

@@ -144,6 +144,12 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    &.profile-country-box {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: space-between;
+    }
     .info-label {
       &svg,
       &i {
@@ -182,6 +188,7 @@
         align-items: center;
         gap: 8px;
         color: var(--black-color);
+        margin: 0;
         i {
           color: var(--main-color);
         }
@@ -207,6 +214,7 @@
     .cash-info {
       display: flex;
       flex-direction: column;
+      height: 100%;
       background: #f4f4f4;
       gap: 4px;
       padding: 12px;

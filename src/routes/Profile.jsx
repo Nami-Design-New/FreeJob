@@ -2,11 +2,12 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router";
 import { Container, Row, Col } from "react-bootstrap";
 import { useSelector } from "react-redux";
-import UserProfileCard from "../ui/profile/UserProfileCard"
+import UserProfileCard from "../ui/profile/UserProfileCard";
 import ErrorPage from "./ErrorPage";
 import EmptyData from "../ui/EmptyData";
 import DataLoader from "../ui/DataLoader";
-import ProfileTabs from './../ui/profile/ProfileTabs';
+import ProfileTabs from "./../ui/profile/ProfileTabs";
+import useGetProfile from "../hooks/settings/useGeProfile";
 
 const Profile = () => {
   const authedUser = useSelector((state) => state.authedUser.user);
@@ -43,10 +44,10 @@ const Profile = () => {
   return (
     <Container className="profile-page my-5">
       <Row className="justify-content-center">
-        <Col md={4} className="position-relative ">
+        <Col lg={4} className="position-relative ">
           <UserProfileCard isMyAccount={isMyAccount} user={user} />
         </Col>
-        <Col md={8}>
+        <Col lg={8}>
           <ProfileTabs user={user} isMyAccount={isMyAccount} />
         </Col>
       </Row>

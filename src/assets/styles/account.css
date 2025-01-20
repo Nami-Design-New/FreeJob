@@ -47,3 +47,203 @@
     }
   }
 }
+
+/* bank account balance details styles  */
+.balance_section {
+  padding: 60px 8px;
+  .container {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+  }
+  .blanceHeader {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    @media (max-width: 380px) {
+      flex-direction: column;
+    }
+    gap: 16px;
+    .btns-wrapper {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+  }
+  .btn {
+    border: 1px solid var(--main-color);
+    color: var(--main-color);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 8px 16px;
+    transition: var(--main-transition);
+    border-radius: 12px;
+    gap: 4px;
+    background: none;
+    i {
+      margin: 0 4px;
+    }
+    &:hover {
+      background: var(--main-color);
+      color: #fff;
+    }
+  }
+  .content-body {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    gap: 32px;
+    .balance-boxes-wrapper {
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      gap: 16px;
+      flex-wrap: wrap;
+      .balance-box {
+        background-color: #f4f4f4;
+        padding: 16px;
+        border-radius: 12px;
+        flex: 1 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 16px;
+        padding: 16px;
+        border-radius: 12px;
+        span,
+        p {
+          margin: 0;
+        }
+        span {
+          font-size: 14px;
+          color: var(--black-color);
+          font-weight: 600;
+          @media (max-width: 576px) {
+            font-size: 12px;
+          }
+        }
+        h6 {
+          color: var(--main-color);
+          font-weight: bold;
+          margin: 0;
+          font-size: 20px;
+          i {
+            color: var(--text-color);
+          }
+          @media (max-width: 576px) {
+            font-size: 16px;
+          }
+        }
+      }
+    }
+    .transactions-wrapper {
+      h3 {
+        width: 100%;
+      }
+      .transactions-aside {
+        padding: 24px 16px;
+        border-radius: 12px;
+        background-color: #f4f4f4;
+        .order-status {
+          display: flex;
+          flex-direction: column;
+          gap: 16px;
+          li {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            input[type="checkbox"] {
+              accent-color: var(--main-color);
+            }
+          }
+        }
+        .search-btn {
+          width: 100%;
+          outline: none;
+          padding: 8px 16px;
+          border: none;
+          font-size: 14px;
+          color: var(--white-color);
+          border-radius: 12px;
+          background: var(--main-color);
+          transition: var(--main-transition);
+          &:hover {
+            background: var(--main-hover-color);
+          }
+        }
+      }
+      .transactions-body {
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+
+        color: var(--black-color);
+        .transaction-box {
+          width: 100%;
+          display: flex;
+          align-items: center;
+          gap: 24px;
+          padding: 16px;
+          border-radius: 16px;
+          background-color: #f4f4f4;
+          .money-wrapper {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            h5 {
+              display: flex;
+              align-items: center;
+              color: var(--black-color);
+              gap: 4px;
+              font-size: 18px;
+              font-weight: 600;
+            }
+          }
+          .info-wrapper {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            .info-header {
+              margin: 0;
+              display: flex;
+              gap: 4px;
+              align-items: center;
+              flex-wrap: wrap;
+              color: var(--black-color);
+              span {
+                color: var(--main-color);
+              }
+            }
+            .info-boxes-wrapper {
+              display: flex;
+              align-items: center;
+              flex-wrap: wrap;
+              gap: 0 24px;
+              .info-box {
+                display: flex;
+                align-items: center;
+                gap: 4px;
+                font-size: 12px;
+                margin: 0;
+                color: var(--main-color);
+                i {
+                  font-size: 12px;
+                  width: 16px;
+                  height: 16px;
+                  display: flex;
+                  justify-content: center;
+                  align-items: center;
+                  color: var(--mian-color);
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
