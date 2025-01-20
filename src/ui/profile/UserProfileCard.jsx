@@ -52,7 +52,7 @@ const UserProfileCard = ({ user, isMyAccount }) => {
                 <h4>{t("profile.skills")}</h4>
               </div>
             </div>
-            <div className="profile-skills p-2">
+            <div className="profile-skills p-2 d-flex flex-wrap gap-2">
               {user?.skills?.map(
                 (skill) =>
                   skill?.name && (
