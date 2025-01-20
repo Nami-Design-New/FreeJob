@@ -1,83 +1,158 @@
-import React, { useState } from "react";
-import { useSelector } from "react-redux";
-import Form from "react-bootstrap/Form";
+import { useEffect, useRef, useState } from "react";
+import { useTranslation } from "react-i18next";
+import { FaRegEdit } from "react-icons/fa";
+import { useDispatch, useSelector } from "react-redux";
+import useCategoriesList from "../hooks/categories/useCategories";
+import useCountriesList from "../hooks/settings/useCountries";
+import useGetSkills from "../hooks/settings/useGetSkills";
+import DataLoader from "../ui/DataLoader";
 import FormInput from "../ui/form/FormInput";
-import SelectFeild from "../ui/form/SelectField";
 import FormTextArea from "../ui/form/FormTextArea";
 import MultiSelect from "../ui/form/MaltiSelect";
 import PasswordField from "../ui/form/PasswordField";
-import { FaRegEdit } from "react-icons/fa";
-import { useTranslation } from "react-i18next";
+import SelectFeild from "../ui/form/SelectField";
+import SubmitButton from "../ui/form/SubmitButton";
+import FormSelector from "../ui/form/FormSelector";
+import axiosInstance from "../utils/axios";
+import { toast } from "react-toastify";
+import { setUser } from "../redux/slices/authedUserSlice";
+import { useNavigate } from "react-router-dom";
+import PhoneField from "../ui/form/PhoneField";
 
 const EditProfile = () => {
   const { t } = useTranslation();
   const user = useSelector((state) => state.authedUser.user);
-  const [formData, setFormData] = useState({
-    name: user?.name || "",
-    email: user?.email || "",
-    phone: user?.phone || "",
-    about: user?.about || "",
-    age: user?.age || "",
-    country_id: user?.country_id || "",
-    is_freelance: user?.is_freelance || 0,
-    skills: user?.skills?.map((skill) => skill?.id) || [],
-    password: "",
-  });
-
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const [loading, setLoading] = useState(false);
+  const [formData, setFormData] = useState({});
+  const [options, setOptions] = useState([]);
+  const [selectedOptions, setSelectedOptions] = useState([]);
+  const [skillsSelectedOptions, setSkillsSelectedOptions] = useState([]);
   const [wantChangePassword, setWantChangePassword] = useState(false);
 
+  const { data: skills } = useGetSkills();
+  const { data: categories } = useCategoriesList();
+  const { data: countries } = useCountriesList();
+
+  useEffect(() => {
+    setFormData({
+      image: "",
+      name: user?.name || "",
+      email: user?.email || "",
+      phone: user?.phone || "",
+      about: user?.about || "",
+      age: user?.age || "",
+      country_id: user?.country_id || "",
+      is_freelance: user?.is_freelance || 0,
+      skills: user?.skills?.map((skill) => skill?.id) || [],
+      categories: user?.categories?.map((category) => category?.id) || [],
+    });
+    if (wantChangePassword) {
+      setFormData((prev) => ({
+        ...prev,
+        password: "",
+      }));
+    }
+  }, [user, wantChangePassword]);
+
+  const imgView = useRef(null);
+
+  useEffect(() => {
+    if (user.image) {
+      imgView.current.src = user.image;
+    }
+  }, [user.image]);
+
+  const handleUpload = (e) => {
+    imgView.current.src = URL.createObjectURL(e.target.files[0]);
+    setFormData({ ...formData, [e.target.name]: e.target.files[0] });
+  };
+  useEffect(() => {
+    if (formData.categories?.length > 0) {
+      const selectedOptions = formData.categories?.map((categoryId) => {
+        const option = categories?.find((opt) => opt.id === categoryId);
+        return {
+          value: option?.id,
+          label: option?.name,
+        };
+      });
+      setSelectedOptions(selectedOptions);
+    }
+
+    if (formData.skills?.length > 0) {
+      const selectedOptions = formData.skills?.map((skillId) => {
+        const option = skills?.find((opt) => opt.id === skillId);
+        return {
+          value: option?.id,
+          label: option?.name,
+        };
+      });
+      setSkillsSelectedOptions(selectedOptions);
+    }
+  }, [formData.categories, formData.skills, categories, skills]);
+
+  const handleSelect = (selectedItems) => {
+    setSelectedOptions(selectedItems);
+    const selectedValues = selectedItems
+      ? selectedItems?.map((option) => option.value)
+      : [];
+    setFormData({
+      ...formData,
+      categories: selectedValues,
+    });
+  };
+
+  const handleSelectSkills = (selectedItems) => {
+    setSkillsSelectedOptions(selectedItems);
+    const selectedValues = selectedItems
+      ? selectedItems?.map((option) => option.value)
+      : [];
+    setFormData({
+      ...formData,
+      skills: selectedValues,
+    });
+  };
+
   const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData({ ...formData, [name]: value });
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value,
+    });
   };
 
-  const handleSkillsChange = (selectedSkills) => {
-    setFormData({ ...formData, skills: selectedSkills });
-  };
-
-  const handleImageChange = (e) => {
-    const file = e.target.files[0];
-    if (file) {
-      const reader = new FileReader();
-      reader.onload = () => {
-        setFormData({ ...formData, profileImage: reader.result });
-      };
-      reader.readAsDataURL(file);
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setLoading(true);
+    try {
+      const res = await axiosInstance.post("/user/update_profile", formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      });
+      if (res.data.code === 200) {
+        toast.success(t("profile.profileEditedSuccessfully"));
+        dispatch(setUser(res.data.data));
+        navigate("/profile");
+      } else {
+        toast.error(res.data.message);
+      }
+    } catch (error) {
+      console.error("Register error:", error);
+      throw new Error(error.message);
+    } finally {
+      setLoading(false);
     }
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    console.log("Form submitted:", formData);
-  };
-
-  const countryOptions = [
-    { value: "us", label: "United States" },
-    { value: "uk", label: "United Kingdom" },
-    { value: "in", label: "India" },
-    { value: "eg", label: "Egypt" },
-    { value: "sa", label: "Saudi Arabia" },
-  ];
-
-  const options = [
-    { value: "+1", label: "+1 (USA)" },
-    { value: "+44", label: "+44 (UK)" },
-    { value: "+91", label: "+91 (India)" },
-  ];
-
-  const skillOptions = [
-    { value: "html", label: "HTML" },
-    { value: "css", label: "CSS" },
-    { value: "javascript", label: "JavaScript" },
-    { value: "react", label: "React" },
-  ];
-
   return (
     <section className="edit-profile">
+      {" "}
       <div className="container col-lg-8 my-5">
         <div className="profile-image-container text-center mb-4">
           <div className="profile-image-wrapper position-relative">
             <img
+              ref={imgView}
               src={formData.profileImage || "./images/avatar.jpg"}
               alt="Profile"
               className="profile-image rounded-circle"
@@ -105,7 +180,7 @@ const EditProfile = () => {
               id="imageUpload"
               accept="image/*"
               style={{ display: "none" }}
-              onChange={handleImageChange}
+              onChange={handleUpload}
             />
           </div>
         </div>
@@ -121,18 +196,18 @@ const EditProfile = () => {
                 id="name"
                 required={true}
                 value={formData?.name}
-                onChange={handleChange}
+                onChange={(e) => handleChange(e)}
               />
             </section>
             <section className="col-lg-6 col-12 p-2">
               <FormInput
                 label={t("auth.age")}
                 name="age"
-                type="number"
+                type="date"
                 id="age"
                 required={true}
                 value={formData?.age}
-                onChange={handleChange}
+                onChange={(e) => handleChange(e)}
               />
             </section>
             <section className="col-12 p-2">
@@ -143,49 +218,33 @@ const EditProfile = () => {
                 name="email"
                 id="email"
                 required={true}
-                value={formData.email}
-                onChange={handleChange}
+                disabled={user?.login_from !== "user"}
+                value={formData?.email}
+                onChange={(e) => handleChange(e)}
               />
             </section>
             <section className="col-lg-6 col-12 p-2">
-              <SelectFeild
-                label="Country"
+              <FormSelector
+                label={t("manageAccounts.country")}
+                id="country_id"
                 name="country_id"
-                value={formData.country_id}
-                onChange={handleChange}
-                options={countryOptions}
-                disabledOption="Select your country"
+                disabledOption={t("select")}
+                value={formData?.country_id}
+                onChange={(e) => handleChange(e)}
+                options={countries?.map((country) => ({
+                  name: country.name,
+                  value: country.id,
+                }))}
               />
             </section>
 
             <section className="col-lg-6 col-12 p-2">
-              <div className="d-flex">
-                <section className="col-auto ">
-                  <SelectFeild
-                    label={t("auth.phone")}
-                    name="phoneCountryCode"
-                    value={formData.phoneCountryCode}
-                    onChange={handleChange}
-                    options={options}
-                    disabledOption="code"
-                  />
-                </section>
-
-                <section
-                  className="flex-grow-1 p-2"
-                  style={{ marginTop: "15px" }}
-                >
-                  <FormInput
-                    label={t("auth.phone")}
-                    name="phoneNumber"
-                    type="text"
-                    id="phoneNumber"
-                    value={formData?.phoneNumber}
-                    onChange={handleChange}
-                    required={true}
-                  />
-                </section>
-              </div>
+              <PhoneField
+                formData={formData}
+                setFormData={setFormData}
+                value={`+${user?.phone_code}${user?.phone}`}
+                id="phone"
+              />
             </section>
 
             <section className="col-12 p-2">
@@ -195,8 +254,9 @@ const EditProfile = () => {
                 name="about"
                 id="about"
                 value={formData?.about}
-                onChange={handleChange}
+                onChange={(e) => handleChange(e)}
                 label={t("auth.about")}
+                rows={6}
               />
             </section>
 
@@ -205,9 +265,12 @@ const EditProfile = () => {
                 label={t("auth.interestes")}
                 id="interest"
                 name="interest"
-                options={[]}
-                selectedOptions={formData.skills}
-                handleChange={handleSkillsChange}
+                options={categories?.map((category) => ({
+                  value: category.id,
+                  label: category.name,
+                }))}
+                selectedOptions={selectedOptions}
+                handleChange={handleSelect}
               />
             </section>
 
@@ -216,9 +279,12 @@ const EditProfile = () => {
                 label={t("search.skills")}
                 id="skills"
                 name="skills"
-                selectedOptions={formData.skills}
-                handleChange={handleSkillsChange}
-                options={skillOptions}
+                selectedOptions={skillsSelectedOptions}
+                handleChange={handleSelectSkills}
+                options={skills?.map((skill) => ({
+                  label: skill?.name,
+                  value: skill?.id,
+                }))}
               />
             </section>
 
@@ -236,7 +302,9 @@ const EditProfile = () => {
                   type="button"
                   style={{
                     backgroundColor:
-                      formData?.is_freelance === 0 ? "#157347" : "#E8FAF4",
+                      formData?.is_freelance === 0
+                        ? "var(--main-color)"
+                        : "#E8FAF4",
                     color: formData?.is_freelance === 0 ? "#fff" : "#6c757d",
                   }}
                   className={`btn `}
@@ -248,7 +316,9 @@ const EditProfile = () => {
                   type="button"
                   style={{
                     backgroundColor:
-                      formData?.is_freelance === 1 ? "#157347" : "#E8FAF4",
+                      formData?.is_freelance === 1
+                        ? "var(--main-color)"
+                        : "#E8FAF4",
                     color: formData?.is_freelance === 1 ? "#fff" : "#6c757d",
                   }}
                   className={`btn`}
@@ -287,9 +357,11 @@ const EditProfile = () => {
             )}
 
             <section className="col-12 p-2">
-              <button type="submit" className="btn btn-success col-12">
-                Save Changes
-              </button>
+              <SubmitButton
+                className="edit_pofile_button"
+                loading={loading}
+                name={t("auth.edit")}
+              />
             </section>
           </section>
         </form>
