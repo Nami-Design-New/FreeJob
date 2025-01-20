@@ -1,10 +1,10 @@
 import { useTranslation } from "react-i18next";
 import { FaFile, FaUsers } from "react-icons/fa";
 import { Link } from "react-router";
-import { formatTimeDifference, getTimeDifference } from "../../utils/helper";
-import { Link } from "react-router";
 import { useSelector } from "react-redux";
 import { IconEdit, IconTrash } from "@tabler/icons-react";
+import { formatTimeDifference, getTimeDifference } from "../../utils/helper";
+import useTruncateText from "../../hooks/helpers/useTruncateText";
 
 export default function ProjectCard({ project }) {
   const { t } = useTranslation();
@@ -25,7 +25,6 @@ export default function ProjectCard({ project }) {
     timeDifference.minutes,
     t
   );
-
 
   return (
     <section className="project_card">
