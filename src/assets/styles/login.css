@@ -1,16 +1,18 @@
-.modal-backdrop {
-  z-index: 100;
-}
-.modal {
-  z-index: 100;
-}
+.auth_modal {
+  .modal-backdrop {
+    z-index: 100;
+  }
+  .modal {
+    z-index: 100;
+  }
 
-.modal-content {
-  padding: 0 !important;
-  overflow: hidden;
-}
-.modal-body {
-  padding: 0 !important;
+  .modal-content {
+    padding: 0 !important;
+    overflow: hidden;
+  }
+  .modal-body {
+    padding: 0 !important;
+  }
 }
 .close_modal {
   position: absolute;

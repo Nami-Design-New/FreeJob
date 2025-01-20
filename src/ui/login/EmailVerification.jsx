@@ -22,16 +22,7 @@ export default function EmailVerification({ otpData, setOtpData }) {
       code: otp,
     }));
   };
-  //   useEffect(() => {
-  //     if (timer > 0) {
-  //       const interval = setInterval(() => {
-  //         setTimer((prev) => prev - 1);
-  //       }, 1000);
-  //       return () => clearInterval(interval);
-  //     } else {
-  //       setIsDisabled(false);
-  //     }
-  //   }, []);
+
   const handleResend = () => {
     setTimer(30);
     setIsDisabled(true);
@@ -108,12 +99,12 @@ export default function EmailVerification({ otpData, setOtpData }) {
           }}
           renderInput={(props) => <input {...props} />}
         />
-        <div className="d-flex justify-conetent-center align-items-center flex-column">
+        {/* <div className="d-flex justify-conetent-center align-items-center flex-column">
           <p className="text-center"> {timer} sec</p>
           <button className="forget_pass btn " onClick={() => handleResend()}>
             code resent
           </button>
-        </div>
+        </div> */}
         <FormButton content="Next" type="submit" />
       </form>
     </div>

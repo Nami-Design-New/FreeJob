@@ -33,7 +33,6 @@ function ProfileTabs({ user, isMyAccount }) {
   const { data: myProjects, isLoading } = useGetUserProjects(user?.id);
   const { data: works } = useGetWorks(user?.id);
   const [showConfirmation, setShowConfirmation] = useState(false);
-  console.log(isMyAccount);
 
   const handleDelete = (id) => {
     setShowConfirmation(true);

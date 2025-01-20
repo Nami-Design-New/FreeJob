@@ -1,7 +1,7 @@
 import FormInput from "../form/FormInput";
 import FormButton from "../form/FormButton";
 import { useDispatch } from "react-redux";
-import { setStep } from "../../redux/slices/authModalSlice";
+import { closeModal, setStep } from "../../redux/slices/authModalSlice";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router";
@@ -9,6 +9,7 @@ import { useCookies } from "react-cookie";
 import axiosInstance from "../../utils/axios";
 import { toast } from "react-toastify";
 import { setIsLogged, setUser } from "../../redux/slices/authedUserSlice";
+import { Modal } from "react-bootstrap";
 
 export default function EmailLogin() {
   const { t } = useTranslation();
@@ -36,7 +37,7 @@ export default function EmailLogin() {
         toast.success(t("auth.loginSuccess"));
         dispatch(setUser(res.data.data));
         dispatch(setIsLogged(true));
-        navigate("/");
+
         setCookie("token", res.data.data.token, {
           path: "/",
           secure: true,
@@ -47,7 +48,7 @@ export default function EmailLogin() {
           secure: true,
           sameSite: "Strict",
         });
-        axios.defaults.headers.common[
+        axiosInstance.defaults.headers.common[
           "Authorization"
         ] = `${res.data.data.token}`;
       } else {
@@ -58,6 +59,7 @@ export default function EmailLogin() {
       throw new Error(error.message);
     } finally {
       setLoading(false);
+      dispatch(closeModal());
     }
   };
   return (

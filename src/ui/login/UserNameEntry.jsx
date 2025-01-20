@@ -51,8 +51,6 @@ export default function UserNameEntry({ setOtpData }) {
         }));
 
         dispatch(setStep(4));
-        console.log(res.data);
-        console.log(res.data.data);
       } else {
         toast.error(res.data.message);
       }
