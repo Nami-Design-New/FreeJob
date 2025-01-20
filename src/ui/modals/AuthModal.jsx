@@ -1,3 +1,5 @@
+import { useState } from "react";
+import { IoMdClose } from "react-icons/io";
 import { Modal } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { closeModal } from "../../redux/slices/authModalSlice";
@@ -7,10 +9,7 @@ import LoginOptions from "../login/LoginOptions";
 import LoginRightSide from "../login/LoginRightSide";
 import RegistrationForm from "../login/RegistrationForm";
 import UserNameEntry from "../login/UserNameEntry";
-import RegistrationForm2 from "../login/RegistrationForm2";
 import RegistrationForm3 from "../login/RegistrationForm3";
-import { IoMdClose } from "react-icons/io";
-import { useState } from "react";
 
 export default function AuthModal() {
   const show = useSelector((state) => state.authModal.show);
@@ -31,7 +30,7 @@ export default function AuthModal() {
     categories: [],
     skills: [],
   });
-  const [errors, setErrors] = useState({});
+
   const currentStep = useSelector((state) => state.authModal.currentStep);
   const renderStep = () => {
     switch (currentStep) {
@@ -73,9 +72,11 @@ export default function AuthModal() {
           >
             <IoMdClose />
           </button>
+
           <div className="d-none d-lg-flex col-6 p-0">
             <LoginRightSide />
           </div>
+
           <div className=" col-lg-6 p-0 h-100">
             {renderStep()}
             <p className="copy_right">

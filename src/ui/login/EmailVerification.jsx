@@ -75,7 +75,7 @@ export default function EmailVerification({ otpData, setOtpData }) {
           </button>
         </p>
       </header>
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} className="d-flex flex-column gap-2">
         <label className="mb-2 fw-semibold" htmlFor="">
           Enter The Code
         </label>

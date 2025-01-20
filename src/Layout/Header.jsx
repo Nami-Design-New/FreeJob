@@ -95,7 +95,7 @@ export default function Header() {
           )}
           {isLogin && <UserDropDown />}
         </div>
-        <button className="btn fs-4" onClick={toggleMenu}>
+        <button className="btn fs-4 toggler" onClick={toggleMenu}>
           <RiMenuUnfold4Fill />
         </button>
       </nav>
