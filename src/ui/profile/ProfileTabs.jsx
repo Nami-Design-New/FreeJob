@@ -3,21 +3,17 @@ import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { toast } from "react-toastify";
 import { Tab, Tabs } from "react-bootstrap";
-import { FaPlus } from "react-icons/fa";
-import { FaCirclePlus } from "react-icons/fa6";
-import { HiOutlineBadgeCheck } from "react-icons/hi";
-import { BsPatchCheck } from "react-icons/bs";
-import { deleteService } from "../services/apiServices";
 import { Link } from "react-router";
+import { deleteService } from "../../services/apiServices";
 import useUserServices from "../../hooks/services/useUserServices";
 import ProjectCard from "../cards/ProjectCard";
 import useGetWorks from "../../hooks/works/useGetWorks";
 import useGetUserProjects from "../../hooks/projects/useGetUserProjects";
-import ServiceCard from "../ui/cards/ServiceCard";
-import DataLoader from "../ui/DataLoader";
 import WorksTap from "./WorksTap";
 import CertificatesTab from "./CertificatesTab";
 import ConfirmationModal from "./ConfirmationModal";
+import ServiceCard from './../cards/ServiceCard';
+import DataLoader from './../DataLoader';
 
 function ProfileTabs({ user, isMyAccount }) {
   const queryClient = useQueryClient();
@@ -87,8 +83,7 @@ function ProfileTabs({ user, isMyAccount }) {
               ) : (
                 <>
                   {services?.map((service) => (
-                    <ServiceCard
-                      canEdit={isMyAccount}
+                    <ServiceCard                      canEdit={isMyAccount}
                       key={service.id}
                       service={service}
                       handleDelete={handleDelete}

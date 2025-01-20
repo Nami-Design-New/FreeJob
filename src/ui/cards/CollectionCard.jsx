@@ -1,13 +1,6 @@
 import { useTranslation } from "react-i18next";
 import { Link, useNavigate } from "react-router";
-// import { IconPencil, IconTrash } from "@tabler/icons-react";
 import { toast } from "react-toastify";
-// import {
-//   removeCollection,
-//   addCollectionToCart,
-// } from "../../services/apiCollections";
-// import ConfirmationModal from "../modals/ConfirmationModal";
-// import EditCollectionModal from "../modals/EditCollectionModal";
 import { formatTimeDifference, getTimeDifference } from "../../utils/helper";
 import { FaCalendar, FaTrash } from "react-icons/fa";
 import { CiEdit } from "react-icons/ci";
@@ -15,11 +8,9 @@ import { useState } from "react";
 const CollectionCard = ({ collection }) => {
   const { t } = useTranslation();
   const navigate = useNavigate();
-  //   const { refetch } = useCartList();
   const [showModal, setShowModal] = useState(false);
   const [showEditModal, setShowEditModal] = useState(false);
   const [loading, setLoading] = useState(false);
-  //   const queryClient = useQueryClient();
 
   const timeDifference = getTimeDifference(collection?.created_at);
   const startTime = formatTimeDifference(

@@ -1,5 +1,3 @@
-import { IconEdit, IconTrash } from "@tabler/icons-react";
-
 const WorkCard = ({
   work,
   canEdit,
@@ -24,17 +22,13 @@ const WorkCard = ({
                 e.stopPropagation();
                 onEditModalShow(work);
               }}
-            >
-              <IconEdit stroke={2} />
-            </button>
+            ></button>
             <button
               onClick={(e) => {
                 e.stopPropagation();
                 onDeleteModalShow(work?.id);
               }}
-            >
-              <IconTrash stroke={2} />
-            </button>
+            ></button>
           </div>
         )}
       </div>
