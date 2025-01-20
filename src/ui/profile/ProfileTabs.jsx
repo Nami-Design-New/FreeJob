@@ -1,29 +1,23 @@
-<<<<<<< HEAD:src/profile/ProfileTabs.jsx
 import { useQueryClient } from "@tanstack/react-query";
 import { useState } from "react";
-=======
->>>>>>> main:src/ui/profile/ProfileTabs.jsx
-import { Tabs, Tab } from "react-bootstrap";
 import { useTranslation } from "react-i18next";
-import useGetUserProjects from "../hooks/projects/useGetUserProjects";
-import useUserServices from "../hooks/services/useUserServices";
-import useGetWorks from "../hooks/works/useGetWorks";
+import useUserServices from "../../hooks/services/useUserServices";
+import useGetWorks from "../../hooks/works/useGetWorks";
+import useGetUserProjects from "../../hooks/projects/useGetUserProjects";
+import { deleteService } from "../../services/apiServices";
 import { toast } from "react-toastify";
-import { deleteService } from "../services/apiServices";
-import { Link } from "react-router";
-import {
-  IconBrandXamarin,
-  IconCirclePlus,
-  IconPlus,
-  IconRosetteDiscountCheck,
-} from "@tabler/icons-react";
-import ServiceCard from "../ui/cards/ServiceCard";
-import DataLoader from "../ui/DataLoader";
-import ProjectCard from "../ui/cards/ProjectCard";
-import CertificatesTab from "./CertificatesTab";
-import WorksTap from "./worksTap";
+import { Tab, Tabs } from "react-bootstrap";
+import { Link } from "react-router-dom";
+import { FaPlus } from "react-icons/fa";
+import { FaCirclePlus } from "react-icons/fa6";
+import ServiceCard from "../cards/ServiceCard";
+import DataLoader from "../DataLoader";
+import ProjectCard from "../cards/ProjectCard";
+import { HiOutlineBadgeCheck } from "react-icons/hi";
+import { BsPatchCheck } from "react-icons/bs";
+import WorksTap from "./WorksTap";
 import ConfirmationModal from "./ConfirmationModal";
-
+import CertificatesTab from "./CertificatesTab";
 function ProfileTabs({ user, isMyAccount }) {
   const queryClient = useQueryClient();
   const { t } = useTranslation();
@@ -63,7 +57,7 @@ function ProfileTabs({ user, isMyAccount }) {
               <>
                 {isMyAccount && (
                   <Link to="/edit-profile">
-                    <IconPlus stroke={1} /> {t("profile.noAbout")}
+                    <FaPlus stroke={1} /> {t("profile.noAbout")}
                   </Link>
                 )}
               </>
@@ -80,7 +74,7 @@ function ProfileTabs({ user, isMyAccount }) {
           <div className="services-container">
             {isMyAccount && (
               <Link to="/add-service" className="add-service">
-                <IconCirclePlus stroke={2} /> {t("profile.addService")}
+                <FaCirclePlus stroke={2} /> {t("profile.addService")}
               </Link>
             )}
 
@@ -115,7 +109,7 @@ function ProfileTabs({ user, isMyAccount }) {
           <div className="services-container">
             {isMyAccount && (
               <Link to="/add-project" className="add-service mb-3">
-                <IconCirclePlus stroke={2} /> {t("routes.add-project")}
+                <FaCirclePlus stroke={2} /> {t("routes.add-project")}
               </Link>
             )}
             {isLoading ? (
@@ -148,22 +142,22 @@ function ProfileTabs({ user, isMyAccount }) {
             <ul className="verify-list">
               <li className="d-flex gap-2">
                 {user?.verified === 1 ? (
-                  <IconRosetteDiscountCheck stroke={2} />
+                  <BsPatchCheck stroke={2} />
                 ) : (
-                  <IconBrandXamarin className="tabler-danger" stroke={2} />
+                  <BsPatchCheck className="tabler-danger" stroke={2} />
                 )}
                 {t("profile.personalIdentification")}
               </li>
               <li className="d-flex gap-2">
                 {user?.phone_verified === 1 ? (
-                  <IconRosetteDiscountCheck stroke={2} />
+                  <BsPatchCheck stroke={2} />
                 ) : (
-                  <IconBrandXamarin className="tabler-danger" stroke={2} />
+                  <BsPatchCheck className="tabler-danger" stroke={2} />
                 )}
                 {t("profile.phoneNumber")}
               </li>
               <li className="d-flex gap-2">
-                <IconRosetteDiscountCheck stroke={2} />
+                <BsPatchCheck stroke={2} />
                 {t("profile.emailAddress")}
               </li>
             </ul>

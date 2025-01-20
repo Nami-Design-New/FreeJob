@@ -7,6 +7,7 @@ import { editProjectRequest } from "../../services/apiProjects";
 import FormInput from "../form/FormInput";
 import FormTextArea from "../form/FormTextArea";
 import SubmitButton from "../form/SubmitButton";
+import useGetSettings from "../../hooks/projects/useGetSettings";
 
 const EditProjectOfferModal = ({ showModal, setShowModal, request }) => {
   const { data: settings } = useGetSettings();

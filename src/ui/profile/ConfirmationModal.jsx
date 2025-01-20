@@ -1,6 +1,6 @@
 import { Modal } from "react-bootstrap";
 import { useTranslation } from "react-i18next";
-import SubmitButton from "../ui/form/SubmitButton";
+import SubmitButton from "../form/SubmitButton";
 
 const ConfirmationModal = ({
   showModal,

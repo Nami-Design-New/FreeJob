@@ -11,6 +11,7 @@
 @import "./account.css";
 @import "./orders.css";
 @import "./chats.css";
+@import "./profile.css";
 
 :root {
   --main-color: #003912;
