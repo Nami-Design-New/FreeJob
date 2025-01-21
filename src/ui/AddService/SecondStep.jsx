@@ -6,15 +6,18 @@ import FormButton from "../form/FormButton";
 import FormInput from "../form/FormInput";
 import FormTextArea from "../form/FormTextArea";
 import AddMoreDevelopCard from "./AddMoreDevelep";
+import useGetSettings from "../../hooks/settings/useGetSettings"; 
 
 export default function SecondStep({ formData, setFormData, isEdit, setStep }) {
-  let fees = 20;
+  const { data: settings } = useGetSettings();
+  const [formValid, setFormValid] = useState(false);
+
   const developmentInitial = {
     description: "",
     price: "",
     duration: "",
   };
-  const [formValid, setFormValid] = useState(false);
+
   useEffect(() => {
     if (
       formData.images.length > 0 &&
@@ -25,6 +28,8 @@ export default function SecondStep({ formData, setFormData, isEdit, setStep }) {
       formData.instructions
     ) {
       setFormValid(true);
+    } else {
+      setFormValid(false);
     }
   }, [formData]);
 
@@ -70,6 +75,7 @@ export default function SecondStep({ formData, setFormData, isEdit, setStep }) {
       developments: [...prev.developments, developmentInitial],
     }));
   };
+
   const handleRemoveDev = (dev, index) => {
     if (dev.id) {
       setFormData((prevState) => ({
@@ -78,12 +84,13 @@ export default function SecondStep({ formData, setFormData, isEdit, setStep }) {
         delete_developments: [...prevState.delete_developments, dev.id],
       }));
     } else {
-      setFormData((prev) => ({
-        ...prev,
+      setFormData((prevState) => ({
+        ...prevState,
         developments: prev.developments.filter((_, i) => i !== index),
       }));
     }
   };
+
   const onDevChange = (e, index) => {
     const { name, value } = e.target;
     setFormData((prev) => ({
@@ -162,9 +169,13 @@ export default function SecondStep({ formData, setFormData, isEdit, setStep }) {
           readOnly
           className="col-md-6 mb-3"
           type="number"
-          label="Dues After Fees (20%)"
+          label={`Dues After Fees (${settings?.data?.service_percentage || 20}%)`}
           style={{ userSelect: "none" }}
-          value={(formData.price * (100 - fees)) / 100}
+          value={
+            formData.price && settings?.data?.service_percentage
+              ? (formData.price * (100 - settings?.data?.service_percentage)) / 100
+              : 0
+          }
         />
       </section>
       <FormInput
@@ -228,9 +239,10 @@ export default function SecondStep({ formData, setFormData, isEdit, setStep }) {
           <FaChevronLeft />
         </FormButton>
         <FormButton
-          className="add_service_button flex-grow-1 "
+          className="add_service_button flex-grow-1"
           content="Add and Confirm"
           type="submit"
+          disabled={!formValid} 
         />
       </section>
     </section>

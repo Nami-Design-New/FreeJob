@@ -1,7 +1,7 @@
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import CategoryCard from "../cards/CategoryCard";
-import useCategoriesList from "../../hooks/categories/useCategories";
+import useCategoriesList from "../../hooks/categories/useCategoriesList";
 import DataLoader from "../DataLoader";
 
 export default function CategoriesSwiper() {

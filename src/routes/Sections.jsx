@@ -3,7 +3,7 @@ import Breadcrumb from "react-bootstrap/Breadcrumb";
 import PaginationComponent from "../ui/PaginationComponent";
 import SectionCard from "../ui/cards/SectionCard";
 import ChooseCategoryPath from "../ui/modals/ChooseCategoryPath";
-import useCategoriesList from "../hooks/categories/useCategories";
+import useCategoriesList from "../hooks/categories/useCategoriesList";
 import DataLoader from "../ui/DataLoader";
 
 export default function Sections() {
