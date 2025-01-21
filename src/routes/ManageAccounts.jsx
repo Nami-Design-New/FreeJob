@@ -34,7 +34,7 @@ const ManageAccounts = () => {
         </section>
       ) : (
         <section className="empty_bank_account">
-          <img src="./images/bank-building.png" />
+          <img src="/images/bank-building.png" />
           <section className="add_bank_account">
             <h3>There Is No Bank Account</h3>
             <button

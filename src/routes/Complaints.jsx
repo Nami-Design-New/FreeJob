@@ -43,7 +43,7 @@ const Complaints = () => {
       {/* Header */}
       <div className="text-center mb-4">
         <img
-          src="./images/support.png"
+          src="/images/support.png"
           alt="hed-img"
           className="mb-3"
           style={{ maxWidth: "180px" }}

@@ -1,36 +1,34 @@
-import { useState } from "react";
-import { Dropdown } from "react-bootstrap";
 import { useTranslation } from "react-i18next";
 import { BsChatText, BsShare } from "react-icons/bs";
-import { IoMdInformationCircleOutline } from "react-icons/io";
+import { useSelector } from "react-redux";
 import { useNavigate } from "react-router";
 import OwnerComponent from "./OwnerComponent";
-import {
-  FaClipboard,
-  FaFacebook,
-  FaInstagram,
-  FaRegCopy,
-  FaSnapchat,
-  FaWhatsapp,
-} from "react-icons/fa";
-import { FaXTwitter } from "react-icons/fa6";
 
 export default function ServiseOwner({ service }) {
-  let instructions = true;
   const navigate = useNavigate();
   const { t } = useTranslation();
+  const authedUser = useSelector((state) => state.authedUser.user);
 
-  const currentPageLink = window.location.href;
-  const socialShareLinks = {
-    facebook: `https://www.facebook.com/sharer/sharer.php?u=${currentPageLink}`,
-    instagram: `https://www.instagram.com/?url=${currentPageLink}`,
-    twitter: `https://twitter.com/intent/tweet?url=${currentPageLink}`,
-    snapchat: `https://www.snapchat.com/share?url=${currentPageLink}`,
-    whatsapp: `https://wa.me/?text=${currentPageLink}`,
+  const handleCreateRoom = () => {
+    sessionStorage.setItem("request_type", "service");
+    sessionStorage.setItem("request_id", service?.id);
+    sessionStorage.setItem("owner_id", service?.user?.id);
+    sessionStorage.setItem("applied_id", authedUser?.id);
+    navigate(`/chat`);
   };
-  const handleCopy = (e) => {
-    e.stopPropagation();
-    navigator.clipboard.writeText(currentPageLink);
+
+  const handleShare = () => {
+    if (navigator.share) {
+      navigator
+        .share({
+          title: service.title,
+          url: window.location.href,
+        })
+        .then(() => t("Shared successfully"))
+        .catch((error) => t("Error sharing:", error));
+    } else {
+      alert(t("share_not_supported"));
+    }
   };
 
   return (
@@ -61,77 +59,10 @@ export default function ServiseOwner({ service }) {
       </ul>
 
       <section className="share_chat_buttons mt-4">
-        <Dropdown>
-          <Dropdown.Toggle className="butn" id="dropdown-basic">
-            <BsShare />
-            Share
-          </Dropdown.Toggle>
-          <Dropdown.Menu>
-            <h5>{t("services.share")}</h5>
-            <ul className="social">
-              <li>
-                <a
-                  href={socialShareLinks.facebook}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  <FaFacebook />
-                </a>
-                {t("services.facebook")}
-              </li>
-              <li>
-                <a
-                  href={socialShareLinks.instagram}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  <FaInstagram />
-                </a>
-                {t("services.instagram")}
-              </li>
-              <li>
-                <a
-                  href={socialShareLinks.twitter}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  <FaXTwitter />
-                </a>
-                {t("services.twitter")}
-              </li>
-              <li>
-                <a
-                  href={socialShareLinks.snapchat}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  <FaSnapchat />
-                </a>
-                {t("services.snapchat")}
-              </li>
-              <li>
-                <a
-                  href={socialShareLinks.whatsapp}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  <FaWhatsapp />
-                </a>
-                {t("services.whatsapp")}
-              </li>
-            </ul>
-            <p className="text-center">{t("services.orCopyLink")}</p>
-            <div className="link">
-              <button onClick={handleCopy}>
-                <FaRegCopy />
-              </button>
-              {/* <span onClick={handleCopy} id="url">
-                  <span>{currentPageLink}</span>
-                </span> */}
-            </div>
-          </Dropdown.Menu>
-        </Dropdown>
-        <button onClick={() => navigate("/chat")}>
+        <button className="butn" onClick={handleShare}>
+          <BsShare /> Share
+        </button>
+        <button onClick={handleCreateRoom}>
           <BsChatText />
           Chat
         </button>

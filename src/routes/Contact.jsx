@@ -26,7 +26,7 @@ const Contact = () => {
           {/* Left Side: Image */}
           <div className="col-md-6">
             <img
-              src="./images/contactus.png"
+              src="/images/contactus.png"
               alt="Contact Us"
               className="img-fluid rounded"
             />

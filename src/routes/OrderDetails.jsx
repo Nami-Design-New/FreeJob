@@ -11,12 +11,12 @@ const order = {
   title: "Songs and broadcasting application",
   price: "200",
   status: "ready",
-  imageUrl: "./images/order.png",
+  imageUrl: "/images/order.png",
   orderNumber: "123456",
   deliverTime: "30-12-2025",
   created_at: "30-12-2024",
   user: {
-    image: "./images/user.png",
+    image: "/images/user.png",
     name: "Mohamed Ahmed",
   },
 };

@@ -34,7 +34,7 @@ export default function HowToStart() {
             lang === "ar" ? "ar" : ""
           } howToStart_imgaeContainer d-none d-lg-block`}
         >
-          <img src="./images/card1.png" className="img-fluid" />
+          <img src="/images/card1.png" className="img-fluid" />
         </div>
       </div>
     </div>

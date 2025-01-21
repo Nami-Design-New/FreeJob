@@ -269,7 +269,7 @@ export default function AddProject() {
                   onChange={handleAttachments}
                 />
                 <section className="icon">
-                  <img src="./images/imageUpload.png" alt="icon" />
+                  <img src="/images/imageUpload.png" alt="icon" />
                 </section>
               </label>
               {formData?.project_files?.length > 0 && (
