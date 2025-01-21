@@ -5,18 +5,18 @@ import Masonry from "react-layout-masonry";
 import { useTranslation } from "react-i18next";
 
 const galleryItems = [
-  { id: 1, imageUrl: "./images/gallery1.png", alt: "Item 1" },
-  { id: 2, imageUrl: "./images/gallery2.png", alt: "Item 2" },
-  { id: 3, imageUrl: "./images/gallery7.png", alt: "Item 3" },
-  { id: 4, imageUrl: "./images/gallery9.png", alt: "Item 4" },
-  { id: 5, imageUrl: "./images/gallery4.png", alt: "Item 5" },
-  { id: 6, imageUrl: "./images/gallery5.png", alt: "Item 6" },
-  { id: 7, imageUrl: "./images/gallery8.png", alt: "Item 7" },
-  { id: 8, imageUrl: "./images/gallery10.jpg", alt: "Item 8" },
-  { id: 9, imageUrl: "./images/gallery3.png", alt: "Item 9" },
-  { id: 10, imageUrl: "./images/gallery6.png", alt: "Item 10" },
-  { id: 11, imageUrl: "./images/gallery12.jpg", alt: "Item 11" },
-  { id: 12, imageUrl: "./images/gallery11.jpg", alt: "Item 12" },
+  { id: 1, imageUrl: "/images/gallery1.png", alt: "Item 1" },
+  { id: 2, imageUrl: "/images/gallery2.png", alt: "Item 2" },
+  { id: 3, imageUrl: "/images/gallery7.png", alt: "Item 3" },
+  { id: 4, imageUrl: "/images/gallery9.png", alt: "Item 4" },
+  { id: 5, imageUrl: "/images/gallery4.png", alt: "Item 5" },
+  { id: 6, imageUrl: "/images/gallery5.png", alt: "Item 6" },
+  { id: 7, imageUrl: "/images/gallery8.png", alt: "Item 7" },
+  { id: 8, imageUrl: "/images/gallery10.jpg", alt: "Item 8" },
+  { id: 9, imageUrl: "/images/gallery3.png", alt: "Item 9" },
+  { id: 10, imageUrl: "/images/gallery6.png", alt: "Item 10" },
+  { id: 11, imageUrl: "/images/gallery12.jpg", alt: "Item 11" },
+  { id: 12, imageUrl: "/images/gallery11.jpg", alt: "Item 12" },
 ];
 
 export default function FramerScrollGallery() {

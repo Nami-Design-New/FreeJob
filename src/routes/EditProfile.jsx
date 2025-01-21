@@ -154,7 +154,7 @@ const EditProfile = () => {
           <div className="profile-image-wrapper position-relative">
             <img
               ref={imgView}
-              src={formData.profileImage || "./images/avatar.jpg"}
+              src={formData.profileImage || "/images/avatar.jpg"}
               alt="Profile"
               className="profile-image rounded-circle"
               style={{

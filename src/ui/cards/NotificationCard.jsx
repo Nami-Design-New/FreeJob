@@ -16,7 +16,7 @@ export default function NotificationCard({ notification }) {
         <div className="d-flex">
           <div className="notification me-3">
             <img
-              src="./images/bell.png"
+              src="/images/bell.png"
               alt="Notification Icon"
               className="notification-icon "
             />

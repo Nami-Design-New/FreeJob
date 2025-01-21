@@ -7,19 +7,19 @@ const workWithUs = [
     id: "1",
     title: "howItWorks.title1",
     description: "howItWorks.desc1",
-    imageUrl: "./images/icon1.png",
+    imageUrl: "/images/icon1.png",
   },
   {
     id: "2",
     title: "howItWorks.title2",
     description: "howItWorks.desc2",
-    imageUrl: "./images/icon2.png",
+    imageUrl: "/images/icon2.png",
   },
   {
     id: "3",
     title: "howItWorks.title3",
     description: "howItWorks.desc3",
-    imageUrl: "./images/icon3.png",
+    imageUrl: "/images/icon3.png",
   },
 ];
 export default function WorkWithUs() {

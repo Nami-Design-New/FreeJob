@@ -35,7 +35,7 @@ export default function BankCard({ bank }) {
     <>
       <section className="bank_card ">
         <section className="bank_img_container ">
-          <img src="./images/bank.png" />
+          <img src="/images/bank.png" />
         </section>
         <section className="bank_info">
           <h2>{bank?.user_name}</h2>

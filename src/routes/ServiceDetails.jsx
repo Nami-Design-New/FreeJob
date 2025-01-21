@@ -4,7 +4,6 @@ import { useTranslation } from "react-i18next";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router";
 import useCartList from "../hooks/cart/useCartList";
-import useGetComments from "../hooks/services/useGetComments";
 import useGetRates from "../hooks/services/useGetRates";
 import useServiceDetails from "../hooks/services/useServiceDetails";
 import { openModal } from "../redux/slices/authModalSlice";
@@ -23,7 +22,6 @@ import ServiseDetailsComponent from "../ui/servicesComponents/serviceDetails/Ser
 import ServiseOwner from "../ui/servicesComponents/serviceDetails/ServiseOwner";
 import ErrorPage from "./ErrorPage";
 
-
 export default function ServiceDetails() {
   const navigate = useNavigate();
 
@@ -31,12 +29,10 @@ export default function ServiceDetails() {
 
   const dispatch = useDispatch();
   const queryClient = useQueryClient();
- 
 
   const { data: service, isLoading } = useServiceDetails();
   const { data: rates } = useGetRates();
   const { data: cartQuery } = useCartList();
-  const { data: comments } = useGetComments();
 
   const cart = useSelector((state) => state.cart.cartList);
   const user = useSelector((state) => state.authedUser.user);
@@ -51,6 +47,7 @@ export default function ServiceDetails() {
     quantity: 1,
     developments: [],
   });
+
   useEffect(() => {
     if (cartQuery) {
       dispatch(
@@ -77,6 +74,7 @@ export default function ServiceDetails() {
       navigate("/services");
     }
   }, [service, user, navigate]);
+
   useEffect(() => {
     if (cart && service) {
       const itemFromCart = cart?.find(
@@ -135,6 +133,7 @@ export default function ServiceDetails() {
       }, 0) * newQuantity;
     setTotalPrice((service?.price || 0) * newQuantity + developmentsTotalPrice);
   };
+
   // decrease quantity
   const handleDecreaseQuantity = async () => {
     if (cartObj.quantity > 1) {
@@ -200,6 +199,7 @@ export default function ServiceDetails() {
             cartObj?.quantity || 0)
     );
   };
+
   // add to cart
   const handleAddToCart = async () => {
     if (!isLogged) {
@@ -213,6 +213,7 @@ export default function ServiceDetails() {
       }
     }
   };
+
   if (isLoading) {
     return <DataLoader />;
   }
@@ -241,13 +242,12 @@ export default function ServiceDetails() {
               formLoading={formLoading}
               totalPrice={totalPrice}
               inCart={inCart}
-           
             />
           </section>
           <section className="col-lg-4">
             <ServiseOwner service={service} />
             <button
-              onClick={() => navigate("/profile")}
+              onClick={() => navigate("/profile/" + service?.user?.id)}
               className="go_profile_btn"
             >
               Go to Profile

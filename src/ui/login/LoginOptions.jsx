@@ -11,15 +11,15 @@ export default function LoginOptions() {
       </header>
       <div className="buttons ">
         <button onClick={() => dispatch(setStep(2))}>
-          <img src="./images/envelope.png" />
+          <img src="/images/envelope.png" />
           <span>Continue with email</span>
         </button>
         <p>OR</p>
         <button>
-          <img src="./images/google.png" /> <span>Continue with Google</span>
+          <img src="/images/google.png" /> <span>Continue with Google</span>
         </button>
         <button>
-          <img src="./images/envelope.png" />
+          <img src="/images/envelope.png" />
           <span>Continue with email</span>
         </button>
       </div>

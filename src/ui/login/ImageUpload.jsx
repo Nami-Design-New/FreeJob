@@ -20,7 +20,7 @@ const ImageUpload = ({ formData, setFormData, image }) => {
     <section className="image-change-wrapper">
       <label className="upload">
         <section className="img-wrap">
-          <img ref={imgView} src="./images/avatar.jpg" alt="avatar" />
+          <img ref={imgView} src="/images/avatar.jpg" alt="avatar" />
         </section>
         <section className="plus">
           <FaEdit />

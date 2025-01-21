@@ -284,9 +284,10 @@ a {
 
 /* error page styles  */
 .cart-section {
-  padding: 60px 0;
+  margin-bottom: 60px;
 
   .error-section {
+    height: 100%;
     display: flex;
     justify-content: center;
     flex-direction: column;
@@ -339,7 +340,7 @@ a {
 .pay_modal {
   display: flex;
   flex-direction: column;
-  gap: 40px;
+  gap: 16px;
   padding: 1rem !important;
 
   .tab-content {
@@ -668,3 +669,8 @@ a {
     }
   }
 }
+
+.collection_modal_container .modal-content {
+  padding: 1rem !important;
+}
+

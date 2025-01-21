@@ -1,5 +1,5 @@
-import { useQuery } from "@tanstack/react-query";
 import { getCollections } from "../../services/apiCollections";
+import { useQuery } from "@tanstack/react-query";
 
 function useCollectionsList() {
   const { isLoading, data, error } = useQuery({

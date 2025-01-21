@@ -2,21 +2,18 @@ import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Modal } from "react-bootstrap";
 import { toast } from "react-toastify";
+import { useQueryClient } from "@tanstack/react-query";
+import { addToCollection } from "../../services/apiCollections";
 import FormInput from "../form/FormInput";
 import FormTextArea from "../form/FormTextArea";
 import SubmitButton from "../cart/SubmitCart";
 import FormSelector from "../form/FormSelector";
+import useCollectionsList from "./../../hooks/collections/useCollectionsList";
 
 function CollectionModal({ showModal, setShowModal, showDeleteFromCart }) {
   const { t } = useTranslation();
-
-  const collections = {
-    data: [
-      { id: 1, title: "Collection 1" },
-      { id: 2, title: "Collection 2" },
-    ],
-  };
-
+  const { data: collections } = useCollectionsList();
+  const queryClient = useQueryClient();
   const [formType, setFormType] = useState("existing");
   const [formData, setFormData] = useState({
     id: "",
@@ -27,7 +24,7 @@ function CollectionModal({ showModal, setShowModal, showDeleteFromCart }) {
   const [loading, setLoading] = useState(false);
 
   const collectionOptions =
-    collections?.data?.map((collection) => ({
+    collections?.map((collection) => ({
       name: collection.title,
       value: collection.id,
     })) || [];
@@ -81,7 +78,7 @@ function CollectionModal({ showModal, setShowModal, showDeleteFromCart }) {
           return;
         }
       }
-      // await addToCollection(requestBody, queryClient);
+      await addToCollection(requestBody, queryClient);
       toast.success(t("cart.addToCollectionSuccess"));
       handleCloseModal();
     } catch (error) {
@@ -114,7 +111,7 @@ function CollectionModal({ showModal, setShowModal, showDeleteFromCart }) {
           className="form"
         >
           <section className="d-flex flex-column gap-3 w-100">
-            <button
+            <div
               className="add-new-collection-btn"
               onClick={() =>
                 setFormType(() => (formType === "new" ? "existing" : "new"))
@@ -128,7 +125,7 @@ function CollectionModal({ showModal, setShowModal, showDeleteFromCart }) {
                     : "addNewCollection"
                 }`
               )}
-            </button>
+            </div>
             {formType === "existing" && (
               <>
                 <FormSelector
