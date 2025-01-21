@@ -21,6 +21,7 @@ import SubmitButton from "../ui/form/SubmitButton";
 import { useState } from "react";
 import { updateProject } from "../services/apiProjects";
 import { useQueryClient } from "@tanstack/react-query";
+// import AddRateModal from "../ui/modals/AddRateModal";
 
 export default function ProjectsOrdersDetails() {
   const lang = useSelector((state) => state.language.lang);
@@ -54,11 +55,11 @@ export default function ProjectsOrdersDetails() {
   const [showRateModal, setShowRateModal] = useState(false);
   const [loading, setLoading] = useState(false);
   const quryClient = useQueryClient();
-  const lang = useSelector((state) => state.language.lang);
+
   const handleupdateProject = async (status) => {
     try {
       status === "canceled" ? setBtn1Loading(true) : setLoading(true);
-      await updateProject(project?.id, status, quryClient);
+      await updateProject(order?.id, status, quryClient);
     } catch (error) {
       throw new Error(error.message);
     } finally {
@@ -172,11 +173,11 @@ export default function ProjectsOrdersDetails() {
           </section>
         </section>
       )}{" "}
-      <AddRateModal
-        order={project}
+      {/* <AddRateModal
+        order={order}
         showModal={showRateModal}
         setShowModal={setShowRateModal}
-      />
+      /> */}
     </>
   );
 }
