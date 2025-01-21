@@ -1,71 +1,41 @@
+import { useState } from "react";
 import InProgressCard from "../cards/InProgressCard";
+import PaginationComponent from "../PaginationComponent";
 
-const orderListItems = [
-  {
-    id: "1",
-    title: "Songs and broadcasting application",
-    price: "200",
-    status: "new",
-    imageUrl: "/images/order.png",
-    user: {
-      image: "/images/user.png",
-      name: "Mohamed Ahmed",
-    },
-  },
-  {
-    id: "2",
-    title: "Songs and broadcasting application",
-    price: "200",
-    status: "in_progress",
-    imageUrl: "/images/order.png",
-    user: {
-      image: "/images/user.png",
-      name: "Mohamed Ahmed",
-    },
-  },
-  {
-    id: "3",
-    title: "Songs and broadcasting application",
-    price: "200",
-    status: "canceled",
-    imageUrl: "/images/order.png",
-    user: {
-      image: "/images/user.png",
-      name: "Mohamed Ahmed",
-    },
-  },
-  {
-    id: "4",
-    title: "Songs and broadcasting application",
-    price: "200",
-    status: "received",
-    imageUrl: "/images/order.png",
-    user: {
-      image: "/images/user.png",
-      name: "Mohamed Ahmed",
-    },
-  },
-  {
-    id: "5",
-    title: "Songs and broadcasting application",
-    price: "200",
-    status: "ready",
-    imageUrl: "/images/order.png",
-    user: {
-      image: "/images/user.png",
-      name: "Mohamed Ahmed",
-    },
-  },
-];
+export default function InProgressOrdersList({
+  projectsOrdersList,
+  isLoading,
+}) {
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 10;
+  const startIndex = (currentPage - 1) * itemsPerPage;
+  console.log(
+    projectsOrdersList.data.slice(startIndex, startIndex + itemsPerPage)
+  );
+  let currentProducts = projectsOrdersList.data.slice(
+    startIndex,
+    startIndex + itemsPerPage
+  );
 
-export default function InProgressOrdersList() {
+  const handlePageChange = (pageNumber) => {
+    setCurrentPage(pageNumber);
+  };
   return (
     <section className="row g-4">
-      {orderListItems.map((order) => (
-        <section key={order.id}>
-          <InProgressCard order={order} />
-        </section>
-      ))}
+      {currentProducts.map((order) => {
+        return (
+          <section key={order.id}>
+            <InProgressCard order={order} />
+          </section>
+        );
+      })}
+
+      <PaginationComponent
+        totalItems={projectsOrdersList.total}
+        currentPage={currentPage}
+        onPageChange={handlePageChange}
+        itemsPerPage={itemsPerPage}
+      />
     </section>
   );
 }

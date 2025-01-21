@@ -12,8 +12,8 @@ import useGetUserProjects from "../../hooks/projects/useGetUserProjects";
 import WorksTap from "./WorksTap";
 import CertificatesTab from "./CertificatesTab";
 import ConfirmationModal from "./ConfirmationModal";
-import ServiceCard from './../cards/ServiceCard';
-import DataLoader from './../DataLoader';
+import ServiceCard from "./../cards/ServiceCard";
+import DataLoader from "./../DataLoader";
 
 function ProfileTabs({ user, isMyAccount }) {
   const queryClient = useQueryClient();
@@ -53,9 +53,7 @@ function ProfileTabs({ user, isMyAccount }) {
             ) : (
               <>
                 {isMyAccount && (
-                  <Link to="/edit-profile">
-                    {t("profile.noAbout")}
-                  </Link>
+                  <Link to="/edit-profile">{t("profile.noAbout")}</Link>
                 )}
               </>
             )}
@@ -75,24 +73,24 @@ function ProfileTabs({ user, isMyAccount }) {
               </Link>
             )}
 
-            <div className="services_grid">
-              {services?.length === 0 ? (
-                <div className="noDataFound">
-                  <h4>{t("profile.noService")}</h4>
-                </div>
-              ) : (
-                <>
-                  {services?.map((service) => (
-                    <ServiceCard                      canEdit={isMyAccount}
-                      key={service.id}
+            {services?.length === 0 ? (
+              <div className="noDataFound">
+                <h4>{t("profile.noService")}</h4>
+              </div>
+            ) : (
+              <>
+                {services?.map((service) => (
+                  <div key={service.id} className="services_grid">
+                    <ServiceCard
+                      canEdit={isMyAccount}
                       service={service}
                       handleDelete={handleDelete}
                       showPending={true}
-                    />
-                  ))}
-                </>
-              )}
-            </div>
+                    />{" "}
+                  </div>
+                ))}
+              </>
+            )}
           </div>
         </Tab>
 
@@ -137,19 +135,11 @@ function ProfileTabs({ user, isMyAccount }) {
           <div className="tab-pane">
             <ul className="verify-list">
               <li className="d-flex gap-2">
-                {user?.verified === 1 ? (
-                  <span>✔</span>
-                ) : (
-                  <span>✘</span>
-                )}
+                {user?.verified === 1 ? <span>✔</span> : <span>✘</span>}
                 {t("profile.personalIdentification")}
               </li>
               <li className="d-flex gap-2">
-                {user?.phone_verified === 1 ? (
-                  <span>✔</span>
-                ) : (
-                  <span>✘</span>
-                )}
+                {user?.phone_verified === 1 ? <span>✔</span> : <span>✘</span>}
                 {t("profile.phoneNumber")}
               </li>
               <li className="d-flex gap-2">

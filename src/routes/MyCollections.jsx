@@ -1,41 +1,40 @@
 import { useTranslation } from "react-i18next";
+import useCollectionsList from "../hooks/collections/useCollectionsList";
 import CollectionCard from "../ui/cards/CollectionCard";
+import DataLoader from "../ui/DataLoader";
+import EmptyData from "../ui/EmptyData";
 import DetailsHeader from "../ui/servicesComponents/serviceDetails/DetailsHeader";
-import { useLocation } from "react-router";
-
-const collections = [
-  { id: 1, title: "Sample Collection", created_at: new Date().toISOString() },
-  { id: 2, title: "Sample Collection", created_at: new Date().toISOString() },
-  { id: 3, title: "Sample Collection", created_at: new Date().toISOString() },
-  { id: 4, title: "Sample Collection", created_at: new Date().toISOString() },
-];
 
 const MyCollections = () => {
+  const { data: collections, isLoading } = useCollectionsList();
   const { t } = useTranslation();
-  const { pathname } = useLocation();
-  const segments = pathname
-    .split("/")
-    .filter((segment) => segment === "my-collections")[0]
-    .split("-")
-    .join(" ");
   return (
     <>
       <section className="myCollections">
         <section className="collections_header_container ">
           <section className="container-md">
-            <DetailsHeader links={segments} />
+            <DetailsHeader links={"My Collections"} />
           </section>
         </section>
 
-        <div className="container">
-          <div className="row g-2">
-            {collections && collections?.length > 0
-              ? collections?.map((collection) => (
+        {isLoading ? (
+          <DataLoader />
+        ) : (
+          <div className="container">
+            <div className="row g-2">
+              {collections && collections?.length > 0 ? (
+                collections?.map((collection) => (
                   <CollectionCard key={collection.id} collection={collection} />
                 ))
-              : null}
+              ) : (
+                <EmptyData>{t("collectionsEmpty")}</EmptyData>
+              )}{" "}
+              {/* {collections?.total > 10 && (
+                <PaginationComponent totalItems={collections.total} />
+              )} */}
+            </div>
           </div>
-        </div>
+        )}
       </section>
     </>
   );

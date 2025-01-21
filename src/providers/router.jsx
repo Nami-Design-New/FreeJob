@@ -94,7 +94,10 @@ export const router = createBrowserRouter([
           { path: "/add-project", element: <AddProject /> },
           { path: "/edit-project/:id", element: <AddProject /> },
           { path: "/projects-orders", element: <ProjectsOrders /> },
-          { path: "/projects-orders/:id", element: <ProjectsOrdersDetails /> },
+          {
+            path: "/projects-orders/:title",
+            element: <ProjectsOrdersDetails />,
+          },
           { path: "/profile", element: <Profile /> },
           { path: "/chat", element: <Chats /> },
           { path: "/edit-profile", element: <EditProfile /> },

@@ -4,6 +4,7 @@ import { getProjectByName } from "../../services/apiProjects";
 
 export default function useGetProject() {
   const { title } = useParams();
+
   const { isLoading, data, error } = useQuery({
     queryKey: ["project", title],
     queryFn: () => getProjectByName(title),
