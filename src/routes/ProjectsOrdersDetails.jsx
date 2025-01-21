@@ -1,6 +1,5 @@
 import { CiFileOn } from "react-icons/ci";
 import { useSelector } from "react-redux";
-
 import useGetProject from "../hooks/projects/useGetProject";
 import {
   ORDER_STATUS_AR,
@@ -39,7 +38,7 @@ export default function ProjectsOrdersDetails() {
     t
   );
 
-  let expectedEndDate = calculateExpectedEndDate(
+  const expectedEndDate = calculateExpectedEndDate(
     order?.created_at,
     order?.days
   );
@@ -51,6 +50,7 @@ export default function ProjectsOrdersDetails() {
     sessionStorage.setItem("applied_id", order?.user?.id);
     navigate(`/chat`);
   };
+
   const [btn1Loading, setBtn1Loading] = useState(false);
   const [showRateModal, setShowRateModal] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -61,26 +61,27 @@ export default function ProjectsOrdersDetails() {
       status === "canceled" ? setBtn1Loading(true) : setLoading(true);
       await updateProject(order?.id, status, quryClient);
     } catch (error) {
-      throw new Error(error.message);
+      console.error(error.message);
     } finally {
       setLoading(false);
       setBtn1Loading(false);
     }
   };
+
   return (
     <>
       {isLoading ? (
         <DataLoader />
       ) : (
         <section className="container">
-          <section className="row my-5  ">
-            <section className=" col-lg-8  mx-auto order_details">
-              <section className="order_card_details ">
+          <section className="row my-5">
+            <section className="col-lg-8 mx-auto order_details">
+              <section className="order_card_details">
                 <section className="order_img">
                   <img
                     className="img-fluid"
                     src={order.image}
-                    alt={order.name}
+                    alt={order.title}
                   />
                 </section>
                 <section className="order_info">
@@ -92,7 +93,7 @@ export default function ProjectsOrdersDetails() {
                     <section className="user_image_container">
                       <img
                         src={order.user.image}
-                        alt={order.user.name + "'s photo"}
+                        alt={`${order.user.name}'s photo`}
                       />
                     </section>
                     <section className="order_user_info">
@@ -106,7 +107,6 @@ export default function ProjectsOrdersDetails() {
                 </section>
                 <section className="order_status">
                   <p>
-                    {" "}
                     {lang === "ar"
                       ? ORDER_STATUS_AR[order?.status]
                       : ORDER_STATUS_EN[order?.status]}
@@ -118,9 +118,7 @@ export default function ProjectsOrdersDetails() {
                     aria-valuemin="0"
                     aria-valuemax="100"
                     style={{
-                      background: `radial-gradient(closest-side, #F1FFFA 79%, transparent 80% 100%),conic-gradient(${
-                        ORDER_STATUS_COLORS[order?.status]
-                      } ${ORDER_STATUS_PERSENTAGE[order?.status]}%, white 0) `,
+                      background: `radial-gradient(closest-side, #F1FFFA 79%, transparent 80% 100%),conic-gradient(${ORDER_STATUS_COLORS[order?.status]} ${ORDER_STATUS_PERSENTAGE[order?.status]}%, white 0)`,
                     }}
                   ></div>
                 </section>
@@ -144,7 +142,7 @@ export default function ProjectsOrdersDetails() {
                 </li>
               </ul>
               <section className="buttons_container">
-                <button onClick={handleCreateRoom} className="add ">
+                <button onClick={handleCreateRoom} className="add">
                   Chat Now
                 </button>
                 <div className="col-lg-9 order-buttons">
@@ -155,7 +153,7 @@ export default function ProjectsOrdersDetails() {
                         className="report-order"
                         name={t("recievedOrders.readyForDelevier")}
                         icon={<i className="fa-light fa-circle-check"></i>}
-                        onClick={() => handleupdateProject("ready")}
+                        onClick={() => handleUpdateProject("ready")}
                       />
                     )}
                   {user?.id === order?.user_id && order?.status === "ready" && (
@@ -164,7 +162,7 @@ export default function ProjectsOrdersDetails() {
                       className="report-order"
                       name={t("recievedOrders.recieve")}
                       icon={<i className="fa-light fa-circle-check"></i>}
-                      onClick={() => handleupdateProject("received")}
+                      onClick={() => handleUpdateProject("received")}
                     />
                   )}
                 </div>
@@ -181,3 +179,4 @@ export default function ProjectsOrdersDetails() {
     </>
   );
 }
+

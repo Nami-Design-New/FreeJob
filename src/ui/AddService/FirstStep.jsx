@@ -1,60 +1,58 @@
 import { useEffect, useState } from "react";
-import FormButton from "../form/FormButton";
 import FormInput from "../form/FormInput";
 import FormSelector from "../form/FormSelector";
 import FormTextArea from "../form/FormTextArea";
 import MultiSelect from "../form/MaltiSelect";
-const categories = [
-  {
-    id: "1",
-    name: "Category 1",
-    value: "1",
-    sub_categories: [
-      { id: "1", name: "subCategory1" },
-      { id: "2", name: "subCategory2" },
-      { id: "3", name: "subCategory3" },
-      { id: "4", name: "subCategory4" },
-    ],
-  },
-  {
-    id: "2",
-    name: "Category 2",
-    value: "2",
-    sub_categories: [
-      { id: "1", name: "subCategory5" },
-      { id: "2", name: "subCategory6" },
-    ],
-  },
-  {
-    id: "3",
-    name: "Category 3",
-    value: "3",
-    sub_categories: [
-      { id: "1", name: "subCategory9" },
-      { id: "2", name: "subCategory10" },
-      { id: "3", name: "subCategory11" },
-    ],
-  },
-];
+import useCategorieListWithSub from "../../hooks/categories/useCategorieListWithSub";
+import { useTranslation } from "react-i18next";
+//
+import FormButton from "../form/FormButton";
 
-export default function FirstStep({
-  setStep,
+const WizardStep1 = ({
   formData,
   setFormData,
+  setStep,
   categoryId,
   setCategoryId,
   skills,
   selectedOptions,
-  setSelectedOptions,
-}) {
+  setSelectedOptions
+}) => {
   const [formValid, setFormValid] = useState(false);
+  const { t } = useTranslation();
   const [subCategories, setSubCategories] = useState([]);
+  const { data: categories } = useCategorieListWithSub();
+
+  const handleChange = (e) => {
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value
+    });
+  };
 
   useEffect(() => {
     if (formData.title && formData.sub_category_id && formData.description) {
       setFormValid(true);
     }
   }, [formData]);
+
+  const handleNext = (e) => {
+    e.preventDefault();
+    if (formValid) {
+      setStep(2);
+    }
+  };
+
+  const handleSelect = (selectedItems) => {
+    setSelectedOptions(selectedItems);
+    const selectedValues = selectedItems
+      ? selectedItems?.map((option) => option.value)
+      : [];
+    setFormData({
+      ...formData,
+      skills: selectedValues
+    });
+  };
 
   useEffect(() => {
     if (categoryId) {
@@ -66,35 +64,6 @@ export default function FirstStep({
     }
   }, [categoryId, categories]);
 
-  const handleChange = (e) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value,
-    });
-  };
-
-  const handleSelect = (selectedItems) => {
-    setSelectedOptions(selectedItems);
-    const selectedValues = selectedItems
-      ? selectedItems?.map((option) => option.value)
-      : [];
-    console.log(selectedValues);
-    setFormData({
-      ...formData,
-      skills: selectedValues,
-    });
-  };
-
-  const handleNext = (e) => {
-    e.preventDefault();
-
-    if (formValid) {
-      setStep(2);
-      window.scrollTo({
-        top: 0,
-      });
-    }
-  };
   return (
     <section>
       <FormInput
@@ -173,4 +142,6 @@ export default function FirstStep({
       />
     </section>
   );
-}
+};
+
+export default WizardStep1;

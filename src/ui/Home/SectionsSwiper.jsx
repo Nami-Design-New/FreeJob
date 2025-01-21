@@ -3,7 +3,7 @@ import "swiper/css";
 import SectionCard from "../cards/SectionCard";
 import ShowAll from "../ShowAll";
 import { useTranslation } from "react-i18next";
-import useCategoriesList from "../../hooks/categories/useCategories";
+import useCategoriesList from "../../hooks/categories/useCategoriesList";
 import DataLoader from "../DataLoader";
 
 export default function SectionsSwiper() {

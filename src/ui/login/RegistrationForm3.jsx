@@ -7,7 +7,7 @@ import { useDispatch } from "react-redux";
 import { useCookies } from "react-cookie";
 import { setIsLogged, setUser } from "../../redux/slices/authedUserSlice";
 import useGetSkills from "./../../hooks/settings/useGetSkills";
-import useCategoriesList from "../../hooks/categories/useCategories";
+import useCategoriesList from "../../hooks/categories/useCategoriesList";
 import FormButton from "../form/FormButton";
 import MultiSelect from "../servicesComponents/MultiSelect";
 import BackButton from "./BackButton";
