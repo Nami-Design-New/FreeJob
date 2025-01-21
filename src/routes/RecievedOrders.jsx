@@ -1,12 +1,16 @@
 import { useState } from "react";
+import { CiFilter } from "react-icons/ci";
 import ProjectOrdersList from "../ui/orders/ProjectOrdersList";
 import SideBarOrdersFilter from "../ui/orders/SideBarOrdersFilter";
-import { CiFilter } from "react-icons/ci";
+import useServiceOrdersList from "./../hooks/orders/useServiceOrdersList";
+import DataLoader from "./../ui/DataLoader";
 
 const RecievedOrders = () => {
+  const { isLoading, data: serviceOrders } = useServiceOrdersList();
   const [isOpen, setIsOpen] = useState(false);
+
   function toggleMenu() {
-    setIsOpen(!isOpen);
+    setIsOpen((open) => !open);
   }
   return (
     <section className="container my-5">
@@ -19,7 +23,11 @@ const RecievedOrders = () => {
           <SideBarOrdersFilter isOpen={isOpen} setIsOpen={setIsOpen} />
         </section>
         <section className="col-12 col-md-9">
-          <ProjectOrdersList />
+          {isLoading ? (
+            <DataLoader />
+          ) : (
+            <ProjectOrdersList serviceOrders={serviceOrders} />
+          )}
         </section>
       </section>
     </section>
