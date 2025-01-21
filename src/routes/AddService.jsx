@@ -13,6 +13,8 @@ import useGetSkills from "../hooks/settings/useGetSkills";
 const AddServices = () => {
   const { data: skills } = useGetSkills();
   const { id } = useParams();
+  console.log(useParams());
+
   const totalSteps = 3;
   const queryClient = useQueryClient();
   const navigate = useNavigate();
@@ -77,32 +79,50 @@ const AddServices = () => {
     setProgress((step / totalSteps) * 100);
   }, [step]);
 
-  const dataToSendForUpdate = {
-    ...formData,
-    images: formData.images.filter((image) =>
-      image?.type?.startsWith("image/")
-    ),
-    developments: formData?.developments?.map((dev) => ({
-      id: dev?.id || null,
-      description: dev?.description,
-      price: dev?.price,
-      duration: dev?.duration,
-    })),
-  };
-
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
 
+    // check if data is changed
+    const isDataChanged =
+      JSON.stringify(formData) !== JSON.stringify(originalData);
+    if (!isDataChanged) {
+      toast.warning(t("addService.noChangesMade"));
+      setLoading(false);
+      return;
+    }
+
+    const dataToSendForUpdate = {
+      ...formData,
+      images: formData.images.filter((image) =>
+        image?.type?.startsWith("image/")
+      ),
+      developments: formData?.developments?.map((dev) => ({
+        id: dev?.id || null,
+        description: dev?.description,
+        price: dev?.price,
+        duration: dev?.duration,
+      })),
+    };
+
     try {
       if (service?.id) {
-        await updateService(dataToSendForUpdate, queryClient);
-        toast.success(t("addService.updateSuccess"));
+        const res = await updateService(dataToSendForUpdate, queryClient);
+        if (res.status === 200) {
+          toast.success(t("addService.updateSuccess"));
+          navigate("/profile");
+        } else {
+          toast.error(res.message);
+        }
       } else {
-        await createService(formData, queryClient);
-        toast.success(t("addService.success"));
+        const res = await createService(formData, queryClient);
+        if (res.status === 200) {
+          toast.success(t("addService.success"));
+          navigate("/profile");
+        } else {
+          toast.error(res.message);
+        }
       }
-      navigate("/profile");
     } catch (error) {
       toast.error(error.message);
     } finally {
