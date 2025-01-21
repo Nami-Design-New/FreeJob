@@ -6,9 +6,10 @@ import FormButton from "../form/FormButton";
 import FormInput from "../form/FormInput";
 import FormTextArea from "../form/FormTextArea";
 import AddMoreDevelopCard from "./AddMoreDevelep";
-import useGetSettings from "../../hooks/settings/useGetSettings"; 
+import useGetSettings from "../../hooks/settings/useGetSettings";
+import SubmitButton from "../form/SubmitButton";
 
-export default function SecondStep({ formData, setFormData, isEdit, setStep }) {
+export default function SecondStep({ formData, setFormData, isEdit, setStep, loading }) {
   const { data: settings } = useGetSettings();
   const [formValid, setFormValid] = useState(false);
 
@@ -86,7 +87,7 @@ export default function SecondStep({ formData, setFormData, isEdit, setStep }) {
     } else {
       setFormData((prevState) => ({
         ...prevState,
-        developments: prev.developments.filter((_, i) => i !== index),
+        developments: prevState.developments.filter((_, i) => i !== index),
       }));
     }
   };
@@ -169,11 +170,14 @@ export default function SecondStep({ formData, setFormData, isEdit, setStep }) {
           readOnly
           className="col-md-6 mb-3"
           type="number"
-          label={`Dues After Fees (${settings?.data?.service_percentage || 20}%)`}
+          label={`Dues After Fees (${
+            settings?.data?.service_percentage || 20
+          }%)`}
           style={{ userSelect: "none" }}
           value={
             formData.price && settings?.data?.service_percentage
-              ? (formData.price * (100 - settings?.data?.service_percentage)) / 100
+              ? (formData.price * (100 - settings?.data?.service_percentage)) /
+                100
               : 0
           }
         />
@@ -238,11 +242,10 @@ export default function SecondStep({ formData, setFormData, isEdit, setStep }) {
         >
           <FaChevronLeft />
         </FormButton>
-        <FormButton
-          className="add_service_button flex-grow-1"
-          content="Add and Confirm"
-          type="submit"
-          disabled={!formValid} 
+        <SubmitButton
+        loading={loading}
+          className={"add_service_button flex-grow-1"}
+          name={"Add and Confirm"}
         />
       </section>
     </section>

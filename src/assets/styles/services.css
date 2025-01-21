@@ -452,6 +452,10 @@
     width: auto;
     display: flex;
     align-items: center;
+    color: var(--white-color);
+    border-radius: 12px;
+    outline: none;
+    border: none;
     justify-content: center;
     background-color: var(--main-color);
 

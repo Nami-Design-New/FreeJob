@@ -100,7 +100,7 @@ const AddServices = () => {
     <section className="add-service">
       <div className="container">
         <div className="row justify-content-center">
-          <div className="col-lg-8 col-12 p-2">
+          <div className="col-lg-8 col-12 p-2 my-5">
             <ProgressBar striped animated now={progress} />
             <form className="form" onSubmit={handleSubmit}>
               {step === 1 && (

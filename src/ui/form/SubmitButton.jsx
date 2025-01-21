@@ -7,7 +7,7 @@ const SubmitButton = ({ loading, name, className, onClick, icon }) => {
       onClick={onClick}
       className={`${className}`}
     >
-      {icon && icon} {name}
+      {icon && icon} {name} {" "}
       <i className={loading ? "fa-solid fa-spinner fa-spin" : ""} />
     </button>
   );

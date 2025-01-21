@@ -79,16 +79,17 @@ function ProfileTabs({ user, isMyAccount }) {
               </div>
             ) : (
               <>
-                {services?.map((service) => (
-                  <div key={service.id} className="services_grid">
+                <div className="services_grid">
+                  {services?.map((service) => (
                     <ServiceCard
+                      key={service.id}
                       canEdit={isMyAccount}
                       service={service}
                       handleDelete={handleDelete}
                       showPending={true}
-                    />{" "}
-                  </div>
-                ))}
+                    />
+                  ))}
+                </div>
               </>
             )}
           </div>
