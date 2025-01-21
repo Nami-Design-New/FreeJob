@@ -49,6 +49,7 @@
     background-color: var(--white-color);
     transition: var(--main-transition);
     border-radius: 1rem !important;
+
     @media (max-width: 768px) {
       position: fixed;
       overflow-y: scroll;
@@ -68,12 +69,15 @@
       align-items: center;
       justify-content: space-between;
       padding: 1rem 0;
+
       @media (min-width: 768px) {
         display: none;
       }
+
       h2 {
         font-size: 1rem;
       }
+
       button {
         display: flex;
         align-items: center;
@@ -84,6 +88,7 @@
         border: none;
         outline: none;
         background-color: var(--main-color);
+
         svg {
           color: var(--white-color);
         }
@@ -94,21 +99,25 @@
       font-size: 1rem;
       font-weight: normal;
     }
+
     .sections_filter {
       margin: 1rem 0;
       padding: 1rem 0;
       border-bottom: 1px solid var(--border-color);
     }
+
     .accordion {
       .accordion-item {
         background-color: var(--white-color);
         border: none;
+
         .department_header {
           width: 100%;
           display: flex;
           align-items: center;
           gap: 10px;
           justify-content: space-between;
+
           label {
             flex: 1 0 0;
             display: flex;
@@ -116,9 +125,11 @@
             align-items: center;
             gap: 10px;
           }
+
           input[type="checkbox"] {
             accent-color: var(--main-color);
           }
+
           .accordion-button {
             width: 12px;
             height: 12px;
@@ -126,9 +137,11 @@
             background-color: var(--white-color);
             border: none;
             box-shadow: none;
+
             &::after {
               content: none;
             }
+
             .horizontal {
               position: absolute;
               top: 50%;
@@ -138,6 +151,7 @@
               background-color: var(--black-color);
               transform: translate(-50%, -50%);
             }
+
             &.collapsed {
               .vertical {
                 position: absolute;
@@ -150,6 +164,7 @@
                 transition: all 300ms ease-in-out;
               }
             }
+
             .vertical {
               position: absolute;
               top: 50%;
@@ -162,18 +177,22 @@
             }
           }
         }
+
         .accordion-collapse {
           width: 100%;
           position: relative;
+
           .accordion-body {
             width: 100%;
             display: flex;
             flex-direction: column;
             gap: 10px;
+
             .form-check {
               display: flex;
               align-items: center;
               gap: 0.5rem;
+
               input[type="checkbox"] {
                 accent-color: var(--main-color);
               }
@@ -622,17 +641,21 @@
     }
   }
 }
+
 .mySwiper {
   .swiper {
     width: 100%;
     aspect-ratio: 6 / 3.5;
+
     .swiper-slide {
       border-radius: 12px;
       overflow: hidden;
       background-color: var(--gray-background);
+
       .img {
         aspect-ratio: 6 / 3.5;
         width: 100%;
+
         img,
         video {
           height: 100%;
@@ -643,6 +666,7 @@
         }
       }
     }
+
     .swiper-pagination-fraction {
       top: 12px !important;
       left: 12px !important;
@@ -650,11 +674,13 @@
       height: 30px !important;
       direction: ltr !important;
       color: #fff;
+
       .swiper-pagination-current {
         font-size: 24px;
         font-weight: bold;
       }
     }
+
     .swiper-button-next,
     .swiper-button-prev {
       width: 36px;
@@ -662,13 +688,17 @@
       background: var(--main-color);
       color: #fff;
       border-radius: 50%;
+
       &::after {
         font-size: 16px;
       }
+
       opacity: 0;
       transition: var(--main-transation);
     }
+
     &:hover {
+
       .swiper-button-next,
       .swiper-button-prev {
         opacity: 1;
@@ -676,6 +706,7 @@
     }
   }
 }
+
 .service_card_owner {
   width: 100%;
   border-radius: 1rem;
@@ -699,6 +730,7 @@
     .user_img {
       width: 4rem;
       height: 4rem;
+      object-fit: cover;
       border-radius: 50%;
     }
 
@@ -946,7 +978,7 @@
     background-color: #f1fffa;
     color: var(--black-color);
     padding: 1rem 0;
-    margin: 0.5rem 0 2.2rem 0;
+    margin: 0rem 0 3rem 0;
 
     section {
       display: flex;

@@ -1,7 +1,8 @@
-import { useEffect, useRef, useState } from "react";
+import { useRef, useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { useSelector } from "react-redux";
-import { Link } from "react-router";
+import { createMessage } from "../../services/apiChats";
 import { formatMessageTime } from "../../utils/helper";
 
 const ChatRoom = ({ chat }) => {
@@ -29,6 +30,32 @@ const ChatRoom = ({ chat }) => {
     }
   }, [chat]);
 
+  // useEffect(() => {
+  //   const pusher = new Pusher("40956cc89171b3e710e6", {
+  //     cluster: "eu",
+  //   });
+
+  //   const channel = pusher.subscribe(`chat_${chat?.id}`);
+
+  //   channel.bind("new_message", function (data) {
+  //     pushMessage(data?.message);
+  //   });
+
+  //   return () => {
+  //     channel.unbind_all();
+  //     channel.unsubscribe();
+  //   };
+  // }, [chat?.id]);
+
+  // function pushMessage(message) {
+  //   if (message?.from_id === user?.id) {
+  //     return;
+  //   }
+  //   setMessages((prevMessages) => {
+  //     return [...prevMessages, message];
+  //   });
+  // }
+
   useEffect(() => {
     if (chatContainerRef.current) {
       chatContainerRef.current.scrollTop =
@@ -43,15 +70,6 @@ const ChatRoom = ({ chat }) => {
       }
     };
   }, []);
-
-  function pushMessage(message) {
-    if (message?.from_id === user?.id) {
-      return;
-    }
-    setMessages((prevMessages) => {
-      return [...prevMessages, message];
-    });
-  }
 
   const handleSendMessage = async (e) => {
     e.preventDefault();
@@ -79,7 +97,7 @@ const ChatRoom = ({ chat }) => {
     });
 
     try {
-      //   await createMessage(message);
+      await createMessage(message);
     } catch (error) {
       console.error("Error sending message:", error);
     } finally {
@@ -157,7 +175,6 @@ const ChatRoom = ({ chat }) => {
     const match = url.match(regex);
     return match ? match[1] : fileName;
   };
-
   return (
     <div className="chat-container">
       <div className="chat-head">
@@ -167,8 +184,8 @@ const ChatRoom = ({ chat }) => {
               chat?.apply
                 ? user?.id === chat?.apply?.id
                   ? chat?.owner?.image
-                  : chat?.apply?.image || "./images/avatar.jpg"
-                : "./images/avatar.jpg"
+                  : chat?.apply?.image || "/images/avatar.jpg"
+                : "/images/deleted-account.jpg"
             }
             alt="user"
           />
@@ -184,7 +201,7 @@ const ChatRoom = ({ chat }) => {
 
       {chat?.service && (
         <Link to={`/services/${chat?.service?.id}`} className="adItem">
-          <img src={chat?.service?.image || "./images/avatar.png"} alt="" />
+          <img src={chat?.service?.image || "/images/bann.webp"} alt="" />
           <p>{chat?.service?.title}</p>
         </Link>
       )}
@@ -227,8 +244,7 @@ const ChatRoom = ({ chat }) => {
                     <div className="doc_message">
                       <p>{extractTextAfterMessages(message?.message)}</p>
                       <div className="icon">
-                        {/* Replace with an alternative icon */}
-                        📄
+                        <i className="fa-regular fa-file"></i>
                       </div>
                     </div>
                   </Link>
@@ -263,10 +279,9 @@ const ChatRoom = ({ chat }) => {
               />
             ) : (
               <div className="file_place">
-                {/* Replace with an alternative icon */}
-                🗑️
-                <span
+                <i
                   style={{ cursor: "pointer" }}
+                  className="fa-solid fa-xmark"
                   onClick={() => {
                     setMessage({ ...message, message: "", type: "" });
                     setRecordingTime(0);
@@ -283,8 +298,7 @@ const ChatRoom = ({ chat }) => {
             )}
 
             <label className="files-input">
-              {/* Replace with an alternative icon */}
-              📎
+              <i className="fa-regular fa-paperclip"></i>
               <input
                 onChange={(e) => {
                   const file = e.target.files[0];
@@ -306,14 +320,12 @@ const ChatRoom = ({ chat }) => {
             </label>
             {isRecording ? (
               <label className="files-input" onClick={stopRecording}>
-                {/* Replace with an alternative icon */}
-                ⏸️
+                <i className="fa-solid fa-microphone-slash"></i>
                 <input type="" />
               </label>
             ) : (
               <label className="files-input" onClick={startRecording}>
-                {/* Replace with an alternative icon */}
-                🎤
+                <i className="fa-solid fa-microphone"></i>
                 <input type="" />
               </label>
             )}
@@ -323,8 +335,7 @@ const ChatRoom = ({ chat }) => {
           </div>
 
           <button type="submit" disabled={loading}>
-            {/* Replace with an alternative icon */}
-            📤
+            <i className="fa-regular fa-paper-plane-top"></i>
           </button>
         </form>
       </div>
