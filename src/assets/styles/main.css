@@ -12,6 +12,8 @@
 @import "./orders.css";
 @import "./chats.css";
 @import "./profile.css";
+@import "./portfolios.css";
+@import "./blogs.css";
 
 :root {
   --main-color: #003912;
@@ -502,7 +504,7 @@ a {
     input {
       display: none;
 
-      &:checked+label {
+      &:checked + label {
         border-color: var(--main-color);
       }
     }
@@ -675,7 +677,6 @@ a {
 .collection_modal_container .modal-content {
   padding: 1rem !important;
 }
-
 
 .pagination_component {
   display: flex;

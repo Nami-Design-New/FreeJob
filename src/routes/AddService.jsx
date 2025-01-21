@@ -13,6 +13,8 @@ import useGetSkills from "../hooks/settings/useGetSkills";
 const AddServices = () => {
   const { data: skills } = useGetSkills();
   const { id } = useParams();
+  console.log(useParams());
+
   const totalSteps = 3;
   const queryClient = useQueryClient();
   const navigate = useNavigate();
@@ -81,10 +83,46 @@ const AddServices = () => {
     e.preventDefault();
     setLoading(true);
 
+    // check if data is changed
+    const isDataChanged =
+      JSON.stringify(formData) !== JSON.stringify(originalData);
+    if (!isDataChanged) {
+      toast.warning(t("addService.noChangesMade"));
+      setLoading(false);
+      return;
+    }
+
+    const dataToSendForUpdate = {
+      ...formData,
+      images: formData.images.filter((image) =>
+        image?.type?.startsWith("image/")
+      ),
+      developments: formData?.developments?.map((dev) => ({
+        id: dev?.id || null,
+        description: dev?.description,
+        price: dev?.price,
+        duration: dev?.duration,
+      })),
+    };
+
     try {
-      await createService(formData, queryClient);
-      toast.success(t("addService.success"));
-      navigate("/profile");
+      if (service?.id) {
+        const res = await updateService(dataToSendForUpdate, queryClient);
+        if (res.status === 200) {
+          toast.success(t("addService.updateSuccess"));
+          navigate("/profile");
+        } else {
+          toast.error(res.message);
+        }
+      } else {
+        const res = await createService(formData, queryClient);
+        if (res.status === 200) {
+          toast.success(t("addService.success"));
+          navigate("/profile");
+        } else {
+          toast.error(res.message);
+        }
+      }
     } catch (error) {
       toast.error(error.message);
     } finally {
@@ -121,7 +159,7 @@ const AddServices = () => {
                   formData={formData}
                   setFormData={setFormData}
                   loading={loading}
-                  // isEdit={service?.id ? true : false}
+                  isEdit={service?.id ? true : false}
                 />
               )}
             </form>

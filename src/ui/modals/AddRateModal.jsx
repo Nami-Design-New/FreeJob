@@ -1,14 +1,3 @@
-
-// import React, { useState } from "react";
-// import { Modal } from "react-bootstrap";
-// import { useTranslation } from "react-i18next";
-// import { createRate } from "../../services/apiServices";
-// import TextField from "../form-elements/TextField";
-// import SubmitButton from "../form-elements/SubmitButton";
-// import { toast } from "react-toastify";
-// import { useNavigate } from "react-router-dom";
-
-import { Modal } from "bootstrap";
 import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
@@ -16,10 +5,9 @@ import { toast } from "react-toastify";
 import FormTextArea from "../form/FormTextArea";
 import SubmitButton from "../form/SubmitButton";
 import { createRate } from "../../services/apiServices";
+import { Modal } from "react-bootstrap";
 
-
-
-const AddRateModal = ({ showModal, setShowModal, order }) => {
+export default function AddRateModal({ showModal, setShowModal, order }) {
   const { t } = useTranslation();
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
@@ -53,10 +41,13 @@ const AddRateModal = ({ showModal, setShowModal, order }) => {
   };
 
   return (
-    <Modal show={showModal} onHide={() => setShowModal(false)} centered>
-
+    <Modal
+      className="rate_modal"
+      show={showModal}
+      onHide={() => setShowModal(false)}
+      centered
+    >
       <Modal.Header className="border-0" closeButton>
-
         <Modal.Title>{t("comments.addComment")}</Modal.Title>
       </Modal.Header>
       <Modal.Body className="add-work">
@@ -85,13 +76,11 @@ const AddRateModal = ({ showModal, setShowModal, order }) => {
                 ))}
               </div>
             </div>
-
+            <label>{t("comments.addComment")}</label>
             <FormTextArea
-
-         
-
               label={t("comments.addComment")}
               value={formData.comment}
+              rows={5}
               onChange={(e) =>
                 setFormData({ ...formData, comment: e.target.value })
               }
@@ -102,6 +91,4 @@ const AddRateModal = ({ showModal, setShowModal, order }) => {
       </Modal.Body>
     </Modal>
   );
-};
-
-export default AddRateModal;
+}

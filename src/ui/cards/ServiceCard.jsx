@@ -53,7 +53,7 @@ export default function ServiceCard({ service, canEdit, handleDelete }) {
           </button>
           {canEdit && (
             <div className="editService">
-              <Link to={`/edit-service/${service?.id}`}>
+              <Link to={`/edit-service/${service?.title}`}>
                 <i className="fa-regular fa-file-pen"></i>
               </Link>
               <Link onClick={() => handleDelete(service?.id)}>

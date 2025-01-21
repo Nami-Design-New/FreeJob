@@ -8,11 +8,18 @@ import FormTextArea from "../form/FormTextArea";
 import AddMoreDevelopCard from "./AddMoreDevelep";
 import useGetSettings from "../../hooks/settings/useGetSettings";
 import SubmitButton from "../form/SubmitButton";
+import { useTranslation } from "react-i18next";
 
-export default function SecondStep({ formData, setFormData, isEdit, setStep, loading }) {
+export default function SecondStep({
+  formData,
+  setFormData,
+  isEdit,
+  setStep,
+  loading,
+}) {
   const { data: settings } = useGetSettings();
   const [formValid, setFormValid] = useState(false);
-
+  const { t } = useTranslation();
   const developmentInitial = {
     description: "",
     price: "",
@@ -241,11 +248,15 @@ export default function SecondStep({ formData, setFormData, isEdit, setStep, loa
           }}
         >
           <FaChevronLeft />
-        </FormButton>
+        </FormButton>{" "}
         <SubmitButton
-        loading={loading}
+          loading={loading}
           className={"add_service_button flex-grow-1"}
-          name={"Add and Confirm"}
+          name={
+            isEdit
+              ? t("addService.updateService")
+              : t("addService.addAndConfirm")
+          }
         />
       </section>
     </section>

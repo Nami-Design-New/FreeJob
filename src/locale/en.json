@@ -497,7 +497,10 @@
     "readyForDelivery": "Ready for Delivery",
     "receive": "Receive",
     "RateService": "Rate Service",
-    "refuseReason": "Reason for Refusal"
+    "refuseReason": "Reason for Refusal",
+    "readyForDelevier": "Ready",
+    "recieve": "Receive",
+    "cancleOrder": "Cancel Order"
   },
   "projects": {
     "title": "Projects",

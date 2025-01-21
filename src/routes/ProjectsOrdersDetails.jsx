@@ -20,7 +20,7 @@ import SubmitButton from "../ui/form/SubmitButton";
 import { useState } from "react";
 import { updateProject } from "../services/apiProjects";
 import { useQueryClient } from "@tanstack/react-query";
-// import AddRateModal from "../ui/modals/AddRateModal";
+import AddRateModal from "../ui/modals/AddRateModal";
 
 export default function ProjectsOrdersDetails() {
   const lang = useSelector((state) => state.language.lang);
@@ -56,7 +56,7 @@ export default function ProjectsOrdersDetails() {
   const [loading, setLoading] = useState(false);
   const quryClient = useQueryClient();
 
-  const handleupdateProject = async (status) => {
+  const handleUpdateProject = async (status) => {
     try {
       status === "canceled" ? setBtn1Loading(true) : setLoading(true);
       await updateProject(order?.id, status, quryClient);
@@ -77,13 +77,6 @@ export default function ProjectsOrdersDetails() {
           <section className="row my-5">
             <section className="col-lg-8 mx-auto order_details">
               <section className="order_card_details">
-                <section className="order_img">
-                  <img
-                    className="img-fluid"
-                    src={order.image}
-                    alt={order.title}
-                  />
-                </section>
                 <section className="order_info">
                   <section className="order_data">
                     <h3>{order.title}</h3>
@@ -118,19 +111,25 @@ export default function ProjectsOrdersDetails() {
                     aria-valuemin="0"
                     aria-valuemax="100"
                     style={{
-                      background: `radial-gradient(closest-side, #F1FFFA 79%, transparent 80% 100%),conic-gradient(${ORDER_STATUS_COLORS[order?.status]} ${ORDER_STATUS_PERSENTAGE[order?.status]}%, white 0)`,
+                      background: `radial-gradient(closest-side, #F1FFFA 79%, transparent 80% 100%),conic-gradient(${
+                        ORDER_STATUS_COLORS[order?.status]
+                      } ${ORDER_STATUS_PERSENTAGE[order?.status]}%, white 0)`,
                     }}
                   ></div>
                 </section>
               </section>
+              <div>
+                <h6>{t("projects.projectDetails")}</h6>
+                <p>{order.description}</p>
+              </div>
               <ul className="order_add_info">
                 <li>
                   <h5>{t("recievedOrders.orderNumber")}</h5>
                   <p>#{order?.id}</p>
                 </li>
                 <li>
-                  <h5>{t("recievedOrders.orderValue")}:</h5>
-                  <p>{order.price}</p>
+                  <h5>{t("recievedOrders.orderValue")}</h5>
+                  <p>{order.price}$</p>
                 </li>
                 <li>
                   <h5>{t("recievedOrders.orderDate")}</h5>
@@ -141,11 +140,12 @@ export default function ProjectsOrdersDetails() {
                   <p>{expectedEndDate}</p>
                 </li>
               </ul>
-              <section className="buttons_container">
-                <button onClick={handleCreateRoom} className="add">
-                  Chat Now
+
+              <div className="buttons_container">
+                <button onClick={handleCreateRoom} className="chat">
+                  <i className="fa-regular fa-message-lines"></i>
                 </button>
-                <div className="col-lg-9 order-buttons">
+                <div className="order-buttons">
                   {user?.id !== order?.user_id &&
                     order?.status === "in_progress" && (
                       <SubmitButton
@@ -166,17 +166,16 @@ export default function ProjectsOrdersDetails() {
                     />
                   )}
                 </div>
-              </section>
+              </div>
             </section>
           </section>
         </section>
       )}{" "}
-      {/* <AddRateModal
+      <AddRateModal
         order={order}
         showModal={showRateModal}
         setShowModal={setShowRateModal}
-      /> */}
+      />
     </>
   );
 }
-
