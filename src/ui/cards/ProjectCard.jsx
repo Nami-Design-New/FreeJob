@@ -60,7 +60,7 @@ export default function ProjectCard({ project }) {
               </span>
               {(project?.status === "جديد" || project?.status === "new") && (
                 <>
-                  <Link to={`/edit-project/${project?.id}`}>
+                  <Link to={`/edit-project/${project?.title}`}>
                     <FaEdit />
                   </Link>
                   <button

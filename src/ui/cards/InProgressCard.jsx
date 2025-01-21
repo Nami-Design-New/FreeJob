@@ -71,8 +71,8 @@ export default function InProgressCard({ order }) {
               <section className="user">
                 <section className="user_image_container">
                   <img
-                    src={order.user.image}
-                    alt={order.user.name + "'s photo"}
+                    src={order.accepted_request.user.image}
+                    alt={order.accepted_request.user.name + "'s photo"}
                   />
                 </section>
                 <section className="order_user_info">

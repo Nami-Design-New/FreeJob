@@ -18,10 +18,8 @@ import useGetSkills from "../hooks/settings/useGetSkills";
 export default function AddProject() {
   const { id } = useParams();
   const { t } = useTranslation();
-
   const navigate = useNavigate();
   const queryClient = useQueryClient();
-  
   const [categoryId, setCategoryId] = useState("");
   const [loading, setLoading] = useState(false);
   const [selectedOptions, setSelectedOptions] = useState([]);
