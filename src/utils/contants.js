@@ -53,3 +53,5 @@ export const TRANSACTIONS_STATUS = [
   "withdraw_balance_request",
   "withdraw_balance_canceled",
 ];
+
+export const PAGE_SIZE = 10;

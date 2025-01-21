@@ -1,3 +1,4 @@
+
 // import React, { useState } from "react";
 // import { Modal } from "react-bootstrap";
 // import { useTranslation } from "react-i18next";
@@ -14,6 +15,8 @@ import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import FormTextArea from "../form/FormTextArea";
 import SubmitButton from "../form/SubmitButton";
+
+
 
 const AddRateModal = ({ showModal, setShowModal, order }) => {
   const { t } = useTranslation();
@@ -50,7 +53,9 @@ const AddRateModal = ({ showModal, setShowModal, order }) => {
 
   return (
     <Modal show={showModal} onHide={() => setShowModal(false)} centered>
+
       <Modal.Header className="border-0" closeButton>
+
         <Modal.Title>{t("comments.addComment")}</Modal.Title>
       </Modal.Header>
       <Modal.Body className="add-work">
@@ -79,7 +84,11 @@ const AddRateModal = ({ showModal, setShowModal, order }) => {
                 ))}
               </div>
             </div>
+
             <FormTextArea
+
+         
+
               label={t("comments.addComment")}
               value={formData.comment}
               onChange={(e) =>

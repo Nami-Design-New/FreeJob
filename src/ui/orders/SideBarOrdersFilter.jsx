@@ -3,20 +3,22 @@ import { FILTER_STATUS } from "../../utils/contants";
 import { useSearchParams } from "react-router";
 import { useEffect, useState } from "react";
 import { IoMdClose } from "react-icons/io";
+
 export default function SideBarOrdersFilter({ isOpen, setIsOpen }) {
   const { t } = useTranslation();
   const [searchParams, setSearchParams] = useSearchParams();
   const statusParam = searchParams.get("status") || "";
-  const page = Number(searchParams.get("page"));
   const [searchFilterData, setSearchFilterData] = useState(
     statusParam ? statusParam.split("-") : []
   );
+
   useEffect(() => {
     if (!searchParams.get("page")) {
       searchParams.append("page", 1);
       setSearchParams(searchParams);
     }
   }, [searchParams, setSearchParams]);
+
   const handleCheckboxChange = (e) => {
     setSearchFilterData((prevState) => {
       if (e.target.value === "all") {
@@ -54,6 +56,7 @@ export default function SideBarOrdersFilter({ isOpen, setIsOpen }) {
           "status",
           searchFilterData.filter((filter) => filter !== "all").join("-")
         );
+        searchParams.set("page", 1);
       }
       setSearchParams(searchParams);
     } else {
