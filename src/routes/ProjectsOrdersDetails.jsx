@@ -17,6 +17,10 @@ import {
 } from "../utils/helper";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
+import SubmitButton from "../ui/form/SubmitButton";
+import { useState } from "react";
+import { updateProject } from "../services/apiProjects";
+import { useQueryClient } from "@tanstack/react-query";
 
 export default function ProjectsOrdersDetails() {
   const lang = useSelector((state) => state.language.lang);
@@ -45,6 +49,22 @@ export default function ProjectsOrdersDetails() {
     sessionStorage.setItem("owner_id", user?.id);
     sessionStorage.setItem("applied_id", order?.user?.id);
     navigate(`/chat`);
+  };
+  const [btn1Loading, setBtn1Loading] = useState(false);
+  const [showRateModal, setShowRateModal] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const quryClient = useQueryClient();
+  const lang = useSelector((state) => state.language.lang);
+  const handleupdateProject = async (status) => {
+    try {
+      status === "canceled" ? setBtn1Loading(true) : setLoading(true);
+      await updateProject(project?.id, status, quryClient);
+    } catch (error) {
+      throw new Error(error.message);
+    } finally {
+      setLoading(false);
+      setBtn1Loading(false);
+    }
   };
   return (
     <>
@@ -126,11 +146,37 @@ export default function ProjectsOrdersDetails() {
                 <button onClick={handleCreateRoom} className="add ">
                   Chat Now
                 </button>
+                <div className="col-lg-9 order-buttons">
+                  {user?.id !== order?.user_id &&
+                    order?.status === "in_progress" && (
+                      <SubmitButton
+                        loading={loading}
+                        className="report-order"
+                        name={t("recievedOrders.readyForDelevier")}
+                        icon={<i className="fa-light fa-circle-check"></i>}
+                        onClick={() => handleupdateProject("ready")}
+                      />
+                    )}
+                  {user?.id === order?.user_id && order?.status === "ready" && (
+                    <SubmitButton
+                      loading={loading}
+                      className="report-order"
+                      name={t("recievedOrders.recieve")}
+                      icon={<i className="fa-light fa-circle-check"></i>}
+                      onClick={() => handleupdateProject("received")}
+                    />
+                  )}
+                </div>
               </section>
             </section>
           </section>
         </section>
-      )}
+      )}{" "}
+      <AddRateModal
+        order={project}
+        showModal={showRateModal}
+        setShowModal={setShowRateModal}
+      />
     </>
   );
 }

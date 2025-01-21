@@ -1,17 +1,16 @@
-import { useTranslation } from "react-i18next";
-import React from "react";
 import { Card } from "react-bootstrap";
 import "../../assets/styles/notifications.css";
+import { calculateDate } from "../../utils/helper";
 
 export default function NotificationCard({ notification }) {
-  const { t } = useTranslation();
-
   return (
-    <Card className="my-3 border-0 bg-light shadow-sm"
-    style={{
-      height: "fit-content",
-      border: "1px solid #ddd",
-    }}>
+    <Card
+      className="my-3 border-0 bg-light shadow-sm"
+      style={{
+        height: "fit-content",
+        border: "1px solid #ddd",
+      }}
+    >
       <Card.Body className="d-flex justify-content-between">
         <div className="d-flex">
           <div className="notification me-3">
@@ -22,8 +21,10 @@ export default function NotificationCard({ notification }) {
             />
           </div>
           <div>
-            <Card.Text className="fw-semibold">{t(notification.message)}</Card.Text>
-            <Card.Text>{t(notification.content)}</Card.Text>
+            <Card.Text className="fw-semibold">
+              {notification?.title}{" "}
+            </Card.Text>
+            <Card.Text>{notification?.description}</Card.Text>
           </div>
         </div>
         <small className="notification-time ">
@@ -33,7 +34,7 @@ export default function NotificationCard({ notification }) {
             className="me-1"
             style={{ width: "16px", height: "16px" }}
           />
-          {notification.time}
+          {calculateDate(notification?.created_at)}{" "}
         </small>
       </Card.Body>
     </Card>

@@ -318,7 +318,7 @@
     "profileEditedSuccessfully": "Profile edited successfully",
     "skills": "Skills",
     "country": "Country",
-    "puplidhedServices": "Puplised Services"  
+    "puplidhedServices": "Puplised Services"
   },
   "addService": {
     "serviceTitle": "Service Title",
@@ -722,5 +722,6 @@
   "likeIt": "Like it",
   "notLikeIt": "Unlike",
   "sort": "Sort",
-  "noFreelancers": "Sorry, there are no freelancers in this category."
+  "noFreelancers": "Sorry, there are no freelancers in this category.",
+  "noNotifications": "There is no notifications to be shown"
 }

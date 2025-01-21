@@ -366,12 +366,10 @@
     color: var(--secondary-color);
   }
 
-
   .project_content {
     display: flex;
     align-items: start;
     justify-content: space-between;
-
     p {
       font-size: 0.75rem;
       color: var(--secondary-color);
@@ -754,7 +752,8 @@
     align-items: start;
     gap: 0.5rem;
 
-    .img {}
+    .img {
+    }
 
     .title {
       display: flex;

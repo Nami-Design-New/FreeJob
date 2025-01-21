@@ -1,24 +1,22 @@
 import { useEffect, useRef, useState } from "react";
+import { Form } from "react-bootstrap";
 import { useTranslation } from "react-i18next";
 import { FaRegEdit } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 import useCategoriesList from "../hooks/categories/useCategories";
 import useCountriesList from "../hooks/settings/useCountries";
 import useGetSkills from "../hooks/settings/useGetSkills";
-import DataLoader from "../ui/DataLoader";
+import { setUser } from "../redux/slices/authedUserSlice";
 import FormInput from "../ui/form/FormInput";
+import FormSelector from "../ui/form/FormSelector";
 import FormTextArea from "../ui/form/FormTextArea";
 import MultiSelect from "../ui/form/MaltiSelect";
 import PasswordField from "../ui/form/PasswordField";
-import SelectFeild from "../ui/form/SelectField";
-import SubmitButton from "../ui/form/SubmitButton";
-import FormSelector from "../ui/form/FormSelector";
-import axiosInstance from "../utils/axios";
-import { toast } from "react-toastify";
-import { setUser } from "../redux/slices/authedUserSlice";
-import { useNavigate } from "react-router-dom";
 import PhoneField from "../ui/form/PhoneField";
-import { Form } from "react-bootstrap";
+import SubmitButton from "../ui/form/SubmitButton";
+import axiosInstance from "../utils/axios";
 
 const EditProfile = () => {
   const { t } = useTranslation();
@@ -27,7 +25,6 @@ const EditProfile = () => {
   const dispatch = useDispatch();
   const [loading, setLoading] = useState(false);
   const [formData, setFormData] = useState({});
-  const [options, setOptions] = useState([]);
   const [selectedOptions, setSelectedOptions] = useState([]);
   const [skillsSelectedOptions, setSkillsSelectedOptions] = useState([]);
   const [wantChangePassword, setWantChangePassword] = useState(false);
