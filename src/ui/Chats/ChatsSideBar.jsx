@@ -1,7 +1,6 @@
 import { useSelector } from "react-redux";
 import { useTranslation } from "react-i18next";
 import { formatMessageTime } from "../../utils/helper";
-// import { formatMessageTime } from "../../utils/helpers";
 
 const ChatSideBar = ({
   setShowChatsMenu,
@@ -47,8 +46,8 @@ const ChatSideBar = ({
               chat?.apply
                 ? chat?.apply?.id === user?.id
                   ? chat?.owner?.image
-                  : chat?.apply?.image || "./images/avatar.jpg"
-                : "./images/avatar.jpg"
+                  : chat?.apply?.image || "/images/avatar.jpg"
+                : "/images/deleted-account.jpg"
             }
             alt="user"
           />
@@ -63,7 +62,7 @@ const ChatSideBar = ({
             <p className="lastMessage unread">
               {chat?.last_message?.type !== "text" ? (
                 <div className="icon">
-                  <i className="fa fa-paperclip" aria-hidden="true"></i>
+                  <i className="fa fa-paperclip" aria-hidden="true"></i>{" "}
                   <span>{t("chat.attachment")}</span>
                 </div>
               ) : (
