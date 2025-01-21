@@ -5,13 +5,22 @@ import { formatTimeDifference, getTimeDifference } from "../../utils/helper";
 import { FaCalendar, FaTrash } from "react-icons/fa";
 import { CiEdit } from "react-icons/ci";
 import { useState } from "react";
+import {
+  addCollectionToCart,
+  removeCollection,
+} from "../../services/apiCollections";
+import { useQueryClient } from "@tanstack/react-query";
+import ConfirmationModal from "../profile/ConfirmationModal";
+import useCartList from "../../hooks/cart/useCartList";
+import EditCollectionModal from "../modals/EditCollectionModal";
 const CollectionCard = ({ collection }) => {
   const { t } = useTranslation();
   const navigate = useNavigate();
   const [showModal, setShowModal] = useState(false);
   const [showEditModal, setShowEditModal] = useState(false);
+  const { refetch } = useCartList();
   const [loading, setLoading] = useState(false);
-
+  const queryClient = useQueryClient();
   const timeDifference = getTimeDifference(collection?.created_at);
   const startTime = formatTimeDifference(
     timeDifference.years,
@@ -25,7 +34,7 @@ const CollectionCard = ({ collection }) => {
   const deleteCollection = async () => {
     setLoading(true);
     try {
-      //   await removeCollection(collection?.id, queryClient);
+      await removeCollection(collection?.id, queryClient);
       toast.success(t("cart.collectionDeletedSuccessfully"));
       setShowModal(false);
     } catch (error) {
@@ -37,12 +46,12 @@ const CollectionCard = ({ collection }) => {
 
   const handleAddtoCart = async () => {
     try {
-      //   const res = await addCollectionToCart(collection?.id, queryClient);
-      //   if (res?.code === 200) {
-      toast.success(t("cart.collectionAddedToCart"));
-      //   refetch();
-      navigate("/cart");
-      //   }
+      const res = await addCollectionToCart(collection?.id, queryClient);
+      if (res?.code === 200) {
+        toast.success(t("cart.collectionAddedToCart"));
+        refetch();
+        navigate("/cart");
+      }
     } catch (error) {
       console.log(error);
     }
@@ -67,7 +76,8 @@ const CollectionCard = ({ collection }) => {
           </h6>
           <ul>
             <li>
-              <i className="fa-regular fa-cubes"></i> <span>{}</span>
+              <i className="fa-regular fa-cubes"></i>{" "}
+              <span>{collection?.count}</span>
             </li>
             <li>
               <FaCalendar />
@@ -75,11 +85,11 @@ const CollectionCard = ({ collection }) => {
             </li>
           </ul>
           <button className="btn" onClick={handleAddtoCart}>
-            Add to Cart
+            {t("cart.addToCart")}
           </button>
         </section>
       </section>
-      {/* <ConfirmationModal
+      <ConfirmationModal
         showModal={showModal}
         setShowModal={setShowModal}
         buttonText={t("cart.deleteCollection")}
@@ -91,7 +101,7 @@ const CollectionCard = ({ collection }) => {
         setShowModal={setShowEditModal}
         showModal={showEditModal}
         collection={collection}
-      /> */}
+      />
     </section>
   );
 };

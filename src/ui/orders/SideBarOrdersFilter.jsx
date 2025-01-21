@@ -1,52 +1,65 @@
 import { useTranslation } from "react-i18next";
 import { FILTER_STATUS } from "../../utils/contants";
 import { useSearchParams } from "react-router";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { IoMdClose } from "react-icons/io";
 export default function SideBarOrdersFilter({ isOpen, setIsOpen }) {
   const { t } = useTranslation();
   const [searchParams, setSearchParams] = useSearchParams();
   const statusParam = searchParams.get("status") || "";
+  const page = Number(searchParams.get("page"));
   const [searchFilterData, setSearchFilterData] = useState(
     statusParam ? statusParam.split("-") : []
   );
-
-  function handleCheckboxChange(e) {
-    const { value, checked } = e.target;
-
+  useEffect(() => {
+    if (!searchParams.get("page")) {
+      searchParams.append("page", 1);
+      setSearchParams(searchParams);
+    }
+  }, [searchParams, setSearchParams]);
+  const handleCheckboxChange = (e) => {
     setSearchFilterData((prevState) => {
-      if (value === "all") {
-        return checked ? [...FILTER_STATUS] : [];
+      if (e.target.value === "all") {
+        if (e.target.checked) {
+          return FILTER_STATUS;
+        } else {
+          return [];
+        }
       } else {
-        const updatedStatuses = checked
-          ? [...prevState, value]
-          : prevState.filter((status) => status !== value);
+        const updatedStatuses = e.target.checked
+          ? [...prevState, e.target.value]
+          : prevState.filter((status) => status !== e.target.value);
+
         const allStatuses = FILTER_STATUS.filter((status) => status !== "all");
-        const areAllSelected = allStatuses.every((status) =>
+        const areAllStatusesChecked = allStatuses.every((status) =>
           updatedStatuses.includes(status)
         );
 
-        return areAllSelected
-          ? ["all", ...allStatuses]
-          : updatedStatuses.filter((s) => s !== "all");
+        if (areAllStatusesChecked) {
+          return ["all", ...updatedStatuses];
+        } else {
+          return updatedStatuses.filter((status) => status !== "all");
+        }
       }
     });
-  }
+  };
 
   function handleApplyFilters() {
-    const filteredStatuses = searchFilterData.filter(
-      (status) => status !== "all"
-    );
-
-    const newSearchParams = new URLSearchParams(searchParams);
-
-    if (filteredStatuses.length > 0) {
-      newSearchParams.set("status", filteredStatuses.join("-"));
+    searchFilterData.filter((filter) => filter !== "all").join("-");
+    if (searchFilterData.length > 0) {
+      if (searchFilterData.includes("all")) {
+        searchParams.delete("status");
+      } else {
+        searchParams.set(
+          "status",
+          searchFilterData.filter((filter) => filter !== "all").join("-")
+        );
+      }
+      setSearchParams(searchParams);
     } else {
-      newSearchParams.delete("status");
+      searchParams.delete("status");
+      setSearchParams(searchParams);
     }
-
-    setSearchParams(newSearchParams);
   }
 
   function handleSubmit(e) {
@@ -71,6 +84,7 @@ export default function SideBarOrdersFilter({ isOpen, setIsOpen }) {
                 id={status}
                 name="order-filter"
                 value={status}
+                checked={searchFilterData.includes(status)}
                 onChange={handleCheckboxChange}
               />
               <label htmlFor={status}>{t(`status.${status}`)}</label>

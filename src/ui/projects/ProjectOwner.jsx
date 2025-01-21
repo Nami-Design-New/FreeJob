@@ -1,8 +1,7 @@
 import { Badge } from "react-bootstrap";
 import { useTranslation } from "react-i18next";
-import { useNavigate } from "react-router";
-import OwnerComponent from "../servicesComponents/serviceDetails/OwnerComponent";
 import { formatTimeDifference, getTimeDifference } from "../../utils/helper";
+import OwnerComponent from "../servicesComponents/serviceDetails/OwnerComponent";
 
 export default function ServiseOwner({ project }) {
   console.log(project);

@@ -1,6 +1,6 @@
 import { CiFileOn } from "react-icons/ci";
 import { useSelector } from "react-redux";
-import { useNavigate } from "react-router";
+import { Link, useNavigate, useSearchParams } from "react-router";
 import {
   ORDER_STATUS_AR,
   ORDER_STATUS_COLORS,
@@ -9,10 +9,27 @@ import {
 } from "../../utils/contants";
 import { TbArrowGuide } from "react-icons/tb";
 import StarsRate from "../StartRate";
+import {
+  calculateDate,
+  formatTimeDifference,
+  getTimeDifference,
+} from "../../utils/helper";
+import { useTranslation } from "react-i18next";
 export default function InProgressCard({ order }) {
   const navigate = useNavigate();
+  const { t } = useTranslation();
   const lang = useSelector((state) => state.language.lang);
-
+  const [searchParams] = useSearchParams();
+  const page = Number(searchParams.get("page")) || 1;
+  const timeDifference = getTimeDifference(order.created_at);
+  const formattedTime = formatTimeDifference(
+    timeDifference.years,
+    timeDifference.months,
+    timeDifference.days,
+    timeDifference.hours,
+    timeDifference.minutes,
+    t
+  );
   return (
     <section className="">
       <section className="order_card">
@@ -23,37 +40,51 @@ export default function InProgressCard({ order }) {
               <p className={lang === "ar" ? "ar" : ""}>{order.price}$</p>
             </section>
             <p className="time">
-              <CiFileOn />3 monthes and 3 days ago
+              <CiFileOn />
+              {formattedTime}
             </p>
           </section>
 
           <section className="order_user">
-            <section className="user">
-              <section className="user_image_container">
-                <img
-                  src={order.user.image}
-                  alt={order.user.name + "'s photo"}
-                />
+            {" "}
+            <Link to={`/profile/${order?.user?.id}`}>
+              <section className="user">
+                {" "}
+                <section className="user_image_container">
+                  <img
+                    src={order?.user?.image}
+                    alt={order?.user?.name + "'s photo"}
+                  />
+                </section>
+                <section className="order_user_info">
+                  <p>{order.user.name}</p> <StarsRate rate={3} />
+                  <p>
+                    {" "}
+                    {t("projects.signUpDate")} :{" "}
+                    {calculateDate(order.user.created_at)}
+                  </p>
+                </section>
               </section>
-              <section className="order_user_info">
-                <p>{order.user.name}</p>
-                <StarsRate rate={3} />
-                <p>Regester from 2024</p>
-              </section>
-            </section>
+            </Link>
             <TbArrowGuide className="tb_arrow" />
-            <section className="user">
-              <section className="user_image_container">
-                <img
-                  src={order.user.image}
-                  alt={order.user.name + "'s photo"}
-                />
+            <Link to={`/profile/${order?.accepted_request?.user?.id}`}>
+              <section className="user">
+                <section className="user_image_container">
+                  <img
+                    src={order.user.image}
+                    alt={order.user.name + "'s photo"}
+                  />
+                </section>
+                <section className="order_user_info">
+                  <p>{order.accepted_request.user.name}</p>
+                  <StarsRate rate={order.accepted_request.user.rate} />
+                  <p>
+                    {t("projects.signUpDate")} :{" "}
+                    {calculateDate(order.accepted_request.user.created_at)}
+                  </p>
+                </section>
               </section>
-              <section className="order_user_info">
-                <p>{order.user.name}</p> <StarsRate rate={3} />
-                <p>Regester from 2024</p>
-              </section>
-            </section>
+            </Link>
           </section>
         </section>
         <section className="order_details_status ">
@@ -78,10 +109,10 @@ export default function InProgressCard({ order }) {
             ></div>{" "}
           </section>
           <button
-            onClick={() => navigate(order.id)}
+            onClick={() => navigate(`${order.title}?page=${page || 1}`)}
             className={`${lang === "ar" ? "ar" : ""} orders_details_button `}
           >
-            Order Details
+            {t("details")}
           </button>
         </section>
       </section>

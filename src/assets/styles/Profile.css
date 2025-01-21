@@ -329,9 +329,21 @@
       align-items: center;
       h4 {
         font-size: 42px;
-        color: var(--LightGray);
+        color: var(--main30-color);
         font-weight: 900;
       }
+    }
+  }
+  .noDataFound {
+    display: flex;
+    margin: 0 auto;
+    padding: 120px 0;
+    justify-content: center;
+    align-items: center;
+    h4 {
+      font-size: 42px;
+      color: var(--main30-color);
+      font-weight: 900;
     }
   }
   .services_grid {
@@ -340,18 +352,7 @@
     margin-top: 16px;
     gap: 16px;
     flex-wrap: wrap;
-    .noDataFound {
-      display: flex;
-      margin: 0 auto;
-      padding: 120px 0;
-      justify-content: center;
-      align-items: center;
-      h4 {
-        font-size: 42px;
-        color: var(--LightGray);
-        font-weight: 900;
-      }
-    }
+
     .service-card {
       flex: 0 1;
       min-width: calc(100% / 3 - 11px);
