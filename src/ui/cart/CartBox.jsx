@@ -1,20 +1,30 @@
+import { useQueryClient } from "@tanstack/react-query";
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { FaFile, FaMinus, FaPlus, FaTrash, FaUsers } from "react-icons/fa";
 import { Link } from "react-router";
-
 import { toast } from "react-toastify";
+import {
+  decreaseCartQuantity,
+  deleteCartItem,
+  increaseCartQuantity,
+  updateDevelopmentsInCart,
+} from "../../services/apiCart";
 
 function CartBox({ item, cartObjList }) {
   const { t } = useTranslation();
   const [totalPrice, setTotalPrice] = useState(0);
   const [formLoading, setFormLoading] = useState(0);
+  const queryClient = useQueryClient();
   const [boxDevs, setBoxDevs] = useState([]);
 
-  // Check for undefined item
   useEffect(() => {
     if (cartObjList && item) {
-      setBoxDevs(cartObjList.filter((i) => i.service_id === item.service_id));
+      setBoxDevs(
+        cartObjList.filter((i) => {
+          return i.service_id === item.service_id;
+        })
+      );
     }
   }, [item, cartObjList]);
 
@@ -25,19 +35,32 @@ function CartBox({ item, cartObjList }) {
     setTotalPrice(
       item?.quantity * item?.service?.price + developmentsPrice * item?.quantity
     );
-    if (!item || !item.service) return <div>Loading...</div>;
   }, [item]);
 
-  function handleDeleteBox(id) {
-    //   await deleteCartItem(id, queryClient);
-    toast.success(t("cart.deleteSuccess"));
-  }
+  const handleDeleteBox = async (id) => {
+    try {
+      await deleteCartItem(id, queryClient);
+      toast.success(t("cart.deleteSuccess"));
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
-  function increaseItemQuantity() {}
+  const increaseItemQuantity = async (id) => {
+    try {
+      setFormLoading(true);
+      await increaseCartQuantity(id, queryClient);
+    } catch (error) {
+      console.error(error);
+    } finally {
+      setFormLoading(false);
+    }
+  };
 
   const decreaseItemQuantity = async (id) => {
     try {
       setFormLoading(true);
+      await decreaseCartQuantity(id, queryClient);
     } catch (error) {
       console.error(error);
     } finally {
@@ -47,13 +70,13 @@ function CartBox({ item, cartObjList }) {
 
   const handleCheckboxChange = async (dev_id, cart_id) => {
     try {
-      // await updateDevelopmentsInCart(
-      //   {
-      //     cart_id: cart_id,
-      //     development_id: dev_id,
-      //   },
-      //   queryClient
-      // );
+      await updateDevelopmentsInCart(
+        {
+          cart_id: cart_id,
+          development_id: dev_id,
+        },
+        queryClient
+      );
     } catch (error) {
       console.log(error);
     }
@@ -69,9 +92,12 @@ function CartBox({ item, cartObjList }) {
         >
           <FaTrash />
         </button>
-        <div className="service-head col-md-6 col-lg-4">
-          <Link to={`/services/${item?.service?.id}`} className="img">
-            <img src={item?.service?.imageUrl} alt="service" />
+        <div className="service-head col-md-6 col-lg-4 p-0">
+          <Link
+            to={`/services/${item?.service?.id}/${item?.service?.title}`}
+            className="img"
+          >
+            <img src={item?.service?.image} alt="service" />
           </Link>{" "}
           <div className="owner">
             <div className="owner-avatar">

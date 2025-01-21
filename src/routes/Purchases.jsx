@@ -17,7 +17,7 @@ const purchases = {
         user: {
           id: 10,
           name: "John Doe",
-          image: "./images/avatar.jpg",
+          image: "/images/avatar.jpg",
         },
       },
       status: "received",
@@ -33,7 +33,7 @@ const purchases = {
         user: {
           id: 11,
           name: "Jane Smith",
-          image: "./images/avatar.jpg",
+          image: "/images/avatar.jpg",
         },
       },
       status: "in_progress",
@@ -49,7 +49,7 @@ const purchases = {
         user: {
           id: 11,
           name: "Jane Smith",
-          image: "./images/avatar.jpg",
+          image: "/images/avatar.jpg",
         },
       },
       status: "in_progress",

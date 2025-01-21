@@ -14,7 +14,7 @@ export default function ChooseCategoryPath({ show, close }) {
               <Link to="/services">
                 <div>
                   <img
-                    src="./images/toprojects.png"
+                    src="/images/toprojects.png"
                     alt=""
                     className="img-fluid"
                   />
@@ -27,7 +27,7 @@ export default function ChooseCategoryPath({ show, close }) {
                 <div>
                   <img
                     className="img-fluid"
-                    src="./images/toservices.png"
+                    src="/images/toservices.png"
                     alt=""
                   />
                 </div>

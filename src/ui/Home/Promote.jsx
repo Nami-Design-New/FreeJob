@@ -16,7 +16,7 @@ export default function Promote() {
         />
       </div>
       <div className="d-none d-md-block col-6 rounded overflow-hidden">
-        <img src="./images/card2.png" alt="" className="img-fluid rounded " />
+        <img src="/images/card2.png" alt="" className="img-fluid rounded " />
       </div>
     </div>
   );
