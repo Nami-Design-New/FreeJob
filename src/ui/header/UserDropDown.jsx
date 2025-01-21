@@ -93,19 +93,19 @@ export default function UserDropDown() {
           <img src={user.image} alt={`${user.name} 's Avatar`} />
         </Dropdown.Toggle>
 
-        <Dropdown.Menu>
+        <Dropdown.Menu >
           <section>
-            <Dropdown.Item>
+            <Dropdown.Item as={"p"}>
               <Link to="/profile">
                 <FaUser /> {user.name}
               </Link>
             </Dropdown.Item>
-            <Dropdown.Item>
+            <Dropdown.Item as={"p"}>
               <Link to="/balance">
                 <FaRegMoneyBillAlt /> {t("navbar.balance")}
               </Link>
             </Dropdown.Item>
-            <Dropdown.Item>
+            <Dropdown.Item as={"p"}>
               <Link to="/manage-accounts">
                 <BsBank2 />
                 {t("navbar.manageAccounts")}
@@ -113,56 +113,61 @@ export default function UserDropDown() {
             </Dropdown.Item>
           </section>
           <section>
-            <Dropdown.Item>
+            <Dropdown.Item as={"p"}>
               <Link to="/edit-profile">
                 <FaEdit /> {t("navbar.editProfile")}
               </Link>
             </Dropdown.Item>
-            <Dropdown.Item>
+            <Dropdown.Item as={"p"}>
               <Link to="/contact">
                 <BiSupport /> {t("navbar.contact")}
               </Link>
             </Dropdown.Item>
-            <Dropdown.Item>
+            <Dropdown.Item as={"p"}>
               <Link to="/my-collections">
                 <MdCollections /> {t("navbar.myCollections")}
               </Link>
             </Dropdown.Item>
-            <Dropdown.Item>
+            <Dropdown.Item as={"p"}>
               <Link to="/complaints-suggestions">
                 <IoMdInformationCircleOutline /> {t("navbar.report")}
               </Link>
             </Dropdown.Item>
-            <Dropdown.Item>
+            <Dropdown.Item as={"p"}>
               {" "}
               <Link to="/notifications">
                 <BsBell /> {t("navbar.allNotifications")}
               </Link>
             </Dropdown.Item>
-            <Dropdown.Item>
+            <Dropdown.Item as={"p"}>
               <Link to="/chat">
                 <BsChat /> {t("chat.chats")}
               </Link>
             </Dropdown.Item>
-            <Dropdown.Item>
+            <Dropdown.Item as={"p"}>
               {" "}
               <Link to="/cart">
                 <BsCart /> {t("navbar.cart")}
               </Link>
             </Dropdown.Item>
-            <Dropdown.Item>
+            <Dropdown.Item as={"p"}>
               <Link to="/freelancers">
                 <BsSearch /> {t("navbar.freelancers")}
               </Link>
             </Dropdown.Item>
-            <Dropdown.Item>
+            <Dropdown.Item as={"p"}>
+              <Link to="/bids">
+                <BsSearch /> {t("navbar.bids")}
+              </Link>
+            </Dropdown.Item>
+            <Dropdown.Item as={"p"}>
               <Link to={"/edit-profile"} onClick={handleShowDeleteAccountModal}>
                 <FaTrash /> {t("navbar.deleteAccount")}
               </Link>
             </Dropdown.Item>
           </section>
           <section>
-            <Dropdown.Item>
+            <Dropdown.Item as={"p"}>
               <Link onClick={performLogout}>
                 <BsBoxArrowRight /> {t("navbar.logout")}
               </Link>
