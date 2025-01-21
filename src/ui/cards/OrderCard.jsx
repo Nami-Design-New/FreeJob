@@ -1,16 +1,29 @@
 import { CiFileOn } from "react-icons/ci";
 import { useSelector } from "react-redux";
-import { useNavigate } from "react-router";
+import { useNavigate, useSearchParams } from "react-router";
 import {
   ORDER_STATUS_AR,
   ORDER_STATUS_COLORS,
   ORDER_STATUS_EN,
   ORDER_STATUS_PERSENTAGE,
 } from "../../utils/contants";
+import { useTranslation } from "react-i18next";
+import { formatTimeDifference, getTimeDifference } from "../../utils/helper";
 
 export default function OrderCard({ order }) {
   const navigate = useNavigate();
+  const [searchParams] = useSearchParams();
   const lang = useSelector((state) => state.language.lang);
+  const { t } = useTranslation();
+  const timeDifference = getTimeDifference(order.created_at);
+  const formattedTime = formatTimeDifference(
+    timeDifference.years,
+    timeDifference.months,
+    timeDifference.days,
+    timeDifference.hours,
+    timeDifference.minutes,
+    t
+  );
   return (
     <section className="position-relative">
       <section className="order_card ">
@@ -33,7 +46,8 @@ export default function OrderCard({ order }) {
             <section className="order_user_info">
               <p>{order.user.name}</p>
               <p>
-                <CiFileOn />3 monthes and 3 days ago
+                <CiFileOn />
+                {formattedTime}
               </p>
             </section>
           </section>
@@ -60,10 +74,12 @@ export default function OrderCard({ order }) {
         </section>
       </section>
       <button
-        onClick={() => navigate(order.id)}
+        onClick={() =>
+          navigate(`${order.id}?page=${searchParams.get("page") || 1}`)
+        }
         className={`${lang === "ar" ? "ar" : ""} order_details_button`}
       >
-        Order Details
+        {t("details")}
       </button>
     </section>
   );
