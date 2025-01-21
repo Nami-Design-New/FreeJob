@@ -550,7 +550,8 @@
     "refused": "Rejected",
     "offer": "Offers",
     "addFirst": "Add First Offer",
-    "gotoProfile": "Go to Profile"
+    "gotoProfile": "Go to Profile",
+    "publishedScience": "Published"
   },
   "chat": {
     "block": "Block",
