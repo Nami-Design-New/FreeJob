@@ -77,13 +77,31 @@ const AddServices = () => {
     setProgress((step / totalSteps) * 100);
   }, [step]);
 
+  const dataToSendForUpdate = {
+    ...formData,
+    images: formData.images.filter((image) =>
+      image?.type?.startsWith("image/")
+    ),
+    developments: formData?.developments?.map((dev) => ({
+      id: dev?.id || null,
+      description: dev?.description,
+      price: dev?.price,
+      duration: dev?.duration,
+    })),
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
 
     try {
-      await createService(formData, queryClient);
-      toast.success(t("addService.success"));
+      if (service?.id) {
+        await updateService(dataToSendForUpdate, queryClient);
+        toast.success(t("addService.updateSuccess"));
+      } else {
+        await createService(formData, queryClient);
+        toast.success(t("addService.success"));
+      }
       navigate("/profile");
     } catch (error) {
       toast.error(error.message);
@@ -121,7 +139,7 @@ const AddServices = () => {
                   formData={formData}
                   setFormData={setFormData}
                   loading={loading}
-                  // isEdit={service?.id ? true : false}
+                  isEdit={service?.id ? true : false}
                 />
               )}
             </form>
