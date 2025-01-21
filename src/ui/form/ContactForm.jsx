@@ -1,46 +1,46 @@
-import React from "react";
+import { useState } from "react";
+import { useTranslation } from "react-i18next";
+import { PhoneInput } from "react-international-phone";
+import FormInput from "./FormInput";
+import SubmitButton from "./SubmitButton";
 
 const ContactForm = () => {
+  const { t } = useTranslation();
+  const [phone, setPhone] = useState();
+  function handlePhoneChange(value) {
+    setPhone(value);
+  }
   return (
-    <form className="p-4">
+    <form className="">
       <div className="row mb-3">
-        <div className="col-md-6">
-          <label className="form-label">Full Name</label>
-          <input
-            style={{ backgroundColor: "#E8FAF4" }}
-            type="text"
-            className="form-control border-0"
-          />
-        </div>
-        <div className="col-md-6">
-          <label className="form-label">Email Address</label>
-          <input
-            style={{ backgroundColor: "#E8FAF4" }}
-            type="email"
-            className="form-control border-0"
-          />
-        </div>
+        <FormInput
+          label={t("auth.name")}
+          style={{ backgroundColor: "#E8FAF4" }}
+          type="text"
+          className="form-control border-0"
+        />
+
+        <FormInput
+          label={t("auth.email")}
+          style={{ backgroundColor: "#E8FAF4" }}
+          type="email"
+          className="form-control border-0"
+        />
       </div>
       <div className="mb-3">
-        <label className="form-label">Phone Number</label>
-        <div className="input-group">
-          <select
-            className="form-select border-0"
-            style={{
-              maxWidth: "80px",
-              marginRight: "20px",
-              backgroundColor: "#E8FAF4",
-            }}
-          >
-            <option value="+1">+1 (US)</option>
-            <option value="+44">+44 (UK)</option>
-          </select>
-          <input
-            style={{ backgroundColor: "#E8FAF4" }}
-            type="text"
-            className="form-control border-0"
-          />
-        </div>
+        <PhoneInput
+          required
+          defaultCountry="sa"
+          onChange={(value) => handlePhoneChange(value)}
+          style={{ width: "100%", marginTop: "0.5rem" }}
+          inputStyle={{
+            border: "none",
+            width: "100%",
+            marginLeft: "0.75rem",
+            borderRadius: "0.5rem",
+            backgroundColor: "#E8FAF4",
+          }}
+        />
       </div>
       <div className="mb-3">
         <label className="form-label">Message</label>
@@ -50,9 +50,7 @@ const ContactForm = () => {
           rows="4"
         ></textarea>
       </div>
-      <button type="submit" className="btn btn-success w-100">
-        Submit
-      </button>
+      <SubmitButton type="submit" name={t("auth.send")} className="order-now" />
     </form>
   );
 };

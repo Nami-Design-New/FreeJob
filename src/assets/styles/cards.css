@@ -120,6 +120,10 @@
       font-size: 1rem;
       color: var(--secondary-color);
       line-height: 1.5rem;
+      display: -webkit-box;
+      -webkit-box-orient: vertical;
+      -webkit-line-clamp: 1;
+      overflow: hidden;
     }
 
     p {
@@ -172,12 +176,14 @@
       }
     }
   }
+
   .service_settings {
     display: flex;
     flex-direction: column;
     align-items: center;
     padding: 5px;
     gap: 1rem;
+
     button {
       border: 0.25rem solid var(--border-color);
       background-color: var(--black-color);
@@ -195,6 +201,7 @@
       display: flex;
 
       gap: 8px;
+
       a {
         color: var(--black-color);
         width: 32px;
@@ -207,6 +214,7 @@
         color: var(--main-color);
         box-shadow: var(--card-shadow);
         font-size: 14px;
+
         &:nth-child(2) {
           color: red;
         }
@@ -332,6 +340,7 @@
   gap: 1rem;
   box-shadow: 0px 3px 10px 0px rgba(0, 0, 0, 0.09);
   padding: 1.5rem 1rem 1rem;
+
   @media (max-width: 768px) {
     height: auto;
     h1 {
@@ -348,22 +357,36 @@
     color: var(--black-color);
   }
 
+<<<<<<< HEAD
+=======
+  p {
+    font-size: 0.75rem;
+    color: var(--secondary-color);
+  }
+
+>>>>>>> b19eb93eceb778afcd36b106bb432f835aef0c80
   .project_content {
     display: flex;
     align-items: start;
     justify-content: space-between;
+<<<<<<< HEAD
     p {
       font-size: 0.75rem;
       color: var(--secondary-color);
     }
+=======
+
+>>>>>>> b19eb93eceb778afcd36b106bb432f835aef0c80
     .status_action {
       display: flex;
       align-items: start;
       gap: 8px;
+
       @media (max-width: 768px) {
         width: 100%;
         justify-content: flex-end;
       }
+
       .status {
         background: var(--main30-color);
         color: var(--main-color);
@@ -374,6 +397,7 @@
         border-radius: 8px;
         height: 36px;
       }
+
       button,
       a {
         border: none;
@@ -386,11 +410,13 @@
         height: 36px;
         border-radius: 50%;
         background-color: var(--white-color);
+
         svg {
           height: 16px;
           color: red;
         }
       }
+
       a {
         svg {
           color: var(--main-color);
@@ -398,6 +424,7 @@
       }
     }
   }
+
   .project_owner {
     padding: 0.5rem;
     display: flex;
@@ -460,6 +487,8 @@
 }
 
 .mainSliderContainer {
+  padding: 24px 0;
+
   .swiper-slide {
     display: flex;
     justify-content: end;
@@ -721,8 +750,7 @@
     align-items: start;
     gap: 0.5rem;
 
-    .img {
-    }
+    .img {}
 
     .title {
       display: flex;
@@ -935,16 +963,19 @@
   display: flex;
   flex-direction: column;
   gap: 1rem;
+
   .user_rating_avatar {
     display: flex;
     gap: 1rem;
     align-items: center;
+
     .user_img {
       width: 3rem;
       height: 3rem;
       border-radius: 50%;
       aspect-ratio: 1/1;
     }
+
     .user_info {
       display: flex;
       flex-direction: column;
@@ -964,6 +995,7 @@
       }
     }
   }
+
   .row_head {
     button {
       display: flex;
@@ -977,15 +1009,18 @@
       outline: none;
       border-radius: 50%;
       color: #fff;
+
       i {
         font-size: 16px !important;
       }
     }
   }
+
   .setting {
     display: flex;
     height: fit-content;
     gap: 12px;
+
     button {
       padding: 6px 16px;
       border-radius: 8px;
@@ -995,37 +1030,44 @@
       align-items: center;
       justify-content: center;
       gap: 0.75rem;
+
       &.edit_btn {
         background-color: var(--main-color);
         color: var(--white-color);
       }
+
       &.refuse_btn {
         background-color: red;
         color: var(--white-color);
       }
+
       svg {
         height: 20px;
       }
     }
   }
+
   .about_offer {
     padding: 24px 12px;
     background: var(--input-bg);
     border-radius: 8px;
     display: flex;
     gap: 12px;
+
     .block {
       flex: 1;
       display: flex;
       align-items: center;
       justify-content: center;
       gap: 12px;
+
       p {
         margin: 0;
         font-size: 24px;
         font-weight: bold;
         color: var(--main-color);
       }
+
       h6 {
         margin: 0;
       }

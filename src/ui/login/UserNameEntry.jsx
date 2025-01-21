@@ -11,7 +11,7 @@ import axiosInstance from "../../utils/axios";
 export default function UserNameEntry({ setOtpData }) {
   const { t } = useTranslation();
   const dispatch = useDispatch();
-  const [hashCode, setHashCode] = useState();
+
   const [isLoading, setIsLoading] = useState(false);
   const [formData, setFormData] = useState({
     email: "",

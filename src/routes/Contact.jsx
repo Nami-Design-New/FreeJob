@@ -1,32 +1,24 @@
-import React from "react";
 import { useTranslation } from "react-i18next";
-import DetailsHeader from "../ui/servicesComponents/serviceDetails/DetailsHeader";
-import { useLocation } from "react-router";
 import ContactForm from "../ui/form/ContactForm";
+import DetailsHeader from "../ui/servicesComponents/serviceDetails/DetailsHeader";
 
 const Contact = () => {
   const { t } = useTranslation();
-  const { pathname } = useLocation();
-  const segments = pathname
-    .split("/")
-    .filter((segment) => segment === "contact")[0]
-    .split("-")
-    .join(" ");
 
   return (
     <section className="contactus">
       <section className="header_container mb-4">
         <div className="container-md">
-          <DetailsHeader links={segments} />
+          <DetailsHeader links={t("routes.contact")} />
         </div>
       </section>
 
       <section className="contact-content container my-5">
         <div className="row">
           {/* Left Side: Image */}
-          <div className="col-md-6">
+          <div className="col-md-6 d-none d-md-block">
             <img
-              src="./images/contactus.png"
+              src="./images/contact.webp"
               alt="Contact Us"
               className="img-fluid rounded"
             />
@@ -34,7 +26,7 @@ const Contact = () => {
 
           {/* Right Side: Form */}
           <div className="col-md-6">
-            <ContactForm /> 
+            <ContactForm />
           </div>
         </div>
       </section>
