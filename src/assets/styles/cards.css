@@ -358,26 +358,19 @@
     color: var(--black-color);
   }
 
-<<<<<<< HEAD
-=======
   p {
     font-size: 0.75rem;
     color: var(--secondary-color);
   }
 
->>>>>>> b19eb93eceb778afcd36b106bb432f835aef0c80
   .project_content {
     display: flex;
     align-items: start;
     justify-content: space-between;
-<<<<<<< HEAD
     p {
       font-size: 0.75rem;
       color: var(--secondary-color);
     }
-=======
-
->>>>>>> b19eb93eceb778afcd36b106bb432f835aef0c80
     .status_action {
       display: flex;
       align-items: start;
@@ -751,7 +744,8 @@
     align-items: start;
     gap: 0.5rem;
 
-    .img {}
+    .img {
+    }
 
     .title {
       display: flex;

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import  { useState } from "react";
 import { useTranslation } from "react-i18next";
 import DetailsHeader from "../ui/servicesComponents/serviceDetails/DetailsHeader";
 import { Link, useLocation } from "react-router";
@@ -20,7 +20,6 @@ const Complaints = () => {
   const pageTitle =
     segments.length > 0 ? segments[0].split("-").join(" ") : "Report aproblem";
   const { t } = useTranslation();
-  const [uploadedFile, setUploadedFile] = useState(null);
 
   const [loading, setLoading] = useState(false);
   const [formData, setFormData] = useState({
