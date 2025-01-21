@@ -15,12 +15,16 @@ export default function OrderCard({ order }) {
     <section className="position-relative">
       <section className="order_card ">
         <section className="order_img">
-          <img className="img-fluid" src={order.imageUrl} alt={order.name} />
+          <img
+            className="img-fluid"
+            src={order?.service?.image}
+            alt={order?.service?.title}
+          />
         </section>
         <section className="order_info">
           <section className="order_data">
-            <h3>{order.title}</h3>
-            <p className={lang === "ar" ? "ar" : ""}>{order.price}$</p>
+            <h3>{order?.service?.title}</h3>
+            <p className={lang === "ar" ? "ar" : ""}>{order?.price}$</p>
           </section>
           <section className="order_user">
             <section className="user_image_container">

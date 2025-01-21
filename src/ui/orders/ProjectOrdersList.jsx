@@ -1,71 +1,34 @@
+import { useTranslation } from "react-i18next";
 import OrderCard from "../cards/OrderCard";
+import CustomPagination from "./../CustomPagination";
+import EmptyData from "./../EmptyData";
 
-const orderListItems = [
-  {
-    id: "1",
-    title: "Songs and broadcasting application",
-    price: "200",
-    status: "new",
-    imageUrl: "/images/order.png",
-    user: {
-      image: "/images/user.png",
-      name: "Mohamed Ahmed",
-    },
-  },
-  {
-    id: "2",
-    title: "Songs and broadcasting application",
-    price: "200",
-    status: "in_progress",
-    imageUrl: "/images/order.png",
-    user: {
-      image: "/images/user.png",
-      name: "Mohamed Ahmed",
-    },
-  },
-  {
-    id: "3",
-    title: "Songs and broadcasting application",
-    price: "200",
-    status: "canceled",
-    imageUrl: "/images/order.png",
-    user: {
-      image: "/images/user.png",
-      name: "Mohamed Ahmed",
-    },
-  },
-  {
-    id: "4",
-    title: "Songs and broadcasting application",
-    price: "200",
-    status: "received",
-    imageUrl: "/images/order.png",
-    user: {
-      image: "/images/user.png",
-      name: "Mohamed Ahmed",
-    },
-  },
-  {
-    id: "5",
-    title: "Songs and broadcasting application",
-    price: "200",
-    status: "ready",
-    imageUrl: "/images/order.png",
-    user: {
-      image: "/images/user.png",
-      name: "Mohamed Ahmed",
-    },
-  },
-];
+export default function ProjectOrdersList({ serviceOrders }) {
+  const { t } = useTranslation();
 
-export default function ProjectOrdersList() {
   return (
-    <section className="row g-4">
-      {orderListItems.map((order) => (
-        <section key={order.id}>
-          <OrderCard order={order} />
-        </section>
-      ))}
-    </section>
+    <>
+      {serviceOrders && serviceOrders?.data?.length > 0 ? (
+        <>
+          <section className="row g-4">
+            {serviceOrders?.data?.map((order) => (
+              <section key={order?.id}>
+                <OrderCard order={order} />
+              </section>
+            ))}
+
+            {serviceOrders && serviceOrders?.total > 10 && (
+              <CustomPagination count={serviceOrders?.total} pageSize={10} />
+            )}
+          </section>
+        </>
+      ) : (
+        <EmptyData>
+          {serviceOrders?.total === 0
+            ? t("recievedOrders.emptyOrders")
+            : t("recievedOrders.noOrders")}
+        </EmptyData>
+      )}
+    </>
   );
 }
