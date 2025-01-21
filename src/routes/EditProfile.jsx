@@ -18,6 +18,7 @@ import { toast } from "react-toastify";
 import { setUser } from "../redux/slices/authedUserSlice";
 import { useNavigate } from "react-router-dom";
 import PhoneField from "../ui/form/PhoneField";
+import { Form } from "react-bootstrap";
 
 const EditProfile = () => {
   const { t } = useTranslation();
@@ -329,16 +330,20 @@ const EditProfile = () => {
               </div>
             </section>
 
-            <section className="col-12 p-4 d-flex justify-content-center">
-              <button
-                type="button"
-                className={`btn btn-link text-success text-decoration-none p-0`}
-                onClick={() => setWantChangePassword(!wantChangePassword)}
-              >
-                {wantChangePassword
-                  ? `${t("auth.newPasswordSuccess")}`
-                  : `${t("auth.doYouWantChangePassword")}`}
-              </button>
+            <section className="col-12 d-flex justify-content-center">
+              {" "}
+              <div className="question p-0 pt-2">
+                <label htmlFor="wantChangePassword" className="quest">
+                  <img src="/icons/Vector.svg" alt="isSeller" />
+                  {t("auth.doYouWantChangePassword")}
+                </label>
+                <Form.Switch
+                  id="wantChangePassword"
+                  name="wantChangePassword"
+                  checked={wantChangePassword}
+                  onChange={() => setWantChangePassword(!wantChangePassword)}
+                />
+              </div>
             </section>
 
             {wantChangePassword && (
@@ -352,7 +357,7 @@ const EditProfile = () => {
                   onChange={handleChange}
                   style={{ backgroundColor: "#E8FAF4" }}
                 />
-                <p>{t("auth.newPasswordSubTitle")}</p>
+                <p className="mt-3">{t("auth.newPasswordSubTitle")}</p>
               </section>
             )}
 

@@ -391,6 +391,9 @@
             box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
             height: 36px;
             width: 36px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             svg {
               height: 16px;
               width: 16px;
@@ -631,10 +634,57 @@
   color: var(--white-color);
   width: 100%;
   border: none;
-  padding: 8px 16px;
+  padding: 16px 16px;
   border-radius: 8px;
   transition: var(--main-transition);
   &:hover {
     background-color: var(--main-hover -color);
+  }
+}
+.question {
+  padding: 0 0 30px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  .quest {
+    display: flex;
+    margin: 1rem 0;
+    align-items: center;
+    gap: 8px;
+    color: var(--black-color);
+  }
+  .form-check-input {
+    &:checked {
+      background-color: var(--main-color);
+      border: none;
+      outline: none;
+      &::after {
+        background-color: var(--main-color);
+      }
+      &::before {
+        right: initial;
+        left: 4px;
+      }
+    }
+  }
+}
+.pass-group {
+  display: flex;
+  position: relative;
+  span {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 60px;
+    height: 56px;
+    position: absolute;
+    right: 0;
+    color: var(--black-color);
+  }
+  input {
+    border-left: 0 !important;
+    border-radius: 12px !important;
+    padding: 1rem;
   }
 }

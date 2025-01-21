@@ -1,3 +1,5 @@
+import { FaEdit, FaTrash } from "react-icons/fa";
+
 const WorkCard = ({
   work,
   canEdit,
@@ -22,13 +24,17 @@ const WorkCard = ({
                 e.stopPropagation();
                 onEditModalShow(work);
               }}
-            ></button>
+            >
+              <FaEdit />
+            </button>
             <button
               onClick={(e) => {
                 e.stopPropagation();
                 onDeleteModalShow(work?.id);
               }}
-            ></button>
+            >
+              <FaTrash />
+            </button>
           </div>
         )}
       </div>

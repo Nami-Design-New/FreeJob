@@ -442,7 +442,15 @@ a {
     padding: 8px;
     border-radius: 8px;
   }
-
+  .delete-btn {
+    width: 100%;
+    padding: 8px;
+    background: red;
+    color: var(--white-color);
+    border-radius: 8px;
+    border: 0;
+    outline: none;
+  }
   .order-now {
     width: 100%;
     padding: 8px;
@@ -490,7 +498,7 @@ a {
     input {
       display: none;
 
-      &:checked+label {
+      &:checked + label {
         border-color: var(--main-color);
       }
     }

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { Form } from "react-bootstrap";
 import { useTranslation } from "react-i18next";
 
@@ -12,16 +12,18 @@ const PasswordField = ({ label, ...props }) => {
 
   return (
     <div className="input-field">
-      <label htmlFor={props.id}>{label}</label>
+      <label className="mb-3" htmlFor={props.id}>
+        {label}
+      </label>
       <div className="pass-group">
         <Form.Control
-
           className="form-control"
           placeholder={t("password")}
           type={showPass ? "text" : "password"}
           required
           {...props}
-          style={{ cursor: "pointer",backgroundColor:"#E8FAF4" }}s
+          style={{ cursor: "pointer", backgroundColor: "#E8FAF4" }}
+          s
         />
         <span onClick={handleInputType}>
           <i
