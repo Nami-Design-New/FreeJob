@@ -1,10 +1,11 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import ChargeModal from "../ui/modals/ChargrModal";
 import { OverlayTrigger, Tooltip } from "react-bootstrap";
 import { useSelector } from "react-redux";
 import { useTranslation } from "react-i18next";
 import Transactions from "../ui/bankAccounts/Transactions";
 import DetailsHeader from "../ui/servicesComponents/serviceDetails/DetailsHeader";
+import WithdrawModal from "../ui/modals/WithdrawModal";
 
 const Balance = () => {
   const { t } = useTranslation();
@@ -117,10 +118,10 @@ const Balance = () => {
           showModal={showChargeModel}
           setShowModal={setShowChargeModel}
         />
-        {/* <WithdrawModal
+        <WithdrawModal
           showModal={showWithdrawModel}
           setShowModal={setShowWithdrawModel}
-        /> */}
+        />
       </section>
     </section>
   );

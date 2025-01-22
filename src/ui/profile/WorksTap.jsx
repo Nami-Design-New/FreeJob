@@ -56,13 +56,13 @@ export default function WorksTap({ works, isMyAccount }) {
               {t("profile.addWork")}
             </button>
           )}
-          <div className="services_grid">
-            {works?.length === 0 ? (
-              <div className="noDataFound">
-                <h4>{t("profile.noWorksFound")}</h4>
-              </div>
-            ) : (
-              <>
+          {works?.length === 0 ? (
+            <div className="noDataFound">
+              <h4>{t("profile.noWorksFound")}</h4>
+            </div>
+          ) : (
+            <>
+              <div className="services_grid">
                 {works?.map((work) => (
                   <WorkCard
                     canEdit={isMyAccount}
@@ -73,9 +73,9 @@ export default function WorksTap({ works, isMyAccount }) {
                     onViewModalShow={onViewModalShow}
                   />
                 ))}
-              </>
-            )}
-          </div>
+              </div>
+            </>
+          )}
         </div>
       </div>{" "}
       <ConfirmationModal

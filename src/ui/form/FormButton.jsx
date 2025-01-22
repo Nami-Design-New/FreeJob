@@ -1,6 +1,7 @@
 export default function FormButton({
   children,
   className,
+  style,
   loading,
   content,
   ...props
@@ -9,7 +10,7 @@ export default function FormButton({
     <button
       {...props}
       className={`${className} form_button`}
-      style={{ opacity: loading ? 0.7 : 1 }}
+      style={{ ...style, opacity: loading ? 0.7 : 1 }}
       disabled={loading}
       type="submit"
     >

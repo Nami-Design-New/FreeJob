@@ -3,9 +3,11 @@ import { CiFilter } from "react-icons/ci";
 import { useSearchParams } from "react-router";
 import FilterSidebar from "../ui/servicesComponents/FilterSidebar";
 import ServicesList from "../ui/servicesComponents/ServicesList";
+import { useTranslation } from "react-i18next";
 
 export default function Services() {
   const [isOpen, setIsOpen] = useState(false);
+  const { t } = useTranslation();
   function toggleMenu() {
     setIsOpen(!isOpen);
   }
@@ -31,7 +33,7 @@ export default function Services() {
     <section className="container">
       <section className="sercives_container my-5">
         <section className="small_header_filter d-md-none">
-          <h6>Services</h6>
+          <h6>{t("routes.services")}</h6>
           <CiFilter className=" my-3 fs-3" onClick={toggleMenu} />
         </section>
         <section>

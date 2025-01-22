@@ -8,6 +8,7 @@ import { toast } from "react-toastify";
 import FormInput from "../form/FormInput";
 import FormButton from "../form/FormButton";
 import axiosInstance from "../../utils/axios";
+import BackButton from "./BackButton";
 
 export default function EmailLogin() {
   const { t } = useTranslation();
@@ -50,6 +51,7 @@ export default function EmailLogin() {
         axiosInstance.defaults.headers.common[
           "Authorization"
         ] = `${res.data.data.token}`;
+        dispatch(closeModal());
       } else {
         toast.error(t("auth.emailOrPasswordWrong"));
       }
@@ -58,25 +60,25 @@ export default function EmailLogin() {
       throw new Error(error.message);
     } finally {
       setLoading(false);
-      dispatch(closeModal());
     }
   };
 
   return (
     <div className="left_side">
+      {" "}
+      <BackButton  />
       <header className="modal_header ">
         <h1>Enter your data to register</h1>
         <p className="d-flex gap-1 align-items-center fs-6 flex-wrap">
           Don&apos;t have an account?
           <button
-            onClick={() => dispatch(setStep(3))}
+            onClick={() => dispatch(setStep(5))}
             className="btn p-0 text-success"
           >
             Create account now
           </button>
         </p>
       </header>
-
       <form onSubmit={handleSubmit} className="d-flex flex-column gap-2">
         <FormInput
           name="email"
@@ -95,7 +97,11 @@ export default function EmailLogin() {
           value={formData.password}
           onChange={handleChange}
         />
-        <button type="button" className="forget_pass btn">
+        <button
+          onClick={() => dispatch(setStep(3))}
+          type="button"
+          className="forget_pass btn"
+        >
           Forget Your Password
         </button>
 

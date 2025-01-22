@@ -63,7 +63,10 @@ export const router = createBrowserRouter([
       { path: "/projects/:title", element: <ProjectDetails /> },
       { path: "/profile/:id", element: <Profile /> },
       { path: "/community/:name", element: <CommunityPosts /> },
-      { path: "/community/:name/:id", element: <CommunitySubjectDetails /> },
+      {
+        path: "/community/:name/:title/:id",
+        element: <CommunitySubjectDetails />,
+      },
       { path: "/freelancers", element: <BestFreeLancers /> },
       { path: "/portfolios", element: <Portfolios /> },
       { path: "/contact", element: <Contact /> },

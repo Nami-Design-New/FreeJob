@@ -9,7 +9,7 @@ import useGetLatestProjects from "./../../hooks/projects/useGetLatestProjects";
 export default function PopularProjects() {
   const { data: latestProjects, isLoading } = useGetLatestProjects();
   const { t } = useTranslation();
-  
+
   return (
     <div className="popular_projects">
       <SectionHeader
@@ -36,10 +36,10 @@ export default function PopularProjects() {
                 slidesPerView: 2,
               },
             }}
-            style={{ padding: "30px", height: "100%" }}
+            style={{ padding: "30px" }}
           >
             {latestProjects.map((project) => (
-              <SwiperSlide key={project.id} style={{ height: "100%" }}>
+              <SwiperSlide key={project.id} style={{ height: "auto" }}>
                 <ProjectCard project={project} />
               </SwiperSlide>
             ))}

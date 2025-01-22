@@ -106,7 +106,7 @@ const FilterSidebar = ({ isOpen, setIsOpen }) => {
       className={`p-3 rounded border sidebar ${isOpen ? "active" : ""}`}
     >
       <header className="filter_sidebar_header">
-        <h2>Services</h2>
+        <h2>{t("routes.services")}</h2>
         <button onClick={() => setIsOpen(false)}>
           <IoMdClose />
         </button>
@@ -127,7 +127,7 @@ const FilterSidebar = ({ isOpen, setIsOpen }) => {
           <DataLoader />
         ) : (
           <section className="my-4">
-            <h3>Sections</h3>
+            <h3>{t("navbar.sections")}</h3>
             <SectionsFilter
               categoriesValue={filters.categories}
               sub_categoriesValue={filters.sub_categories}
@@ -149,7 +149,7 @@ const FilterSidebar = ({ isOpen, setIsOpen }) => {
           />
         </section>
         <section className="my-4">
-          <h3>Price Range</h3>
+          <h3>{t("projects.price")}</h3>
           <RangeInput
             label="$"
             min={1}
@@ -160,7 +160,7 @@ const FilterSidebar = ({ isOpen, setIsOpen }) => {
           />
         </section>
         <section className="my-4">
-          <h3>Delivery Duration</h3>
+          <h3>{t("services.deliveryTime")}</h3>
           <RangeInput
             label="Days"
             min={1}
@@ -172,7 +172,7 @@ const FilterSidebar = ({ isOpen, setIsOpen }) => {
         </section>
         <footer className="d-flex align-item-center gap-2 justify-content-center p-0 pt-3">
           <FormButton
-            content="Apply"
+            content={t("search.apply")}
             style={{
               backgroundColor: "var(--main-color)",
               package: "0.5rem 0.75rem",
@@ -182,7 +182,7 @@ const FilterSidebar = ({ isOpen, setIsOpen }) => {
           />
 
           <FormButton
-            content="Reset"
+            content={t("search.clear")}
             style={{
               backgroundColor: "var(--main-color)",
               package: "0.5rem 0.75rem",

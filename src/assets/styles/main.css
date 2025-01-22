@@ -14,7 +14,13 @@
 @import "./profile.css";
 @import "./portfolios.css";
 @import "./blogs.css";
-
+@import "./about.css";
+@import "./communities.css";
+@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+@font-face {
+  font-family: "Din";
+  src: url("../webfonts/din-next-lt-w23-regular.ttf");
+}
 :root {
   --main-color: #003912;
   --main30-color: #00391254;
@@ -39,6 +45,7 @@
   box-sizing: border-box;
   scroll-behavior: smooth;
   -webkit-tap-highlight-color: transparent;
+  font-family: "Din", sans-serif;
 }
 
 /* Scrollbar Container */
@@ -87,10 +94,11 @@ a {
 }
 
 .form_input {
+  width: 100%;
   label {
     color: var(--black-color);
     margin-bottom: 0.5rem;
-    font-size: 1.25rem;
+    font-size: 1rem;
     font-weight: 400;
     line-height: 1.75rem;
     align-self: start;
@@ -614,7 +622,19 @@ a {
       height: 0.75rem !important;
     }
   }
-
+  .modal-body {
+    min-width: 300px;
+    width: 50%;
+    flex: 1 0 0;
+    padding: 0 !important;
+    height: 100% !important;
+    position: relative;
+    display: flex;
+    flex-direction: row-reverse !important;
+    @media (max-width: 992px) {
+      width: 100%;
+    }
+  }
   .image_field {
     width: 100%;
     gap: 8px;

@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { RiMenuUnfold4Fill } from "react-icons/ri";
+import { RiMenuFold4Fill, RiMenuUnfold4Fill } from "react-icons/ri";
 import { useDispatch, useSelector } from "react-redux";
 import { NavLink, useNavigate } from "react-router";
 import { openModal } from "../redux/slices/authModalSlice";
@@ -16,6 +16,7 @@ import SideMenu from "./../ui/header/SideMenu";
 export default function Header() {
   const isLogin = useSelector((state) => state.authedUser.isLogged);
   const { t } = useTranslation();
+  const lang = useSelector((state) => state.language.lang);
   const [isOpen, setIsOpen] = useState(false);
   const isMobile = useResponsiveState("(min-width: 768px)");
   const dispatch = useDispatch();
@@ -47,7 +48,6 @@ export default function Header() {
             </li>
             <li>
               <NavLink to="/projects-orders">
-                {" "}
                 {t("navbar.projectsOrders")}
               </NavLink>
             </li>
@@ -96,7 +96,7 @@ export default function Header() {
           {isLogin && <UserDropDown />}
         </div>
         <button className="btn fs-4 toggler" onClick={toggleMenu}>
-          <RiMenuUnfold4Fill />
+          {lang === "en" ? <RiMenuUnfold4Fill /> : <RiMenuFold4Fill />}
         </button>
       </nav>
       <div className="header_swiper">

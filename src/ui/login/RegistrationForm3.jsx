@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { closeModal } from "../../redux/slices/authModalSlice";
+import { closeModal, setStep } from "../../redux/slices/authModalSlice";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router";
 import { useDispatch } from "react-redux";
@@ -16,7 +16,13 @@ import axiosInstance from "../../utils/axios";
 import FormInput from "../form/FormInput";
 import "react-international-phone/style.css";
 
-export default function RegistrationForm3({ formData, setFormData }) {
+export default function RegistrationForm3({
+  formData,
+  setFormData,
+  setOtpData,
+  register,
+  setRegister,
+}) {
   const [selected, setSelected] = useState("Seller");
   const { t } = useTranslation();
   const navigate = useNavigate();
@@ -87,7 +93,7 @@ export default function RegistrationForm3({ formData, setFormData }) {
     setIsLoading(true);
     try {
       const res = await axiosInstance.post(
-        "/user/register",
+        "/user/can_register",
         {
           ...formData,
           is_freelance: selected === "Seller" ? 1 : 0,
@@ -111,31 +117,36 @@ export default function RegistrationForm3({ formData, setFormData }) {
           job_title: "",
           categories: [],
         });
-        dispatch(closeModal());
-        const login = await axiosInstance.post("/user/login", {
-          email: formData.email,
-          password: formData.password,
-        });
-        if (login.data.code === 200) {
-          navigate("/");
-          dispatch(setUser(login.data.data));
-          dispatch(setIsLogged(true));
-          setCookie("token", login.data.data.token, {
-            path: "/",
-            secure: true,
-            sameSite: "Strict",
-          });
-          setCookie("id", login.data.data.id, {
-            path: "/",
-            secure: true,
-            sameSite: "Strict",
-          });
-          axiosInstance.defaults.headers.common[
-            "Authorization"
-          ] = `${login.data.data.token}`;
-        } else {
-          toast.error(login.data.message);
-        }
+        dispatch(setStep(4));
+        setRegister(true);
+        setOtpData((prev) => ({
+          ...prev,
+          hashed_code: res.data.data,
+        }));
+        // const login = await axiosInstance.post("/user/login", {
+        //   email: formData.email,
+        //   password: formData.password,
+        // });
+        // if (login.data.code === 200) {
+        //   navigate("/");
+        //   dispatch(setUser(login.data.data));
+        //   dispatch(setIsLogged(true));
+        //   setCookie("token", login.data.data.token, {
+        //     path: "/",
+        //     secure: true,
+        //     sameSite: "Strict",
+        //   });
+        //   setCookie("id", login.data.data.id, {
+        //     path: "/",
+        //     secure: true,
+        //     sameSite: "Strict",
+        //   });
+        //   axiosInstance.defaults.headers.common[
+        //     "Authorization"
+        //   ] = `${login.data.data.token}`;
+        // } else {
+        //   toast.error(login.data.message);
+        // }
       } else {
         toast.error(res.data.message);
       }

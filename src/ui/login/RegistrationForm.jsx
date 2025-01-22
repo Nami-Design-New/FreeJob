@@ -44,7 +44,7 @@ export default function RegistrationForm({ formData, setFormData }) {
 
   return (
     <div className="left_side">
-      <BackButton />
+      <BackButton step={2} />
       <header className="modal_header pb-3 ">
         <h1 className="text-center">Complete your information</h1>
       </header>

@@ -19,6 +19,3 @@ function useCategoriesList() {
 }
 
 export default useCategoriesList;
-
-
-

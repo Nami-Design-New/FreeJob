@@ -16,7 +16,7 @@ const WizardStep1 = ({
   setCategoryId,
   skills,
   selectedOptions,
-  setSelectedOptions
+  setSelectedOptions,
 }) => {
   const [formValid, setFormValid] = useState(false);
   const { t } = useTranslation();
@@ -26,7 +26,7 @@ const WizardStep1 = ({
   const handleChange = (e) => {
     setFormData({
       ...formData,
-      [e.target.name]: e.target.value
+      [e.target.name]: e.target.value,
     });
   };
 
@@ -50,7 +50,7 @@ const WizardStep1 = ({
       : [];
     setFormData({
       ...formData,
-      skills: selectedValues
+      skills: selectedValues,
     });
   };
 
@@ -68,21 +68,22 @@ const WizardStep1 = ({
     <section>
       <FormInput
         className="mb-4"
-        label="Service Title"
-        placeholder="Add Service title"
+        label={t("addService.serviceTitle")}
+        placeholder={t("addService.serviceTitlePlaceholder")}
         type="text"
         onChange={handleChange}
         value={formData.title}
         id="title"
         name="title"
+        required={true}
       />
       {/* category */}
       <section className="mb-4">
         <FormSelector
-          disabledOption="select"
-          label="Category"
+          label={t("addService.serviceCategory")}
           id="category"
           value={categoryId}
+          disabledOption={t("select")}
           onChange={(e) => {
             setSubCategories(
               categories?.find(
@@ -100,8 +101,10 @@ const WizardStep1 = ({
       {/* subcategories  */}
       <section className="mb-4">
         <FormSelector
-          disabledOption="Choose Your Category"
-          label="Subcategory"
+          disabledOption={
+            categoryId ? t("select") : t("addService.selectCategoryFirst")
+          }
+          label={t("addService.serviceSubCategory")}
           id="sub_category_id"
           name="sub_category_id"
           value={formData.sub_category_id}
@@ -114,7 +117,7 @@ const WizardStep1 = ({
       </section>
       <MultiSelect
         className="mb-4"
-        label="Skilles Used"
+        label={t("search.skills")}
         id="skills"
         name="skills"
         selectedOptions={selectedOptions}
@@ -125,17 +128,20 @@ const WizardStep1 = ({
         }))}
       />
       <section>
-        <label className="mb-2 text-black">Service Description</label>
+        <label className="mb-2 text-black">
+          {t("addService.serviceDescription")}
+        </label>
         <FormTextArea
           rows={8}
           id="description"
           name="description"
           value={formData.description}
           onChange={handleChange}
+          required={true}
         />
       </section>
       <FormButton
-        content="Next"
+        content={t("next")}
         onClick={handleNext}
         className="add_service_button"
         style={{ width: "10rem" }}

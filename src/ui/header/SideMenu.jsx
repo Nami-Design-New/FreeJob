@@ -1,13 +1,22 @@
 import { useRef, useState } from "react";
-import { NavLink } from "react-router";
+import { Link, NavLink } from "react-router";
 import Button from "../Button";
 import LanguageToggle from "../LanguageToggle";
 import Logo from "./Logo";
 import { useSelector } from "react-redux";
+import { useTranslation } from "react-i18next";
+import useGetCommunitiesList from "../../hooks/useGetCommunitiesList";
+// import useGetAbout from "../../hooks/useGetAbout";
+import { Accordion } from "react-bootstrap";
+import useGetAbout from "../../hooks/about/useGetAbout";
 
 export default function SideMenu({ state, onClose }) {
   const isLogin = useSelector((state) => state.authedUser.isLogged);
   const lang = useSelector((state) => state.language.lang);
+  const { data: footerCategoriesList } = useGetAbout();
+  const { data: communities } = useGetCommunitiesList();
+  const [isOpen, setIsOpen] = useState();
+  const { t } = useTranslation();
   const dialogRef = useRef(null);
   function handleCloseMenu() {
     onClose();
@@ -21,7 +30,7 @@ export default function SideMenu({ state, onClose }) {
     <dialog
       ref={dialogRef}
       onClose={handleCloseMenu}
-      className={`d-md-hidden  ${lang === "ar" ? "ar" : ""}    `}
+      className={`side_menu   d-md-hidden  ${lang === "ar" ? "ar" : ""}    `}
     >
       <header onClick={handleCloseMenu} className="py-3">
         <Logo />
@@ -33,35 +42,80 @@ export default function SideMenu({ state, onClose }) {
           onClick={handleCloseMenu}
         >
           <li>
-            <NavLink to="/purchases">Purchases</NavLink>
+            <NavLink to="/purchases">{t("routes.purchases")}</NavLink>
           </li>
           <li>
-            <NavLink to="/recieved-orders">Incoming Requests</NavLink>
+            <NavLink to="/recieved-orders">
+              {t("routes.recieved-request")}
+            </NavLink>
           </li>
           <li>
-            <NavLink to="/projects-orders">In Progress</NavLink>
+            <NavLink to="/projects-orders">
+              {" "}
+              {t("navbar.projectsOrders")}
+            </NavLink>
           </li>
           <li>
-            <NavLink to="/projects">Projects</NavLink>
+            <NavLink to="/projects">{t("routes.projects")}</NavLink>
           </li>
           <li>
-            <NavLink to="/services">Services</NavLink>
+            <NavLink to="/services">{t("routes.services")}</NavLink>
           </li>
           <li>
-            <NavLink to="/portfolios">PortFolios</NavLink>
+            <NavLink to="/portfolios">{t("routes.portfolios")}</NavLink>
           </li>
           <li>
-            <NavLink to="/freelancers">Find FreeLancers</NavLink>
+            <NavLink to="/freelancers">{t("routes.freelancers")}</NavLink>
           </li>
-          <li>
-            <NavLink to="/about/1">About FREEJOP</NavLink>
-          </li>
-          <li>
-            <NavLink to="/community">FREEJOP&apos;s Community</NavLink>
+          <li
+            onClick={(event) => {
+              event.stopPropagation();
+            }}
+          >
+            {" "}
+            <Accordion>
+              <Accordion.Item eventKey="0">
+                <Accordion.Header>
+                  <span>{t("navbar.ynjez")}</span>
+                </Accordion.Header>
+                <Accordion.Body>
+                  <ul onClick={handleCloseMenu}>
+                    {footerCategoriesList?.map((category) => (
+                      <li key={category.id}>
+                        <Link to={`/about/${category.id}`}>
+                          {category.name}
+                        </Link>
+                      </li>
+                    ))}
+                  </ul>
+                </Accordion.Body>
+              </Accordion.Item>
+              {communities && communities?.length > 0 && (
+                <Accordion.Item eventKey="1">
+                  <Accordion.Header>
+                    <span>{t("navbar.communities")}</span>
+                  </Accordion.Header>
+                  <Accordion.Body>
+                    <ul onClick={handleCloseMenu}>
+                      {communities?.map((community) => (
+                        <li key={community.id}>
+                          <Link
+                            to={`/community/${community.name}`}
+                            onClick={() => setIsOpen(false)}
+                          >
+                            {community.name}
+                          </Link>
+                        </li>
+                      ))}
+                    </ul>
+                  </Accordion.Body>
+                </Accordion.Item>
+              )}
+            </Accordion>
           </li>
 
           <li>
-            <NavLink to="/blogs">Blogs</NavLink>
+            <NavLink to="/blogs">{t("routes.blogs")}</NavLink>
           </li>
           <li className="d-flex align-items-center justify-content-start ">
             <LanguageToggle />
@@ -73,18 +127,62 @@ export default function SideMenu({ state, onClose }) {
           onClick={handleCloseMenu}
         >
           <li>
-            <NavLink to="/projects">Projects</NavLink>
+            <NavLink to="/projects">{t("routes.projects")}</NavLink>
           </li>
           <li>
-            <NavLink to="/services">Services</NavLink>
+            <NavLink to="/services">{t("routes.services")}</NavLink>
           </li>
           <li>
-            <NavLink to="/portfolios">PortFolios</NavLink>
+            <NavLink to="/portfolios">{t("routes.portfolios")}</NavLink>
           </li>
           <li>
-            <NavLink to="/freelancers">Find FreeLancers</NavLink>
+            <NavLink to="/freelancers">{t("routes.freelancers")}</NavLink>
           </li>
           <li>
+            {" "}
+            <Accordion>
+              <Accordion.Item eventKey="0">
+                <Accordion.Header>
+                  <span>{t("navbar.ynjez")}</span>
+                </Accordion.Header>
+                <Accordion.Body>
+                  <ul>
+                    {footerCategoriesList?.map((category) => (
+                      <li key={category.id}>
+                        <Link
+                          to={`/about/${category.id}`}
+                          onClick={() => setIsOpen(false)}
+                        >
+                          {category.name}
+                        </Link>
+                      </li>
+                    ))}
+                  </ul>
+                </Accordion.Body>
+              </Accordion.Item>
+              {communities && communities?.length > 0 && (
+                <Accordion.Item eventKey="1">
+                  <Accordion.Header>
+                    <i className="fa-regular fa-comments"></i>{" "}
+                    <span>{t("navbar.communities")}</span>
+                  </Accordion.Header>
+                  <Accordion.Body>
+                    <ul>
+                      {communities?.map((community) => (
+                        <li key={community.id}>
+                          <Link
+                            to={`/community/${community.name}`}
+                            onClick={() => setIsOpen(false)}
+                          >
+                            {community.name}
+                          </Link>
+                        </li>
+                      ))}
+                    </ul>
+                  </Accordion.Body>
+                </Accordion.Item>
+              )}
+            </Accordion>
             <NavLink to="/about/1">About FREEJOP</NavLink>
           </li>
           <li>
@@ -92,7 +190,7 @@ export default function SideMenu({ state, onClose }) {
           </li>
 
           <li>
-            <NavLink to="/blogs">Blogs</NavLink>
+            <NavLink to="/blogs">{t("routes.blogs")}</NavLink>
           </li>
           <li className="d-flex align-items-center justify-content-start ">
             <LanguageToggle />

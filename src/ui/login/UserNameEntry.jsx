@@ -8,14 +8,13 @@ import { useTranslation } from "react-i18next";
 import { toast } from "react-toastify";
 import axiosInstance from "../../utils/axios";
 
-export default function UserNameEntry({ setOtpData }) {
+export default function UserNameEntry({ setOtpData ,setUserId }) {
   const { t } = useTranslation();
   const dispatch = useDispatch();
 
   const [isLoading, setIsLoading] = useState(false);
   const [formData, setFormData] = useState({
     email: "",
-    phone: "",
   });
   function handlePhoneChange(value) {
     setFormData({
@@ -34,7 +33,7 @@ export default function UserNameEntry({ setOtpData }) {
     e.preventDefault();
     try {
       const res = await axiosInstance.post(
-        "/user/can_register",
+        "/user/check_email",
         {
           ...formData,
         },
@@ -47,9 +46,9 @@ export default function UserNameEntry({ setOtpData }) {
       if (res.data.code === 200) {
         setOtpData((prev) => ({
           ...prev,
-          hashed_code: res.data.data,
+          hashed_code: res.data.data.code,
         }));
-
+    setUserId(res.data.data.user.id);
         dispatch(setStep(4));
       } else {
         toast.error(res.data.message);
@@ -70,7 +69,7 @@ export default function UserNameEntry({ setOtpData }) {
         </p>
       </header>
       <form onSubmit={handleSubmit}>
-        {" "}
+        {/* {" "}
         <label className="fw-normal">Phone Number</label>
         <PhoneInput
           required
@@ -84,7 +83,7 @@ export default function UserNameEntry({ setOtpData }) {
             borderRadius: "0.5rem",
             backgroundColor: "#E8FAF4",
           }}
-        />
+        /> */}
         <FormInput
           label={t("auth.email")}
           placeholder="example@example.com"
