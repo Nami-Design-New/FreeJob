@@ -9,7 +9,7 @@ export default function MultiSelect({
   ...props
 }) {
   return (
-    <div className="input-field">
+    <div className="input-field form_input">
       <label className="mb-2" htmlFor={props.id}>
         {label}
       </label>

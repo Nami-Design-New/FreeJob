@@ -309,37 +309,36 @@
 }
 
 /* rateModal  */
-.rate_modal {
-  .form {
-    margin-top: 32px;
+
+.form {
+  margin-top: 32px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  .stars {
     display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 16px;
-    .stars {
+    gap: 4px;
+    li {
+      color: #d9d9d9;
+      &.star {
+        color: #ffd500;
+      }
+    }
+    .star-rating-service {
       display: flex;
-      gap: 4px;
-      li {
+      flex-direction: row-reverse;
+      gap: 12px;
+      label {
+        cursor: pointer;
         color: #d9d9d9;
-        &.star {
-          color: #ffd500;
+        &.active {
+          color: gold;
         }
       }
-      .star-rating-service {
-        display: flex;
-        flex-direction: row-reverse;
-        gap: 12px;
-        label {
-          cursor: pointer;
-          color: #d9d9d9;
-          &.active {
-            color: gold;
-          }
-        }
-        input {
-          appearance: none;
-          display: none;
-        }
+      input {
+        appearance: none;
+        display: none;
       }
     }
   }

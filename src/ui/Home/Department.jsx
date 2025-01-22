@@ -36,7 +36,11 @@ const Department = ({ category }) => {
           dir={lang === "ar" ? "rtl" : "ltr"}
         >
           {category?.services?.map((service) => (
-            <SwiperSlide className="p-3" key={service.id}>
+            <SwiperSlide
+              style={{ height: "auto" }}
+              className="p-3"
+              key={service.id}
+            >
               <ServiceCard service={service} />
             </SwiperSlide>
           ))}

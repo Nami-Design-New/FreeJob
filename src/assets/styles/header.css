@@ -270,11 +270,44 @@ dialog {
       width: 100%;
       cursor: pointer;
       transition: var(--main-transition);
-
       &:hover a {
         color: var(--black-color);
       }
-
+      .accordion {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+      }
+      .accordion-item {
+        border: none;
+      }
+      .accordion-header {
+        border: none;
+        span {
+          flex: 1 0;
+          display: flex;
+          align-items: center;
+          justify-content: flex-start;
+        }
+      }
+      .accordion-button {
+        padding: 8px 0;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        background-color: transparent !important;
+        box-shadow: none;
+        &:focus {
+          outline: none;
+          box-shadow: none;
+        }
+        &:not(.collapsed) {
+          color: var(--main-color);
+        }
+      }
+      .accordion-body {
+        border: none;
+      }
       a {
         width: 100%;
         text-decoration: none;
