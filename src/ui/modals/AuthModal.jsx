@@ -2,7 +2,7 @@ import { useState } from "react";
 import { IoMdClose } from "react-icons/io";
 import { Modal } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
-import { closeModal } from "../../redux/slices/authModalSlice";
+import { closeModal, setStep } from "../../redux/slices/authModalSlice";
 import EmailLogin from "../login/EmailLogin";
 import EmailVerification from "../login/EmailVerification";
 import LoginOptions from "../login/LoginOptions";
@@ -10,9 +10,12 @@ import LoginRightSide from "../login/LoginRightSide";
 import RegistrationForm from "../login/RegistrationForm";
 import UserNameEntry from "../login/UserNameEntry";
 import RegistrationForm3 from "../login/RegistrationForm3";
+import ForgetPassword from "../login/ForgetPassword";
 
 export default function AuthModal() {
   const show = useSelector((state) => state.authModal.show);
+  const [register, setRegister] = useState(false);
+  const [userId, setUserId] = useState();
   const dispatch = useDispatch();
   const [otpData, setOtpData] = useState({
     code: "",
@@ -39,16 +42,40 @@ export default function AuthModal() {
       case 2:
         return <EmailLogin />;
       case 3:
-        return <UserNameEntry setOtpData={setOtpData} />;
+        return <UserNameEntry setOtpData={setOtpData} setUserId={setUserId} />;
       case 4:
-        return <EmailVerification otpData={otpData} setOtpData={setOtpData} />;
+        return (
+          <EmailVerification
+            otpData={otpData}
+            setOtpData={setOtpData}
+            register={register}
+            setRegister={setRegister}
+          />
+        );
       case 5:
         return (
           <RegistrationForm formData={formData} setFormData={setFormData} />
         );
       case 6:
         return (
-          <RegistrationForm3 formData={formData} setFormData={setFormData} />
+          <RegistrationForm3
+            formData={formData}
+            setFormData={setFormData}
+            setOtpData={setOtpData}
+            register={register}
+            setRegister={setRegister}
+          />
+        );
+      case 7:
+        return (
+          <ForgetPassword
+            formData={formData}
+            setFormData={setFormData}
+            setOtpData={setOtpData}
+            register={register}
+            setRegister={setRegister}
+            userId={userId}
+          />
         );
       default:
         return <LoginOptions />;
@@ -61,7 +88,9 @@ export default function AuthModal() {
       size="xl"
       show={show}
       backdrop="static"
-      onHide={() => dispatch(closeModal())}
+      onHide={() => {
+        dispatch(closeModal());
+      }}
       className="auth_modal"
     >
       <Modal.Body scrollable={true}>

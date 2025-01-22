@@ -8,9 +8,13 @@ import { toast } from "react-toastify";
 import axiosInstance from "../../utils/axios";
 import { useTranslation } from "react-i18next";
 
-export default function EmailVerification({ otpData, setOtpData }) {
+export default function EmailVerification({
+  otpData,
+  setOtpData,
+  register,
+  setUserId,
+}) {
   const dispatch = useDispatch();
-  console.log(otpData);
 
   const { t } = useTranslation();
   const [timer, setTimer] = useState(30);
@@ -44,11 +48,13 @@ export default function EmailVerification({ otpData, setOtpData }) {
     setIsLoading(true);
     try {
       const res = await axiosInstance.request(checkCodeRequest);
-      console.log(otpData);
-
       if (res.data.code === 200) {
-        toast.success(t("auth.registerSuccess"));
-        dispatch(setStep(5));
+        if (register) {
+          toast.success(t("auth.registerSuccess"));
+          dispatch(setStep(2));
+        } else {
+          dispatch(setStep(7));
+        }
       } else {
         toast.error(res.data.message);
       }
@@ -56,7 +62,6 @@ export default function EmailVerification({ otpData, setOtpData }) {
       throw new Error(error.message);
     } finally {
       setIsLoading(false);
-      dispatch(setStep(5));
     }
   };
 
@@ -66,7 +71,7 @@ export default function EmailVerification({ otpData, setOtpData }) {
       <header className="modal_header pb-3 ">
         <h1>Confirm your email</h1>
         <p className="">
-          Enter the verification code we emailed to:nemamirror1@gmail.com.{" "}
+          Enter the verification code you Recived
           <button
             onClick={() => dispatch(setStep(3))}
             className="btn p-0 text-success"

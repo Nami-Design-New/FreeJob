@@ -114,7 +114,8 @@
     "verificationSuccess": "Your data has been successfully sent and is currently under review. You will be notified on the registered email.",
     "doYouWantChangePassword": "Do you want to change the password?",
     "areYouSureYouWantToDeleteYourAccount": "Are you sure you want to delete your account?",
-    "jobTitle": "Job Title"
+    "jobTitle": "Job Title",
+    "passwordChanged": "Password changed successfully"
   },
   "navbar": {
     "ynjez": "About Ynjez",

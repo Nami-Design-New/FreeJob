@@ -114,7 +114,8 @@
     "verificationSuccess": "تم ارسال بياناتك بنجاح وجاري مراجعتها حالياً , سيتم اخطارك علي البريد الالكتروني المسجل لدينا",
     "doYouWantChangePassword": "هل تريد تغيير كلمة المرور؟",
     "areYouSureYouWantToDeleteYourAccount": "هل أنت متأكد من أنك تريد حذف حسابك",
-    "jobTitle": "المسمى الوظيفي"
+    "jobTitle": "المسمى الوظيفي",
+    "passwordChanged": "تم تغيير كلمة المرور بنجاح"
   },
   "navbar": {
     "ynjez": "عن FREEJOB",
