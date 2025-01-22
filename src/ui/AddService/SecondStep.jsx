@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { FaPlusCircle } from "react-icons/fa";
+import { FaChevronRight, FaPlusCircle } from "react-icons/fa";
 import { FaChevronLeft } from "react-icons/fa6";
 import { IoCloseOutline } from "react-icons/io5";
 import FormButton from "../form/FormButton";
@@ -9,6 +9,7 @@ import AddMoreDevelopCard from "./AddMoreDevelep";
 import useGetSettings from "../../hooks/settings/useGetSettings";
 import SubmitButton from "../form/SubmitButton";
 import { useTranslation } from "react-i18next";
+import { useSelector } from "react-redux";
 
 export default function SecondStep({
   formData,
@@ -19,6 +20,7 @@ export default function SecondStep({
 }) {
   const { data: settings } = useGetSettings();
   const [formValid, setFormValid] = useState(false);
+  const lang = useSelector((state) => state.language.lang);
   const { t } = useTranslation();
   const developmentInitial = {
     description: "",
@@ -115,12 +117,9 @@ export default function SecondStep({
       <section className="input_field_img">
         <label htmlFor="info-htmlFor-customer">
           <section className="d-flex justify-content-between align-items-center">
-            <span className="mb-2">Service Gallery</span>
+            <span className="mb-2">{t("addService.serviceGallery")}</span>
           </section>
-          <small>
-            Size: 343x257 pixels. Ratio 4:3. Maximum size: 5 MB. Allowed number:
-            10 files.
-          </small>
+          <small>{t("addService.imagesHint")}</small>
         </label>
         <section className="images_grid_upload">
           <section className="file_upload">
@@ -167,7 +166,7 @@ export default function SecondStep({
         <FormInput
           type="number"
           className="col-md-6 mb-3"
-          label="Service Price"
+          label={t("addService.servicePrice")}
           name="price"
           min={0}
           value={formData.price}
@@ -177,9 +176,12 @@ export default function SecondStep({
           readOnly
           className="col-md-6 mb-3"
           type="number"
-          label={`Dues After Fees (${
-            settings?.data?.service_percentage || 20
-          }%)`}
+          label={
+            t("addService.yourDuesAfterfees") +
+            "  (" +
+            settings?.data?.service_percentage +
+            "%)"
+          }
           style={{ userSelect: "none" }}
           value={
             formData.price && settings?.data?.service_percentage
@@ -197,10 +199,10 @@ export default function SecondStep({
         value={formData.days}
         onChange={handleChange}
         className="mb-3"
-        label="Delivery Time"
+        label={t("addService.serviceDays")}
       />
       <section>
-        <label className="mb-2">Buyer Instructions</label>
+        <label className="mb-2">{t("addService.instructions")}</label>
         <FormTextArea
           name="instructions"
           id="instructions"
@@ -214,12 +216,12 @@ export default function SecondStep({
 
       <section className="add_more_devlop">
         <label className="mb-2" htmlFor="add_more_devlop">
-          Add Development to this Service
+          {t("addService.addMoreDevelopment")}
         </label>
         <FormButton
           onClick={(e) => handleAddDev(e)}
           className="add_develop_button"
-          content="Add Development to this Service"
+          content={t("addService.addMoreDevelopment")}
         >
           <FaPlusCircle />
         </FormButton>
@@ -247,7 +249,7 @@ export default function SecondStep({
             setStep(1);
           }}
         >
-          <FaChevronLeft />
+          {lang === "ar" ? <FaChevronRight /> : <FaChevronLeft />}
         </FormButton>{" "}
         <SubmitButton
           loading={loading}

@@ -73,7 +73,7 @@ export default function SideBarOrdersFilter({ isOpen, setIsOpen }) {
   return (
     <section className={`sidebar_orders_filter ${isOpen ? "active" : ""}`}>
       <section className="sidebar_orders_filter_header">
-        <h2>Orders Status</h2>
+        <h2>{t("status.orderStatus")}</h2>
         <button>
           <IoMdClose onClick={() => setIsOpen(false)} />
         </button>

@@ -6,6 +6,7 @@ import { CiFilter } from "react-icons/ci";
 import useProjectsOrdersList from "../hooks/projects/useProjectsOrdersList";
 import DataLoader from "../ui/DataLoader";
 import EmptyData from "../ui/EmptyData";
+import CustomPagination from "../ui/CustomPagination";
 
 const ProjectsOrders = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -15,7 +16,7 @@ const ProjectsOrders = () => {
   }
   return (
     <section>
-      <section className="project_header_container ">
+      <section className="header_container ">
         <section className="container-md ">
           <DetailsHeader links={"In Progress"} />
         </section>
@@ -33,7 +34,15 @@ const ProjectsOrders = () => {
             {isLoading ? (
               <DataLoader />
             ) : projectsOrdersList.data.length > 0 ? (
-              <InProgressOrdersList projectsOrdersList={projectsOrdersList} />
+              <>
+                <InProgressOrdersList projectsOrdersList={projectsOrdersList} />{" "}
+                {projectsOrdersList && projectsOrdersList?.total > 10 && (
+                  <CustomPagination
+                    count={projectsOrdersList?.total}
+                    pageSize={10}
+                  />
+                )}
+              </>
             ) : (
               <EmptyData>
                 <p>You have no in-progress orders at the moment.</p>

@@ -254,7 +254,7 @@ export default function AddProject() {
 
             <section className="col-12 p-2">
               <section className="content">
-                <h6>Add Project Attachments</h6>
+                <h6>{t("projects.addAttachment")}</h6>
               </section>
             </section>
             <section className="file_upload_grid">

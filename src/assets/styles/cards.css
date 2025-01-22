@@ -1199,3 +1199,70 @@
     }
   }
 }
+
+/* bank trensfer card */
+.bank-transfer-box {
+  width: 100%;
+  input {
+    display: none;
+    &:checked + label {
+      border-color: var(--main-color);
+    }
+  }
+  label {
+    background-color: var(--gray-background);
+    border: 2px solid var(--gray-background);
+    width: 100%;
+    padding: 16px;
+    border-radius: 12px;
+    display: flex;
+    gap: 24px;
+    position: relative;
+    cursor: pointer;
+    transition: var(--transition);
+  }
+  .image-wrapper {
+    width: 42px;
+    height: 42px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    i {
+      font-size: 24px;
+    }
+  }
+  .info-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    position: relative;
+    h5 {
+      margin: 0;
+    }
+    .info-boxes-wrapper {
+      display: flex;
+      position: relative;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 0 24px;
+      .info-box {
+        display: flex;
+        align-items: center;
+        gap: 4px;
+        position: relative;
+        font-size: 14px;
+        margin: 0;
+        color: var(--text-color);
+        i {
+          font-size: 12px;
+          width: 16px;
+          height: 16px;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          color: var(--text-color);
+        }
+      }
+    }
+  }
+}

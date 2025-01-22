@@ -1,4 +1,5 @@
 import React from "react";
+import { useSelector } from "react-redux";
 import { NavLink } from "react-router";
 import "swiper/css";
 import { Autoplay, Navigation, Pagination } from "swiper/modules";
@@ -20,12 +21,14 @@ const categories = [
 ];
 
 export default function HeaderSwiper() {
+  const lang = useSelector((state) => state.language.lang);
   return (
     <Swiper
       navigation={true}
       modules={[Navigation, Pagination]}
       spaceBetween={20}
       slidesPerView="auto"
+      dir={lang === "en" ? "ltr" : "rtl"}
     >
       {categories.map((cat, index) => (
         <SwiperSlide

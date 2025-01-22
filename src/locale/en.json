@@ -120,6 +120,7 @@
   "navbar": {
     "ynjez": "About Ynjez",
     "addService": "Add Service",
+
     "categories": "Categories",
     "sections": "Sections",
     "purchase": "Purchases",
@@ -354,7 +355,8 @@
     "noChangesMade": "No changes detected. Please make some updates before submitting.",
     "SimilarServices": "Similar Services",
     "yourDuesAfterfees": "Dues After Fees",
-    "success": "Added successfully"
+    "success": "Added successfully",
+    "devName": "Development Name"
   },
   "search": {
     "searchFor": "Search for...",
@@ -366,7 +368,8 @@
     "verificated": "Verified Identity",
     "availabilty": "Currently Available",
     "apply": "Apply",
-    "clear": "Clear Filter",
+    "clearfilter": "Clear Filter",
+    "clear": "Clear",
     "searchFilter": "Search Results",
     "noData": "No services found with these details, please try something else...",
     "loading": "Loading",
@@ -552,7 +555,8 @@
     "offer": "Offers",
     "addFirst": "Add First Offer",
     "gotoProfile": "Go to Profile",
-    "publishedScience": "Published"
+    "publishedScience": "Published",
+    "addAttachment": "Add Project Attachments"
   },
   "chat": {
     "block": "Block",

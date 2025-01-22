@@ -1,3 +1,4 @@
+import { useTranslation } from "react-i18next";
 import FormInput from "../form/FormInput";
 import { IoCloseOutline } from "react-icons/io5";
 
@@ -7,6 +8,7 @@ const AddMoreDevelopCard = ({
   development,
   onDevChange,
 }) => {
+  const { t } = useTranslation();
   return (
     <section id="0" className="add_more_model">
       <section
@@ -19,8 +21,8 @@ const AddMoreDevelopCard = ({
         <FormInput
           id={`description-${index}`}
           name="description"
-          label="Development Name"
-          placeholder="Example Website design and Development"
+          label={t("addService.devName")}
+          placeholder={t("addService.moreDevtitlePlaceholder")}
           value={development.description}
           onChange={(e) => onDevChange(e, index)}
         />
@@ -30,8 +32,8 @@ const AddMoreDevelopCard = ({
             name="price"
             type="number"
             min={0}
-            label="Price"
-            placeholder="Development price"
+            label={t("addService.price")}
+            placeholder={t("addService.moreDevPricePlaceholder")}
             value={development.price}
             onChange={(e) => onDevChange(e, index)}
             className="col-md-6"
@@ -41,8 +43,8 @@ const AddMoreDevelopCard = ({
             name="duration"
             type="number"
             min={0}
-            label="Development Duration"
-            placeholder="Development Duration"
+            label={t("addService.duration")}
+            placeholder={t("addService.moreDevDurationPlaceholder")}
             value={development.duration}
             onChange={(e) => onDevChange(e, index)}
             className="col-md-6"
