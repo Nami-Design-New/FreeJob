@@ -1,3 +1,4 @@
+import { useParams } from "react-router-dom";
 import axiosInstance from "../utils/axios";
 
 export async function getCommunities() {
@@ -23,7 +24,7 @@ export async function getCommunityPosts(name) {
 export async function getCommunityPostDetails(title) {
   try {
     const req = await axiosInstance.post("/get_community_post_details_title", {
-      title: title,
+      title,
     });
     return req.data.data;
   } catch (error) {

@@ -6,8 +6,9 @@ import Logo from "./Logo";
 import { useSelector } from "react-redux";
 import { useTranslation } from "react-i18next";
 import useGetCommunitiesList from "../../hooks/useGetCommunitiesList";
-import useGetAbout from "../../hooks/useGetAbout";
+// import useGetAbout from "../../hooks/useGetAbout";
 import { Accordion } from "react-bootstrap";
+import useGetAbout from "../../hooks/about/useGetAbout";
 
 export default function SideMenu({ state, onClose }) {
   const isLogin = useSelector((state) => state.authedUser.isLogged);

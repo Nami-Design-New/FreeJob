@@ -3,11 +3,13 @@ import { Link, useSearchParams } from "react-router-dom";
 import DataLoader from "../ui/DataLoader";
 import ErrorPage from "./ErrorPage";
 import useGetAboutAppCategory from "../hooks/about/useGetAboutAppCategory";
+import DetailsHeader from "../ui/servicesComponents/serviceDetails/DetailsHeader";
+import { useTranslation } from "react-i18next";
 
 const About = () => {
   const { data: aboutCategoriesList, isLoading } = useGetAboutAppCategory();
   const [searchParams, setSearchParams] = useSearchParams();
-
+  const { t } = useTranslation();
   useEffect(() => {
     if (aboutCategoriesList && !searchParams.get("category")) {
       setSearchParams({ category: aboutCategoriesList[0].name });
@@ -26,6 +28,12 @@ const About = () => {
 
   return (
     <>
+      {" "}
+      <section className="header_container ">
+        <section className="container-md ">
+          <DetailsHeader links={t("routes.about")} />
+        </section>
+      </section>
       <section className="faqs">
         <div className="container">
           <ul
