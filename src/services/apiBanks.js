@@ -51,3 +51,12 @@ export async function editBank(requestBody, querClinet) {
     throw new Error(error.message);
   }
 }
+
+export async function getPaymentMethods() {
+  try {
+    const req = await axiosInstance.get("/get_payments");
+    return req.data.data;
+  } catch (err) {
+    throw new Error(err.message);
+  }
+}

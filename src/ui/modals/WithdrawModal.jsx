@@ -5,7 +5,7 @@ import { useState } from "react";
 import { useQueryClient } from "@tanstack/react-query";
 import { createWithdraw } from "../../services/apiBanks";
 import { toast } from "react-toastify";
-import { Modal, Nav, Row, Tab, Tabs } from "react-bootstrap";
+import { Modal, Nav, Row, Tab } from "react-bootstrap";
 import FormInput from "../form/FormInput";
 import { Link } from "react-router-dom";
 import BankTransferCard from "../cards/BankTransferCard";
