@@ -6,9 +6,14 @@ export default function FooterSection({ items, title }) {
       <h1 className="footer_section_title">{title}</h1>
       <ul>
         {items.map((item) => (
-          <li key={item.title}>
-            <Link className="title">{item.title}</Link>
-            <Link className="subtitle">{item?.subtitle}</Link>
+          <li key={item.name}>
+            <Link
+              className="title"
+              to={`/services?categories=${item.category_id}`}
+            >
+              {item.name}
+            </Link>
+            {/* <Link className="subtitle">{item?.name}</Link> */}
           </li>
         ))}
       </ul>
