@@ -12,6 +12,7 @@ function ProtectionProvider({ children }) {
 
   useEffect(() => {
     if (!loading && !isAuthed) {
+      navigate("/");
       dispatch(openModal());
     }
   }, [dispatch, isAuthed, loading, navigate]);

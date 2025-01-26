@@ -40,9 +40,7 @@ export default function Services() {
           <FilterSidebar isOpen={isOpen} setIsOpen={setIsOpen} />
         </section>
 
-        <section className="services_list">
-          <ServicesList filter={filter} />
-        </section>
+        <ServicesList filter={filter} />
       </section>
     </section>
   );

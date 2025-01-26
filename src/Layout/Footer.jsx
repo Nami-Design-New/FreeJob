@@ -1,61 +1,13 @@
+import { Accordion } from "react-bootstrap";
 import { useTranslation } from "react-i18next";
-import FooterBottomSection from "../ui/footer/FooterBottomSection";
-import FooterSection from "../ui/footer/FooterSection";
+import { Link } from "react-router-dom";
 import useGetAbout from "../hooks/about/useGetAbout";
-import useGetCommunitiesList from "../hooks/community/useGetCommunitiesList";
 import usePopularCategories from "../hooks/categories/usePopularCategoris";
+import useGetCommunitiesList from "../hooks/community/useGetCommunitiesList";
 import usePaymentMethodsList from "../hooks/usePaymentMethodsList";
 import DataLoader from "../ui/DataLoader";
-import { Link } from "react-router-dom";
-import { Accordion } from "react-bootstrap";
 import Logo from "../ui/header/Logo";
 import LanguageToggle from "../ui/LanguageToggle";
-
-const categories = [
-  { title: "Graphics & Design", subtitle: "" },
-  { title: "Digital Marketing", subtitle: "" },
-  { title: "Writing & Translation", subtitle: "" },
-  { title: "Video & Animation", subtitle: "" },
-  { title: "Music & Audio", subtitle: "" },
-  { title: "Programming & Tech", subtitle: "" },
-  { title: "AI Services", subtitle: "" },
-  { title: "Consulting", subtitle: "" },
-  { title: "Data", subtitle: "" },
-  { title: "Business", subtitle: "" },
-  { title: "Personal Growth & Hobbies", subtitle: "" },
-  { title: "Photography", subtitle: "" },
-  { title: "Finance", subtitle: "" },
-  { title: "End-to-End Projects", subtitle: "" },
-  { title: "Service Catalog", subtitle: "" },
-];
-
-const forClients = [
-  { title: "How Fiverr Works", subtitle: "" },
-  { title: "Customer Success Stories", subtitle: "" },
-  { title: "Trust & Safety", subtitle: "" },
-  { title: "Quality Guide", subtitle: "" },
-  { title: "Fiverr Learn", subtitle: "Online Courses" },
-  { title: "Fiverr Guides", subtitle: "" },
-  { title: "Fiverr Answers", subtitle: "" },
-];
-const forFreelancers = [
-  { title: "Become a Fiverr Freelancer", subtitle: "" },
-  { title: "Become an Agency", subtitle: "" },
-  { title: "Kickstart", subtitle: "" },
-  { title: "Community Hub", subtitle: "" },
-  { title: "Forum", subtitle: "" },
-  { title: "Events", subtitle: "" },
-];
-
-const businessSolutions = [
-  { title: "Fiverr Pro", subtitle: "" },
-  { title: "Project Management Service", subtitle: "" },
-  { title: "ClearVoice", subtitle: "Content Marketing" },
-  { title: "Working Not Working", subtitle: "Creative Talent" },
-  { title: "AutoDS", subtitle: "Dropshipping Tool" },
-  { title: "Fiverr Logo Maker", subtitle: "" },
-  { title: "Contact Sales", subtitle: "" },
-];
 
 export default function Footer() {
   const { data: payments } = usePaymentMethodsList();
@@ -64,126 +16,12 @@ export default function Footer() {
   const { isLoading: isCategoryLoading, data: popularCategoriesList } =
     usePopularCategories();
   const { data: communities } = useGetCommunitiesList();
-  console.log(popularCategoriesList);
-  console.log(footerCategoriesList);
-  console.log(communities);
 
   return (
     <>
       {isCategoryLoading && isLoading ? (
         <DataLoader />
       ) : (
-        // <footer>
-        //   <div className="container-md">
-        //     {" "}
-        //     <section className="copy_rights  col-md-12 col-lg-5 ">
-        //       <Logo />
-        //       <p>
-        //         &copy; <Link to="/"> tet International Ltd. </Link>{" "}
-        //         {new Date().getFullYear()}
-        //       </p>
-        //     </section>
-        //     <div className="row">
-        //       <div className="col-6 col-lg-3">
-        //         <div>
-        //           <h1 className="footer_section_title">
-        //             {t("footer.categories")}
-        //           </h1>
-        //           <ul>
-        //             {popularCategoriesList.map((item) => (
-        //               <li key={item.name}>
-        //                 <Link
-        //                   className="title"
-        //                   to={`/services?categories=${item.category_id}`}
-        //                 >
-        //                   {item.name}
-        //                 </Link>
-        //               </li>
-        //             ))}
-        //           </ul>
-        //         </div>
-        //       </div>
-        //       <div className="col-6 col-lg-3">
-        //         <div>
-        //           <h1 className="footer_section_title">Categories</h1>
-        //           <ul>
-        //             {footerCategoriesList &&
-        //               footerCategoriesList?.length > 0 && (
-        //                 <div className="col-lg-3 col-6">
-        //                   <div className="links pa-24">
-        //                     <h4>{t("footer.importantLinks")}</h4>
-        //                     <ul>
-        //                       {footerCategoriesList.map((category) => (
-        //                         <li key={category.id}>
-        //                           <Link to={`/about/${category.id}`}>
-        //                             {category.name}
-        //                           </Link>
-        //                         </li>
-        //                       ))}
-        //                       <li>
-        //                         <Link to="/blogs">{t("footer.blogs")}</Link>
-        //                       </li>
-        //                       <li>
-        //                         <Link to="/terms-conditions">
-        //                           {t("footer.terms")}
-        //                         </Link>
-        //                       </li>
-        //                       <li>
-        //                         <Link to="/privacy-policy">
-        //                           {t("footer.privacy")}
-        //                         </Link>
-        //                       </li>
-        //                       <Accordion>
-        //                         {communities && communities?.length > 0 && (
-        //                           <Accordion.Item eventKey="0">
-        //                             <Accordion.Header className="nav-link">
-        //                               <span>{t("navbar.communities")}</span>
-        //                             </Accordion.Header>
-        //                             <Accordion.Body>
-        //                               <ul>
-        //                                 {communities?.map((community) => (
-        //                                   <li
-        //                                     key={community.id}
-        //                                     className="nav-link"
-        //                                   >
-        //                                     <Link
-        //                                       to={`/community/${community.name}`}
-        //                                       // onClick={() => setIsOpen(false)}
-        //                                     >
-        //                                       {community.name}
-        //                                     </Link>
-        //                                   </li>
-        //                                 ))}
-        //                               </ul>
-        //                             </Accordion.Body>
-        //                           </Accordion.Item>
-        //                         )}
-        //                       </Accordion>
-        //                     </ul>
-        //                   </div>
-        //                 </div>
-        //               )}
-        //           </ul>
-        //         </div>
-        //         {/* <FooterSection
-        //           items={footerCategoriesList}
-        //           title="For Clients"
-        //         /> */}
-        //       </div>
-        //       <div className="col-6 col-lg-3">
-        //         <FooterSection items={forFreelancers} title="For Freelancers" />
-        //       </div>
-        //       <div className="col-6 col-lg-3">
-        //         <FooterSection
-        //           items={businessSolutions}
-        //           title="Business Solutions"
-        //         />
-        //       </div>
-        //     </div>
-        //     <FooterBottomSection />
-        //   </div>
-        // </footer>
-
         <footer>
           <div className="container">
             <div className="row upper-row">

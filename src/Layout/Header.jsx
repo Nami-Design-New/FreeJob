@@ -90,7 +90,6 @@ export default function Header() {
                 {t("routes.login")}
               </button>
               {show && <AuthModal />}
-              <Button content={t("navbar.join")} />
             </div>
           )}
           {isLogin && <UserDropDown />}

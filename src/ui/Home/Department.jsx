@@ -1,8 +1,8 @@
-import ServiceCard from "../../ui/cards/ServiceCard";
-import { Swiper, SwiperSlide } from "swiper/react";
-import { Autoplay } from "swiper/modules";
 import { useSelector } from "react-redux";
+import { Autoplay } from "swiper/modules";
+import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/swiper-bundle.css";
+import ServiceCard from "../../ui/cards/ServiceCard";
 import ShowAll from "../ShowAll";
 
 const Department = ({ category }) => {

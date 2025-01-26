@@ -325,11 +325,17 @@ dialog {
 .header_swiper {
   width: 100%;
   margin-top: 8px;
-
   .swiper {
     padding: 0 48px;
   }
-
+  button {
+    border: none;
+    background-color: transparent;
+    color: var(--gray-color);
+    &:hover {
+      color: var(--secondary-color);
+    }
+  }
   .swiper-button-next,
   .swiper-button-prev {
     background: var(--white-color);
@@ -342,7 +348,7 @@ dialog {
       content: "\f105";
       background: none;
       font-size: 20px;
-      margin-top: 4px;
+      /* margin-top: 4px; */
       font-family: "Font Awesome 6 Pro";
     }
   }

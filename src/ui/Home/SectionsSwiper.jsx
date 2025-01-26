@@ -5,10 +5,21 @@ import ShowAll from "../ShowAll";
 import { useTranslation } from "react-i18next";
 import useCategoriesList from "../../hooks/categories/useCategoriesList";
 import DataLoader from "../DataLoader";
+import ChooseCategoryPath from "../modals/ChooseCategoryPath";
+import { useEffect, useState } from "react";
 
 export default function SectionsSwiper() {
   const { categories, isLoading } = useCategoriesList();
+  const [id, setId] = useState();
+  const [show, setShow] = useState(false);
+  const handleCloseModal = () => setShow(false);
+  const handleOpenModal = () => setShow(true);
   const { t } = useTranslation();
+  function handleClick(id) {
+    setId(id);
+    handleOpenModal();
+  }
+
   return (
     <>
       <div className="">
@@ -43,12 +54,21 @@ export default function SectionsSwiper() {
           }}
         >
           {categories.map((item) => (
-            <SwiperSlide key={item.id} style={{ height: "auto" }}>
+            <SwiperSlide
+              onClick={() => handleClick(item.id)}
+              key={item.id}
+              style={{ height: "auto" }}
+            >
               <SectionCard section={item} />
             </SwiperSlide>
           ))}
         </Swiper>
-      )}
+      )}{" "}
+      <ChooseCategoryPath
+        show={show}
+        close={handleCloseModal}
+        params={`categories=${id}`}
+      />
     </>
   );
 }

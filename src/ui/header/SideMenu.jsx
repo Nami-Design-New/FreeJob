@@ -72,7 +72,6 @@ export default function SideMenu({ state, onClose }) {
               event.stopPropagation();
             }}
           >
-            {" "}
             <Accordion>
               <Accordion.Item eventKey="0">
                 <Accordion.Header>
@@ -138,7 +137,11 @@ export default function SideMenu({ state, onClose }) {
           <li>
             <NavLink to="/freelancers">{t("routes.freelancers")}</NavLink>
           </li>
-          <li>
+          <li
+            onClick={(event) => {
+              event.stopPropagation();
+            }}
+          >
             {" "}
             <Accordion>
               <Accordion.Item eventKey="0">
@@ -163,7 +166,6 @@ export default function SideMenu({ state, onClose }) {
               {communities && communities?.length > 0 && (
                 <Accordion.Item eventKey="1">
                   <Accordion.Header>
-                    <i className="fa-regular fa-comments"></i>{" "}
                     <span>{t("navbar.communities")}</span>
                   </Accordion.Header>
                   <Accordion.Body>
@@ -183,10 +185,6 @@ export default function SideMenu({ state, onClose }) {
                 </Accordion.Item>
               )}
             </Accordion>
-            <NavLink to="/about/1">About FREEJOP</NavLink>
-          </li>
-          <li>
-            <NavLink to="/community">FREEJOP&apos;s Community</NavLink>
           </li>
 
           <li>

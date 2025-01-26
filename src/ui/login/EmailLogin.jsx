@@ -66,23 +66,23 @@ export default function EmailLogin() {
   return (
     <div className="left_side">
       {" "}
-      <BackButton  />
+      <BackButton />
       <header className="modal_header ">
-        <h1>Enter your data to register</h1>
+        <h1>{t("auth.loginPageTitle")}</h1>
         <p className="d-flex gap-1 align-items-center fs-6 flex-wrap">
-          Don&apos;t have an account?
+          {t("auth.dontHaveAccount")}
           <button
             onClick={() => dispatch(setStep(5))}
             className="btn p-0 text-success"
           >
-            Create account now
+            {t("auth.createAccount")}
           </button>
         </p>
       </header>
       <form onSubmit={handleSubmit} className="d-flex flex-column gap-2">
         <FormInput
           name="email"
-          label="Email"
+          label={t("auth.email")}
           type="email"
           required
           value={formData.email}
@@ -91,7 +91,7 @@ export default function EmailLogin() {
 
         <FormInput
           name="password"
-          label="Password"
+          label={t("auth.password")}
           type="password"
           required
           value={formData.password}
@@ -102,10 +102,10 @@ export default function EmailLogin() {
           type="button"
           className="forget_pass btn"
         >
-          Forget Your Password
+          {t("auth.forgetPassword")}
         </button>
 
-        <FormButton content="Login" type="submit" loading={loading} />
+        <FormButton content={t("auth.login")} type="submit" loading={loading} />
       </form>
     </div>
   );

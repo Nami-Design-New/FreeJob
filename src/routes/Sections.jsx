@@ -25,7 +25,7 @@ export default function Sections() {
 
   return (
     <section className="sections">
-      <section className="sections_breadcrumb">
+      <section className="header_container">
         <section className="container">
           <Breadcrumb as="nav">
             <Breadcrumb.Item href="/">Home</Breadcrumb.Item>

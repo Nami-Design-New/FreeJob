@@ -50,8 +50,16 @@
     "services": "الخدمات"
   },
   "auth": {
+    "copyRight": "جميع الحقوق محفوظة",
+    "completeRegister": "استكمل بياناتك",
+    "largest_platform": "أكبر منصة للعمل الحر",
+    "categories_count": "اكثر من 700 فئة",
+    "quality_work": "عمل بجودة عالية يتم إنجازه بشكل أسرع",
+    "access_global": "الوصول إلى المواهب والشركات حول العالم",
+    "withEmail": "متابعة بالبريد الإلكتروني",
     "loginPageTitle": "تسجيل الدخول",
     "loginPageSubTitle": " اهلا بك ...! ادخل بياناتك المسجلة لإتمام عملية الدخول",
+    "dontHaveAccount": "ليس لديك حساب؟",
     "email": "البريد الالكترونى",
     "password": "كلمة المرور",
     "forgetPassword": "نسيت كلمة المرور",
@@ -725,5 +733,6 @@
   "notLikeIt": "إلغاء الإعجاب",
   "sort": "رتب",
   "noFreelancers": "عذراً، لا يوجد مستقلين في هذه الفئة.",
-  "noNotifications": "لا يوجد إشعارات ليتم عرضها"
+  "noNotifications": "لا يوجد إشعارات ليتم عرضها",
+  "searchIn": "استمرار البحث في ..."
 }

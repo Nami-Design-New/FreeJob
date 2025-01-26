@@ -105,18 +105,8 @@ export default function RegistrationForm3({
         }
       );
       if (res.data.code === 200) {
-        toast.success(t("auth.registerSuccess"));
-        setFormData({
-          image: "",
-          name: "",
-          email: "",
-          phone: "",
-          age: "",
-          password: "",
-          is_freelance: false,
-          job_title: "",
-          categories: [],
-        });
+        toast.success(t("auth.otpSubTitle"));
+
         dispatch(setStep(4));
         setRegister(true);
         setOtpData((prev) => ({
@@ -163,7 +153,7 @@ export default function RegistrationForm3({
     <div className="left_side">
       <BackButton />
       <header className="modal_header pb-3 ">
-        <h1 className="text-center">Complete your information</h1>
+        <h1 className="text-center">{t("auth.completeRegister")}</h1>
       </header>
       <form onSubmit={handleSubmit} className="user_data row row-gap-2 ">
         <div className="col-12 p-0">
@@ -202,17 +192,17 @@ export default function RegistrationForm3({
         </div>
         <div className="p-0 col-12">
           <label className="mb-2" htmlFor="">
-            Are you a seller?
+            {t("auth.areYouSeller")}
           </label>
           <TabSelector
             selected={selected}
-            title1="Seller"
-            title2="Not Seller"
+            title1={t("auth.Seller")}
+            title2={t("auth.NotSeller")}
             onSelect={setSelected}
           />
         </div>
 
-        <FormButton content="Submit" type="submit" />
+        <FormButton content={t("complaints.submit")} type="submit" />
       </form>
     </div>
   );
