@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import { getPopularCategories } from "../../services/apiCategories";
+import { getPopularCategories } from "../../services/categoriesApi";
 
 function usePopularCategories() {
   const { isLoading, data, error } = useQuery({

@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import { getGategoriesWithSubcategories } from "../../services/apiCategories";
+import { getGategoriesWithSubcategories } from "../../services/categoriesApi";
 
 function useCategorieListWithSub() {
   const { isLoading, data, error } = useQuery({

@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import { getCategory } from "../../services/apiCategories";
+import { getCategory } from "../../services/categoriesApi";
 
 function useGetCategoryById(id) {
   const { isLoading, data, error } = useQuery({
