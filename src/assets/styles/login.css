@@ -1,3 +1,20 @@
+.auth_social_btn {
+  justify-content: space-between;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1rem;
+  background-color: var(--white-color);
+  color: var(--black-color);
+  border: 1px solid var(--border-color);
+  border-radius: 0.5rem;
+  flex-grow: 1;
+  justify-self: center;
+  font-size: 1rem;
+  line-height: 1.5rem;
+  font-weight: 700;
+  text-align: center;
+}
+
 .auth_modal {
   .modal-backdrop {
     z-index: 100;
@@ -30,7 +47,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: var(--white-color);
+  background-color: transparent;
 }
 
 .right_side {
@@ -291,11 +308,12 @@ react-international-phone-country-selector-dropdown {
 }
 
 .react-international-phone-input-container .react-international-phone-input {
-  padding: .75rem 1rem !important;
+  padding: 0.75rem 1rem !important;
   height: 49.6px;
 }
 
-.react-international-phone-input-container .react-international-phone-country-selector-button {
+.react-international-phone-input-container
+  .react-international-phone-country-selector-button {
   width: 49.6px;
   height: 100%;
 }

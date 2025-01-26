@@ -39,14 +39,13 @@ export default function RegistrationForm({ formData, setFormData }) {
   async function handleSubmit(e) {
     e.preventDefault();
     dispatch(setStep(6));
-    console.log(formData);
   }
 
   return (
     <div className="left_side">
       <BackButton step={2} />
       <header className="modal_header pb-3 ">
-        <h1 className="text-center">Complete your information</h1>
+        <h1 className="text-center">{t("auth.registerPageSubTitle")}</h1>
       </header>
       <form onSubmit={handleSubmit} className="user_data row g-2 ">
         <div className="col-12 ">
@@ -106,7 +105,7 @@ export default function RegistrationForm({ formData, setFormData }) {
         </div>
         <div className="col-6">
           <FormSelector
-            label="Country"
+            label={t("profile.country")}
             value={countryId}
             disabledOption={t("select")}
             options={countries?.map((country) => ({
@@ -117,7 +116,7 @@ export default function RegistrationForm({ formData, setFormData }) {
           />
         </div>
         <div className=" col-12 mt-3">
-          <label className="fw-normal">Phone Number</label>
+          <label className="fw-normal"> {t("auth.phone")}</label>
           <PhoneInput
             defaultCountry="sa"
             onChange={(value, country) => handlePhoneChange(value, country)}
@@ -131,7 +130,7 @@ export default function RegistrationForm({ formData, setFormData }) {
             }}
           />
         </div>
-        <FormButton content="Next" type="submit" />
+        <FormButton content={t("next")} type="submit" />
       </form>
     </div>
   );

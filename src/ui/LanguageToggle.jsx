@@ -16,7 +16,7 @@ function LanguageToggle() {
   return (
     <div className="d-flex justify-content-end">
       <button className="langButton btn btn-light " onClick={toggleLanguage}>
-        {lang === "en" ? "Arabic" : "الإنجليزية"}
+        {lang === "en" ? "عربي" : "English"}
         <i className="mx-1">
           <BsGlobe />
         </i>

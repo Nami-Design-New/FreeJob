@@ -1,4 +1,3 @@
-import { Link } from "react-router";
 import ProjectCard from "../cards/ProjectCard";
 import useProjectsList from "../../hooks/projects/useProjectsList";
 import EmptyData from "../EmptyData";

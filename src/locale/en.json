@@ -50,8 +50,16 @@
     "services": "Services"
   },
   "auth": {
+    "copyRight": "Copy Rights Reserved",
+    "completeRegister": "Complete Your Registration",
+    "largest_platform": "The largest platform for freelancers",
+    "categories_count": "More Than 700 categories",
+    "quality_work": "Quality work done faster",
+    "access_global": "Access to talent and businesses across the globe",
+    "withEmail": "Continue With Email",
     "loginPageTitle": "Login",
     "loginPageSubTitle": "Welcome ...! Please enter your registered details to complete the login process",
+    "dontHaveAccount": "Don't have an account?",
     "email": "Email",
     "password": "Password",
     "forgetPassword": "Forgot Password",
@@ -118,7 +126,7 @@
     "passwordChanged": "Password changed successfully"
   },
   "navbar": {
-    "ynjez": "About Ynjez",
+    "ynjez": "About FREEJOB",
     "addService": "Add Service",
 
     "categories": "Categories",
@@ -732,5 +740,6 @@
   "notLikeIt": "Unlike",
   "sort": "Sort",
   "noFreelancers": "Sorry, there are no freelancers in this category.",
-  "noNotifications": "There is no notifications to be shown"
+  "noNotifications": "There is no notifications to be shown",
+  "searchIn": "Continue search in"
 }

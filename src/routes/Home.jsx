@@ -26,7 +26,7 @@ export default function Home() {
         <section className="row">
           <HowToStart />
         </section>
-        
+
         <PopularServices />
         <Promote />
         <PartnersofSuccess />
@@ -34,7 +34,7 @@ export default function Home() {
         <Gallery />
         <WorkWithUs />
       </section>
-      
+
       <Banner />
     </>
   );

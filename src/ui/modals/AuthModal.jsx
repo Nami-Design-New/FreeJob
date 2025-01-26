@@ -11,6 +11,7 @@ import RegistrationForm from "../login/RegistrationForm";
 import UserNameEntry from "../login/UserNameEntry";
 import RegistrationForm3 from "../login/RegistrationForm3";
 import ForgetPassword from "../login/ForgetPassword";
+import { t } from "i18next";
 
 export default function AuthModal() {
   const show = useSelector((state) => state.authModal.show);
@@ -48,6 +49,8 @@ export default function AuthModal() {
           <EmailVerification
             otpData={otpData}
             setOtpData={setOtpData}
+            formData={formData}
+            setFormData={setFormData}
             register={register}
             setRegister={setRegister}
           />
@@ -109,7 +112,7 @@ export default function AuthModal() {
           <div className=" col-lg-6 p-0 h-100">
             {renderStep()}
             <p className="copy_right">
-              Copy Rights Reserved {new Date().getFullYear()}
+              {t("auth.copyRight")} {new Date().getFullYear()}
             </p>
           </div>
         </div>

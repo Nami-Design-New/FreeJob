@@ -14,6 +14,7 @@ import "../node_modules/bootstrap/dist/js/bootstrap.bundle.min.js";
 import "../node_modules/react-toastify/dist/ReactToastify.css";
 import "./assets/styles/all.min.css";
 import "./assets/styles/main.css";
+import { GoogleOAuthProvider } from "@react-oauth/google";
 
 const queryClient = new QueryClient();
 
@@ -21,10 +22,12 @@ createRoot(document.getElementById("root")).render(
   <QueryClientProvider client={queryClient}>
     <ReactQueryDevtools initialIsOpen={false} />
     <Provider store={store}>
-      <ToastContainer autoClose={2000} />
-      <InterceptorProvider>
-        <App />
-      </InterceptorProvider>
+      <ToastContainer autoClose={2000} />{" "}
+      <GoogleOAuthProvider clientId={import.meta.env.VITE_GOOGLE_CLIENT_ID}>
+        <InterceptorProvider>
+          <App />
+        </InterceptorProvider>
+      </GoogleOAuthProvider>
     </Provider>
   </QueryClientProvider>
 );

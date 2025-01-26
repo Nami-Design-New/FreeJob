@@ -40,7 +40,7 @@
   --main-transition: all 300ms ease;
 }
 
-* {
+body {
   padding: 0;
   margin: 0;
   line-height: 1.4;
@@ -48,8 +48,10 @@
   scroll-behavior: smooth;
   -webkit-tap-highlight-color: transparent;
   font-family: "Din", sans-serif;
+  main {
+    min-height: calc(100vh - 120px);
+  }
 }
-
 /* Scrollbar Container */
 ::-webkit-scrollbar {
   width: 8px;
@@ -515,7 +517,7 @@ a {
     input {
       display: none;
 
-      &:checked+label {
+      &:checked + label {
         border-color: var(--main-color);
       }
     }

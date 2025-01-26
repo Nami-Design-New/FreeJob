@@ -4,6 +4,7 @@ import CollectionCard from "../ui/cards/CollectionCard";
 import DataLoader from "../ui/DataLoader";
 import EmptyData from "../ui/EmptyData";
 import DetailsHeader from "../ui/servicesComponents/serviceDetails/DetailsHeader";
+import PaginationComponent from "../ui/PaginationComponent";
 
 const MyCollections = () => {
   const { data: collections, isLoading } = useCollectionsList();
@@ -29,9 +30,9 @@ const MyCollections = () => {
               ) : (
                 <EmptyData>{t("collectionsEmpty")}</EmptyData>
               )}{" "}
-              {/* {collections?.total > 10 && (
+              {collections?.total > 10 && (
                 <PaginationComponent totalItems={collections.total} />
-              )} */}
+              )}
             </div>
           </div>
         )}

@@ -1,8 +1,9 @@
-import { Link } from "react-router";
 import { useEffect } from "react";
-import ServiceCard from "../cards/ServiceCard";
+import { useTranslation } from "react-i18next";
 import useSearchServicesList from "../../hooks/services/useSearchServicesList";
+import ServiceCard from "../cards/ServiceCard";
 import DataLoader from "../DataLoader";
+import EmptyData from "../EmptyData";
 
 export default function ServicesList() {
   const {
@@ -12,7 +13,7 @@ export default function ServicesList() {
     isFetching,
     isFetchingNextPage,
   } = useSearchServicesList();
-
+  const { t } = useTranslation();
   useEffect(() => {
     const handleScroll = () => {
       if (
@@ -32,13 +33,19 @@ export default function ServicesList() {
     <DataLoader />
   ) : (
     <>
-      {searchServicesList.map((service) => (
-        <section key={service.id} className="service_card_filter">
-          <Link to={service.id}>
-            <ServiceCard service={service} />
-          </Link>
+      {searchServicesList && searchServicesList.length > 0 ? (
+        <section className="services_list">
+          {searchServicesList.map((service) => (
+            <section key={service.id} className="service_card_filter">
+              <ServiceCard service={service} />
+            </section>
+          ))}
         </section>
-      ))}
+      ) : (
+        <EmptyData minHeight={"300px"}>
+          {t("notFoundPlaceholder.noServicesFoundWithThisDetails")}
+        </EmptyData>
+      )}
     </>
   );
 }

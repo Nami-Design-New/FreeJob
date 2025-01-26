@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import OTPInput from "react-otp-input";
 import { useDispatch } from "react-redux";
 import { setStep } from "../../redux/slices/authModalSlice";
@@ -7,19 +7,25 @@ import BackButton from "./BackButton";
 import { toast } from "react-toastify";
 import axiosInstance from "../../utils/axios";
 import { useTranslation } from "react-i18next";
+import { useNavigate } from "react-router-dom";
+import { setIsLogged, setUser } from "../../redux/slices/authedUserSlice";
+import { useCookies } from "react-cookie";
 
 export default function EmailVerification({
   otpData,
   setOtpData,
   register,
   setUserId,
+  formData,
 }) {
   const dispatch = useDispatch();
-
+  const navigate = useNavigate();
   const { t } = useTranslation();
   const [timer, setTimer] = useState(30);
   const [isLoading, setIsLoading] = useState(false);
   const [isDisabled, setIsDisabled] = useState(true);
+  const [, setCookie] = useCookies(["token"]);
+
   const handleChange = (otp) => {
     setOtpData((prevState) => ({
       ...prevState,
@@ -43,6 +49,7 @@ export default function EmailVerification({
     },
     url: "/user/check_code",
   };
+  console.log(formData, otpData);
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsLoading(true);
@@ -51,7 +58,34 @@ export default function EmailVerification({
       if (res.data.code === 200) {
         if (register) {
           toast.success(t("auth.registerSuccess"));
-          dispatch(setStep(2));
+          if (res.data.code === 200) {
+            const login = await axiosInstance.post("/user/login", {
+              email: formData.email,
+              password: formData.password,
+            });
+            if (login.data.code === 200) {
+              toast.success(t("auth.loginSuccess"));
+              dispatch(setUser(login.data.data));
+              dispatch(setIsLogged(true));
+              setCookie("token", login.data.data.token, {
+                path: "/",
+                secure: true,
+                sameSite: "Strict",
+              });
+              setCookie("id", login.data.data.id, {
+                path: "/",
+                secure: true,
+                sameSite: "Strict",
+              });
+              axiosInstance.defaults.headers.common[
+                "Authorization"
+              ] = `${login.data.data.token}`;
+            } else {
+              toast.error(t("auth.emailOrPasswordWrong"));
+            }
+          } else {
+            toast.error(res.data.message);
+          }
         } else {
           dispatch(setStep(7));
         }

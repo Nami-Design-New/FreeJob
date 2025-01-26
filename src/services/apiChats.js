@@ -1,7 +1,8 @@
-import axios from "./../utils/axios";
+import axiosInstance from "./../utils/axios";
+
 export async function getChats() {
   try {
-    const res = await axios.post("/user/get_chats");
+    const res = await axiosInstance.post("/user/get_chats");
     if (res.data.code === 200) {
       return res.data.data;
     }
@@ -12,9 +13,9 @@ export async function getChats() {
 
 export async function getTargetChat(data) {
   try {
-    const res = await axios.post("user/get_object_chat", {
+    const res = await axiosInstance.post("user/get_object_chat", {
       ...data,
-      orderBy: "asc"
+      orderBy: "asc",
     });
     if (res.data.code === 200) {
       return res.data.data;
@@ -26,10 +27,10 @@ export async function getTargetChat(data) {
 
 export const createMessage = async (data) => {
   try {
-    const res = await axios.post("/user/create_message", data, {
+    const res = await axiosInstance.post("/user/create_message", data, {
       headers: {
-        "Content-Type": "multipart/form-data"
-      }
+        "Content-Type": "multipart/form-data",
+      },
     });
     if (res.data.code === 200) {
       return res.data.data;

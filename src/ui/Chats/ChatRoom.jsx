@@ -30,32 +30,6 @@ const ChatRoom = ({ chat }) => {
     }
   }, [chat]);
 
-  // useEffect(() => {
-  //   const pusher = new Pusher("40956cc89171b3e710e6", {
-  //     cluster: "eu",
-  //   });
-
-  //   const channel = pusher.subscribe(`chat_${chat?.id}`);
-
-  //   channel.bind("new_message", function (data) {
-  //     pushMessage(data?.message);
-  //   });
-
-  //   return () => {
-  //     channel.unbind_all();
-  //     channel.unsubscribe();
-  //   };
-  // }, [chat?.id]);
-
-  // function pushMessage(message) {
-  //   if (message?.from_id === user?.id) {
-  //     return;
-  //   }
-  //   setMessages((prevMessages) => {
-  //     return [...prevMessages, message];
-  //   });
-  // }
-
   useEffect(() => {
     if (chatContainerRef.current) {
       chatContainerRef.current.scrollTop =
@@ -73,6 +47,11 @@ const ChatRoom = ({ chat }) => {
 
   const handleSendMessage = async (e) => {
     e.preventDefault();
+
+    if (message?.type === "") {
+      return;
+    }
+
     setLoading(true);
     setMessages((prevMessages) => {
       return [
@@ -105,8 +84,6 @@ const ChatRoom = ({ chat }) => {
       setLoading(false);
     }
   };
-
-  console.log(chat);
 
   const startRecording = async () => {
     setIsRecording(true);
@@ -334,7 +311,7 @@ const ChatRoom = ({ chat }) => {
             )}
           </div>
 
-          <button type="submit" disabled={loading}>
+          <button type="submit" disabled={message.type === "" && loading}>
             <i className="fa-regular fa-paper-plane-top"></i>
           </button>
         </form>

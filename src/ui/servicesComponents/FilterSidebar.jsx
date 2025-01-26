@@ -2,15 +2,15 @@ import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { IoMdClose } from "react-icons/io";
 import { useSearchParams } from "react-router";
+import useCategorieListWithSub from "../../hooks/categories/useCategorieListWithSub";
+import useGetSkills from "../../hooks/settings/useGetSkills";
 import { handleApplyFilters } from "../../utils/helper";
+import DataLoader from "../DataLoader";
 import FormButton from "../form/FormButton";
+import FormInput from "../form/FormInput";
 import MultiSelect from "./MultiSelect";
 import RangeInput from "./RangeInput";
-import SearchInput from "./SearchInput";
 import SectionsFilter from "./SectionsFilter";
-import DataLoader from "../DataLoader";
-import useGetSkills from "../../hooks/settings/useGetSkills";
-import useCategorieListWithSub from "../../hooks/categories/useCategorieListWithSub";
 
 const FilterSidebar = ({ isOpen, setIsOpen }) => {
   const { t } = useTranslation();
@@ -20,7 +20,7 @@ const FilterSidebar = ({ isOpen, setIsOpen }) => {
   const [selectedOptions, setSelectedOptions] = useState([]);
   const [searchParams, setSearchParams] = useSearchParams();
   const [filters, setFilters] = useState({
-    searchQuery: searchParams.get("search") || "",
+    searchQuery: searchParams.get("searchQuery") || "",
     price_from: Number(searchParams.get("price_from")) || 5,
     price_to: Number(searchParams.get("price_to")) || 2000,
     duration_from: Number(searchParams.get("duration_from")) || 1,
@@ -44,6 +44,8 @@ const FilterSidebar = ({ isOpen, setIsOpen }) => {
   });
 
   useEffect(() => {
+    console.log(filters);
+
     const options = filters?.skills?.map((id) => {
       const skill = skills?.find((s) => s?.id === Number(id));
       return { value: id, label: skill?.name };
@@ -70,8 +72,8 @@ const FilterSidebar = ({ isOpen, setIsOpen }) => {
     setSearchParams({});
   };
 
-  const handleSearch = (query) => {
-    setFilters((prev) => ({ ...prev, searchQuery: query }));
+  const handleSearch = (e) => {
+    setFilters((prev) => ({ ...prev, searchQuery: e.target.value }));
   };
 
   const handleSkillChange = (selectedItems) => {
@@ -117,10 +119,12 @@ const FilterSidebar = ({ isOpen, setIsOpen }) => {
         className="filter-form "
       >
         <section className="mb-4">
-          <SearchInput
+          <FormInput
             value={filters.searchQuery}
-            onSearch={handleSearch}
+            label={t("routes.search")}
+            onChange={(e) => handleSearch(e)}
             aria-label="Search items"
+            placeholder={t("search.searchFor")}
           />
         </section>
         {categoriesIsLoading ? (
@@ -170,7 +174,7 @@ const FilterSidebar = ({ isOpen, setIsOpen }) => {
             aria-label="Select delivery duration"
           />
         </section>
-        <footer className="d-flex align-item-center gap-2 justify-content-center p-0 pt-3">
+        <div className="d-flex align-item-center gap-2 justify-content-center p-0 pt-3">
           <FormButton
             content={t("search.apply")}
             style={{
@@ -192,7 +196,7 @@ const FilterSidebar = ({ isOpen, setIsOpen }) => {
             className="hover"
             onClick={resetFilters}
           />
-        </footer>
+        </div>
       </form>
     </aside>
   );

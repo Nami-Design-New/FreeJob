@@ -3,10 +3,21 @@ import "swiper/css";
 import CategoryCard from "../cards/CategoryCard";
 import useCategoriesList from "../../hooks/categories/useCategoriesList";
 import DataLoader from "../DataLoader";
+import { useState } from "react";
+import { useTranslation } from "react-i18next";
+import ChooseCategoryPath from "../modals/ChooseCategoryPath";
 
 export default function CategoriesSwiper() {
   const { categories, isLoading } = useCategoriesList();
-
+  const [id, setId] = useState();
+  const [show, setShow] = useState(false);
+  const handleCloseModal = () => setShow(false);
+  const handleOpenModal = () => setShow(true);
+  const { t } = useTranslation();
+  function handleClick(id) {
+    setId(id);
+    handleOpenModal();
+  }
   return (
     <div className="swiper_cntainer">
       {isLoading ? (
@@ -37,12 +48,21 @@ export default function CategoriesSwiper() {
           }}
         >
           {categories.map((item) => (
-            <SwiperSlide key={item.id} style={{ height: "auto" }}>
+            <SwiperSlide
+              onClick={() => handleClick(item.id)}
+              key={item.id}
+              style={{ height: "auto" }}
+            >
               <CategoryCard category={item} />
             </SwiperSlide>
           ))}
         </Swiper>
-      )}
+      )}{" "}
+      <ChooseCategoryPath
+        show={show}
+        close={handleCloseModal}
+        params={`categories=${id}`}
+      />
     </div>
   );
 }
