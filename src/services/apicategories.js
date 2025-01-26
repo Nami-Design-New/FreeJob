@@ -8,6 +8,7 @@ export async function getCategories() {
     throw new Error(err.message);
   }
 }
+
 export async function getGategoriesWithSubcategories() {
   try {
     const req = await axiosInstance.get("/get_categories_with_subcategory");
@@ -16,6 +17,7 @@ export async function getGategoriesWithSubcategories() {
     throw new Error(err.message);
   }
 }
+
 getGategoriesWithSubcategories();
 export async function getPopularCategories() {
   try {
@@ -25,6 +27,7 @@ export async function getPopularCategories() {
     throw new Error(err.message);
   }
 }
+
 export async function getSubCategories(categoryId) {
   try {
     const req = await axiosInstance.post("/get_sub_categories", {

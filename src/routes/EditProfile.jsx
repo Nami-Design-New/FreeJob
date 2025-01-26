@@ -6,7 +6,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { setUser } from "../redux/slices/authedUserSlice";
-import useCategoriesList from "../hooks/categories/useCategories";
 import useCountriesList from "../hooks/settings/useCountries";
 import useGetSkills from "../hooks/settings/useGetSkills";
 import FormInput from "../ui/form/FormInput";
@@ -17,6 +16,7 @@ import PasswordField from "../ui/form/PasswordField";
 import PhoneField from "../ui/form/PhoneField";
 import SubmitButton from "../ui/form/SubmitButton";
 import axiosInstance from "../utils/axios";
+import useCategoriesList from "../hooks/categories/useCategoriesList";
 
 const EditProfile = () => {
   const { t } = useTranslation();
