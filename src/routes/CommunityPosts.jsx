@@ -2,12 +2,13 @@ import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
 import useCommunityPosts from "../hooks/community/useCommunityPosts";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import DataLoader from "../ui/DataLoader";
 import DetailsHeader from "../ui/servicesComponents/serviceDetails/DetailsHeader";
 import CommunitySubjectCard from "../ui/cards/CommunitySubjectCard";
 import EmptyData from "../ui/EmptyData";
 import AddSubjectModal from "../ui/modals/AddSubjectModal";
+import { openModal } from "../redux/slices/authModalSlice";
 
 function CommunityPosts() {
   const { name } = useParams();
@@ -17,13 +18,13 @@ function CommunityPosts() {
   const { isLoading, data: posts } = useCommunityPosts(name);
 
   const isLogged = useSelector((state) => state.authedUser.isLogged);
-  const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   function handleClickAddPost() {
     if (isLogged) {
       setShowAddSubjectModal(true);
     } else {
-      navigate("/login");
+      dispatch(openModal());
     }
   }
 

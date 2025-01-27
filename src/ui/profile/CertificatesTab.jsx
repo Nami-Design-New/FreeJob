@@ -49,14 +49,6 @@ export default function CertificatesTab({ user, isMyAccount }) {
   return (
     <div className="tab-pane ">
       <div className="services-container">
-        {isMyAccount && (
-          <button
-            onClick={() => setShowAddCertificateModal(true)}
-            className="add-service"
-          >
-            {t("profile.addCertificate")}
-          </button>
-        )}
         {certificates?.length === 0 ? (
           <div className="noDataFound">
             <h4>{t("profile.noCertificatesFound")}</h4>
@@ -64,6 +56,19 @@ export default function CertificatesTab({ user, isMyAccount }) {
         ) : (
           <>
             <div className="services_grid">
+              {" "}
+              {isMyAccount && (
+                <button
+                  onClick={() => setShowAddCertificateModal(true)}
+                  className="add-service"
+                >
+                  {t("profile.addCertificate")}{" "}
+                  <img
+                    src={"/images/certified-outline.png"}
+                    alt="add service"
+                  />
+                </button>
+              )}
               {certificates?.map((cer) => (
                 <CertificateCard
                   canEdit={isMyAccount}

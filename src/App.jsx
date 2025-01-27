@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { setIsLogged } from "./redux/slices/authedUserSlice";
 import useAuth from "./hooks/helpers/useAuth";
 import i18n from "./utils/i18n";
+import DataLoader from "./ui/DataLoader";
 
 function App() {
   const { isAuthed, loading } = useAuth();
@@ -21,6 +22,6 @@ function App() {
     dispatch(setIsLogged(isAuthed));
   }, [dispatch, isAuthed]);
 
-  return loading ? null : <RouterProvider router={router} />;
+  return loading ? <DataLoader /> : <RouterProvider router={router} />;
 }
 export default App;

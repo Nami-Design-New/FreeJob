@@ -36,7 +36,10 @@ export default function ServiseOwner({ project }) {
         </li>
         <li className=" d-flex justify-content-between">
           <p>{t("projects.deliveryTime")}</p>
-          <span> {project.days} days</span>
+          <span>
+            {" "}
+            {project.days} {t("search.days")}
+          </span>
         </li>
         <li className=" d-flex justify-content-between">
           <p>{t("projects.averageOffers")}</p>

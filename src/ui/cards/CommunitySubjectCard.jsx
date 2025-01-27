@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { formatTimeDifference, getTimeDifference } from "../../utils/helper";
 import { useTranslation } from "react-i18next";
+import StarsRate from "../StartRate";
 
 function CommunitySubjectCard({ currentRoute, post }) {
   const { t } = useTranslation();
@@ -46,7 +47,8 @@ function CommunitySubjectCard({ currentRoute, post }) {
             <p className="time info-box m-0">
               <i className="fa-regular fa-timer"></i>
               {publisherStartTime}
-            </p>
+            </p>{" "}
+            <StarsRate rate={post?.user?.rate} />
           </div>
         </div>
       </div>

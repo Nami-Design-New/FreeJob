@@ -46,6 +46,7 @@ import ProtectionProvider from "./ProtectionProvider";
 import ManageAccounts from "../routes/ManageAccounts";
 import ProjectsOrdersDetails from "../routes/ProjectsOrdersDetails";
 import CommunitySubjectDetails from "../routes/CommunitySubjectDetails";
+import MyServices from "../routes/MyServices";
 
 export const router = createBrowserRouter([
   {
@@ -117,6 +118,7 @@ export const router = createBrowserRouter([
           { path: "/edit-bank-account/:id", element: <AddBankAccount /> },
           { path: "/add-bank-account/", element: <AddBankAccount /> },
           { path: "/complaints-suggestions", element: <Complaints /> },
+          { path: "/my-services", element: <MyServices /> },
         ],
       },
     ],

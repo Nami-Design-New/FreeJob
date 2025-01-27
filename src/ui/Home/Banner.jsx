@@ -20,7 +20,6 @@ export default function Banner() {
           }}
         />
       </div>
-      <div className="bottom_section"></div>
     </>
   );
 }

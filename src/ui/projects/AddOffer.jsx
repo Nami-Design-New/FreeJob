@@ -83,7 +83,7 @@ const AddOffer = ({ id }) => {
             <FormInput
               required
               readOnly
-              label={`${t("After fees")} 15% `}
+              label={`${t("addService.yourDuesAfterfees")} 15% `}
               value={(formData.price * (100 - 15)) / 100}
             />
           </section>

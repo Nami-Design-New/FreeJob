@@ -364,7 +364,8 @@
     "SimilarServices": "Similar Services",
     "yourDuesAfterfees": "Dues After Fees",
     "success": "Added successfully",
-    "devName": "Development Name"
+    "devName": "Development Name",
+    "puplishDate": "Publication Date"
   },
   "search": {
     "searchFor": "Search for...",
@@ -403,7 +404,9 @@
     "all": "All Works",
     "deliveryTime": "Delivery Time",
     "budget": "Budget",
-    "days": "Day"
+    "days": "Day",
+    "from": "From",
+    "to": "To"
   },
   "services": {
     "developments": "Available Add-ons for This Service",
@@ -627,11 +630,11 @@
     "accountBalance": "Account Balance",
     "depositBalance": "Deposit Balance",
     "withdrawBalance": "Withdraw Balance",
-    "totalBalance": "Total Balance",
+    "totalBalance": "Total",
     "totalBalanceTooltip": "The total balance obtained",
-    "pendingBalance": "Pending Balance",
+    "pendingBalance": "Pending",
     "pendingBalanceTooltip": "Pending balance: The balance awaiting approval",
-    "availableBalance": "Available Balance",
+    "availableBalance": "Available",
     "availableBalanceTooltip": "Available Balance = Total Balance - Pending Balance",
     "wallet": "Wallet",
     "walletTooltip": "Wallet: Contains the amounts in your account",

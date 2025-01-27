@@ -15,7 +15,7 @@ function SubjectCommentCard({ comment }) {
   );
 
   return (
-    <div className="box-item column comment-item">
+    <div className="commentCard column comment-item">
       <div className="userBox">
         <div className="image-wrapper">
           <img src={comment?.user?.image} alt={comment?.user?.name} />

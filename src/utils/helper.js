@@ -120,3 +120,11 @@ export const handleApplyFilters = (setSearchParams, searchFilterData) => {
 
   setSearchParams(newParams);
 };
+
+export const formatMoney = (amount) => {
+  if (amount < 1000) {
+    return amount;
+  }
+  const formatted = (amount / 1000).toFixed(1);
+  return `${formatted}k`;
+};

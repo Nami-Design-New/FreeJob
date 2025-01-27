@@ -14,6 +14,11 @@ import CertificatesTab from "./CertificatesTab";
 import ConfirmationModal from "./ConfirmationModal";
 import ServiceCard from "./../cards/ServiceCard";
 import DataLoader from "./../DataLoader";
+import { FaEdit } from "react-icons/fa";
+import ShowAll from "../ShowAll";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Autoplay } from "swiper/modules";
+import { useSelector } from "react-redux";
 
 function ProfileTabs({ user, isMyAccount }) {
   const queryClient = useQueryClient();
@@ -24,7 +29,7 @@ function ProfileTabs({ user, isMyAccount }) {
   const { data: myProjects, isLoading } = useGetUserProjects(user?.id);
   const { data: works } = useGetWorks(user?.id);
   const [showConfirmation, setShowConfirmation] = useState(false);
-
+  const lang = useSelector((state) => state.language.lang);
   const handleDelete = (id) => {
     setShowConfirmation(true);
     setServiceId(id);
@@ -44,179 +49,156 @@ function ProfileTabs({ user, isMyAccount }) {
   };
   return (
     <>
-      <Tabs defaultActiveKey="about" id="uncontrolled-tab-example">
-        {/* about me */}
-        <Tab eventKey="about" title={t("profile.aboutMe")} className="tab_item">
-          <div className="user_about">
+      <div className="_item">
+        <div className="user_about">
+          <>
+            <div className="about_title">
+              <h6>{t("profile.aboutMe")}</h6>
+              {isMyAccount && user?.about && (
+                <Link to="/edit-profile">
+                  <FaEdit />
+                  {t("profile.edit")}
+                </Link>
+              )}
+            </div>{" "}
             {user?.about ? (
               <p>{user?.about}</p>
             ) : (
-              <>
-                {isMyAccount && (
-                  <Link to="/edit-profile">{t("profile.noAbout")}</Link>
-                )}
-              </>
+              <p className="fs-4">{t("profile.noAbout")}</p>
             )}
-          </div>
-        </Tab>
+          </>
+        </div>
+
+        {/* my certificates */}
+        <div className="tab_item">
+          <h6>{t("profile.myCertificates")}</h6>
+          <CertificatesTab user={user} isMyAccount={isMyAccount} />
+        </div>
 
         {/* services */}
-        <Tab
-          eventKey="service"
-          title={t("profile.services")}
-          className="tab_item"
-        >
-          <div className="services-container">
-            {isMyAccount && (
-              <Link to="/add-service" className="add-service">
-                {t("profile.addService")}
-              </Link>
-            )}
-
-            {services?.length === 0 ? (
-              <div className="noDataFound">
-                <h4>{t("profile.noService")}</h4>
-              </div>
-            ) : (
-              <>
-                <div className="services_grid">
-                  {services?.map((service) => (
+        <div className="services-container">
+          {services?.length === 0 ? (
+            <div className="noDataFound">
+              <h4>{t("profile.noService")}</h4>
+            </div>
+          ) : (
+            <>
+              <ShowAll to="/my-services" sectionName={t("profile.services")} />
+              {/* <div className="services_grid"> */}
+              <Swiper
+                slidesPerView={4}
+                speed={1000}
+                spaceBetween={20}
+                className="mainSliderContainer"
+                breakpoints={{
+                  0: {
+                    slidesPerView: 1,
+                  },
+                  575: {
+                    slidesPerView: 2,
+                  },
+                  992: {
+                    slidesPerView: 3,
+                  },
+                  1150: {
+                    slidesPerView: 4,
+                  },
+                }}
+                dir={lang === "ar" ? "rtl" : "ltr"}
+              >
+                {" "}
+                <SwiperSlide
+                  style={{
+                    height: "auto",
+                    width: "auto",
+                  }}
+                >
+                  {isMyAccount && (
+                    <Link to="/add-service" className="add-service">
+                      {t("profile.addService")}
+                      <img src={"/images/plus.png"} alt="add service" />
+                    </Link>
+                  )}{" "}
+                </SwiperSlide>
+                {services?.map((service) => (
+                  <SwiperSlide
+                    style={{ height: "auto", width: "auto" }}
+                    key={service.id}
+                  >
                     <ServiceCard
-                      key={service.id}
                       canEdit={isMyAccount}
                       service={service}
                       handleDelete={handleDelete}
                       showPending={true}
                     />
-                  ))}
-                </div>
-              </>
-            )}
-          </div>
-        </Tab>
-
-        {/* projects */}
-        <Tab
-          eventKey="projects"
-          title={t("profile.projects")}
-          className="tab_item"
-        >
-          <div className="services-container">
-            {isMyAccount && (
-              <Link to="/add-project" className="add-service mb-3">
-                {t("routes.add-project")}
-              </Link>
-            )}
-            {isLoading ? (
-              <DataLoader />
-            ) : (
-              <div className="projects_wrapper">
-                {myProjects?.length === 0 ? (
-                  <div className="noDataFound">
-                    <h4>{t("profile.noProjects")}</h4>
-                  </div>
-                ) : (
-                  <>
-                    {myProjects?.map((project) => (
-                      <ProjectCard key={project?.id} project={project} />
-                    ))}
-                  </>
-                )}
-              </div>
-            )}
-          </div>
-        </Tab>
-
-        {/* verifications */}
-        <Tab
-          eventKey="documentation"
-          title={t("profile.verification")}
-          className="tab_item"
-        >
-          <div className="tab-pane">
-            <ul className="verify-list">
-              <li className="d-flex gap-2">
-                {user?.verified === 1 ? <span>✔</span> : <span>✘</span>}
-                {t("profile.personalIdentification")}
-              </li>
-              <li className="d-flex gap-2">
-                {user?.phone_verified === 1 ? <span>✔</span> : <span>✘</span>}
-                {t("profile.phoneNumber")}
-              </li>
-              <li className="d-flex gap-2">
-                <span>✔</span>
-                {t("profile.emailAddress")}
-              </li>
-            </ul>
-            {isMyAccount && (
-              <>
-                {(user?.verified === 0 || user?.phone_verified === 0) && (
-                  <div className="unverified-box mb-3 d-block">
-                    <h6>{t("profile.notVerified")}</h6>
-                  </div>
-                )}
-                <div className="d-flex gap-2">
-                  {user?.phone_verified === 0 && (
-                    <div className="unverified-box">
-                      <Link to="/verify-phone">{t("profile.verifyPhone")}</Link>
-                    </div>
-                  )}
-                  {user?.verified === 0 && (
-                    <div className="unverified-box">
-                      <Link to="/verify-identity">
-                        {t("profile.verifyYourIdentity")}
-                      </Link>
-                    </div>
-                  )}
-                </div>
-              </>
-            )}
-          </div>
-        </Tab>
-
-        {/*  statistics */}
-        <Tab
-          eventKey="statistics"
-          title={t("profile.statistics")}
-          className="tab_item"
-        >
-          <div
-            className="tab-pane"
-            id="pills-statics"
-            role="tabpanel"
-            aria-labelledby="pills-statics-tab"
-          >
-            <ul className="statics-list p-2">
-              <li className="d-flex justify-content-between">
-                <h6>{t("profile.puplidhedServices")}</h6>
-                <span>{user?.service_count}</span>
-              </li>
-              <li className="d-flex justify-content-between">
-                <h6>{t("profile.clientsNumber")}</h6>
-                <span>{user?.customer_count}</span>
-              </li>
-            </ul>
-          </div>
-        </Tab>
+                  </SwiperSlide>
+                ))}
+              </Swiper>
+              {/* </div> */}
+            </>
+          )}
+        </div>
 
         {/* my works */}
-        <Tab
-          eventKey="My works"
-          title={t("profile.myWorks")}
-          className="tab_item"
-        >
+        <div className="tab_item">
           <WorksTap works={works} isMyAccount={isMyAccount} />
-        </Tab>
+        </div>
 
-        {/* my certificates */}
-        <Tab
-          eventKey="My Certifications"
-          title={t("profile.myCertificates")}
-          className="tab_item"
+        {/* projects */}
+        <div className="services-container">
+          {isMyAccount && (
+            <Link to="/add-project" className="add-project">
+              <img src={"/images/plus.png"} alt="add service" />
+              {t("routes.add-project")}
+            </Link>
+          )}{" "}
+          {isLoading ? (
+            <DataLoader />
+          ) : (
+            <div className="projects_wrapper">
+              {myProjects?.length === 0 ? (
+                <div className="noDataFound">
+                  <h4>{t("profile.noProjects")}</h4>
+                </div>
+              ) : (
+                <>
+                  {" "}
+                  <ShowAll
+                    to="/my-services"
+                    sectionName={t("profile.projects")}
+                  />
+                  {myProjects?.map((project) => (
+                    <ProjectCard key={project?.id} project={project} />
+                  ))}
+                </>
+              )}
+            </div>
+          )}
+        </div>
+
+        {/*  statistics */}
+
+        {/* <div
+          className="tab-pane"
+          id="pills-statics"
+          role="tabpanel"
+          aria-labelledby="pills-statics-tab"
         >
-          <CertificatesTab user={user} isMyAccount={isMyAccount} />
-        </Tab>
-      </Tabs>
+          <h6>{t("profile.statistics")}</h6>
+          <ul className="statics-list p-2">
+            <li className="d-flex justify-content-between">
+              <h6>{t("profile.puplidhedServices")}</h6>
+              <span>{user?.service_count}</span>
+            </li>
+            <li className="d-flex justify-content-between">
+              <h6>{t("profile.clientsNumber")}</h6>
+              <span>{user?.customer_count}</span>
+            </li>
+          </ul>
+        </div> */}
+      </div>
+
+      {/* </Tabs> */}
       <ConfirmationModal
         eventFun={handleDeleteService}
         showModal={showConfirmation}

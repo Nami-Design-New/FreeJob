@@ -30,7 +30,7 @@ export default function ServiseDetailsComponent({
     <section className="service_details_component">
       <ServiceSlider images={service?.images} />
       <section className="service_description">
-        <ServiceDetailsSectionHeader title="Service Description">
+        <ServiceDetailsSectionHeader title={t("addService.serviceDescription")}>
           <LiaFileSolid />
         </ServiceDetailsSectionHeader>
         <p>{service?.description}</p>
