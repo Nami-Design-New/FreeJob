@@ -362,7 +362,8 @@
     "SimilarServices": "خدمات مماثلة ",
     "yourDuesAfterfees": "المستحقات بعد الرسوم",
     "success": "تم الاضافة بنجاح",
-    "devName": "اسم التطوير"
+    "devName": "اسم التطوير",
+    "puplishDate": "تاريخ النشر"
   },
   "search": {
     "searchFor": "ابحث عن...",
@@ -401,7 +402,9 @@
     "all": "جميع الأعمال",
     "deliveryTime": "مدة التسليم",
     "budget": "الميزانية",
-    "days": "يوم"
+    "days": "يوم",
+    "from": "من",
+    "to": "الى"
   },
   "services": {
     "developments": "تطويرات متوفرة لهذه الخدمة",
@@ -620,11 +623,11 @@
     "accountBalance": "رصيد الحساب",
     "depositBalance": "إيداع رصيد",
     "withdrawBalance": "سحب رصيد",
-    "totalBalance": "الرصيد الكلى",
+    "totalBalance": "الكلى",
     "totalBalanceTooltip": "الرصيد الكلى الذي تم الحصول عليه",
-    "pendingBalance": "الرصيد المعلق",
+    "pendingBalance": "المعلق",
     "pendingBalanceTooltip": "الرصيد المعلق: الرصيد المعلّق في انتظار الموافقة",
-    "availableBalance": "الرصيد المتوفر",
+    "availableBalance": "المتوفر",
     "availableBalanceTooltip": "الرصيد المتوفر = الرصيد الكلى - الرصيد المعلّق",
     "wallet": "المحفظة",
     "walletTooltip": "المحفظة: تحتوي على المبالغ الموجودة في حسابك",

@@ -1,4 +1,4 @@
-import { FaEdit, FaTrash } from "react-icons/fa";
+import { FaEdit, FaEye, FaThumbsUp, FaTrash } from "react-icons/fa";
 
 const WorkCard = ({
   work,
@@ -16,29 +16,42 @@ const WorkCard = ({
       }}
     >
       <div className="img">
-        <img src={work?.images?.[0]?.image} alt="" />
-        {canEdit && (
-          <div className="icons">
-            <button
-              onClick={(e) => {
-                e.stopPropagation();
-                onEditModalShow(work);
-              }}
-            >
-              <FaEdit />
-            </button>
-            <button
-              onClick={(e) => {
-                e.stopPropagation();
-                onDeleteModalShow(work?.id);
-              }}
-            >
-              <FaTrash />
-            </button>
+        <img src={work?.images?.[0]?.image} alt="" />{" "}
+        <div className="main">
+          <div className="work-info">
+            <h4>{work?.title || "مشروع"}</h4>
+            <div className="works_stats">
+              <span>
+                {" "}
+                <FaEye /> {work?.view_count}
+              </span>
+              <span>
+                <FaThumbsUp /> {work?.likes_count}
+              </span>
+            </div>
           </div>
-        )}
+          {canEdit && (
+            <div className="icons">
+              <button
+                onClick={(e) => {
+                  e.stopPropagation();
+                  onEditModalShow(work);
+                }}
+              >
+                <FaEdit />
+              </button>
+              <button
+                onClick={(e) => {
+                  e.stopPropagation();
+                  onDeleteModalShow(work?.id);
+                }}
+              >
+                <FaTrash />
+              </button>
+            </div>
+          )}
+        </div>
       </div>
-      <h4>{work?.title || "مشروع"}</h4>
     </div>
   );
 };

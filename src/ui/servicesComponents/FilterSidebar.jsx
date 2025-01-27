@@ -166,7 +166,7 @@ const FilterSidebar = ({ isOpen, setIsOpen }) => {
         <section className="my-4">
           <h3>{t("services.deliveryTime")}</h3>
           <RangeInput
-            label="Days"
+            label={t("search.days")}
             min={1}
             max={360}
             value={[filters.duration_from, filters.duration_to]}

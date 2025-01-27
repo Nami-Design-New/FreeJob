@@ -3,6 +3,7 @@ import { BsChatText, BsShare } from "react-icons/bs";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router";
 import OwnerComponent from "./OwnerComponent";
+import { calculateDate } from "../../../utils/helper";
 
 export default function ServiseOwner({ service }) {
   const navigate = useNavigate();
@@ -36,7 +37,8 @@ export default function ServiseOwner({ service }) {
       <OwnerComponent item={service} />
       <ul className="card_ul">
         <li className="rate d-flex justify-content-between">
-          <p>Puplish Date</p>3 jan
+          <p>{t("addService.puplishDate")}</p>
+          {calculateDate(service.created_at)}
         </li>
         <li className="d-flex justify-content-between">
           <p>{t("services.buyers")}</p>
@@ -60,11 +62,11 @@ export default function ServiseOwner({ service }) {
 
       <section className="share_chat_buttons mt-4">
         <button className="butn" onClick={handleShare}>
-          <BsShare /> Share
+          <BsShare /> {t("services.share")}
         </button>
         <button onClick={handleCreateRoom}>
           <BsChatText />
-          Chat
+          {t("routes.chat")}
         </button>
       </section>
     </section>

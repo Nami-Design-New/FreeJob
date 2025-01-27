@@ -1,31 +1,50 @@
-import React, { useState } from "react";
-import EmptyData from "../ui/EmptyData";
-import { Link, useNavigate, useParams } from "react-router-dom";
-import DataLoader from "../ui/DataLoader";
-import DetailsHeader from "../ui/servicesComponents/serviceDetails/DetailsHeader";
-import { formatTimeDifference, getTimeDifference } from "../utils/helper";
-import { useSelector } from "react-redux";
-import useGetCommunityPostDetails from "../hooks/community/useGetCommunityPostDetails";
+import { useQueryClient } from "@tanstack/react-query";
+import { useState } from "react";
 import { useTranslation } from "react-i18next";
+import { FaCalendarAlt } from "react-icons/fa";
+import { Link, useNavigate, useParams } from "react-router-dom";
+import { toast } from "react-toastify";
+import useGetCommunityPostDetails from "../hooks/community/useGetCommunityPostDetails";
+import { addComment } from "../services/apiCommunities";
+import DataLoader from "../ui/DataLoader";
+import EmptyData from "../ui/EmptyData";
+import StarsRate from "../ui/StartRate";
 import SubjectCommentCard from "../ui/cards/SubjectCommentCard";
-import AddCommentModal from "../ui/modals/AddCommentModal";
+import FormButton from "../ui/form/FormButton";
+import FormTextArea from "../ui/form/FormTextArea";
+import SubmitButton from "../ui/form/SubmitButton";
+import DetailsHeader from "../ui/servicesComponents/serviceDetails/DetailsHeader";
+import {
+  calculateDate,
+  formatTimeDifference,
+  getTimeDifference,
+} from "../utils/helper";
 
 function CommunitySubjectDetails() {
   const { title } = useParams();
   const { t } = useTranslation();
-  const [showAddCommentModal, setShowAddCommentModal] = useState(false);
   const { isLoading, data: post } = useGetCommunityPostDetails(title);
+  const { id } = useParams();
+  const [loading, setLoading] = useState(false);
+  const [comment, setComment] = useState("");
 
-  const isLogged = useSelector((state) => state.authedUser.isLogged);
-  const navigate = useNavigate();
+  const queryClient = useQueryClient();
 
-  function handleClickAddPost() {
-    if (isLogged) {
-      setShowAddCommentModal(true);
-    } else {
-      navigate("/login");
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setLoading(true);
+    try {
+      await addComment({ community_post_id: Number(id), comment }, queryClient);
+      toast.success(t("communities.commentAddedSuccessfully"));
+      setComment("");
+    } catch (err) {
+      console.log(err);
+    } finally {
+      setLoading(false);
     }
-  }
+  };
+
+  const navigate = useNavigate();
 
   const publisherTimeDifference = getTimeDifference(post?.user?.created_at);
   const publisherStartTime = formatTimeDifference(
@@ -49,19 +68,43 @@ function CommunitySubjectDetails() {
       ) : (
         <section className="communityDetails communitySubjectDetails">
           <div className="container">
-            <div className="communityHeader">
-              <h3>{post?.title}</h3>
-              <button className="btn" onClick={handleClickAddPost}>
-                <i className="far fa-plus"></i> {t("communities.addComment")}
-              </button>
+            <div className="g-3 row">
+              <div className="col-lg-8">
+                <div className="box-item">
+                  <h3>{post?.title}</h3>
+                  <p>{post?.description}</p>
+                </div>
+              </div>
+              <div className="community_userData col-lg-4">
+                <div className="userBox">
+                  <Link
+                    to={`/profile/${post?.user?.id}`}
+                    className="image-wrapper"
+                  >
+                    <img src={post?.user?.image} alt="" />
+                  </Link>
+                  <div className="info-wrapper">
+                    <p>{post?.user?.name}</p>
+                    <StarsRate rate={post?.user?.rate} />
+                    <p>{calculateDate(post?.user?.created_at)}</p>
+                  </div>
+                </div>
+                <div className="publishTime">
+                  <p>
+                    <FaCalendarAlt />
+                    {t("communities.publishTime")}
+                  </p>
+                  <span>{publisherStartTime}</span>
+                </div>
+                <FormButton
+                  style={{ backgroundColor: "var(--main-color)" }}
+                  content={t("projects.gotoProfile")}
+                  onClick={() => navigate(`/profile/${post?.user?.id}`)}
+                />
+              </div>
             </div>
             <div className="content-body">
               <div className="right-wrapper">
-                <div className="subject-box">
-                  <div className="box-item">
-                    <p>{post?.description}</p>
-                  </div>
-                </div>
                 <div className="subject-box">
                   <div className="box-header">
                     <h5>
@@ -69,79 +112,56 @@ function CommunitySubjectDetails() {
                       {`(${post?.comments?.length})`}
                     </h5>
                   </div>
-                  {post?.comments?.length > 0 ? (
-                    post?.comments?.map((comment) => (
-                      <SubjectCommentCard key={comment.id} comment={comment} />
-                    ))
-                  ) : (
-                    <EmptyData>
-                      <div className="py-4">{t("communities.noComments")}</div>
-                    </EmptyData>
-                  )}
-                </div>
-              </div>
-              <div className="left-wrapper">
-                <div className="subject-box">
-                  <div className="box-header">
-                    <h5>{t("communities.aboutSubject")}</h5>
-                  </div>
-                  <div className="box-item">
-                    <p>{t("communities.publishTime")}</p>
-                    <span>{publisherStartTime}</span>
-                  </div>
-                  <div className="box-item column">
-                    <h6>{t("communities.subjectPublisher")}</h6>
-                    <div className="userBox">
-                      <Link
-                        to={`/profile/${post?.user?.id}`}
-                        className="image-wrapper"
-                      >
-                        <img src={post?.user?.image} alt="" />
-                      </Link>
-                      <div className="info-wrapper">
-                        <p>{post?.user?.name}</p>
+                  <div className="row g-3">
+                    <div className="col-6">
+                      <div className="login-section">
+                        <form onSubmit={handleSubmit}>
+                          <div className="row">
+                            <div>
+                              <div>
+                                <label className="mb-3">
+                                  {t("communities.commentBody")}
+                                </label>
+                                <FormTextArea
+                                  name="comment"
+                                  onChange={(e) => setComment(e.target.value)}
+                                  value={comment}
+                                  placeholder={t("writeHere")}
+                                  required={true}
+                                  rows={4}
+                                />
+                              </div>
+                            </div>
+
+                            <SubmitButton
+                              name={t("communities.add")}
+                              loading={loading}
+                              className={" submit-btn col-12 "}
+                            />
+                          </div>
+                        </form>
                       </div>
                     </div>
-                  </div>
-                </div>
-                {post?.similar_posts && (
-                  <div className="subject-box">
-                    <div className="box-header">
-                      <h5>{t("communities.similarSubjects")}</h5>
-                    </div>
-                    {post?.similar_posts?.length ? (
-                      post?.similar_posts?.map((post) => (
-                        <Link
-                          to={`/community/${post?.category_name}/${post?.id}`}
-                          className="box-item no-border"
-                          key={post.id}
-                        >
-                          <div className="image-wrapper mini">
-                            <img src={post?.user?.image} alt="" />
-                          </div>
-                          <div className="info-wrapper">
-                            <p>{post?.title}</p>
-                          </div>
-                        </Link>
+                    {post?.comments?.length > 0 ? (
+                      post?.comments?.map((comment) => (
+                        <div className="col-6" key={comment.id}>
+                          <SubjectCommentCard comment={comment} />
+                        </div>
                       ))
                     ) : (
                       <EmptyData>
                         <div className="py-4">
-                          {t("communities.noSimilarSubjects")}
+                          {t("communities.noComments")}
                         </div>
                       </EmptyData>
                     )}
                   </div>
-                )}
+                </div>
               </div>
             </div>
           </div>
         </section>
       )}
-      <AddCommentModal
-        showModal={showAddCommentModal}
-        setShowModal={setShowAddCommentModal}
-      />
     </>
   );
 }

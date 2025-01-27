@@ -16,7 +16,7 @@ const CertificateCard = ({
           onClick={() => onClick(certificate)}
         />
         {canEdit && (
-          <div className="icons">
+          <div className="icons certificate_icons">
             <button onClick={() => onEditModalShow(certificate)}>
               <FaEdit />
             </button>
@@ -26,7 +26,6 @@ const CertificateCard = ({
           </div>
         )}
       </div>
-      <h4 onClick={() => onClick(certificate)}>{certificate?.title}</h4>
     </div>
   );
 };

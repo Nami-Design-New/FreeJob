@@ -7,6 +7,10 @@ import ConfirmationModal from "./ConfirmationModal";
 import WorkViewModal from "./WorkViewModal";
 import { deleteWork } from "../../services/apiWorks";
 import WorkCard from "../cards/worksCard";
+import { Link } from "react-router-dom";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { useSelector } from "react-redux";
+import ShowAll from "../ShowAll";
 
 export default function WorksTap({ works, isMyAccount }) {
   const { t } = useTranslation();
@@ -16,7 +20,7 @@ export default function WorksTap({ works, isMyAccount }) {
   const [targetId, setTargetId] = useState(null);
   const [targetWork, setTargetWork] = useState(null);
   const queryClient = useQueryClient();
-
+  const lang = useSelector((state) => state.language.lang);
   const onDeleteModalShow = (id) => {
     setShowConfirmation(true);
     setTargetId(id);
@@ -46,23 +50,75 @@ export default function WorksTap({ works, isMyAccount }) {
 
   return (
     <>
-      <div className="tab-pane ">
-        <div className="services-container">
-          {isMyAccount && (
-            <button
-              onClick={() => setShowAddWorkModal(true)}
-              className="add-service"
+      <div className="services-container">
+        {works?.length === 0 ? (
+          <div className="noDataFound">
+            <h4>{t("profile.noWorksFound")}</h4>
+          </div>
+        ) : (
+          <>
+            {" "}
+            <ShowAll
+              to="/my-services"
+              sectionName={t("profile.myWorks")}
+            />{" "}
+            <Swiper
+              slidesPerView={4}
+              speed={1000}
+              spaceBetween={20}
+              className="mainSliderContainer"
+              breakpoints={{
+                0: {
+                  slidesPerView: 1,
+                },
+                575: {
+                  slidesPerView: 2,
+                },
+                992: {
+                  slidesPerView: 3,
+                },
+                1150: {
+                  slidesPerView: 4,
+                },
+              }}
+              dir={lang === "ar" ? "rtl" : "ltr"}
             >
-              {t("profile.addWork")}
-            </button>
-          )}
-          {works?.length === 0 ? (
-            <div className="noDataFound">
-              <h4>{t("profile.noWorksFound")}</h4>
-            </div>
-          ) : (
-            <>
-              <div className="services_grid">
+              {" "}
+              <SwiperSlide
+                style={{
+                  height: "auto",
+                  width: "auto",
+                }}
+              >
+                {isMyAccount && (
+                  <button
+                    onClick={() => setShowAddWorkModal(true)}
+                    className="add-service"
+                  >
+                    {t("profile.addWork")}
+                    <img src={"/images/plus.png"} alt="add service" />
+                  </button>
+                )}
+              </SwiperSlide>
+              {works?.map((work) => (
+                <SwiperSlide
+                  style={{
+                    height: "auto",
+                    width: "auto",
+                  }}
+                  key={work.id}
+                >
+                  <WorkCard
+                    canEdit={isMyAccount}
+                    work={work}
+                    onEditModalShow={onEditModalShow}
+                    onDeleteModalShow={onDeleteModalShow}
+                    onViewModalShow={onViewModalShow}
+                  />
+                </SwiperSlide>
+              ))}
+            </Swiper>
+            {/* <div className="services_grid">
                 {works?.map((work) => (
                   <WorkCard
                     canEdit={isMyAccount}
@@ -73,11 +129,11 @@ export default function WorksTap({ works, isMyAccount }) {
                     onViewModalShow={onViewModalShow}
                   />
                 ))}
-              </div>
-            </>
-          )}
-        </div>
-      </div>{" "}
+              </div> */}
+          </>
+        )}
+      </div>
+
       <ConfirmationModal
         showModal={showConfirmation}
         setShowModal={setShowConfirmation}

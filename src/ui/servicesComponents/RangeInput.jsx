@@ -1,9 +1,11 @@
 import Slider from "rc-slider";
 import "rc-slider/assets/index.css";
+import { useTranslation } from "react-i18next";
 
 export default function RangeInput({ label, value, min, max, handleSlide }) {
+  const { t } = useTranslation();
   return (
-    <div >
+    <div>
       <Slider
         range
         min={min}
@@ -31,7 +33,7 @@ export default function RangeInput({ label, value, min, max, handleSlide }) {
         ]}
       />
       <p>
-        <span>{value[0]}</span> to <span>{value[1]}</span> {label}
+        <span>{value[0]}</span> {t("search.to")} <span>{value[1]}</span> {label}
       </p>
     </div>
   );

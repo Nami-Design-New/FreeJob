@@ -250,7 +250,7 @@ export default function ServiceDetails() {
               onClick={() => navigate("/profile/" + service?.user?.id)}
               className="go_profile_btn"
             >
-              Go to Profile
+              {t("projects.gotoProfile")}
             </button>
           </section>
           {rates?.data?.length > 0 && (
