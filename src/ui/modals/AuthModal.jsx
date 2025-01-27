@@ -2,7 +2,8 @@ import { useState } from "react";
 import { IoMdClose } from "react-icons/io";
 import { Modal } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
-import { closeModal, setStep } from "../../redux/slices/authModalSlice";
+import { closeModal } from "../../redux/slices/authModalSlice";
+import { t } from "i18next";
 import EmailLogin from "../login/EmailLogin";
 import EmailVerification from "../login/EmailVerification";
 import LoginOptions from "../login/LoginOptions";
@@ -11,17 +12,18 @@ import RegistrationForm from "../login/RegistrationForm";
 import UserNameEntry from "../login/UserNameEntry";
 import RegistrationForm3 from "../login/RegistrationForm3";
 import ForgetPassword from "../login/ForgetPassword";
-import { t } from "i18next";
 
 export default function AuthModal() {
   const show = useSelector((state) => state.authModal.show);
   const [register, setRegister] = useState(false);
   const [userId, setUserId] = useState();
   const dispatch = useDispatch();
+
   const [otpData, setOtpData] = useState({
     code: "",
     hashed_code: "",
   });
+
   const [formData, setFormData] = useState({
     image: "",
     name: "",

@@ -1,10 +1,8 @@
-import { useGoogleLogin } from "@react-oauth/google";
-import { useState } from "react";
 import { useCookies } from "react-cookie";
 import { useTranslation } from "react-i18next";
 import { useDispatch } from "react-redux";
-import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import { useGoogleLogin } from "@react-oauth/google";
 import { setIsLogged, setUser } from "../../redux/slices/authedUserSlice";
 import { setStep } from "../../redux/slices/authModalSlice";
 import axiosInstance from "../../utils/axios";
@@ -12,14 +10,9 @@ import AppleSigninButton from "./AppleSigninButton";
 
 export default function LoginOptions() {
   const { t } = useTranslation();
-  const navigate = useNavigate();
   const dispatch = useDispatch();
   const [, setCookie] = useCookies(["token", "id"]);
-  const [loading, setLoading] = useState(false);
-  const [formData, setFormData] = useState({
-    email: "",
-    password: "",
-  });
+
   const handleGoogleLogin = useGoogleLogin({
     onSuccess: async (tokenResponse) => {
       try {
@@ -32,7 +25,6 @@ export default function LoginOptions() {
           toast.success(t("auth.loginSuccess"));
           dispatch(setUser(res.data.data));
           dispatch(setIsLogged(true));
-          // navigate("/");
           setCookie("token", res.data.data.token, {
             path: "/",
             secure: true,
@@ -69,11 +61,14 @@ export default function LoginOptions() {
           <img src="/images/envelope.png" />
           <span>{t("auth.withEmail")}</span>
         </button>
+
         <p>{t("auth.orLoginWith")}</p>
+
         <button onClick={handleGoogleLogin}>
           <img src="/images/google.png" />{" "}
           <span>{t("auth.googleAccount")}</span>
         </button>
+
         <AppleSigninButton t={t} />
       </div>
     </div>

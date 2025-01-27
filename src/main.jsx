@@ -23,11 +23,11 @@ createRoot(document.getElementById("root")).render(
     <ReactQueryDevtools initialIsOpen={false} />
     <Provider store={store}>
       <ToastContainer autoClose={2000} />{" "}
-      <GoogleOAuthProvider clientId={import.meta.env.VITE_GOOGLE_CLIENT_ID}>
-        <InterceptorProvider>
+      <InterceptorProvider>
+        <GoogleOAuthProvider clientId={import.meta.env.VITE_GOOGLE_CLIENT_ID}>
           <App />
-        </InterceptorProvider>
-      </GoogleOAuthProvider>
+        </GoogleOAuthProvider>
+      </InterceptorProvider>
     </Provider>
   </QueryClientProvider>
 );
