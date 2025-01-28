@@ -10,6 +10,7 @@ import useGetSettings from "../../hooks/settings/useGetSettings";
 import SubmitButton from "../form/SubmitButton";
 import { useTranslation } from "react-i18next";
 import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 export default function SecondStep({
   formData,
@@ -21,6 +22,7 @@ export default function SecondStep({
   const { data: settings } = useGetSettings();
   const [formValid, setFormValid] = useState(false);
   const lang = useSelector((state) => state.language.lang);
+  const navigate = useNavigate();
   const { t } = useTranslation();
   const developmentInitial = {
     description: "",
@@ -208,7 +210,7 @@ export default function SecondStep({
           id="instructions"
           value={formData.instructions}
           onChange={handleChange}
-          placeholder="Add some instruction Here"
+          placeholder={t("addService.instructionsPlaceholder")}
           rows="8"
           label="Buyer Inster"
         />
@@ -254,6 +256,7 @@ export default function SecondStep({
         <SubmitButton
           loading={loading}
           className={"add_service_button flex-grow-1"}
+          onClick={() => navigate("/profile")}
           name={
             isEdit
               ? t("addService.updateService")

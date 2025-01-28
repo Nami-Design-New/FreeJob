@@ -6,7 +6,7 @@ export default function Banner() {
   const { t } = useTranslation();
   return (
     <>
-      <div className="banner">
+      <div className="banner_home">
         <h1>{t("home.withFREEJOB")}</h1>
         <FormButton
           content={t("home.joinNow")}

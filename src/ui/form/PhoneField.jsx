@@ -30,6 +30,7 @@ const PhoneField = ({ formData, setFormData, id, value, icon }) => {
             border: "none",
             width: "100%",
             marginLeft: "0.75rem",
+            marginRight: "0.75rem",
             borderRadius: "0.5rem",
             backgroundColor: "#E8FAF4",
           }}

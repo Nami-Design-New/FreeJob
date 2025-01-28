@@ -15,7 +15,7 @@ export async function getServicesByFilter(
   const requestBody = {
     skip: 12,
   };
-
+  if (page) requestBody.page = page;
   if (skills?.length > 0) requestBody.skills = skills.map((id) => Number(id));
   if (page) requestBody.page = page;
   if (search) requestBody.search = search;

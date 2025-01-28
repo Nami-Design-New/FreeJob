@@ -7,6 +7,7 @@ import { toast } from "react-toastify";
 import { useDispatch } from "react-redux";
 import axiosInstance from "../../utils/axios";
 import { useNavigate } from "react-router";
+import BackButton from "./BackButton";
 
 export default function ForgetPassword({ userId }) {
   const { t } = useTranslation();
@@ -37,6 +38,7 @@ export default function ForgetPassword({ userId }) {
   };
   return (
     <div className="left_side">
+      <BackButton step={4} />
       <header className="modal_header ">
         <h1>{t("auth.newPasswordTitle")}</h1>
         <p className="title">{t("auth.newPasswordSubTitle")}</p>
@@ -59,7 +61,7 @@ export default function ForgetPassword({ userId }) {
            /> */}
         <FormInput
           label={t("auth.password")}
-          placeholder="Enter Yout Password"
+          placeholder={t("auth.passwordPlaceholder")}
           type="password"
           name="password"
           id="password"

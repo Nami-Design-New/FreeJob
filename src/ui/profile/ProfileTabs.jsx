@@ -1,24 +1,22 @@
 import { useQueryClient } from "@tanstack/react-query";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
-import { toast } from "react-toastify";
-import { Tab, Tabs } from "react-bootstrap";
+import { FaEdit } from "react-icons/fa";
+import { useSelector } from "react-redux";
 import { Link } from "react-router";
-import { deleteService } from "../../services/apiServices";
-import useUserServices from "../../hooks/services/useUserServices";
-import ProjectCard from "../cards/ProjectCard";
-import useGetWorks from "../../hooks/works/useGetWorks";
+import { toast } from "react-toastify";
+import { Swiper, SwiperSlide } from "swiper/react";
 import useGetUserProjects from "../../hooks/projects/useGetUserProjects";
-import WorksTap from "./WorksTap";
-import CertificatesTab from "./CertificatesTab";
-import ConfirmationModal from "./ConfirmationModal";
+import useUserServices from "../../hooks/services/useUserServices";
+import useGetWorks from "../../hooks/works/useGetWorks";
+import { deleteService } from "../../services/apiServices";
+import ProjectCard from "../cards/ProjectCard";
+import ShowAll from "../ShowAll";
 import ServiceCard from "./../cards/ServiceCard";
 import DataLoader from "./../DataLoader";
-import { FaEdit } from "react-icons/fa";
-import ShowAll from "../ShowAll";
-import { Swiper, SwiperSlide } from "swiper/react";
-import { Autoplay } from "swiper/modules";
-import { useSelector } from "react-redux";
+import CertificatesTab from "./CertificatesTab";
+import ConfirmationModal from "./ConfirmationModal";
+import WorksTap from "./WorksTap";
 
 function ProfileTabs({ user, isMyAccount }) {
   const queryClient = useQueryClient();
@@ -77,75 +75,80 @@ function ProfileTabs({ user, isMyAccount }) {
 
         {/* services */}
         <div className="services-container">
-          {services?.length === 0 ? (
-            <div className="noDataFound">
-              <h4>{t("profile.noService")}</h4>
-            </div>
-          ) : (
-            <>
-              <ShowAll to="/my-services" sectionName={t("profile.services")} />
-              {/* <div className="services_grid"> */}
-              <Swiper
-                slidesPerView={4}
-                speed={1000}
-                spaceBetween={20}
-                className="mainSliderContainer"
-                breakpoints={{
-                  0: {
-                    slidesPerView: 1,
-                  },
-                  575: {
-                    slidesPerView: 2,
-                  },
-                  992: {
-                    slidesPerView: 3,
-                  },
-                  1150: {
-                    slidesPerView: 4,
-                  },
-                }}
-                dir={lang === "ar" ? "rtl" : "ltr"}
-              >
-                {" "}
+          <>
+            <ShowAll sectionName={t("profile.services")} show={true} />
+            {/* <div className="services_grid"> */}
+            <Swiper
+              slidesPerView={4}
+              speed={1000}
+              spaceBetween={20}
+              className="mainSliderContainer"
+              breakpoints={{
+                0: {
+                  slidesPerView: 1,
+                },
+                575: {
+                  slidesPerView: 2,
+                },
+                992: {
+                  slidesPerView: 3,
+                },
+                1150: {
+                  slidesPerView: 4,
+                },
+              }}
+              dir={lang === "ar" ? "rtl" : "ltr"}
+            >
+              {isMyAccount && (
                 <SwiperSlide
                   style={{
                     height: "auto",
                     width: "auto",
                   }}
                 >
-                  {isMyAccount && (
-                    <Link to="/add-service" className="add-service">
-                      {t("profile.addService")}
-                      <img src={"/images/plus.png"} alt="add service" />
-                    </Link>
-                  )}{" "}
+                  <Link to="/add-service" className="add-service">
+                    {t("profile.addService")}
+                    <img src={"/images/plus.png"} alt="add service" />
+                  </Link>
                 </SwiperSlide>
-                {services?.map((service) => (
-                  <SwiperSlide
-                    style={{ height: "auto", width: "auto" }}
-                    key={service.id}
-                  >
-                    <ServiceCard
-                      canEdit={isMyAccount}
-                      service={service}
-                      handleDelete={handleDelete}
-                      showPending={true}
-                    />
-                  </SwiperSlide>
-                ))}
-              </Swiper>
-              {/* </div> */}
-            </>
-          )}
+              )}
+
+              {services?.length === 0 ? (
+                <SwiperSlide style={{ height: "auto", width: "auto" }}>
+                  <div className="noDataFound">
+                    <h4>{t("profile.noService")}</h4>
+                  </div>{" "}
+                </SwiperSlide>
+              ) : (
+                <>
+                  {services?.map((service) => (
+                    <SwiperSlide
+                      style={{ height: "auto", width: "auto" }}
+                      key={service.id}
+                    >
+                      <ServiceCard
+                        canEdit={isMyAccount}
+                        service={service}
+                        handleDelete={handleDelete}
+                        showPending={true}
+                      />
+                    </SwiperSlide>
+                  ))}
+                </>
+              )}
+            </Swiper>
+            {/* </div> */}
+          </>
         </div>
 
         {/* my works */}
         <div className="tab_item">
           <WorksTap works={works} isMyAccount={isMyAccount} />
         </div>
-
         {/* projects */}
         <div className="services-container">
+          {" "}
+          <ShowAll show={true} sectionName={t("profile.projects")} />
           {isMyAccount && (
             <Link to="/add-project" className="add-project">
               <img src={"/images/plus.png"} alt="add service" />
@@ -163,10 +166,6 @@ function ProfileTabs({ user, isMyAccount }) {
               ) : (
                 <>
                   {" "}
-                  <ShowAll
-                    to="/my-services"
-                    sectionName={t("profile.projects")}
-                  />
                   {myProjects?.map((project) => (
                     <ProjectCard key={project?.id} project={project} />
                   ))}
@@ -175,29 +174,7 @@ function ProfileTabs({ user, isMyAccount }) {
             </div>
           )}
         </div>
-
-        {/*  statistics */}
-
-        {/* <div
-          className="tab-pane"
-          id="pills-statics"
-          role="tabpanel"
-          aria-labelledby="pills-statics-tab"
-        >
-          <h6>{t("profile.statistics")}</h6>
-          <ul className="statics-list p-2">
-            <li className="d-flex justify-content-between">
-              <h6>{t("profile.puplidhedServices")}</h6>
-              <span>{user?.service_count}</span>
-            </li>
-            <li className="d-flex justify-content-between">
-              <h6>{t("profile.clientsNumber")}</h6>
-              <span>{user?.customer_count}</span>
-            </li>
-          </ul>
-        </div> */}
       </div>
-
       {/* </Tabs> */}
       <ConfirmationModal
         eventFun={handleDeleteService}

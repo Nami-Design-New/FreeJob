@@ -1,7 +1,10 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { ProgressBar } from "react-bootstrap";
 import { useTranslation } from "react-i18next";
 import { useSelector } from "react-redux";
+import VerifyStep1 from "../ui/profile/VerifyStep1";
+import VerifyStep2 from "../ui/profile/VerifyStep2";
+import Instructions from "../ui/profile/Instructions";
 
 const VerifyPhone = () => {
   const totalSteps = 3;
@@ -12,7 +15,7 @@ const VerifyPhone = () => {
   const [formData, setFormData] = useState({
     phone: "",
     hashed_code: "",
-    code: "",
+    phone_code: "",
   });
 
   useEffect(() => {

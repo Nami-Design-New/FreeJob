@@ -25,6 +25,7 @@ export async function getProjectsByFilter(
 
   try {
     const req = await axiosInstance.post("/get_projects", requestBody);
+
     return {
       data: req.data.data,
       total: req.data.total,

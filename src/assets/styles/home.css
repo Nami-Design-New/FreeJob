@@ -191,7 +191,7 @@
   margin-bottom: 4.7rem;
 }
 
-.banner {
+.banner_home {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -214,7 +214,7 @@
 }
 
 @media screen and (max-width: 768px) {
-  .banner {
+  .banner_home {
     h1 {
       font-size: 1.5rem;
     }

@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import OTPInput from "react-otp-input";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { setStep } from "../../redux/slices/authModalSlice";
 import FormButton from "../form/FormButton";
 import BackButton from "./BackButton";
@@ -10,6 +10,7 @@ import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import { setIsLogged, setUser } from "../../redux/slices/authedUserSlice";
 import { useCookies } from "react-cookie";
+import { FaChevronLeft } from "react-icons/fa";
 
 export default function EmailVerification({
   otpData,
@@ -17,11 +18,15 @@ export default function EmailVerification({
   register,
   setUserId,
   formData,
+  setRegister,
+  forgetPassformData,
+  setForgetPassformData,
 }) {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { t } = useTranslation();
   const [timer, setTimer] = useState(30);
+  const { previousStep } = useSelector((state) => state.authModal);
   const [isLoading, setIsLoading] = useState(false);
   const [isDisabled, setIsDisabled] = useState(true);
   const [, setCookie] = useCookies(["token"]);
@@ -49,6 +54,15 @@ export default function EmailVerification({
     },
     url: "/user/check_code",
   };
+
+  const registerRequest = {
+    method: "POST",
+    headers: headers,
+    data: {
+      ...formData,
+    },
+    url: "/user/register",
+  };
   console.log(formData, otpData);
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -57,8 +71,9 @@ export default function EmailVerification({
       const res = await axiosInstance.request(checkCodeRequest);
       if (res.data.code === 200) {
         if (register) {
-          toast.success(t("auth.registerSuccess"));
-          if (res.data.code === 200) {
+          const response = await axiosInstance.request(registerRequest);
+          if (response.data.code === 200) {
+            toast.success(t("auth.registerSuccess"));
             const login = await axiosInstance.post("/user/login", {
               email: formData.email,
               password: formData.password,
@@ -84,8 +99,9 @@ export default function EmailVerification({
               toast.error(t("auth.emailOrPasswordWrong"));
             }
           } else {
-            toast.error(res.data.message);
+            toast.error(response.data.message);
           }
+          setRegister(false);
         } else {
           dispatch(setStep(7));
         }
@@ -98,31 +114,39 @@ export default function EmailVerification({
       setIsLoading(false);
     }
   };
-
+  function handleBack() {
+    if (previousStep !== null) {
+      dispatch(setStep(previousStep));
+    }
+  }
   return (
     <div className="left_side pt-4">
-      <BackButton />
+      <button onClick={handleBack} className="back_button">
+        <FaChevronLeft />
+      </button>
       <header className="modal_header pb-3 ">
-        <h1>Confirm your email</h1>
+        <h1>{t("auth.otpTitle")}</h1>
         <p className="">
-          Enter the verification code you Recived
+          {t("auth.otpSubTitle")}:{" "}
+          {register ? formData.email : forgetPassformData.email}{" "}
           <button
             onClick={() => dispatch(setStep(3))}
             className="btn p-0 text-success"
           >
-            (Use a different email)
+            ({t("auth.useAnthorEmail")})
           </button>
         </p>
       </header>
       <form onSubmit={handleSubmit} className="d-flex flex-column gap-2">
         <label className="mb-2 fw-semibold" htmlFor="">
-          Enter The Code
+          {t("auth.enterCode")}
         </label>
         <OTPInput
           containerStyle={{
             gap: "0.5rem",
             marginTop: "0.2rem",
             marginBottom: "2.5rem",
+            direction: "ltr",
           }}
           value={otpData.code}
           onChange={handleChange}
@@ -144,7 +168,7 @@ export default function EmailVerification({
             code resent
           </button>
         </div> */}
-        <FormButton content="Next" type="submit" />
+        <FormButton content={t("next")} type="submit" />
       </form>
     </div>
   );

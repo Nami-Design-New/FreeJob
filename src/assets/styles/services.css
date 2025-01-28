@@ -441,7 +441,7 @@
     background-color: var(--main-color);
 
     svg {
-      margin: 0.5rem;
+      color: var(--white-color);
     }
   }
 
@@ -702,7 +702,6 @@
     }
 
     &:hover {
-
       .swiper-button-next,
       .swiper-button-prev {
         opacity: 1;

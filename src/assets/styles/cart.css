@@ -357,14 +357,16 @@
       border: none;
 
       .btn-close {
-        background-color: red;
         opacity: 1;
-        font-size: 0.75rem;
+        font-size: 1.5rem;
         padding: 0.5rem;
         border-radius: 50%;
         margin: 0;
         box-shadow: none !important;
-        color: #fff !important;
+        background-image: url(/icons/x-close.svg);
+        svg {
+          color: red !important;
+        }
       }
     }
 
@@ -427,7 +429,7 @@
         input {
           display: none;
 
-          &:checked+label {
+          &:checked + label {
             border-color: var(--main-color);
           }
         }

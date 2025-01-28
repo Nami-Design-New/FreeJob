@@ -7,24 +7,21 @@ import { PhoneInput } from "react-international-phone";
 import { useTranslation } from "react-i18next";
 import { toast } from "react-toastify";
 import axiosInstance from "../../utils/axios";
+import BackButton from "./BackButton";
 
-export default function UserNameEntry({ setOtpData ,setUserId }) {
+export default function UserNameEntry({
+  forgetPassformData,
+  setForgetPassformData,
+  setOtpData,
+  setUserId,
+}) {
   const { t } = useTranslation();
   const dispatch = useDispatch();
-
   const [isLoading, setIsLoading] = useState(false);
-  const [formData, setFormData] = useState({
-    email: "",
-  });
-  function handlePhoneChange(value) {
-    setFormData({
-      ...formData,
-      phone: value,
-    });
-  }
+
   const handleChange = (e) => {
-    setFormData({
-      ...formData,
+    setForgetPassformData({
+      ...forgetPassformData,
       [e.target.name]: e.target.value,
     });
   };
@@ -35,7 +32,7 @@ export default function UserNameEntry({ setOtpData ,setUserId }) {
       const res = await axiosInstance.post(
         "/user/check_email",
         {
-          ...formData,
+          ...forgetPassformData,
         },
         {
           headers: {
@@ -48,7 +45,7 @@ export default function UserNameEntry({ setOtpData ,setUserId }) {
           ...prev,
           hashed_code: res.data.data.code,
         }));
-    setUserId(res.data.data.user.id);
+        setUserId(res.data.data.user.id);
         dispatch(setStep(4));
       } else {
         toast.error(res.data.message);
@@ -61,29 +58,12 @@ export default function UserNameEntry({ setOtpData ,setUserId }) {
   }
   return (
     <div className="left_side">
+      <BackButton />
       <header className="modal_header ">
-        <h1>Enter your data to register</h1>
-        <p className="">
-          Add a unique Email that will make you stand out to others. You
-          can&apos;t change your username, so choose wisely.
-        </p>
+        <h1>{t("auth.forgetPasswordTitle")}</h1>
+        <p className="">{t("auth.forgetPasswordSubTitle")}</p>
       </header>
       <form onSubmit={handleSubmit}>
-        {/* {" "}
-        <label className="fw-normal">Phone Number</label>
-        <PhoneInput
-          required
-          defaultCountry="sa"
-          onChange={(value) => handlePhoneChange(value)}
-          style={{ width: "100%", marginTop: "0.5rem" }}
-          inputStyle={{
-            border: "none",
-            width: "100%",
-            marginLeft: "0.75rem",
-            borderRadius: "0.5rem",
-            backgroundColor: "#E8FAF4",
-          }}
-        /> */}
         <FormInput
           label={t("auth.email")}
           placeholder="example@example.com"
@@ -91,16 +71,16 @@ export default function UserNameEntry({ setOtpData ,setUserId }) {
           name="email"
           id="email"
           required
-          formData={formData}
+          value={forgetPassformData.email}
           onChange={(e) => handleChange(e)}
         />
         <button
           onClick={() => dispatch(setStep(2))}
           className="forget_pass btn"
         >
-          Are you already registered?
+          {t("auth.alreadyRegistered")}
         </button>{" "}
-        <FormButton content="Next" type="submit" disabled={isLoading} />
+        <FormButton content={t("next")} type="submit" disabled={isLoading} />
       </form>
     </div>
   );

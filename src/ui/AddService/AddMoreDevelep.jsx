@@ -21,6 +21,7 @@ const AddMoreDevelopCard = ({
         <FormInput
           id={`description-${index}`}
           name="description"
+          required
           label={t("addService.devName")}
           placeholder={t("addService.moreDevtitlePlaceholder")}
           value={development.description}
@@ -31,6 +32,7 @@ const AddMoreDevelopCard = ({
             id={`price-${index}`}
             name="price"
             type="number"
+            required
             min={0}
             label={t("addService.price")}
             placeholder={t("addService.moreDevPricePlaceholder")}
@@ -42,6 +44,7 @@ const AddMoreDevelopCard = ({
             id={`duration-${index}`}
             name="duration"
             type="number"
+            required
             min={0}
             label={t("addService.duration")}
             placeholder={t("addService.moreDevDurationPlaceholder")}

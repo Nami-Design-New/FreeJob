@@ -110,7 +110,7 @@ const Carts = () => {
     <section className="cart-section">
       <section className="header_container ">
         <section className="container-md  ">
-          <DetailsHeader links={segments} />{" "}
+          <DetailsHeader links={t("routes.cart")} />{" "}
           <button
             className="add-to-collection-btn mx-2"
             onClick={() => setShowCollectionModel(true)}
