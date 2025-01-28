@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router";
-import { Container, Row, Col } from "react-bootstrap";
+import { Container, Row } from "react-bootstrap";
 import { useSelector } from "react-redux";
 import UserProfileCard from "../ui/profile/UserProfileCard";
 import ErrorPage from "./ErrorPage";
@@ -53,11 +53,10 @@ const Profile = () => {
         <div className="userData">
           <div className="user-avatar">
             <img src={user?.image} alt="user-avatar" />
-            {user?.verified === 1 && (
-              <Link to={"/edit-profile"} className="status">
-                <FaEdit />
-              </Link>
-            )}
+
+            <Link to={"/edit-profile"} className="status">
+              <FaEdit />
+            </Link>
           </div>
           <div className="name-rate">
             <h6 className="mb-2">{t(user?.name)}</h6>

@@ -2,6 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   currentStep: 1,
+  previousStep: null,
   formData: {},
   show: false,
 };
@@ -11,6 +12,7 @@ const authModalSlice = createSlice({
   initialState,
   reducers: {
     setStep: (state, action) => {
+      state.previousStep = state.currentStep;
       state.currentStep = action.payload;
     },
     saveFormData: (state, action) => {

@@ -90,6 +90,7 @@
     "ownbyus": "الخاصة بنا",
     "orRegisterWith": "او انشاء حساب باستخدام",
     "forgetPasswordTitle": "نسيت كلمة المرور ..!",
+    "alreadyRegistered": "لديك حساب بالفعل؟",
     "forgetPasswordSubTitle": "من فضلك ادخل البريد الالكتروني المسجل لدينا لارسال رمز التحقق.",
     "sendByEmail": "ارسال بالبريد الالكتروني",
     "sendByPhone": "ارسال بالهاتف",
@@ -97,6 +98,9 @@
     "otpSentSuccess": "تم ارسال رمز التحقق بنجاح",
     "otpTitle": "ادخل رمز التحقق",
     "otpSubTitle": "من فضلك ادخل الرمز المرسل الي البريد ",
+    "enterCode": "ادخل الرمز",
+    "useAnthorEmail": "استخدم بريد الكتروني اخر",
+    "passwordPlaceholder": "كلمة المرور",
     "resendCode": "اعادة ارسال الرمز",
     "confirm": "تاكيد",
     "areYouSureYouWantToDelete": " هل انت متاكد من انك تريد حذف هذا المشروع؟",
@@ -345,8 +349,10 @@
     "imagesHint": "القياس: 343x257 بكسل . بنسبة 4:3 . الحجم الأقصى: 5 ميجا. العدد المسموح: 10 ملفات.",
     "imageLimitReached": "تم تجاوز عدد الصور المسموح بها",
     "instructions": "تعليمات للمشتري",
+    "instructionsPlaceholder": "مثال : يرجى تزويدي بالمعلومات اللازمة لبدء العمل",
     "instructionsHint": "المعلومات التي تحتاجها من المشتري لتنفيذ الخدمة. تظهر هذه المعلومات بعد شراء الخدمة فقط.",
     "addMoreDevelopment": "أضف تطويراً لهذه الخدمة",
+    "devAvilable": "تطويرات متوفرة لهذه الخدمه",
     "addMoreDevelopmentHint": "تطويرات الخدمة المقدمة اختيارية فقط ولا يمكن أن تجبر المشتري على طلبها",
     "moreDevtitle": "عنوان التطوير",
     "moreDevtitlePlaceholder": "مثال : تصميم وبرمجة مواقع",
@@ -737,5 +743,6 @@
   "sort": "رتب",
   "noFreelancers": "عذراً، لا يوجد مستقلين في هذه الفئة.",
   "noNotifications": "لا يوجد إشعارات ليتم عرضها",
-  "searchIn": "استمرار البحث في ..."
+  "searchIn": "استمرار البحث في ...",
+  "clients": "العملاء"
 }

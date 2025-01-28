@@ -96,7 +96,7 @@ function CollectionModal({ showModal, setShowModal, showDeleteFromCart }) {
       onHide={handleCloseModal}
       centered
     >
-      <Modal.Header className="custom_modal_header pb-0" closeButton>
+      <Modal.Header className="custom_modal_header border-0" closeButton>
         <h5 className="m-0">
           {t(`cart.${formType === 1 ? "addCollection" : "addNewCollection"}`)}
         </h5>
@@ -151,13 +151,14 @@ function CollectionModal({ showModal, setShowModal, showDeleteFromCart }) {
                   onChange={handleChange}
                 />
                 <section>
-                  <label className="mb-2">Description</label>
+                  <label className="mb-2">
+                    {t("cart.collectionDescription")}
+                  </label>
                   <FormTextArea
                     name="description"
                     id="description"
                     value={formData.description}
                     onChange={handleChange}
-                    label={t("cart.collectionDescription")}
                   />
                 </section>
               </>
@@ -170,9 +171,10 @@ function CollectionModal({ showModal, setShowModal, showDeleteFromCart }) {
                   id="delete_collection_from_cart"
                   checked={formData.delete_collection_from_cart}
                   onChange={handleChange}
+                  style={{ accentColor: "var(--main-color)" }}
                 />
                 <label htmlFor="delete_collection_from_cart">
-                  {t("cart.deleteCollectionFromCart")}
+                  {t("cart.deleteCart")}
                 </label>
               </div>
             )}

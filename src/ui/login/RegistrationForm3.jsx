@@ -113,30 +113,6 @@ export default function RegistrationForm3({
           ...prev,
           hashed_code: res.data.data,
         }));
-        // const login = await axiosInstance.post("/user/login", {
-        //   email: formData.email,
-        //   password: formData.password,
-        // });
-        // if (login.data.code === 200) {
-        //   navigate("/");
-        //   dispatch(setUser(login.data.data));
-        //   dispatch(setIsLogged(true));
-        //   setCookie("token", login.data.data.token, {
-        //     path: "/",
-        //     secure: true,
-        //     sameSite: "Strict",
-        //   });
-        //   setCookie("id", login.data.data.id, {
-        //     path: "/",
-        //     secure: true,
-        //     sameSite: "Strict",
-        //   });
-        //   axiosInstance.defaults.headers.common[
-        //     "Authorization"
-        //   ] = `${login.data.data.token}`;
-        // } else {
-        //   toast.error(login.data.message);
-        // }
       } else {
         toast.error(res.data.message);
       }

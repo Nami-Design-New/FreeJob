@@ -118,6 +118,7 @@ const WizardStep1 = ({
       <MultiSelect
         className="mb-4"
         label={t("search.skills")}
+        placeholder={t("complaints.choose")}
         id="skills"
         name="skills"
         selectedOptions={selectedOptions}
@@ -135,6 +136,7 @@ const WizardStep1 = ({
           rows={8}
           id="description"
           name="description"
+          placeholder={t("addService.serviceDescription")}
           value={formData.description}
           onChange={handleChange}
           required={true}

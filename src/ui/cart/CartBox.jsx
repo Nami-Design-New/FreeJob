@@ -10,6 +10,7 @@ import {
   increaseCartQuantity,
   updateDevelopmentsInCart,
 } from "../../services/apiCart";
+import DataLoader from "../DataLoader";
 
 function CartBox({ item, cartObjList }) {
   const { t } = useTranslation();
@@ -106,7 +107,9 @@ function CartBox({ item, cartObjList }) {
             <section>
               <p>{item?.service?.user?.name}</p>
               <p>
-                <FaFile /> 2 services <FaUsers /> clintes
+                <FaFile /> {item?.service?.user?.service_orders_count}{" "}
+                {t("routes.services")} <FaUsers />{" "}
+                {item?.service?.user?.customer_count} {t("clients")}
               </p>
             </section>
           </div>
@@ -116,7 +119,7 @@ function CartBox({ item, cartObjList }) {
           <div className="title">
             <h5>{item?.service?.name}</h5>
             <p>
-              <FaFile /> Developments available for this service
+              <FaFile /> {t("addService.devAvilable")}
             </p>
           </div>
           {item?.service?.developments &&
@@ -133,7 +136,7 @@ function CartBox({ item, cartObjList }) {
                       onChange={() => handleCheckboxChange(dev.id, item?.id)}
                     />
                     <div className="label">
-                      <p>Design (2) 3d Images</p>
+                      <p>{dev.description}</p>
                       <label htmlFor={`check-${dev.id}`}>
                         {t("services.compare")} {dev.price}${" "}
                         {t("services.percentageofExtraService")}
@@ -149,7 +152,13 @@ function CartBox({ item, cartObjList }) {
           <div className="total">
             <div className="total_price">
               <h6>{t("services.total")} :</h6>
-              <p className="mb-0">{totalPrice}$</p>{" "}
+              <p className="mb-0">
+                {formLoading ? (
+                  <DataLoader minHeight="30px" />
+                ) : (
+                  `${totalPrice}$`
+                )}
+              </p>
             </div>
             <p className="added_develop">
               {item?.service?.developments?.filter((e) => e.in_cart).length >

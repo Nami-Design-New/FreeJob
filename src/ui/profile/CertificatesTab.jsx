@@ -49,26 +49,22 @@ export default function CertificatesTab({ user, isMyAccount }) {
   return (
     <div className="tab-pane ">
       <div className="services-container">
-        {certificates?.length === 0 ? (
-          <div className="noDataFound">
-            <h4>{t("profile.noCertificatesFound")}</h4>
-          </div>
-        ) : (
-          <>
-            <div className="services_grid">
-              {" "}
-              {isMyAccount && (
-                <button
-                  onClick={() => setShowAddCertificateModal(true)}
-                  className="add-service"
-                >
-                  {t("profile.addCertificate")}{" "}
-                  <img
-                    src={"/images/certified-outline.png"}
-                    alt="add service"
-                  />
-                </button>
-              )}
+        <div className="services_grid">
+          {isMyAccount && (
+            <button
+              onClick={() => setShowAddCertificateModal(true)}
+              className="add-service"
+            >
+              {t("profile.addCertificate")}{" "}
+              <img src={"/images/certified-outline.png"} alt="add service" />
+            </button>
+          )}
+          {certificates?.length === 0 ? (
+            <div className="noDataFound">
+              <h4>{t("profile.noCertificatesFound")}</h4>
+            </div>
+          ) : (
+            <>
               {certificates?.map((cer) => (
                 <CertificateCard
                   canEdit={isMyAccount}
@@ -79,9 +75,9 @@ export default function CertificatesTab({ user, isMyAccount }) {
                   onDeleteModalShow={onDeleteModalShow}
                 />
               ))}
-            </div>
-          </>
-        )}
+            </>
+          )}
+        </div>
       </div>
       <ConfirmationModal
         showModal={showConfirmation}

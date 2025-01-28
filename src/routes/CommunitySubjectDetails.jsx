@@ -113,7 +113,7 @@ function CommunitySubjectDetails() {
                     </h5>
                   </div>
                   <div className="row g-3">
-                    <div className="col-6">
+                    <div className="col-md-6">
                       <div className="login-section">
                         <form onSubmit={handleSubmit}>
                           <div className="row">
@@ -144,7 +144,7 @@ function CommunitySubjectDetails() {
                     </div>
                     {post?.comments?.length > 0 ? (
                       post?.comments?.map((comment) => (
-                        <div className="col-6" key={comment.id}>
+                        <div className="col-md-6" key={comment.id}>
                           <SubjectCommentCard comment={comment} />
                         </div>
                       ))

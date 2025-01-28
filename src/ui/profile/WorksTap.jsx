@@ -1,16 +1,15 @@
 import { useQueryClient } from "@tanstack/react-query";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
+import { useSelector } from "react-redux";
 import { toast } from "react-toastify";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { deleteWork } from "../../services/apiWorks";
+import WorkCard from "../cards/worksCard";
+import ShowAll from "../ShowAll";
 import AddWorkModal from "./AddWorkModal";
 import ConfirmationModal from "./ConfirmationModal";
 import WorkViewModal from "./WorkViewModal";
-import { deleteWork } from "../../services/apiWorks";
-import WorkCard from "../cards/worksCard";
-import { Link } from "react-router-dom";
-import { Swiper, SwiperSlide } from "swiper/react";
-import { useSelector } from "react-redux";
-import ShowAll from "../ShowAll";
 
 export default function WorksTap({ works, isMyAccount }) {
   const { t } = useTranslation();
@@ -51,74 +50,81 @@ export default function WorksTap({ works, isMyAccount }) {
   return (
     <>
       <div className="services-container">
-        {works?.length === 0 ? (
-          <div className="noDataFound">
-            <h4>{t("profile.noWorksFound")}</h4>
-          </div>
-        ) : (
-          <>
+        <>
+          {" "}
+          <ShowAll show={true} sectionName={t("profile.myWorks")} />{" "}
+          <Swiper
+            slidesPerView={4}
+            speed={1000}
+            spaceBetween={20}
+            className="mainSliderContainer"
+            breakpoints={{
+              0: {
+                slidesPerView: 1,
+              },
+              575: {
+                slidesPerView: 2,
+              },
+              992: {
+                slidesPerView: 3,
+              },
+              1150: {
+                slidesPerView: 4,
+              },
+            }}
+            dir={lang === "ar" ? "rtl" : "ltr"}
+          >
             {" "}
-            <ShowAll
-              to="/my-services"
-              sectionName={t("profile.myWorks")}
-            />{" "}
-            <Swiper
-              slidesPerView={4}
-              speed={1000}
-              spaceBetween={20}
-              className="mainSliderContainer"
-              breakpoints={{
-                0: {
-                  slidesPerView: 1,
-                },
-                575: {
-                  slidesPerView: 2,
-                },
-                992: {
-                  slidesPerView: 3,
-                },
-                1150: {
-                  slidesPerView: 4,
-                },
-              }}
-              dir={lang === "ar" ? "rtl" : "ltr"}
-            >
-              {" "}
+            {isMyAccount && (
               <SwiperSlide
                 style={{
                   height: "auto",
                   width: "auto",
                 }}
               >
-                {isMyAccount && (
-                  <button
-                    onClick={() => setShowAddWorkModal(true)}
-                    className="add-service"
-                  >
-                    {t("profile.addWork")}
-                    <img src={"/images/plus.png"} alt="add service" />
-                  </button>
-                )}
-              </SwiperSlide>
-              {works?.map((work) => (
-                <SwiperSlide
-                  style={{
-                    height: "auto",
-                    width: "auto",
-                  }}
-                  key={work.id}
+                <button
+                  onClick={() => setShowAddWorkModal(true)}
+                  className="add-service"
                 >
-                  <WorkCard
-                    canEdit={isMyAccount}
-                    work={work}
-                    onEditModalShow={onEditModalShow}
-                    onDeleteModalShow={onDeleteModalShow}
-                    onViewModalShow={onViewModalShow}
-                  />
-                </SwiperSlide>
-              ))}
-            </Swiper>
-            {/* <div className="services_grid">
+                  {t("profile.addWork")}
+                  <img src={"/images/plus.png"} alt="add service" />
+                </button>
+              </SwiperSlide>
+            )}
+            {works?.length === 0 ? (
+              <SwiperSlide
+                style={{
+                  height: "auto",
+                  width: "auto",
+                }}
+              >
+                <div className="noDataFound">
+                  <h4>{t("profile.noWorksFound")}</h4>
+                </div>
+              </SwiperSlide>
+            ) : (
+              <>
+                {works?.map((work) => (
+                  <SwiperSlide
+                    style={{
+                      height: "auto",
+                      width: "auto",
+                    }}
+                    key={work.id}
+                  >
+                    <WorkCard
+                      canEdit={isMyAccount}
+                      work={work}
+                      onEditModalShow={onEditModalShow}
+                      onDeleteModalShow={onDeleteModalShow}
+                      onViewModalShow={onViewModalShow}
+                    />
+                  </SwiperSlide>
+                ))}
+              </>
+            )}
+          </Swiper>
+          {/* <div className="services_grid">
                 {works?.map((work) => (
                   <WorkCard
                     canEdit={isMyAccount}
@@ -130,8 +136,7 @@ export default function WorksTap({ works, isMyAccount }) {
                   />
                 ))}
               </div> */}
-          </>
-        )}
+        </>
       </div>
 
       <ConfirmationModal

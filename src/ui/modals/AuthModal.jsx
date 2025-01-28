@@ -18,6 +18,9 @@ export default function AuthModal() {
   const [register, setRegister] = useState(false);
   const [userId, setUserId] = useState();
   const dispatch = useDispatch();
+  const [forgetPassformData, setForgetPassformData] = useState({
+    email: "",
+  });
   const [otpData, setOtpData] = useState({
     code: "",
     hashed_code: "",
@@ -43,7 +46,14 @@ export default function AuthModal() {
       case 2:
         return <EmailLogin />;
       case 3:
-        return <UserNameEntry setOtpData={setOtpData} setUserId={setUserId} />;
+        return (
+          <UserNameEntry
+            forgetPassformData={forgetPassformData}
+            setForgetPassformData={setForgetPassformData}
+            setOtpData={setOtpData}
+            setUserId={setUserId}
+          />
+        );
       case 4:
         return (
           <EmailVerification
@@ -53,6 +63,8 @@ export default function AuthModal() {
             setFormData={setFormData}
             register={register}
             setRegister={setRegister}
+            forgetPassformData={forgetPassformData}
+            setForgetPassformData={setForgetPassformData}
           />
         );
       case 5:

@@ -78,6 +78,8 @@
     position: absolute;
     z-index: 9;
     bottom: -120px;
+    left: 50%;
+    transform: translateX(-50%);
     .user-avatar {
       width: 120px;
       height: 120px;
@@ -396,10 +398,11 @@
     display: flex;
     margin: 0 auto;
     padding: 120px 0;
+    flex-grow: 1;
     justify-content: center;
     align-items: center;
     h4 {
-      font-size: 42px;
+      font-size: 35px;
       color: var(--main30-color);
       font-weight: 900;
     }
@@ -412,7 +415,7 @@
   justify-content: center;
   align-items: center;
   h4 {
-    font-size: 42px;
+    font-size: 28px;
     color: var(--main30-color);
     font-weight: 900;
   }

@@ -12,7 +12,9 @@ export default function RootLayout() {
   return (
     <>
       <Header />
-      <Outlet />
+      <main>
+        <Outlet />
+      </main>
       <Footer />
     </>
   );

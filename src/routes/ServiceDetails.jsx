@@ -231,7 +231,16 @@ export default function ServiceDetails() {
       </section>
       <section className="container">
         <section className="row">
-          <section className="col-lg-8">
+          <section className="col-lg-3">
+            <ServiseOwner service={service} />
+            <button
+              onClick={() => navigate("/profile/" + service?.user?.id)}
+              className="go_profile_btn"
+            >
+              {t("projects.gotoProfile")}
+            </button>
+          </section>
+          <section className="col-lg-9">
             <ServiseDetailsComponent
               handleAddTocart={handleAddToCart}
               handleDecreaseQuantity={handleDecreaseQuantity}
@@ -244,15 +253,7 @@ export default function ServiceDetails() {
               inCart={inCart}
             />
           </section>
-          <section className="col-lg-4">
-            <ServiseOwner service={service} />
-            <button
-              onClick={() => navigate("/profile/" + service?.user?.id)}
-              className="go_profile_btn"
-            >
-              {t("projects.gotoProfile")}
-            </button>
-          </section>
+
           {rates?.data?.length > 0 && (
             <section className="row g-2  rating_container">
               <h6 className="header_rate">Service Rates</h6>

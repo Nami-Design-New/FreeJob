@@ -1,10 +1,12 @@
-import { useInfiniteQuery } from "@tanstack/react-query";
+import { useInfiniteQuery, useQuery } from "@tanstack/react-query";
 import { getServicesByFilter } from "../../services/apiServices";
 import { useSearchParams } from "react-router";
 
-function useSearchServicesList() {
+function useSearchServicesList(refetchPage) {
   const [searchParams] = useSearchParams();
-
+  const page = refetchPage
+    ? refetchPage
+    : Number(searchParams.get("page")) || 1;
   const search = searchParams.get("search");
   const rate = Number(searchParams.get("rate"));
   const user_verification = Number(searchParams.get("user_verification"));
@@ -24,15 +26,15 @@ function useSearchServicesList() {
       .get("sub_categories")
       .split("-")
       .map((subcategory) => Number(subcategory));
-      
+
   const is_old = Number(searchParams.get("is_old"));
   const sort = searchParams.get("sort");
-  const pageSize = 12;
 
   const queryKey = [
     "searchServicesList",
     {
       search,
+      page,
       rate,
       user_verification,
       user_available,
@@ -45,12 +47,12 @@ function useSearchServicesList() {
   ];
 
   const { data, fetchNextPage, hasNextPage, isFetching, isFetchingNextPage } =
-    useInfiniteQuery({
+    useQuery({
       queryKey,
-      queryFn: ({ pageParam = 1 }) =>
+      queryFn: () =>
         getServicesByFilter(
           search,
-          pageParam,
+          page,
           rate,
           user_verification,
           user_available,
@@ -60,17 +62,14 @@ function useSearchServicesList() {
           skills,
           sort
         ),
-      getNextPageParam: (lastPage, pages) => {
-        const isMore = lastPage.data.length >= pageSize;
-        return isMore ? pages.length + 1 : undefined;
-      },
+
       keepPreviousData: true,
       refetchOnWindowFocus: false,
       refetchOnReconnect: false,
     });
 
   return {
-    data: data?.pages.flatMap((page) => page.data) || [],
+    data,
     fetchNextPage,
     hasNextPage,
     isFetching,

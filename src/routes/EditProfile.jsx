@@ -169,6 +169,7 @@ const EditProfile = () => {
                 bottom: "10px",
                 borderRadius: "50%",
                 cursor: "pointer",
+                left: "56%",
               }}
             >
               <FaRegEdit color="black" />

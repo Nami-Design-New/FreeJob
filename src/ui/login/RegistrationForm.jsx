@@ -18,7 +18,11 @@ export default function RegistrationForm({ formData, setFormData }) {
 
   function handlePhoneChange(value, { country }) {
     let code = country.dialCode;
-    setFormData({ ...formData, phone: value.slice(code.length), code });
+    setFormData({
+      ...formData,
+      phone: value.slice(code.length + 1),
+      phone_code: code,
+    });
   }
   const handleCountrytSelect = (e) => {
     setCountryId(e.target.value);
@@ -78,7 +82,7 @@ export default function RegistrationForm({ formData, setFormData }) {
             name="email"
             id="email"
             required={true}
-            formData={formData.email}
+            value={formData.email}
             onChange={(e) => handleChange(e)}
           />
         </div>
@@ -119,15 +123,18 @@ export default function RegistrationForm({ formData, setFormData }) {
           <label className="fw-normal"> {t("auth.phone")}</label>
           <PhoneInput
             defaultCountry="sa"
+            value={`${formData.phone_code}${formData.phone}`}
             onChange={(value, country) => handlePhoneChange(value, country)}
             style={{ width: "100%", marginTop: "0.5rem" }}
             inputStyle={{
               border: "none",
               width: "100%",
               marginLeft: "0.75rem",
+              marginRight: "0.75rem",
               borderRadius: "0.5rem",
               backgroundColor: "#E8FAF4",
             }}
+            className="react-international-phone-list"
           />
         </div>
         <FormButton content={t("next")} type="submit" />

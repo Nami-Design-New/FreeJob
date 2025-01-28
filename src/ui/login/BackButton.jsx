@@ -4,6 +4,8 @@ import { setStep } from "../../redux/slices/authModalSlice";
 
 export default function BackButton({ step }) {
   const currentStep = useSelector((state) => state.authModal.currentStep);
+  console.log(currentStep);
+
   const dispatch = useDispatch();
 
   return (

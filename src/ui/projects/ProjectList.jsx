@@ -1,47 +1,31 @@
-import ProjectCard from "../cards/ProjectCard";
-import useProjectsList from "../../hooks/projects/useProjectsList";
-import EmptyData from "../EmptyData";
 import { useTranslation } from "react-i18next";
-import { useEffect } from "react";
+import useProjectsList from "../../hooks/projects/useProjectsList";
+import ProjectCard from "../cards/ProjectCard";
+import CustomPagination from "../CustomPagination";
 import DataLoader from "../DataLoader";
+import EmptyData from "../EmptyData";
 
 export default function ProjectList() {
   const { t } = useTranslation();
-  const {
-    data: searchProjectsList,
-    fetchNextPage,
-    hasNextPage,
-    isFetching,
-    isFetchingNextPage,
-  } = useProjectsList();
-  useEffect(() => {
-    const handleScroll = () => {
-      if (
-        window.innerHeight + document.documentElement.scrollTop >=
-        document.documentElement.offsetHeight - 1000
-      ) {
-        if (!isFetchingNextPage && hasNextPage) {
-          fetchNextPage();
-        }
-      }
-    };
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, [isFetchingNextPage, hasNextPage, fetchNextPage, searchProjectsList]);
-  return isFetching ? (
+  const { data: searchProjectsList, isLoading } = useProjectsList();
+
+  return isLoading ? (
     <DataLoader />
   ) : (
     <>
-      {searchProjectsList && searchProjectsList?.length > 0 ? (
+      {console.log(searchProjectsList)}
+      {searchProjectsList && searchProjectsList?.data.length > 0 ? (
         <main className="row g-3">
-          {searchProjectsList.map((project) => (
+          {searchProjectsList?.data.map((project) => (
             <div key={project.id} className="projects_card_filter">
               <section className="col-12">
                 <ProjectCard project={project} />
               </section>
             </div>
           ))}
-          {isFetching && <DataLoader />}
+          {searchProjectsList && searchProjectsList?.total > 10 && (
+            <CustomPagination count={searchProjectsList?.total} pageSize={10} />
+          )}
         </main>
       ) : (
         <EmptyData minHeight={"300px"}>

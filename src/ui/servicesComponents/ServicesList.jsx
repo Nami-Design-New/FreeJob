@@ -4,42 +4,26 @@ import useSearchServicesList from "../../hooks/services/useSearchServicesList";
 import ServiceCard from "../cards/ServiceCard";
 import DataLoader from "../DataLoader";
 import EmptyData from "../EmptyData";
+import CustomPagination from "../CustomPagination";
 
 export default function ServicesList() {
-  const {
-    data: searchServicesList,
-    fetchNextPage,
-    hasNextPage,
-    isFetching,
-    isFetchingNextPage,
-  } = useSearchServicesList();
+  const { data: searchServicesList, isLoading } = useSearchServicesList();
   const { t } = useTranslation();
-  useEffect(() => {
-    const handleScroll = () => {
-      if (
-        window.innerHeight + document.documentElement.scrollTop >=
-        document.documentElement.offsetHeight - 1000
-      ) {
-        if (!isFetchingNextPage && hasNextPage) {
-          fetchNextPage();
-        }
-      }
-    };
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, [isFetchingNextPage, hasNextPage, fetchNextPage]);
 
-  return isFetching ? (
+  return isLoading ? (
     <DataLoader />
   ) : (
     <>
-      {searchServicesList && searchServicesList.length > 0 ? (
+      {searchServicesList && searchServicesList?.data?.length > 0 ? (
         <section className="services_list">
-          {searchServicesList.map((service) => (
+          {searchServicesList?.data?.map((service) => (
             <section key={service.id} className="service_card_filter">
               <ServiceCard service={service} />
             </section>
           ))}
+          {searchServicesList && searchServicesList?.total > 10 && (
+            <CustomPagination count={searchServicesList?.total} pageSize={10} />
+          )}
         </section>
       ) : (
         <EmptyData minHeight={"300px"}>
