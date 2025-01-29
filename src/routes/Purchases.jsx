@@ -18,7 +18,7 @@ const Purchases = () => {
   }
 
   return (
-    <main>
+    <section>
       <section className=" container my-4">
         <section className="small_header_filter d-md-none">
           <h6>Purchases</h6>
@@ -64,7 +64,7 @@ const Purchases = () => {
           </section>
         </div>
       </section>
-    </main>
+    </section>
   );
 };
 

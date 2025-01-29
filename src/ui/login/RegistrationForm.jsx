@@ -100,8 +100,9 @@ export default function RegistrationForm({ formData, setFormData }) {
 
         <div className="col-6">
           <FormInput
-            label={t("auth.age")}
+            label={t("auth.dateOfBirth")}
             name={"age"}
+            type="date"
             id={"age"}
             value={formData.age}
             onChange={(e) => handleChange(e)}

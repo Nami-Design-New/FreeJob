@@ -1,7 +1,7 @@
-import  { useState } from "react";
+import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import DetailsHeader from "../ui/servicesComponents/serviceDetails/DetailsHeader";
-import { Link, useLocation } from "react-router";
+import { Link } from "react-router";
 import FormInput from "../ui/form/FormInput";
 import FormTextArea from "../ui/form/FormTextArea";
 import SubmitButton from "../ui/form/SubmitButton";
@@ -11,16 +11,7 @@ import axiosInstance from "../utils/axios";
 import FormSelector from "../ui/form/FormSelector";
 
 const Complaints = () => {
-  const { pathname } = useLocation();
-
-  const segments = pathname
-    .split("/")
-    .filter((segment) => segment === "Report aproblem");
-
-  const pageTitle =
-    segments.length > 0 ? segments[0].split("-").join(" ") : "Report aproblem";
   const { t } = useTranslation();
-
   const [loading, setLoading] = useState(false);
   const [formData, setFormData] = useState({
     title: "",
@@ -89,7 +80,7 @@ const Complaints = () => {
     <section className="complaints-page">
       <section className="collections_header_container mb-4">
         <div className="container-md">
-          <DetailsHeader links={pageTitle} />
+          <DetailsHeader links={t("routes.complaints-suggestions")} />
         </div>
       </section>
 
@@ -157,7 +148,7 @@ const Complaints = () => {
 
           <section className="col-12 p-2 ">
             <section className="content">
-              <h6>Add Project Attachments</h6>
+              <h6>{t("projects.addAttachment")}</h6>
             </section>
           </section>
           <section className="file_upload_grid mb-3">

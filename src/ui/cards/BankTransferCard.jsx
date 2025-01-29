@@ -1,4 +1,7 @@
 function BankTransferCard({ bank, bankTransfer, onChange, disabled }) {
+  console.log(bankTransfer, bank.id);
+  console.log(Number(bankTransfer) === Number(bank.id));
+
   return (
     <div className="bank-transfer-box">
       <input
@@ -6,7 +9,7 @@ function BankTransferCard({ bank, bankTransfer, onChange, disabled }) {
         name="bank_id"
         id={bank?.id}
         value={bank?.id}
-        checked={Number(bankTransfer) === Number(bank?.id)}
+        checked={Number(bankTransfer) === Number(bank.id)}
         onChange={(e) => {
           onChange(e.target.value);
         }}

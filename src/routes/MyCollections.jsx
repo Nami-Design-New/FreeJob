@@ -4,9 +4,11 @@ import CollectionCard from "../ui/cards/CollectionCard";
 import DataLoader from "../ui/DataLoader";
 import EmptyData from "../ui/EmptyData";
 import DetailsHeader from "../ui/servicesComponents/serviceDetails/DetailsHeader";
-import PaginationComponent from "../ui/PaginationComponent";
+import CustomPagination from "../ui/CustomPagination";
+import { useQueryClient } from "@tanstack/react-query";
 
 const MyCollections = () => {
+  // const queryClient = useQueryClient();
   const { data: collections, isLoading } = useCollectionsList();
   const { t } = useTranslation();
   return (
@@ -14,10 +16,9 @@ const MyCollections = () => {
       <section className="myCollections">
         <section className="collections_header_container ">
           <section className="container-md">
-            <DetailsHeader links={"My Collections"} />
+            <DetailsHeader links={t("navbar.myCollections")} />
           </section>
         </section>
-
         {isLoading ? (
           <DataLoader />
         ) : (
@@ -29,9 +30,9 @@ const MyCollections = () => {
                 ))
               ) : (
                 <EmptyData>{t("collectionsEmpty")}</EmptyData>
-              )}{" "}
-              {collections?.total > 10 && (
-                <PaginationComponent totalItems={collections.total} />
+              )}
+              {collections?.count > 10 && (
+                <CustomPagination count={collections?.count} pageSize={10} />
               )}
             </div>
           </div>

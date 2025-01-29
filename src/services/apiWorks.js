@@ -11,6 +11,17 @@ export async function getWorks(userId) {
   }
 }
 
+export async function getWork(workId) {
+  try {
+    const req = await axiosInstance.post("/get_work", {
+      id: workId,
+    });
+    return req.data.data;
+  } catch (error) {
+    throw new Error(error.message);
+  }
+}
+
 export async function addWork(data, queryClient) {
   try {
     await axiosInstance.post("/user/create_works", data, {

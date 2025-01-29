@@ -50,7 +50,6 @@ const CollectionCard = ({ collection }) => {
       if (res?.code === 200) {
         toast.success(t("cart.collectionAddedToCart"));
         refetch();
-        navigate("/cart");
       }
     } catch (error) {
       console.log(error);

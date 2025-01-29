@@ -3,6 +3,8 @@ import axiosInstance from "../utils/axios";
 export async function getCategories() {
   try {
     const req = await axiosInstance.get("/get_categories");
+    console.log(req.data);
+
     return req.data.data;
   } catch (err) {
     throw new Error(err.message);

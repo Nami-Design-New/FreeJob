@@ -77,7 +77,7 @@ function ProfileTabs({ user, isMyAccount }) {
         <div className="services-container">
           <>
             <ShowAll sectionName={t("profile.services")} show={true} />
-            {/* <div className="services_grid"> */}
+
             <Swiper
               slidesPerView={4}
               speed={1000}
@@ -137,10 +137,8 @@ function ProfileTabs({ user, isMyAccount }) {
                 </>
               )}
             </Swiper>
-            {/* </div> */}
           </>
         </div>
-
         {/* my works */}
         <div className="tab_item">
           <WorksTap works={works} isMyAccount={isMyAccount} />
@@ -167,7 +165,11 @@ function ProfileTabs({ user, isMyAccount }) {
                 <>
                   {" "}
                   {myProjects?.map((project) => (
-                    <ProjectCard key={project?.id} project={project} />
+                    <ProjectCard
+                      key={project?.id}
+                      project={project}
+                      isProfile={true}
+                    />
                   ))}
                 </>
               )}
@@ -175,7 +177,7 @@ function ProfileTabs({ user, isMyAccount }) {
           )}
         </div>
       </div>
-      {/* </Tabs> */}
+
       <ConfirmationModal
         eventFun={handleDeleteService}
         showModal={showConfirmation}

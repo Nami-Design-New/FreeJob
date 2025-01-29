@@ -1,14 +1,15 @@
 import { getCollections } from "../../services/apiCollections";
-import { useQuery } from "@tanstack/react-query";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
 
 function useCollectionsList() {
+  const { queryClient } = useQueryClient();
   const { isLoading, data, error } = useQuery({
     queryKey: ["collectionsList"],
     queryFn: () => getCollections(),
-    retry: false,
-    refetchOnWindowFocus: false,
-    refetchOnMount: false,
-    refetchOnReconnect: false,
+    retry: true,
+    refetchOnWindowFocus: true,
+    refetchOnMount: true,
+    refetchOnReconnect: true,
   });
 
   return { isLoading, data, error };

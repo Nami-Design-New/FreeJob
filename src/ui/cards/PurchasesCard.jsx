@@ -7,11 +7,22 @@ import {
   ORDER_STATUS_EN,
   ORDER_STATUS_PERSENTAGE,
 } from "../../utils/contants";
+import { formatTimeDifference, getTimeDifference } from "../../utils/helper";
+import { useTranslation } from "react-i18next";
 
 export default function PurchaseCard({ purchase }) {
   const navigate = useNavigate();
+  const { t } = useTranslation();
   const lang = useSelector((state) => state.language.lang);
-
+  const timeDifference = getTimeDifference(purchase?.created_at);
+  const startTime = formatTimeDifference(
+    timeDifference.years,
+    timeDifference.months,
+    timeDifference.days,
+    timeDifference.hours,
+    timeDifference.minutes,
+    t
+  );
   return (
     <section className="position-relative">
       <section className="order_card ">
@@ -37,7 +48,8 @@ export default function PurchaseCard({ purchase }) {
             <section className="order_user_info">
               <p>{purchase.service.user.name}</p>
               <p>
-                <CiFileOn />3 monthes and 3 days ago
+                <CiFileOn />
+                {startTime}
               </p>
             </section>
           </section>
@@ -66,7 +78,7 @@ export default function PurchaseCard({ purchase }) {
         onClick={() => navigate(`${purchase.id}`)}
         className={`${lang === "ar" ? "ar" : ""} order_details_button`}
       >
-        Order Details
+        {t("routes.order-details")}
       </button>
     </section>
   );

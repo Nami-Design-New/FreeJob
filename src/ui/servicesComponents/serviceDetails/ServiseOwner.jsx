@@ -1,7 +1,7 @@
 import { useTranslation } from "react-i18next";
 import { BsChatText, BsShare } from "react-icons/bs";
 import { useSelector } from "react-redux";
-import { useNavigate } from "react-router";
+import { Link, useNavigate } from "react-router";
 import OwnerComponent from "./OwnerComponent";
 import { calculateDate } from "../../../utils/helper";
 
@@ -64,10 +64,31 @@ export default function ServiseOwner({ service }) {
         <button className="butn" onClick={handleShare}>
           <BsShare /> {t("services.share")}
         </button>
-        <button onClick={handleCreateRoom}>
-          <BsChatText />
-          {t("routes.chat")}
-        </button>
+        <Link
+          onClick={(e) => {
+            if (e.button === 1 || e.ctrlKey || e.metaKey) {
+              console.log("middle click");
+              return;
+            }
+            console.log("left click");
+            e.preventDefault();
+            handleCreateRoom();
+            navigate(`/chat`);
+          }}
+          onAuxClick={(e) => {
+            e.preventDefault();
+            if (e.button === 1) {
+              console.log("wheel click");
+              handleCreateRoom();
+              const newTab = window.open("/chat", "_blank");
+              if (newTab) {
+                newTab.focus();
+              }
+            }
+          }}
+        >
+          <BsChatText /> {t("routes.chat")}
+        </Link>
       </section>
     </section>
   );

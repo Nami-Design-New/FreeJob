@@ -1,24 +1,24 @@
 .notification {
-    width: 45px;
-    height: 45px;
-    border-radius: 50%;
-    background-color: #fff;
-    display: flex;
-    justify-content: center;
-    align-items: center;  
-  }
- /* .card{
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  background-color: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+/* .card{
   background-color: #f1fffa;
  } */
-  .notification-icon {
-    width: 25px;
-    height: 25px;
-    object-fit: cover;
-  }
-  .notification-time  {
-    display: flex;
-    justify-content: flex-end;  
-    align-items: end;
-  }
-  /* ///// */
-  
+.notification-icon {
+  width: 25px;
+  height: 25px;
+  object-fit: cover;
+}
+.notification-time {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 1rem;
+}
+/* ///// */
