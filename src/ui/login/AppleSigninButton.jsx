@@ -3,9 +3,9 @@ import AppleSignin from "react-apple-signin-auth";
 const AppleSigninButton = ({ t, handleAppleAuth }) => (
   <AppleSignin
     authOptions={{
-      // clientId: process.env.REACT_APP_APPLE_CLIENT_ID,
+      clientId: import.meta.env.VITE_APPLE_CLIENT_ID,
       scope: "email name",
-      // redirectURI: process.env.REACT_APP_APPLE_REDIRECT_URI,
+      redirectURI: import.meta.env.VITE_APPLE_REDIRECT_URI,
       state: "state",
       nonce: "nonce",
       usePopup: true,
