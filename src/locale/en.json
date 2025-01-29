@@ -110,6 +110,7 @@
     "newPasswordSuccess": "Password changed successfully ✔",
     "interestes": "Specialization",
     "age": "Age",
+    "dateOfBirth": "Date of Birth",
     "edit": "Edit",
     "registerSuccess": "Registration successful",
     "aboutUser": "About User",
@@ -422,6 +423,7 @@
     "buyers": "Buyers",
     "oredersInProgress": "Orders in Progress",
     "serviceMinimumPrice": "Service Price Starts From",
+    "startFrom": "Starts From :",
     "deliveryTime": "Delivery Time",
     "deliveryOnTime": "On-Time Delivery",
     "contactAndFollow": "Communication and Follow-up",
@@ -672,6 +674,7 @@
     "addAccount": "Add Account",
     "editAccount": "Edit Account",
     "userName": "Name",
+
     "iban": "IBAN Code",
     "balance": "Balance",
     "bankName": "Bank Name",
@@ -751,5 +754,6 @@
   "noFreelancers": "Sorry, there are no freelancers in this category.",
   "noNotifications": "There is no notifications to be shown",
   "searchIn": "Continue search in",
-  "clients": "Clients"
+  "clients": "Clients",
+  "yourmessage": "Your Message"
 }

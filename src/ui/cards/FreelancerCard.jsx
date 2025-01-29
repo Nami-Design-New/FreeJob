@@ -9,32 +9,24 @@ function FreelancerCard({ freelancer, truncate }) {
 
   return (
     <Link to={`/profile/${freelancer?.id}`} className="freelancerCard">
-      <div className="d-flex justify-content-between">
-        <div className="info">
-          <div className="img">
-            <img
-              src={
-                imgError
-                  ? "./images/avatar-placeholder-2.svg"
-                  : freelancer.image
-              }
-              alt={freelancer?.name}
-              onError={() => setImgError(true)}
-            />
-            {freelancer?.verified === 1 && <span className="status"></span>}
-          </div>
-          <div className="content">
-            <h6>{freelancer?.name}</h6>
-            <ul>
-              <li>
-                <i className="fa-regular fa-cubes"></i> {t("servicesCount")}:{" "}
-                {freelancer?.service_count}
-              </li>
-            </ul>
-          </div>
-        </div>
+      <img
+        className="image"
+        src={imgError ? "./images/avatar-placeholder-2.svg" : freelancer.image}
+        alt={freelancer?.name}
+        onError={() => setImgError(true)}
+      />
+      {freelancer?.verified === 1 && <span className="status"></span>}
+      <div className="content">
+        <h6 className="mt-3">{freelancer?.name}</h6>
         <StarsRate rate={freelancer?.rate} />
+        <ul className="mt-2">
+          <li>
+            <i className="fa-regular fa-cubes"></i> {t("servicesCount")}:{" "}
+            {freelancer?.service_count}
+          </li>
+        </ul>
       </div>
+
       <p>{truncate(freelancer?.about)}</p>
     </Link>
   );

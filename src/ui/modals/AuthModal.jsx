@@ -2,7 +2,7 @@ import { useState } from "react";
 import { IoMdClose } from "react-icons/io";
 import { Modal } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
-import { closeModal, setStep } from "../../redux/slices/authModalSlice";
+import { closeModal } from "../../redux/slices/authModalSlice";
 import EmailLogin from "../login/EmailLogin";
 import EmailVerification from "../login/EmailVerification";
 import LoginOptions from "../login/LoginOptions";

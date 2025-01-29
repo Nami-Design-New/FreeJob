@@ -15,18 +15,18 @@ export default function ProjectList() {
     <>
       {console.log(searchProjectsList)}
       {searchProjectsList && searchProjectsList?.data.length > 0 ? (
-        <main className="row g-3">
+        <section className="row g-3">
           {searchProjectsList?.data.map((project) => (
             <div key={project.id} className="projects_card_filter">
               <section className="col-12">
-                <ProjectCard project={project} />
+                <ProjectCard isProfile={false} project={project} />
               </section>
             </div>
           ))}
           {searchProjectsList && searchProjectsList?.total > 10 && (
             <CustomPagination count={searchProjectsList?.total} pageSize={10} />
           )}
-        </main>
+        </section>
       ) : (
         <EmptyData minHeight={"300px"}>
           {t("notFoundPlaceholder.noProjectsFoundWithThisDetails")}

@@ -49,7 +49,7 @@ export default function CertificatesTab({ user, isMyAccount }) {
   return (
     <div className="tab-pane ">
       <div className="services-container">
-        <div className="services_grid">
+        <div className="certificate_grid">
           {isMyAccount && (
             <button
               onClick={() => setShowAddCertificateModal(true)}

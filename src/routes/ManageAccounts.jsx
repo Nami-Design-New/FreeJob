@@ -21,7 +21,7 @@ const ManageAccounts = () => {
             onClick={() => navigate("/add-bank-account")}
           >
             <FaPlus />
-            Add Bank Account
+            {t("manageAccounts.addAccount")}
           </button>
         </section>
       </section>
@@ -42,7 +42,7 @@ const ManageAccounts = () => {
               onClick={() => navigate("/add-bank-account")}
             >
               <FaPlus />
-              Add Bank Account
+              {t("manageAccounts.addAccount")}
             </button>
           </section>
         </section>

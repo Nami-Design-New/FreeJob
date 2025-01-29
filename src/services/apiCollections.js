@@ -1,8 +1,8 @@
-import axios from "../utils/axios";
+import axiosInstance from "../utils/axios";
 
 export async function getCollections() {
   try {
-    const req = await axios.post("/user/get_collections");
+    const req = await axiosInstance.post("/user/get_collections");
     return req.data.data;
   } catch (error) {
     throw new Error(error.message);
@@ -10,22 +10,29 @@ export async function getCollections() {
 }
 
 export async function getCollection(id) {
+  console.log(id);
+
   try {
-    const req = await axios.post("user/get_collection_details_with_services", {
-      id
+    const req = await axiosInstance.post("user/get_collection_details", {
+      id,
     });
+    console.log(req);
+
     return {
       data: req.data.data,
-      count: req.data.count
+      count: req.data.count,
     };
   } catch (error) {
     throw new Error(error.message);
   }
 }
-
+getCollection("27");
 export async function addToCollection(requestBody, querClient) {
   try {
-    const req = await axios.post("/user/add_to_collection", requestBody);
+    const req = await axiosInstance.post(
+      "/user/add_to_collection",
+      requestBody
+    );
     querClient.invalidateQueries("cartList");
     return req.data;
   } catch (error) {
@@ -35,8 +42,8 @@ export async function addToCollection(requestBody, querClient) {
 
 export async function removeCollection(requestBody, querClient) {
   try {
-    await axios.post("/user/delete_collection", {
-      id: requestBody
+    await axiosInstance.post("/user/delete_collection", {
+      id: requestBody,
     });
     querClient.invalidateQueries(["collectionsList"]);
   } catch (error) {
@@ -46,7 +53,7 @@ export async function removeCollection(requestBody, querClient) {
 
 export async function updateCollection(requestBody, querClient) {
   try {
-    await axios.post("/user/update_collection", requestBody);
+    await axiosInstance.post("/user/update_collection", requestBody);
     querClient.invalidateQueries(["collectionsList"]);
   } catch (error) {
     throw new Error(error.message);
@@ -55,8 +62,8 @@ export async function updateCollection(requestBody, querClient) {
 
 export async function addCollectionToCart(id, queryClient) {
   try {
-    const req = await axios.post("/user/add_collection_to_cart", {
-      id: id
+    const req = await axiosInstance.post("/user/add_collection_to_cart", {
+      id: id,
     });
     queryClient.invalidateQueries(["cartList"]);
     return req.data;

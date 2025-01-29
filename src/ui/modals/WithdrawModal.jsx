@@ -18,6 +18,7 @@ const WithdrawModal = ({ showModal, setShowModal, cartTotalPrice }) => {
   const [amount, setAmount] = useState("");
   const [paypal, setPaypal] = useState("");
   const [bankId, setBankId] = useState("");
+
   const [loading, setLoading] = useState(false);
 
   const [conditionsCheck, setConditionsCheck] = useState({
@@ -49,7 +50,7 @@ const WithdrawModal = ({ showModal, setShowModal, cartTotalPrice }) => {
       requestBody.paypal = paypal;
     }
     console.log(requestBody);
-
+    console.log(bankId);
     try {
       if (
         (activeTab === "bankTransfer" &&
@@ -218,10 +219,10 @@ const WithdrawModal = ({ showModal, setShowModal, cartTotalPrice }) => {
                     required={true}
                   />
                   <FormInput
-                    type="number"
+                    type="email"
                     id="paypal"
                     name="paypal"
-                    placeholder={"001321913231"}
+                    placeholder={"@paypal"}
                     value={paypal}
                     label={`${t("balance.paypalAccount")} *`}
                     onChange={(e) => setPaypal(e.target.value)}
@@ -292,7 +293,7 @@ const WithdrawModal = ({ showModal, setShowModal, cartTotalPrice }) => {
             {t("cancel")}
           </button>
           <button
-            className="order-now text-center"
+            className="order-now text-center d-flex align-items-center justify-content-center"
             type="submit"
             onClick={handleSubmit}
           >

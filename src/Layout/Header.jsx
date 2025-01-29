@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { Fragment, useEffect, useState } from "react";
 import { Dropdown } from "react-bootstrap";
 import { useTranslation } from "react-i18next";
 import { RiMenuFold4Fill, RiMenuUnfold4Fill } from "react-icons/ri";
@@ -14,15 +14,19 @@ import SideMenu from "./../ui/header/SideMenu";
 import UserDropDown from "./../ui/header/UserDropDown";
 import LanguageToggle from "./../ui/LanguageToggle";
 import AuthModal from "./../ui/modals/AuthModal";
+import useGetNotifications from "../hooks/useGetNotifications";
+import NotificationItem from "../ui/header/NotificationItem";
 
 export default function Header() {
   const isLogin = useSelector((state) => state.authedUser.isLogged);
   const { t } = useTranslation();
   const lang = useSelector((state) => state.language.lang);
+  const user = useSelector((state) => state.authedUser.user);
   const [isOpen, setIsOpen] = useState(false);
   const isMobile = useResponsiveState("(min-width: 768px)");
   const dispatch = useDispatch();
   const show = useSelector((state) => state.authModal.show);
+  const { data: notifications } = useGetNotifications();
   const navigate = useNavigate();
   const { data: communities } = useGetCommunitiesList();
   useEffect(() => {
@@ -40,24 +44,71 @@ export default function Header() {
       <nav>
         <Logo />
         {isLogin ? (
-          <ul className="nav_links d-lg-flex d-none">
-            <li>
-              <NavLink to="/purchases">{t("routes.purchases")}</NavLink>
-            </li>
-            <li>
-              <NavLink to="/recieved-orders">
-                {t("routes.recieved-request")}
-              </NavLink>
-            </li>
-            <li>
-              <NavLink to="/projects-orders">
-                {t("navbar.projectsOrders")}
-              </NavLink>
-            </li>
-            <li className="d-flex align-items-center justify-content-center ">
-              <LanguageToggle />
-            </li>
-          </ul>
+          <>
+            <ul className="nav_links d-lg-flex d-none">
+              <li>
+                <NavLink to="/purchases">{t("routes.purchases")}</NavLink>
+              </li>
+              <li>
+                <NavLink to="/recieved-orders">
+                  {t("routes.recieved-request")}
+                </NavLink>
+              </li>
+              <li>
+                <NavLink to="/projects-orders">
+                  {t("navbar.projectsOrders")}
+                </NavLink>
+              </li>
+              <li className="d-flex align-items-center justify-content-center ">
+                <LanguageToggle />
+              </li>
+            </ul>
+            <ul className="nav_icons d-lg-flex d-none">
+              <li>
+                <Link to="/cart" className="btn">
+                  <i className="fa-light fa-cart-shopping"></i>
+                  <span className="num-count">{user?.cart_count || 0}</span>
+                </Link>
+              </li>
+              {/* Notifications */}
+              <li
+                className={` notifications ${lang === "en" ? "reverse" : ""}`}
+              >
+                <Dropdown style={{ position: "relative" }}>
+                  <Dropdown.Toggle
+                    style={{
+                      backgroundColor: "white",
+                      outline: "none",
+                      border: "none",
+                    }}
+                    id="dropdown-basic"
+                  >
+                    <i
+                      className="fa-regular fa-bell "
+                      style={{ color: "#000" }}
+                    ></i>
+                    <span className="num-count">
+                      {user?.receive_notification || 0}
+                    </span>
+                  </Dropdown.Toggle>
+                  <Dropdown.Menu align="start">
+                    <div className="scroll_menu">
+                      {notifications?.map((notification) => (
+                        <Fragment key={notification?.title}>
+                          <Dropdown.Item>
+                            <NotificationItem notification={notification} />
+                          </Dropdown.Item>
+                        </Fragment>
+                      ))}
+                    </div>
+                    <Link className="showall" to="/notifications">
+                      {t("navbar.allNotifications")}
+                    </Link>
+                  </Dropdown.Menu>
+                </Dropdown>
+              </li>
+            </ul>
+          </>
         ) : (
           <ul className="nav_links d-lg-flex d-none">
             <li>

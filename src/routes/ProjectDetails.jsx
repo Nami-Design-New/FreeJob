@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { BsChat } from "react-icons/bs";
 import { useSelector } from "react-redux";
-import { useNavigate } from "react-router";
+import { Link, useNavigate } from "react-router";
 import useGetProject from "../hooks/projects/useGetProject";
 import useGetProjectRequests from "../hooks/projects/useGetProjectRequests";
 import DataLoader from "../ui/DataLoader";
@@ -48,20 +48,21 @@ const ProjectDetails = () => {
 
       <section className="container">
         <section className="row gy-5">
+          {" "}
+          <section className="col-lg-4">
+            <ProjectOwner project={project} />
+            <Link
+              to={`/profile/${project?.user?.id}`}
+              className="go_profile_btn"
+            >
+              {t("projects.gotoProfile")}
+            </Link>
+          </section>
           <section className="col-lg-8">
             <ProjectDetailsComponent project={project} />
             {!project?.is_my_project && !project?.added_request && (
               <>{!project?.added_request && <AddOffer id={project?.id} />}</>
             )}
-          </section>
-          <section className="col-lg-4">
-            <ProjectOwner project={project} />
-            <button
-              onClick={() => navigate("/profile")}
-              className="go_profile_btn"
-            >
-              {t("projects.gotoProfile")}
-            </button>
           </section>
           {requests && requests.length > 0 && (
             <section className="row g-2  rating_container">

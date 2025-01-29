@@ -297,7 +297,7 @@ const BestFreeLancers = () => {
                       {freelancers?.data?.length > 0 ? (
                         <>
                           {freelancers?.data?.map((freelancer) => (
-                            <div className="col-12 p-2" key={freelancer?.id}>
+                            <div className="col-md-4 py-4" key={freelancer?.id}>
                               <FreelancerCard
                                 freelancer={freelancer}
                                 truncate={truncate}

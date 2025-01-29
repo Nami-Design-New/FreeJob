@@ -164,7 +164,7 @@ function Portfolios() {
                     <div className="row">
                       {portfolios?.data?.map((portfolio) => (
                         <div
-                          className="col-lg-4 col-md-6 col-12 p-2"
+                          className="col-lg-4 col-md-6 col-12 px-2 py-4"
                           key={portfolio.id}
                         >
                           <PortfolioCard

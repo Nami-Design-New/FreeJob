@@ -799,8 +799,8 @@
     align-items: center;
     justify-content: center;
     gap: 1rem;
-
-    button {
+    button,
+    a {
       height: 3rem;
       min-width: 90px;
       border: none;
@@ -951,6 +951,9 @@
 .go_profile_btn {
   background-color: var(--main-color);
   color: var(--white-color);
+  display: flex;
+  align-items: center;
+  justify-content: center;
   width: 100%;
   outline: none;
   border: none;

@@ -98,9 +98,15 @@ a {
   white-space: nowrap;
 }
 
+.modal-header {
+  justify-content: space-between;
+  .btn-close {
+    margin: 0 !important;
+  }
+}
+
 .form_input {
   width: 100%;
-
   label {
     color: var(--black-color);
     margin-bottom: 0.5rem;
@@ -514,15 +520,13 @@ a {
 
   .bank-transfer-box {
     width: 100%;
-
     input {
       display: none;
-
       &:checked + label {
         border-color: var(--main-color);
+        border: 1px solid;
       }
     }
-
     label {
       background-color: var(--gray-background);
       border: 2px solid var(--gray-background);
@@ -535,7 +539,6 @@ a {
       cursor: pointer;
       transition: var(--transition);
     }
-
     .image-wrapper {
       width: 42px;
       height: 42px;

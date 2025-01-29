@@ -2,7 +2,7 @@ import { useQueryClient } from "@tanstack/react-query";
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useDispatch, useSelector } from "react-redux";
-import { useNavigate } from "react-router";
+import { Link, useNavigate } from "react-router";
 import useCartList from "../hooks/cart/useCartList";
 import useGetRates from "../hooks/services/useGetRates";
 import useServiceDetails from "../hooks/services/useServiceDetails";
@@ -233,12 +233,12 @@ export default function ServiceDetails() {
         <section className="row">
           <section className="col-lg-3">
             <ServiseOwner service={service} />
-            <button
-              onClick={() => navigate("/profile/" + service?.user?.id)}
+            <Link
+              to={`/profile/${service?.user?.id}`}
               className="go_profile_btn"
             >
               {t("projects.gotoProfile")}
-            </button>
+            </Link>
           </section>
           <section className="col-lg-9">
             <ServiseDetailsComponent

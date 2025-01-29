@@ -420,6 +420,15 @@
     font-weight: 900;
   }
 }
+
+.certificate_grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  margin-top: 16px;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
 .services_grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(16rem, 1fr));
@@ -443,6 +452,7 @@
   @media screen and (max-width: 576px) {
     min-width: 100%;
   }
+
   .main {
     display: flex;
     justify-content: space-between;

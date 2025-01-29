@@ -47,6 +47,7 @@ import ManageAccounts from "../routes/ManageAccounts";
 import ProjectsOrdersDetails from "../routes/ProjectsOrdersDetails";
 import CommunitySubjectDetails from "../routes/CommunitySubjectDetails";
 import MyServices from "../routes/MyServices";
+import PortfolioDetails from "../routes/PortfolioDetails";
 
 export const router = createBrowserRouter([
   {
@@ -70,6 +71,7 @@ export const router = createBrowserRouter([
       },
       { path: "/freelancers", element: <BestFreeLancers /> },
       { path: "/portfolios", element: <Portfolios /> },
+      { path: "/portfolios/:id", element: <PortfolioDetails /> },
       { path: "/contact", element: <Contact /> },
       { path: "/about/:id", element: <About /> },
       { path: "/about/preview/:id", element: <AboutPreview /> },

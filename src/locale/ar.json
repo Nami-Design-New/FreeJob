@@ -88,6 +88,8 @@
     "privacyPolicy": "سياسة الخصوصية",
     "and": "و",
     "ownbyus": "الخاصة بنا",
+    "dateOfBirth": "تاريخ الميلاد",
+
     "orRegisterWith": "او انشاء حساب باستخدام",
     "forgetPasswordTitle": "نسيت كلمة المرور ..!",
     "alreadyRegistered": "لديك حساب بالفعل؟",
@@ -420,6 +422,7 @@
     "buyers": "المشترين",
     "oredersInProgress": "طلبات جاري تنفيذها",
     "serviceMinimumPrice": "سعر الخدمة يبدأ من",
+    "startFrom": "تبدأ من:",
     "deliveryTime": "مدة التسليم",
     "deliveryOnTime": "التسليم بالموعد",
     "contactAndFollow": "التواصل والمتابعة",
@@ -744,5 +747,6 @@
   "noFreelancers": "عذراً، لا يوجد مستقلين في هذه الفئة.",
   "noNotifications": "لا يوجد إشعارات ليتم عرضها",
   "searchIn": "استمرار البحث في ...",
-  "clients": "العملاء"
+  "clients": "العملاء",
+  "yourmessage": "رسالتك"
 }
