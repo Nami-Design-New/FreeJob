@@ -3,10 +3,7 @@ import { IoMdClose } from "react-icons/io";
 import { Modal } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { closeModal } from "../../redux/slices/authModalSlice";
-<<<<<<< HEAD
-=======
 import { t } from "i18next";
->>>>>>> 42d56f2cbf0c9c9c3b7e9771ff1c08925aba4e40
 import EmailLogin from "../login/EmailLogin";
 import EmailVerification from "../login/EmailVerification";
 import LoginOptions from "../login/LoginOptions";
