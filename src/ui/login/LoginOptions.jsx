@@ -13,6 +13,38 @@ export default function LoginOptions() {
   const dispatch = useDispatch();
   const [, setCookie] = useCookies(["token", "id"]);
 
+  const handleAppleAuth = (response) => {
+    if (response?.authorization?.id_token) {
+      try {
+        const login = axiosInstance.post("/user/social_login", {
+          login_from: "apple",
+          google_token: response?.authorization?.id_token,
+        });
+        if (login.data.code === 200) {
+          toast.success(t("auth.loginSuccess"));
+          dispatch(setUser(login.data.data));
+          dispatch(setIsLogged(true));
+          setCookie("token", login.data.data.token, {
+            path: "/",
+            secure: true,
+            sameSite: "Strict",
+          });
+          setCookie("id", login.data.data.id, {
+            path: "/",
+            secure: true,
+            sameSite: "Strict",
+          });
+          axiosInstance.defaults.headers.common[
+            "Authorization"
+          ] = `${login.data.data.token}`;
+        }
+      } catch (error) {
+        console.log(error);
+        throw new Error(error.message);
+      }
+    }
+  };
+
   const handleGoogleLogin = useGoogleLogin({
     onSuccess: async (tokenResponse) => {
       try {
@@ -69,7 +101,7 @@ export default function LoginOptions() {
           <span>{t("auth.googleAccount")}</span>
         </button>
 
-        <AppleSigninButton t={t} />
+        <AppleSigninButton t={t} handleAppleAuth={handleAppleAuth} />
       </div>
     </div>
   );

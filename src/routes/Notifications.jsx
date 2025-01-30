@@ -8,19 +8,12 @@ import EmptyData from "../ui/EmptyData";
 
 export default function NotificationPage() {
   const { t } = useTranslation();
-  const { pathname } = useLocation();
-  const segments = pathname
-    .split("/")
-    .filter((segment) => segment === "notifications")[0]
-    .split("-")
-    .join(" ");
-
   const { isLoading, data: notifications } = useGetNotifications();
   return (
     <section className="notifications">
       <section className="header_container">
         <section className="container-md">
-          <DetailsHeader links={segments} />
+          <DetailsHeader links={t("routes.notifications")} />
         </section>
       </section>
       <div className="container notifications-list my-5">

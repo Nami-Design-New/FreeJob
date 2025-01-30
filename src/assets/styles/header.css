@@ -148,6 +148,7 @@
             padding: 10px;
             border-bottom: 1px solid #eee;
             width: 100%;
+
             p {
               margin: 0;
               font-size: 12px;
@@ -219,6 +220,11 @@
               }
             }
           }
+        }
+        .showall {
+          font-size: 12px;
+          padding: 10px;
+          color: var(--gray-color);
         }
       }
       .btn {

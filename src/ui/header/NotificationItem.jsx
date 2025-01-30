@@ -56,7 +56,7 @@ function NotificationItem({ notification }) {
       }}
     >
       <div className="text-wrap ">
-        <div className=" d-flex align-items-center gap-3  justify-content-between">
+        <div className=" d-flex align-items-center gap-3 justify-content-between">
           <div className="image-wrapper">
             {imgError ? (
               <i className="fa-regular fa-bell"></i>

@@ -12,7 +12,7 @@ export default function NotificationCard({ notification }) {
       }}
     >
       <Card.Body className="d-flex justify-content-between">
-        <div className="d-flex">
+        <div className="d-flex gap-3">
           <div className="notification me-3">
             <img
               src="/images/bell.png"
