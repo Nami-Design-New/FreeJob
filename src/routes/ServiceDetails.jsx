@@ -24,24 +24,18 @@ import ErrorPage from "./ErrorPage";
 
 export default function ServiceDetails() {
   const navigate = useNavigate();
-
   const { t } = useTranslation();
-
   const dispatch = useDispatch();
   const queryClient = useQueryClient();
-
   const { data: service, isLoading } = useServiceDetails();
   const { data: rates } = useGetRates();
   const { data: cartQuery } = useCartList();
-
   const cart = useSelector((state) => state.cart.cartList);
   const user = useSelector((state) => state.authedUser.user);
   const isLogged = useSelector((state) => state.authedUser.isLogged);
-
   const [inCart, setInCart] = useState(false);
   const [formLoading, setFormLoading] = useState(false);
   const [totalPrice, setTotalPrice] = useState(0);
-
   const [cartObj, setCartObj] = useState({
     service_id: service?.id,
     quantity: 1,

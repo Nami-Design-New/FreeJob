@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 
 function PortfolioCard({ setRow, setIsModalOpen, portfolio }) {
   return (
-    <Link to={`/portfolios/${portfolio.id}`}>
+    <Link to={`/portfolios/${portfolio.title}`}>
       <div
         className="portfolio-card"
         onClick={() => {

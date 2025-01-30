@@ -170,7 +170,6 @@
 .subject-box {
   padding: 16px 0;
   border-radius: 16px;
-
   position: relative;
   overflow: hidden;
   display: flex;
@@ -286,7 +285,9 @@
     position: absolute;
     gap: 8px;
     top: -30px;
-    width: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+
     .image-wrapper {
       position: relative;
       display: flex;
@@ -324,6 +325,7 @@
       display: flex;
       align-items: center;
       gap: 8px;
+      margin: 0;
     }
   }
 }

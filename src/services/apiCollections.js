@@ -10,13 +10,10 @@ export async function getCollections() {
 }
 
 export async function getCollection(id) {
-  console.log(id);
-
   try {
     const req = await axiosInstance.post("user/get_collection_details", {
       id,
     });
-    console.log(req);
 
     return {
       data: req.data.data,

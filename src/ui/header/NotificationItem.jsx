@@ -2,6 +2,7 @@ import { Link, useLocation } from "react-router-dom";
 import { calculateDate } from "../../utils/helper";
 import useGetCommunityPostDetails from "../../hooks/community/useGetCommunityPostDetails";
 import { useState } from "react";
+import DataLoader from "../DataLoader";
 
 function NotificationItem({ notification }) {
   const currentPath = useLocation().pathname;
@@ -30,7 +31,9 @@ function NotificationItem({ notification }) {
     default:
       break;
   }
-
+  if (isLoading) {
+    return <DataLoader />;
+  }
   return (
     <Link
       to={`${notification?.request_type === "admin" ? currentPath : ""}${
@@ -43,7 +46,7 @@ function NotificationItem({ notification }) {
           : ""
       }${
         notification?.request_type === "community"
-          ? `/community/${post?.category_name}/${notification?.request_id}`
+          ? `/community/${post?.category_name}/${post?.title}/${notification?.request_id}`
           : ""
       }${
         notification?.request_type === "service_order" ? `/recieved-orders` : ""

@@ -12,7 +12,6 @@ export default function Services() {
     setIsOpen(!isOpen);
   }
   const [searchParams] = useSearchParams();
-
   let filter = {
     searchQuery: searchParams.get("search") || "",
     selectedSections: searchParams.get("sections")

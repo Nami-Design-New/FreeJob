@@ -9,7 +9,6 @@ import CustomPagination from "../CustomPagination";
 export default function ServicesList() {
   const { data: searchServicesList, isLoading } = useSearchServicesList();
   const { t } = useTranslation();
-
   return isLoading ? (
     <DataLoader />
   ) : (

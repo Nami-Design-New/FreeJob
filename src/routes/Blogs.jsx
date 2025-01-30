@@ -13,7 +13,7 @@ function Blogs() {
     <>
       <section className="header_container ">
         <section className="container-md ">
-          <DetailsHeader links={t("routes.portfolios")} />
+          <DetailsHeader links={t("routes.blogs")} />
         </section>
       </section>
       {isLoading ? (

@@ -89,6 +89,7 @@ const OrderDetails = () => {
     try {
       status === "canceled" ? setBtn1Loading(true) : setLoading(true);
       await updateOrder(order?.id, status, queryClient);
+      
       refetchOrders();
       refetchPurchases();
     } catch (error) {
