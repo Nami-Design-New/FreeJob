@@ -49,10 +49,12 @@ body {
   scroll-behavior: smooth;
   -webkit-tap-highlight-color: transparent;
   font-family: "Din", sans-serif;
+
   main {
     min-height: calc(100vh - 120px);
   }
 }
+
 /* Scrollbar Container */
 ::-webkit-scrollbar {
   width: 8px;
@@ -100,6 +102,7 @@ a {
 
 .modal-header {
   justify-content: space-between;
+
   .btn-close {
     margin: 0 !important;
   }
@@ -107,6 +110,7 @@ a {
 
 .form_input {
   width: 100%;
+
   label {
     color: var(--black-color);
     margin-bottom: 0.5rem;
@@ -520,13 +524,16 @@ a {
 
   .bank-transfer-box {
     width: 100%;
+
     input {
       display: none;
-      &:checked + label {
+
+      &:checked+label {
         border-color: var(--main-color);
         border: 1px solid;
       }
     }
+
     label {
       background-color: var(--gray-background);
       border: 2px solid var(--gray-background);
@@ -539,6 +546,7 @@ a {
       cursor: pointer;
       transition: var(--transition);
     }
+
     .image-wrapper {
       width: 42px;
       height: 42px;
@@ -830,4 +838,10 @@ a {
   border-radius: 8px !important;
   left: auto;
   z-index: 1000 !important;
+}
+
+.showall {
+  width: 100%;
+  display: block;
+  padding: 8px 16px
 }
