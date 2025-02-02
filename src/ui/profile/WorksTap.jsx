@@ -117,7 +117,7 @@ export default function WorksTap({ works, isMyAccount }) {
                       work={work}
                       onEditModalShow={onEditModalShow}
                       onDeleteModalShow={onDeleteModalShow}
-                      onViewModalShow={onViewModalShow}
+                      // onViewModalShow={onViewModalShow}
                     />
                   </SwiperSlide>
                 ))}
@@ -153,12 +153,12 @@ export default function WorksTap({ works, isMyAccount }) {
         showModal={showAddWorkModal}
         setShowModal={setShowAddWorkModal}
       />
-      <WorkViewModal
+      {/* <WorkViewModal
         showModal={showWorkViewModal}
         setShowModal={setShowWorkViewModal}
         targetWork={targetWork}
         setTargetWork={setTargetWork}
-      />
+      /> */}
     </>
   );
 }

@@ -7,7 +7,7 @@ export function useGetWork() {
   console.log(title);
 
   const { data, isLoading, error } = useQuery({
-    queryKey: ["work"],
+    queryKey: ["work", title],
     queryFn: () => getWork(title),
     refetchOnWindowFocus: false,
     refetchOnMount: false,

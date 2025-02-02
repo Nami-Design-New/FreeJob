@@ -27,7 +27,7 @@ function BlogDetails() {
     <>
       <section className="header_container ">
         <section className="container-md ">
-          <DetailsHeader links={t("routes.portfolios")} />
+          <DetailsHeader links={t("routes.blogs")} />
         </section>
       </section>
       <section className="blogDetails">
@@ -62,10 +62,7 @@ function BlogDetails() {
                     </Swiper>
                   )}
                 </div>
-                {/* <div className="date">
-                  <i className="fa-duotone fa-calendar-days"></i>
-                  {formattedDate(blog?.created_at)}
-                </div> */}
+
                 <p
                   className="description"
                   dangerouslySetInnerHTML={renderHTML(blog?.html)}

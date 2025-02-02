@@ -755,5 +755,7 @@
   "noNotifications": "There is no notifications to be shown",
   "searchIn": "Continue search in",
   "clients": "Clients",
-  "yourmessage": "Your Message"
+  "yourmessage": "Your Message",
+  "view": "view",
+  "like": "like"
 }
