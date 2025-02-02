@@ -38,7 +38,6 @@ export default function Services() {
         <section>
           <FilterSidebar isOpen={isOpen} setIsOpen={setIsOpen} />
         </section>
-
         <ServicesList filter={filter} />
       </section>
     </section>
