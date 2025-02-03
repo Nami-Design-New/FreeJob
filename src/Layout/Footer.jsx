@@ -119,7 +119,7 @@ export default function Footer() {
                       <li>
                         <a
                           target="_blank"
-                          href="https://play.google.com/store/apps/details?id=com.app.ynjez"
+                          href="https://play.google.com/store/apps/details?id=com.app.abday"
                         >
                           <div className="text">
                             <p>Google Play</p>

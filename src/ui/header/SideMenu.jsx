@@ -76,7 +76,7 @@ export default function SideMenu({ state, onClose }) {
             <Accordion>
               <Accordion.Item eventKey="0">
                 <Accordion.Header>
-                  <span>{t("navbar.ynjez")}</span>
+                  <span>{t("navbar.abday")}</span>
                 </Accordion.Header>
                 <Accordion.Body>
                   <ul onClick={handleCloseMenu}>
@@ -147,7 +147,7 @@ export default function SideMenu({ state, onClose }) {
             <Accordion>
               <Accordion.Item eventKey="0">
                 <Accordion.Header>
-                  <span>{t("navbar.ynjez")}</span>
+                  <span>{t("navbar.abday")}</span>
                 </Accordion.Header>
                 <Accordion.Body>
                   <ul>
