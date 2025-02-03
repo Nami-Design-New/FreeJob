@@ -815,6 +815,10 @@
     position: absolute;
     right: 0;
     color: var(--black-color);
+    &.ar {
+      right: auto;
+      left: 0;
+    }
   }
   input {
     border-left: 0 !important;

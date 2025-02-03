@@ -13,8 +13,8 @@ export async function getWorks(userId) {
 
 export async function getWork(workId) {
   try {
-    const req = await axiosInstance.post("/get_work", {
-      id: workId,
+    const req = await axiosInstance.post("/get_work_details", {
+      title: workId,
     });
     return req.data.data;
   } catch (error) {

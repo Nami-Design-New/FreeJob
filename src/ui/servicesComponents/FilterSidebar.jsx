@@ -44,8 +44,6 @@ const FilterSidebar = ({ isOpen, setIsOpen }) => {
   });
 
   useEffect(() => {
-    console.log(filters);
-
     const options = filters?.skills?.map((id) => {
       const skill = skills?.find((s) => s?.id === Number(id));
       return { value: id, label: skill?.name };

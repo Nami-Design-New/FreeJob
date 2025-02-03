@@ -71,7 +71,7 @@ export const router = createBrowserRouter([
       },
       { path: "/freelancers", element: <BestFreeLancers /> },
       { path: "/portfolios", element: <Portfolios /> },
-      { path: "/portfolios/:id", element: <PortfolioDetails /> },
+      { path: "/portfolios/:title", element: <PortfolioDetails /> },
       { path: "/contact", element: <Contact /> },
       { path: "/about/:id", element: <About /> },
       { path: "/about/preview/:id", element: <AboutPreview /> },

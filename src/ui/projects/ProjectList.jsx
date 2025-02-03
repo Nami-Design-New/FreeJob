@@ -13,7 +13,6 @@ export default function ProjectList() {
     <DataLoader />
   ) : (
     <>
-      {console.log(searchProjectsList)}
       {searchProjectsList && searchProjectsList?.data.length > 0 ? (
         <section className="row g-3">
           {searchProjectsList?.data.map((project) => (

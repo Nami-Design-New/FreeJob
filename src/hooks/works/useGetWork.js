@@ -3,12 +3,12 @@ import { getWork } from "../../services/apiWorks";
 import { useParams } from "react-router-dom";
 
 export function useGetWork() {
-  const { id } = useParams();
-  console.log(Number(id));
+  const { title } = useParams();
+  console.log(title);
 
   const { data, isLoading, error } = useQuery({
-    queryKey: ["work"],
-    queryFn: () => getWork(Number(id)),
+    queryKey: ["work", title],
+    queryFn: () => getWork(title),
     refetchOnWindowFocus: false,
     refetchOnMount: false,
     refetchOnReconnect: false,

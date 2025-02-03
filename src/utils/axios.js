@@ -1,5 +1,5 @@
 import axios from "axios";
-const lang = sessionStorage.getItem("lang") || "ar";
+const lang = localStorage.getItem("lang") || "ar";
 
 const axiosInstance = axios.create();
 axiosInstance.defaults.baseURL = "https://freejob.zeroonez.com/api";

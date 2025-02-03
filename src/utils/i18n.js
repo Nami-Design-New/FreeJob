@@ -14,7 +14,7 @@ const resources = {
   },
 };
 
-const lang = sessionStorage.getItem("lang") || "en";
+const lang = localStorage.getItem("lang") || "en";
 
 i18n
   .use(Backend)

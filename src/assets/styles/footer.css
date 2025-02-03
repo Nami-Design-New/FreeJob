@@ -94,8 +94,10 @@ footer {
         display: flex;
         justify-content: flex-start;
         margin-bottom: 32px;
+        width: 200px;
         img {
-          max-height: 64px;
+          /* max-height: 64px; */
+          max-width: 100%;
         }
       }
       p {

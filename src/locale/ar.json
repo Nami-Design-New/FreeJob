@@ -748,5 +748,7 @@
   "noNotifications": "لا يوجد إشعارات ليتم عرضها",
   "searchIn": "استمرار البحث في ...",
   "clients": "العملاء",
-  "yourmessage": "رسالتك"
+  "yourmessage": "رسالتك",
+  "view": "مشاهدة",
+  "like": "اعجاب"
 }
