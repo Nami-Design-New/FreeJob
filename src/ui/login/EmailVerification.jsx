@@ -1,34 +1,27 @@
-import { useEffect, useState } from "react";
-import OTPInput from "react-otp-input";
+import { useState } from "react";
+import { toast } from "react-toastify";
+import { useTranslation } from "react-i18next";
 import { useDispatch, useSelector } from "react-redux";
 import { setStep } from "../../redux/slices/authModalSlice";
-import FormButton from "../form/FormButton";
-import BackButton from "./BackButton";
-import { toast } from "react-toastify";
-import axiosInstance from "../../utils/axios";
-import { useTranslation } from "react-i18next";
-import { useNavigate } from "react-router-dom";
-import { setIsLogged, setUser } from "../../redux/slices/authedUserSlice";
 import { useCookies } from "react-cookie";
 import { FaChevronLeft } from "react-icons/fa";
+import { setIsLogged, setUser } from "../../redux/slices/authedUserSlice";
+import FormButton from "../form/FormButton";
+import OTPInput from "react-otp-input";
+import axiosInstance from "../../utils/axios";
 
 export default function EmailVerification({
   otpData,
   setOtpData,
   register,
-  setUserId,
   formData,
   setRegister,
   forgetPassformData,
-  setForgetPassformData,
 }) {
   const dispatch = useDispatch();
-  const navigate = useNavigate();
   const { t } = useTranslation();
-  const [timer, setTimer] = useState(30);
   const { previousStep } = useSelector((state) => state.authModal);
   const [isLoading, setIsLoading] = useState(false);
-  const [isDisabled, setIsDisabled] = useState(true);
   const [, setCookie] = useCookies(["token"]);
 
   const handleChange = (otp) => {
@@ -38,14 +31,11 @@ export default function EmailVerification({
     }));
   };
 
-  const handleResend = () => {
-    setTimer(30);
-    setIsDisabled(true);
-  };
   const headers = {
     Accept: "application/json",
     "Content-Type": "multipart/form-data",
   };
+
   const checkCodeRequest = {
     method: "POST",
     headers: headers,
@@ -60,10 +50,11 @@ export default function EmailVerification({
     headers: headers,
     data: {
       ...formData,
+      is_freelance: formData.is_freelance === "Seller" ? 1 : 0,
     },
     url: "/user/register",
   };
-  console.log(formData, otpData);
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsLoading(true);
@@ -114,11 +105,13 @@ export default function EmailVerification({
       setIsLoading(false);
     }
   };
+
   function handleBack() {
     if (previousStep !== null) {
       dispatch(setStep(previousStep));
     }
   }
+
   return (
     <div className="left_side pt-4">
       <button onClick={handleBack} className="back_button">
@@ -157,18 +150,12 @@ export default function EmailVerification({
             backgroundColor: "#E8FAF4",
             justifyContent: "center",
             width: "100%",
-            height: "50px",
+            height: "70px",
             borderRadius: "5px",
           }}
           renderInput={(props) => <input {...props} />}
         />
-        {/* <div className="d-flex justify-conetent-center align-items-center flex-column">
-          <p className="text-center"> {timer} sec</p>
-          <button className="forget_pass btn " onClick={() => handleResend()}>
-            code resent
-          </button>
-        </div> */}
-        <FormButton content={t("next")} type="submit" />
+        <FormButton content={t("next")} loading={isLoading} type="submit" />
       </form>
     </div>
   );

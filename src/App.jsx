@@ -22,6 +22,6 @@ function App() {
     dispatch(setIsLogged(isAuthed));
   }, [dispatch, isAuthed]);
 
-  return loading ? <DataLoader /> : <RouterProvider router={router} />;
+  return loading ? <DataLoader minHeight="100vh" /> : <RouterProvider router={router} />;
 }
 export default App;

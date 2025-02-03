@@ -845,3 +845,23 @@ a {
   display: block;
   padding: 8px 16px
 }
+
+.select__control {
+  box-shadow: none !important;
+  border-color: #eeeeee !important;
+  background-color: #f8f8f8 !important;
+  border-radius: 12px !important;
+  height: 54px;
+  &:hover {
+    background-color: white !important;
+  }
+}
+.css-13cymwt-control {
+  border-color: #eeeeee !important;
+}
+.select__indicator-separator {
+  display: none !important;
+}
+.select__menu {
+  z-index: 999999 !important;
+}

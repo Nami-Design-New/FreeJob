@@ -1,11 +1,8 @@
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { closeModal, setStep } from "../../redux/slices/authModalSlice";
+import { setStep } from "../../redux/slices/authModalSlice";
 import { toast } from "react-toastify";
-import { useNavigate } from "react-router";
 import { useDispatch } from "react-redux";
-import { useCookies } from "react-cookie";
-import { setIsLogged, setUser } from "../../redux/slices/authedUserSlice";
 import useGetSkills from "./../../hooks/settings/useGetSkills";
 import useCategoriesList from "../../hooks/categories/useCategoriesList";
 import FormButton from "../form/FormButton";
@@ -20,19 +17,16 @@ export default function RegistrationForm3({
   formData,
   setFormData,
   setOtpData,
-  register,
   setRegister,
 }) {
   const [selected, setSelected] = useState("Seller");
   const { t } = useTranslation();
-  const navigate = useNavigate();
   const { categories } = useCategoriesList();
   const { data: skills } = useGetSkills();
-  const [, setIsLoading] = useState("");
+  const [isLoading, setIsLoading] = useState("");
   const [options, setOptions] = useState([]);
   const [skillsSelectedOptisons, setSkillsSelectedOptions] = useState([]);
   const [selectedOptions, setSelectedOptions] = useState([]);
-  const [, setCookie] = useCookies(["token"]);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -178,7 +172,7 @@ export default function RegistrationForm3({
           />
         </div>
 
-        <FormButton content={t("complaints.submit")} type="submit" />
+        <FormButton content={t("complaints.submit")} loading={isLoading} type="submit" />
       </form>
     </div>
   );

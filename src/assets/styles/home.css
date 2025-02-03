@@ -49,6 +49,7 @@
     }
   }
 }
+
 .section_header {
   display: flex;
   flex-direction: column;
@@ -94,6 +95,8 @@
     padding: 1.5rem;
     border-radius: 1rem;
     color: var(--white-color);
+    display: flex;
+    align-items: center;
 
     ul {
       list-style-type: disc;

@@ -57,9 +57,11 @@
 
       .dropdown-menu {
         padding: 0;
+
         section {
           border-bottom: 1px solid var(--border-color);
           padding: 1rem;
+
           .dropdown-item {
             padding: 0.5rem;
             margin: 0;
@@ -128,21 +130,26 @@
       gap: 0.5rem;
       margin: 0 10px;
       align-items: center;
+
       .notifications {
         .dropdown-menu {
           overflow-y: auto !important;
           width: 350px;
+
           &::-webkit-scrollbar {
             width: 0;
             height: 0;
           }
+
           .dropdown-toggle {
             border: none;
           }
         }
+
         .scroll_menu {
           overflow-y: scroll;
           height: 252px;
+
           .dropdown-item {
             position: relative;
             padding: 10px;
@@ -155,24 +162,29 @@
               color: var(--gray-color);
               padding: 8px 1rem;
             }
+
             h6 {
               text-align: start !important;
               font-size: 14px;
               flex-grow: 1;
               margin: 0;
             }
+
             .time {
               white-space: nowrap;
               font-size: 12px;
             }
+
             .text-wrap {
               flex-grow: 1;
               display: flex;
               flex-direction: column;
               gap: 6px;
+
               p {
                 text-align: start;
               }
+
               .status {
                 align-items: center;
                 background-color: var(--main-color);
@@ -185,11 +197,13 @@
                 line-height: 20px;
                 position: relative;
                 width: 24px;
+
                 i {
                   color: var(--white-color);
                 }
               }
             }
+
             .image-wrapper {
               width: 42px;
               height: 42px;
@@ -199,15 +213,18 @@
               position: relative;
               align-items: center;
               justify-content: center;
+
               i {
                 font-size: 24px;
               }
+
               img {
                 width: 100%;
                 height: 100%;
                 object-fit: cover;
               }
             }
+
             &:not(:last-of-type) {
               &::after {
                 content: "";
@@ -221,14 +238,17 @@
             }
           }
         }
+
         .showall {
           font-size: 12px;
           padding: 10px;
           color: var(--gray-color);
         }
       }
+
       .btn {
         position: relative;
+
         .num-count {
           position: absolute;
           width: 18px;
@@ -263,12 +283,8 @@
 }
 
 .logo {
-  color: var(--color-black);
-  text-decoration: none;
-  font-size: 1.25rem;
-  width: 140px;
   img {
-    max-width: 100%;
+    height: 62px;
   }
 }
 
@@ -393,19 +409,24 @@ dialog {
       width: 100%;
       cursor: pointer;
       transition: var(--main-transition);
+
       &:hover a {
         color: var(--black-color);
       }
+
       .accordion {
         display: flex;
         flex-direction: column;
         gap: 8px;
       }
+
       .accordion-item {
         border: none;
       }
+
       .accordion-header {
         border: none;
+
         span {
           flex: 1 0;
           display: flex;
@@ -413,6 +434,7 @@ dialog {
           justify-content: flex-start;
         }
       }
+
       .accordion-button {
         padding: 8px 0;
         display: flex;
@@ -420,17 +442,21 @@ dialog {
         gap: 8px;
         background-color: transparent !important;
         box-shadow: none;
+
         &:focus {
           outline: none;
           box-shadow: none;
         }
+
         &:not(.collapsed) {
           color: var(--main-color);
         }
       }
+
       .accordion-body {
         border: none;
       }
+
       a {
         width: 100%;
         text-decoration: none;
@@ -448,17 +474,21 @@ dialog {
 .header_swiper {
   width: 100%;
   margin-top: 8px;
+
   .swiper {
     padding: 0 48px;
   }
+
   button {
     border: none;
     background-color: transparent;
     color: var(--gray-color);
+
     &:hover {
       color: var(--secondary-color);
     }
   }
+
   .swiper-button-next,
   .swiper-button-prev {
     background: var(--white-color);
@@ -498,4 +528,28 @@ dialog {
   margin-inline-start: 12px;
   border: 0 !important;
   box-shadow: none !important;
+}
+
+.accordion-button {
+  box-shadow: none !important;
+  background: transparent !important;
+  color: var(--gray-color) !important;
+  text-align: start;
+
+  &::after {
+    content: "\f00d";
+    font-family: "Font Awesome 6 Pro";
+    background: none !important;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    font-weight: 400;
+    transform: rotate(135deg);
+    transform-origin: center;
+  }
+
+  &:not(.collapsed)::after {
+    transform: rotate(0deg);
+  }
 }

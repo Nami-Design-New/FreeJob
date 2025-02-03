@@ -1,13 +1,12 @@
 import { useRef, useState } from "react";
 import { Link, NavLink } from "react-router";
+import { useSelector } from "react-redux";
+import { useTranslation } from "react-i18next";
+import { Accordion } from "react-bootstrap";
 import Button from "../Button";
 import LanguageToggle from "../LanguageToggle";
 import Logo from "./Logo";
-import { useSelector } from "react-redux";
-import { useTranslation } from "react-i18next";
 import useGetCommunitiesList from "../../hooks/useGetCommunitiesList";
-// import useGetAbout from "../../hooks/useGetAbout";
-import { Accordion } from "react-bootstrap";
 import useGetAbout from "../../hooks/about/useGetAbout";
 
 export default function SideMenu({ state, onClose }) {
@@ -15,22 +14,24 @@ export default function SideMenu({ state, onClose }) {
   const lang = useSelector((state) => state.language.lang);
   const { data: footerCategoriesList } = useGetAbout();
   const { data: communities } = useGetCommunitiesList();
-  const [isOpen, setIsOpen] = useState();
+  const [, setIsOpen] = useState();
   const { t } = useTranslation();
   const dialogRef = useRef(null);
   function handleCloseMenu() {
     onClose();
   }
+
   if (state) {
     dialogRef.current?.showModal();
   } else {
     dialogRef.current?.close();
   }
+
   return (
     <dialog
       ref={dialogRef}
       onClose={handleCloseMenu}
-      className={`side_menu   d-md-hidden  ${lang === "ar" ? "ar" : ""}    `}
+      className={`side_menu  d-md-hidden  ${lang === "ar" ? "ar" : ""}    `}
     >
       <header onClick={handleCloseMenu} className="py-3">
         <Logo />
