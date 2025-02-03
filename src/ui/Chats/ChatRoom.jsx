@@ -14,9 +14,11 @@ const ChatRoom = ({ chat }) => {
   const formRef = useRef(null);
   const chatContainerRef = useRef(null);
   const recordingIntervalRef = useRef(null);
+  const socketRef = useRef(null);
   const { t } = useTranslation();
   const { user } = useSelector((state) => state.authedUser);
   const [fileName, setFileName] = useState("");
+
   const [message, setMessage] = useState({
     from_id: user?.id,
     chat_id: chat?.id,
@@ -24,12 +26,55 @@ const ChatRoom = ({ chat }) => {
     type: "",
   });
 
+  // WebSocket initialization
+  useEffect(() => {
+    socketRef.current = new WebSocket(
+      "wss://api.abday.com.sa/app/nb9shwzjuyd3inhumkzz?protocol=7&client=js&version=8.4.0&flash=false"
+    );
+
+    socketRef.current.onopen = () => {
+      console.log("WebSocket connection established");
+      socketRef.current.send(
+        JSON.stringify({
+          event: "pusher:subscribe",
+          data: {
+            channel: `chat.${chat?.id}`,
+          },
+        })
+      );
+    };
+
+    socketRef.current.onmessage = (event) => {
+      const data = JSON.parse(event.data);
+      console.log("Received message:", data);
+      if (data?.chat_id) {
+        setMessages((prevMessages) => [...prevMessages, data]);
+      }
+    };
+
+    socketRef.current.onerror = (error) => {
+      console.error("WebSocket Error:", error);
+    };
+
+    socketRef.current.onclose = () => {
+      console.log("WebSocket connection closed");
+    };
+
+    return () => {
+      if (socketRef.current) {
+        socketRef.current.close();
+      }
+    };
+  }, [chat?.id]);
+
   useEffect(() => {
     if (chat) {
       setMessages(chat?.messages.slice() || []);
+      console.log(chat?.messages);
     }
   }, [chat]);
 
+  // Scroll to the bottom of the chat container when messages change
   useEffect(() => {
     if (chatContainerRef.current) {
       chatContainerRef.current.scrollTop =
@@ -37,6 +82,7 @@ const ChatRoom = ({ chat }) => {
     }
   }, [messages]);
 
+  // Clear recording interval on component unmount
   useEffect(() => {
     return () => {
       if (recordingIntervalRef.current) {
@@ -45,6 +91,7 @@ const ChatRoom = ({ chat }) => {
     };
   }, []);
 
+  // Send message
   const handleSendMessage = async (e) => {
     e.preventDefault();
 
@@ -53,20 +100,19 @@ const ChatRoom = ({ chat }) => {
     }
 
     setLoading(true);
-    setMessages((prevMessages) => {
-      return [
-        ...prevMessages,
-        {
-          ...message,
-          message:
-            message.type !== "text"
-              ? URL.createObjectURL(message.message)
-              : message.message,
-          id: Date.now(),
-          created_at: Date.now(),
-        },
-      ];
-    });
+
+    const newMessage = {
+      ...message,
+      id: Date.now(),
+      created_at: Date.now(),
+      message:
+        message.type !== "text"
+          ? URL.createObjectURL(message.message)
+          : message.message,
+    };
+
+    setMessages((prevMessages) => [...prevMessages, newMessage]);
+
     formRef.current.reset();
     setMessage({
       from_id: user?.id,
@@ -76,7 +122,25 @@ const ChatRoom = ({ chat }) => {
     });
 
     try {
-      await createMessage(message);
+      if (
+        socketRef.current &&
+        socketRef.current.readyState === WebSocket.OPEN
+      ) {
+        socketRef.current.send(
+          JSON.stringify({
+            event: "pusher:trigger",
+            data: {
+              channel: `chat.${chat?.id}`,
+              name: "new-message",
+              data: { newMessage },
+            },
+          })
+        );
+      } else {
+        console.log("WebSocket is not open");
+      }
+
+      await createMessage(newMessage);
     } catch (error) {
       console.error("Error sending message:", error);
     } finally {
@@ -85,6 +149,7 @@ const ChatRoom = ({ chat }) => {
     }
   };
 
+  // Start recording
   const startRecording = async () => {
     setIsRecording(true);
     setRecordingTime(0);
@@ -128,6 +193,7 @@ const ChatRoom = ({ chat }) => {
     }
   };
 
+  // Stop recording
   const stopRecording = () => {
     if (mediaRecorder && mediaRecorder.state !== "inactive") {
       mediaRecorder.stop();
@@ -135,23 +201,27 @@ const ChatRoom = ({ chat }) => {
     clearInterval(recordingIntervalRef.current);
   };
 
+  // Start recording timer
   const startRecordingTimer = () => {
     recordingIntervalRef.current = setInterval(() => {
       setRecordingTime((prevTime) => prevTime + 1);
     }, 1000);
   };
 
+  // Format recording time
   const formatRecordingTime = (time) => {
     const minutes = Math.floor(time / 60);
     const seconds = time % 60;
     return `${minutes}:${seconds < 10 ? `0${seconds}` : seconds}`;
   };
 
+  // Extract file name from URL
   const extractTextAfterMessages = (url) => {
     const regex = /_messages\.(.*)/;
     const match = url.match(regex);
     return match ? match[1] : fileName;
   };
+
   return (
     <div className="chat-container">
       <div className="chat-head">
