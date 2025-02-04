@@ -94,17 +94,14 @@ const ChatRoom = ({ chat }) => {
   // Send message
   const handleSendMessage = async (e) => {
     e.preventDefault();
+    setLoading(true);
 
     if (message?.type === "") {
       return;
     }
 
-    setLoading(true);
-
     const newMessage = {
       ...message,
-      id: Date.now(),
-      created_at: Date.now(),
       message:
         message.type !== "text"
           ? URL.createObjectURL(message.message)
@@ -126,16 +123,20 @@ const ChatRoom = ({ chat }) => {
         socketRef.current &&
         socketRef.current.readyState === WebSocket.OPEN
       ) {
+        const eventData = {
+          channel: `chat.${chat?.id}`,
+          name: "new-message",
+          data: "test",
+        };
+
         socketRef.current.send(
           JSON.stringify({
             event: "pusher:trigger",
-            data: {
-              channel: `chat.${chat?.id}`,
-              name: "new-message",
-              data: { newMessage },
-            },
+            data: JSON.stringify(eventData),
           })
         );
+
+        console.log("Message sent:", JSON.stringify(newMessage));
       } else {
         console.log("WebSocket is not open");
       }
