@@ -111,6 +111,7 @@ const ChatRoom = ({ chat }) => {
     setMessages((prevMessages) => [...prevMessages, newMessage]);
 
     formRef.current.reset();
+
     setMessage({
       from_id: user?.id,
       chat_id: chat?.id,
@@ -123,20 +124,14 @@ const ChatRoom = ({ chat }) => {
         socketRef.current &&
         socketRef.current.readyState === WebSocket.OPEN
       ) {
-        const eventData = {
-          channel: `chat.${chat?.id}`,
-          name: "new-message",
-          data: "test",
-        };
-
         socketRef.current.send(
           JSON.stringify({
-            event: "pusher:trigger",
-            data: JSON.stringify(eventData),
+            event: "pusher:subscribe",
+            data: {
+              channel: `chat.${chat?.id}`,
+            },
           })
         );
-
-        console.log("Message sent:", JSON.stringify(newMessage));
       } else {
         console.log("WebSocket is not open");
       }
