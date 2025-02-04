@@ -21,7 +21,7 @@ export default function ServiceCard({ service, canEdit, handleDelete }) {
           <section>
             <section className="service_info">
               <h3>{service.title}</h3>
-              <p>{service.category.name} </p>
+              <p>{service?.category?.name} </p>
             </section>
             <section className="rating">
               <StarsRate rate={service.rate} /> ({service.rate})
