@@ -26,46 +26,60 @@ const ChatRoom = ({ chat }) => {
     type: "",
   });
 
+  const channel = chat?.id ? `chat_${chat?.id}` : null;
+
   // WebSocket initialization
   useEffect(() => {
-    socketRef.current = new WebSocket(
-      "wss://api.abday.com.sa/app/nb9shwzjuyd3inhumkzz?protocol=7&client=js&version=8.4.0&flash=false"
-    );
-
-    socketRef.current.onopen = () => {
-      console.log("WebSocket connection established");
-      socketRef.current.send(
-        JSON.stringify({
-          event: "pusher:subscribe",
-          data: {
-            channel: `chat.${chat?.id}`,
-          },
-        })
-      );
-    };
-
-    socketRef.current.onmessage = (event) => {
-      const data = JSON.parse(event.data);
-      console.log("Received message:", data);
-      if (data?.chat_id) {
-        setMessages((prevMessages) => [...prevMessages, data]);
+    const initializeWebSocket = () => {
+      if (socketRef.current) {
+        socketRef.current.close();
       }
+
+      socketRef.current = new WebSocket(
+        "wss://api.abday.com.sa/app/nb9shwzjuyd3inhumkzz?protocol=7&client=js&version=8.4.0&flash=false"
+      );
+
+      socketRef.current.onopen = () => {
+        console.log("WebSocket connection established");
+
+        if (chat?.id) {
+          socketRef.current.send(
+            JSON.stringify({
+              event: "pusher:subscribe",
+              data: { channel: channel },
+            })
+          );
+        }
+      };
+
+      socketRef.current.onmessage = (event) => {
+        const data = JSON.parse(event.data);
+        const messageData = JSON.parse(data.data);
+
+        console.log("Received message:", messageData);
+
+        if (messageData?.message?.chat_id) {
+          setMessages((prevMessages) => [...prevMessages, messageData.message]);
+        }
+      };
+
+      socketRef.current.onerror = (error) => {
+        console.error("WebSocket Error:", error);
+      };
+
+      socketRef.current.onclose = () => {
+        console.log("WebSocket connection closed");
+      };
     };
 
-    socketRef.current.onerror = (error) => {
-      console.error("WebSocket Error:", error);
-    };
-
-    socketRef.current.onclose = () => {
-      console.log("WebSocket connection closed");
-    };
+    initializeWebSocket();
 
     return () => {
       if (socketRef.current) {
         socketRef.current.close();
       }
     };
-  }, [chat?.id]);
+  }, [channel, chat?.id]);
 
   useEffect(() => {
     if (chat) {
@@ -108,8 +122,6 @@ const ChatRoom = ({ chat }) => {
           : message.message,
     };
 
-    setMessages((prevMessages) => [...prevMessages, newMessage]);
-
     formRef.current.reset();
 
     setMessage({
@@ -127,9 +139,7 @@ const ChatRoom = ({ chat }) => {
         socketRef.current.send(
           JSON.stringify({
             event: "pusher:subscribe",
-            data: {
-              channel: `chat.${chat?.id}`,
-            },
+            data: { channel: channel },
           })
         );
       } else {
