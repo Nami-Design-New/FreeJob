@@ -1,5 +1,5 @@
 import axios from "axios";
-const lang = localStorage.getItem("lang") || "en";
+const lang = localStorage.getItem("lang") || "ar";
 
 const axiosInstance = axios.create();
 axiosInstance.defaults.baseURL = "https://api.abday.com.sa/api";
