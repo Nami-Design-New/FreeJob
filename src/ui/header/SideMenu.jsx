@@ -45,11 +45,16 @@ export default function SideMenu({ state, onClose, menuButtonRef }) {
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [state, menuButtonRef]);
-
+  const handleBackdropClick = (event) => {
+    if (event.target === dialogRef.current) {
+      handleCloseMenu();
+    }
+  };
   return (
     <dialog
       ref={dialogRef}
       onClose={handleCloseMenu}
+      onClick={handleBackdropClick}
       className={`side_menu d-md-hidden ${lang === "ar" ? "ar" : ""}`}
     >
       <header onClick={handleCloseMenu} className="py-3">
