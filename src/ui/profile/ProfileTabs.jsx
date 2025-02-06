@@ -49,7 +49,7 @@ function ProfileTabs({ user, isMyAccount }) {
   };
   return (
     <>
-      <div className="_item">
+      <div className="_item profile_sections">
         <div className="user_about">
           <>
             <div className="about_title">
@@ -62,7 +62,7 @@ function ProfileTabs({ user, isMyAccount }) {
               )}
             </div>{" "}
             {user?.about ? (
-              <p>{user?.about}</p>
+              <p className="m-0">{user?.about}</p>
             ) : (
               <p className="fs-4">{t("profile.noAbout")}</p>
             )}
@@ -78,13 +78,13 @@ function ProfileTabs({ user, isMyAccount }) {
         {/* services */}
         <div className="services-container">
           <>
-            <ShowAll sectionName={t("profile.services")} show={true} />
+            <h6>{t("profile.services")}</h6>
 
             <Swiper
               slidesPerView={4}
               speed={1000}
               spaceBetween={20}
-              className="mainSliderContainer"
+              className="mainSliderContainer pt-2"
               breakpoints={{
                 0: {
                   slidesPerView: 1,
@@ -141,14 +141,15 @@ function ProfileTabs({ user, isMyAccount }) {
             </Swiper>
           </>
         </div>
+
         {/* my works */}
         <div className="tab_item">
           <WorksTap works={works} isMyAccount={isMyAccount} />
         </div>
+
         {/* projects */}
         <div className="services-container">
-          {" "}
-          <ShowAll show={true} sectionName={t("profile.projects")} />
+          <h6>{t("profile.projects")}</h6>
           {isMyAccount && (
             <Link to="/add-project" className="add-project">
               <img src={"/images/plus.png"} alt="add service" />

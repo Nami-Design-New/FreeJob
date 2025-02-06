@@ -6,10 +6,8 @@ import { toast } from "react-toastify";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { deleteWork } from "../../services/apiWorks";
 import WorkCard from "../cards/worksCard";
-import ShowAll from "../ShowAll";
 import AddWorkModal from "./AddWorkModal";
 import ConfirmationModal from "./ConfirmationModal";
-import WorkViewModal from "./WorkViewModal";
 
 export default function WorksTap({ works, isMyAccount }) {
   const { t } = useTranslation();
@@ -51,13 +49,12 @@ export default function WorksTap({ works, isMyAccount }) {
     <>
       <div className="services-container">
         <>
-          {" "}
-          <ShowAll show={true} sectionName={t("profile.myWorks")} />{" "}
+          <h6>{t("profile.myWorks")}</h6>
           <Swiper
             slidesPerView={4}
             speed={1000}
             spaceBetween={20}
-            className="mainSliderContainer"
+            className="mainSliderContainer pt-2"
             breakpoints={{
               0: {
                 slidesPerView: 1,

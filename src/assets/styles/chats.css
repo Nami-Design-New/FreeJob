@@ -45,9 +45,10 @@
     height: 100%;
     max-height: 636px;
     overflow-y: scroll;
+    scrollbar-width: 0;
 
     &::-webkit-scrollbar {
-      width: 0;
+      display: none;
     }
 
     @media (max-width: 768px) {

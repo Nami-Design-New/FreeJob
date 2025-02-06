@@ -1,6 +1,8 @@
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router";
+import { FaEdit } from "react-icons/fa";
 import { formatMoney } from "../../utils/helper";
+import StarsRate from "../StartRate";
 const UserProfileCard = ({ user, isMyAccount }) => {
   console.log(user);
   const { t } = useTranslation();
@@ -10,12 +12,8 @@ const UserProfileCard = ({ user, isMyAccount }) => {
   }
 
   return (
-    <div
-      className="   
-        profile-descripe
-        d-flex flex-lg-row flex-column align-items-start justify-content-center "
-    >
-      <div className="cash profile-country-box mt-3">
+    <div className="profile-descripe mb-5">
+      <div className="cash profile-country-box">
         <ul className="verify-list">
           <li className="d-flex gap-2">
             {user?.verified === 1 ? <span>✔</span> : <span>✘</span>}
@@ -30,6 +28,7 @@ const UserProfileCard = ({ user, isMyAccount }) => {
             {t("profile.emailAddress")}
           </li>
         </ul>
+
         <div className="country-wrapper ">
           {isMyAccount && (
             <>
@@ -59,83 +58,76 @@ const UserProfileCard = ({ user, isMyAccount }) => {
         </div>
       </div>
 
-      {/* {user?.skills && user?.skills?.length > 0 && (
-          <div className="cash profile-skills-box mt-3">
-            <div className="row">
-              <div className="col-12 p-2">
-                <div className="head">
-                  <h4>{t("profile.skills")}</h4>
-                </div>
-              </div>
-              <div className="profile-skills p-2 d-flex flex-wrap gap-2">
-                {user?.skills?.map(
-                  (skill) =>
-                    skill?.name && (
-                      <div className="cash-info" key={skill.id}>
-                        <h6>{skill.name}</h6>
-                      </div>
-                    )
-                )}
-              </div>
-            </div>
-          </div>
-        )} */}
-
-      <div className="cash mt-3">
-        <div className="row gx-1">
-          <h4>{t("profile.balance")}</h4>
+      <div className="userData">
+        <div className="user-avatar">
+          <img src={user?.image} alt="user-avatar" />
           {isMyAccount && (
-            <div className="col-4 ">
+            <Link to={"/edit-profile"} className="status">
+              <FaEdit />
+            </Link>
+          )}
+        </div>
+        <div className="name-rate">
+          <h6 className="mb-2">{t(user?.name)}</h6>
+          <StarsRate rate={user?.rate || 0} />
+        </div>
+      </div>
+
+      <div className="cash">
+        <div className="d-flex gap-2">
+          {isMyAccount ? (
+            <>
               <div className="head">
                 <Link to="/balance">{t("profile.withdraw")}</Link>{" "}
                 <Link to="/balance">{t("profile.deposit")}</Link>
               </div>
+
+              <div className="cash-info" style={{ backgroundColor: "#003912" }}>
+                <h6>{formatMoney(user?.total_balance)} </h6>
+                <span className="d-flex align-items-center ">
+                  {t("balance.totalBalance")}
+                </span>
+              </div>
+
+              <div className="cash-info" style={{ backgroundColor: "#9B0D0D" }}>
+                <h6>{formatMoney(user?.pending_balance)}</h6>
+                <span className="d-flex align-items-center ">
+                  {t("balance.pendingBalance")}
+                </span>
+              </div>
+
+              <div className="cash-info" style={{ backgroundColor: "#014169" }}>
+                <h6>{formatMoney(user?.available_balance)} </h6>
+                <span className="d-flex align-items-center ">
+                  {t("balance.availableBalance")}
+                </span>
+              </div>
+
+              <div className="cash-info" style={{ backgroundColor: "#E8C201" }}>
+                <h6>{formatMoney(user?.wallet)} </h6>
+                <span className="d-flex align-items-center ">
+                  {t("balance.wallet")}
+                </span>
+              </div>
+            </>
+          ) : (
+            <div className="statistics">
+              <h4>الاحصائيات</h4>
+
+              <div className="s_card">
+                <h3>
+                  40 <br />
+                  خدمة
+                </h3>
+              </div>
+              <div className="s_card">
+                <img src="/images/round1.png" alt="" />
+                <h3>
+                  30 <br /> عميل
+                </h3>
+              </div>
             </div>
           )}
-          <div className="col-2   ">
-            <div className="cash-info" style={{ backgroundColor: "#003912" }}>
-              <h6>
-                {formatMoney(user?.total_balance)}{" "}
-                {/* <i className="fa-solid fa-dollar-sign"></i> */}
-              </h6>
-              <span className="d-flex align-items-center ">
-                {t("balance.totalBalance")}
-              </span>
-            </div>
-          </div>
-          <div className="col-2 ">
-            <div className="cash-info" style={{ backgroundColor: "#9B0D0D" }}>
-              <h6>
-                {formatMoney(user?.pending_balance)}{" "}
-                {/* <i className="fa-solid fa-dollar-sign"></i> */}
-              </h6>
-              <span className="d-flex align-items-center ">
-                {t("balance.pendingBalance")}
-              </span>
-            </div>
-          </div>
-          <div className="col-2 ">
-            <div className="cash-info" style={{ backgroundColor: "#014169" }}>
-              <h6>
-                {formatMoney(user?.available_balance)}{" "}
-                {/* <i className="fa-solid fa-dollar-sign"></i> */}
-              </h6>
-              <span className="d-flex align-items-center ">
-                {t("balance.availableBalance")}
-              </span>
-            </div>
-          </div>
-          <div className="col-2">
-            <div className="cash-info" style={{ backgroundColor: "#E8C201" }}>
-              <h6>
-                {formatMoney(user?.wallet)}{" "}
-                {/* <i className="fa-solid fa-dollar-sign"></i> */}
-              </h6>
-              <span className="d-flex align-items-center ">
-                {t("balance.wallet")}
-              </span>
-            </div>
-          </div>
         </div>
       </div>
     </div>

@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Link, useParams } from "react-router";
+import { useParams } from "react-router";
 import { Container, Row } from "react-bootstrap";
 import { useSelector } from "react-redux";
 import UserProfileCard from "../ui/profile/UserProfileCard";
@@ -8,16 +8,12 @@ import EmptyData from "../ui/EmptyData";
 import DataLoader from "../ui/DataLoader";
 import ProfileTabs from "./../ui/profile/ProfileTabs";
 import useGetProfile from "../hooks/settings/useGeProfile";
-import { FaEdit } from "react-icons/fa";
-import StarsRate from "../ui/StartRate";
-import { useTranslation } from "react-i18next";
 
 const Profile = () => {
   const authedUser = useSelector((state) => state.authedUser.user);
   const [user, setUser] = useState({});
   const { id } = useParams();
   const { data: profile, isLoading } = useGetProfile(id);
-  const { t } = useTranslation();
 
   const isMyAccount = !id || id === String(authedUser?.id);
 
@@ -47,24 +43,8 @@ const Profile = () => {
 
   return (
     <div>
-      {" "}
-      <div className="banner">
-        {" "}
-        <div className="userData">
-          <div className="user-avatar">
-            <img src={user?.image} alt="user-avatar" />
-
-            <Link to={"/edit-profile"} className="status">
-              <FaEdit />
-            </Link>
-          </div>
-          <div className="name-rate">
-            <h6 className="mb-2">{t(user?.name)}</h6>
-            <StarsRate rate={user?.rate || 0} />
-          </div>
-        </div>
-      </div>
-      <Container className="profile-page my-5">
+      <div className="banner"></div>
+      <Container className="profile-page">
         <Row className="justify-content-center">
           <UserProfileCard isMyAccount={isMyAccount} user={user} />
           <ProfileTabs user={user} isMyAccount={isMyAccount} />

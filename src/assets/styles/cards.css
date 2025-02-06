@@ -73,7 +73,7 @@
   border-radius: 1rem;
   box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
   background-color: var(--service-card-bg);
-  height: auto;
+  height: 100%;
   overflow: hidden;
   .section_card_title {
     font-size: 1rem;
