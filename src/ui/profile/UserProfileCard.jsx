@@ -112,18 +112,18 @@ const UserProfileCard = ({ user, isMyAccount }) => {
             </>
           ) : (
             <div className="statistics">
-              <h4>الاحصائيات</h4>
+              <h4>{t("statistics")}</h4>
 
               <div className="s_card">
                 <h3>
                   40 <br />
-                  خدمة
+                  {t("service")}
                 </h3>
               </div>
               <div className="s_card">
                 <img src="/images/round1.png" alt="" />
                 <h3>
-                  30 <br /> عميل
+                  30 <br /> {t("client")}
                 </h3>
               </div>
             </div>

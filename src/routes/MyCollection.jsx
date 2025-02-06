@@ -19,13 +19,13 @@ import DetailsHeader from "../ui/servicesComponents/serviceDetails/DetailsHeader
 const MyCollection = () => {
   const { t } = useTranslation();
   const { id } = useParams();
-  console.log(Number(id));
   const navigate = useNavigate();
   const { data: collection, isLoading } = useGetCollection();
   const [showModal, setShowModal] = useState(false);
   const [showEditModal, setShowEditModal] = useState(false);
   const [loading, setLoading] = useState(false);
   const queryClient = useQueryClient();
+
   const deleteCollection = async () => {
     setLoading(true);
     try {
@@ -77,8 +77,8 @@ const MyCollection = () => {
       <section className="myCollections">
         <div className="container">
           <div className="row g-3">
-            {collection?.data && collection?.data?.length > 0
-              ? collection?.data?.map((service) => (
+            {collection?.data && collection?.data?.services?.length > 0
+              ? collection?.data?.services?.map((service) => (
                   <section
                     className="col-lg-4 col-md-6 col-12 p2"
                     key={service?.id}
@@ -98,10 +98,11 @@ const MyCollection = () => {
         eventFun={deleteCollection}
         loading={loading}
       />
+
       <EditCollectionModal
         setShowModal={setShowEditModal}
         showModal={showEditModal}
-        collection={collection}
+        collection={collection?.data}
       />
     </>
   );

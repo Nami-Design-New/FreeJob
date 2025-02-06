@@ -19,6 +19,9 @@ const EditCollectionModal = ({ showModal, setShowModal, collection }) => {
   });
 
   useEffect(() => {
+
+    console.log(collection);
+    
     setFormData({
       id: collection?.id,
       title: collection?.title,

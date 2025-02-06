@@ -143,7 +143,7 @@ export default function Header() {
             </li>
           </ul>
         )}{" "}
-        <div className="d-flex align-items-center gap-2 justify-content-end flex-grow-1 ">
+        <div className="d-flex align-items-center gap-2 justify-content-end">
           {isLogin ? (
             <section className="button-group d-flex align-items-center gap-2 d-none  d-sm-flex ">
               <Button

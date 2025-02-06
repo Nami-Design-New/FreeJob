@@ -757,5 +757,9 @@
   "received":"تم تسليمه",
   "ready": "جاهز للمراجعة",
   "progress": "جاري التحضير",
-  "new": "جديد"
+  "new": "جديد",
+  "statistics": "الاحصائيات",
+  "service": "خدمة",
+  "client": "عميل",
+  "writeCommentHere": "اكتب تعليقك هنا......."
 }

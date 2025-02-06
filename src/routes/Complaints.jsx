@@ -134,7 +134,7 @@ const Complaints = () => {
           </div>
 
           <div className="mb-3">
-            <label className="form-label mb-3">{t("Message")}</label>
+            <label className="form-label mb-3">{t("complaints.message")}</label>
             <FormTextArea
               rows={5}
               label={t("complaints.message")}

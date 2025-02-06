@@ -675,7 +675,6 @@
     "addAccount": "Add Account",
     "editAccount": "Edit Account",
     "userName": "Name",
-
     "iban": "IBAN Code",
     "balance": "Balance",
     "bankName": "Bank Name",
@@ -760,8 +759,12 @@
   "view": "view",
   "like": "like",
   "canceled": "Canceled",
-  "received":"Received",
+  "received": "Received",
   "ready": "Ready for Review",
   "progress": "In Progress",
-  "new": "New"
+  "new": "New",
+  "statistics": "Statistics",
+  "service": "Service",
+  "client": "Client",
+  "writeCommentHere": "Write comment here.........."
 }

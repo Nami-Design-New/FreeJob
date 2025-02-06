@@ -114,30 +114,27 @@ function CommunitySubjectDetails() {
                   </div>
                   <div className="row g-3">
                     <div className="col-md-6">
-                      <div className="login-section">
+                      <div className="login-section community_comment ">
                         <form onSubmit={handleSubmit}>
                           <div className="row">
-                            <div>
-                              <div>
-                                <label className="mb-3">
-                                  {t("communities.commentBody")}
-                                </label>
-                                <FormTextArea
-                                  name="comment"
-                                  onChange={(e) => setComment(e.target.value)}
-                                  value={comment}
-                                  placeholder={t("writeHere")}
-                                  required={true}
-                                  rows={4}
-                                />
-                              </div>
+                            <div className="col-12 p-2">
+                              <FormTextArea
+                                name="comment"
+                                onChange={(e) => setComment(e.target.value)}
+                                value={comment}
+                                placeholder={t("writeCommentHere")}
+                                required={true}
+                                rows={4}
+                              />
                             </div>
 
-                            <SubmitButton
-                              name={t("communities.add")}
-                              loading={loading}
-                              className={" submit-btn col-12 "}
-                            />
+                            <div className="col-12 p-2">
+                              <SubmitButton
+                                name={t("communities.add")}
+                                loading={loading}
+                                className={" submit-btn mt-0 me-auto"}
+                              />
+                            </div>
                           </div>
                         </form>
                       </div>

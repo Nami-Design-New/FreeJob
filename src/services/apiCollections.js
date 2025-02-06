@@ -11,7 +11,7 @@ export async function getCollections() {
 
 export async function getCollection(id) {
   try {
-    const req = await axiosInstance.post("user/get_collection_details", {
+    const req = await axiosInstance.post("user/get_collection_details_with_services", {
       id,
     });
 

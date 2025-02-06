@@ -2,13 +2,12 @@ import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useSelector } from "react-redux";
 import { Link, useSearchParams } from "react-router-dom";
-import useGetWalletOperations from "../../hooks/accounts/useGetWalletOperations";
 import { TRANSACTIONS_STATUS } from "../../utils/contants";
 import { formatMoney, formattedDate } from "../../utils/helper";
 import DataLoader from "../DataLoader";
 import EmptyData from "../EmptyData";
-import PaginationComponent from "../PaginationComponent";
 import CustomPagination from "../CustomPagination";
+import useGetWalletOperations from "../../hooks/accounts/useGetWalletOperations";
 
 export default function Transactions({
   setShowChargeModel,
@@ -194,7 +193,7 @@ export default function Transactions({
                       transaction?.service_order_id || transaction?.project_id
                         ? transaction?.service_order_id
                           ? `/recieved-orders/${transaction?.service_order_id}`
-                          : `/projects-orders/${transaction?.project_id}`
+                          : `/projects-orders/${transaction?.project?.title}`
                         : ""
                     }`}
                     className="transaction-box"
