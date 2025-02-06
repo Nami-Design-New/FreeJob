@@ -114,14 +114,6 @@ const ChatRoom = ({ chat }) => {
       return;
     }
 
-    const newMessage = {
-      ...message,
-      message:
-        message.type !== "text"
-          ? URL.createObjectURL(message.message)
-          : message.message,
-    };
-
     formRef.current.reset();
 
     setMessage({
@@ -146,7 +138,7 @@ const ChatRoom = ({ chat }) => {
         console.log("WebSocket is not open");
       }
 
-      await createMessage(newMessage);
+      await createMessage(message);
     } catch (error) {
       console.error("Error sending message:", error);
     } finally {
