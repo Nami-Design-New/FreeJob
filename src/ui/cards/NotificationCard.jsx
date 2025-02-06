@@ -5,7 +5,7 @@ import { calculateDate } from "../../utils/helper";
 export default function NotificationCard({ notification }) {
   return (
     <Card
-      className="my-3 border-0 bg-light shadow-sm"
+      className=" border-0 bg-light shadow-sm"
       style={{
         height: "fit-content",
         border: "1px solid #ddd",

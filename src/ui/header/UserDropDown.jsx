@@ -39,6 +39,7 @@ export default function UserDropDown() {
   const queryClient = useQueryClient();
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const [showDropdown, setShowDropdown] = useState(false);
 
   function handleShowDeleteAccountModal() {
     setIsDeleteAccountModalOpen(true);
@@ -64,6 +65,7 @@ export default function UserDropDown() {
       throw new Error(error.message);
     }
   };
+
   const handleDeleteAccount = async () => {
     try {
       setDeleteLoading(true);
@@ -86,14 +88,20 @@ export default function UserDropDown() {
       setIsDeleteAccountModalOpen(false);
     }
   };
+
   return (
     <>
-      <Dropdown className="actions">
+      <Dropdown
+        className="actions"
+        show={showDropdown}
+        onMouseEnter={() => setShowDropdown(true)}
+        onMouseLeave={() => setShowDropdown(false)}
+      >
         <Dropdown.Toggle as="button" className="user_btn">
           <img src={user.image} alt={`${user.name} 's Avatar`} />
         </Dropdown.Toggle>
 
-        <Dropdown.Menu >
+        <Dropdown.Menu>
           <section>
             <Dropdown.Item as={"p"}>
               <Link to="/profile">
@@ -134,7 +142,6 @@ export default function UserDropDown() {
               </Link>
             </Dropdown.Item>
             <Dropdown.Item as={"p"}>
-              {" "}
               <Link to="/notifications">
                 <BsBell /> {t("navbar.allNotifications")}
               </Link>
@@ -145,7 +152,6 @@ export default function UserDropDown() {
               </Link>
             </Dropdown.Item>
             <Dropdown.Item as={"p"}>
-              {" "}
               <Link to="/cart">
                 <BsCart /> {t("navbar.cart")}
               </Link>

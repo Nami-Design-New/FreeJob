@@ -16,18 +16,19 @@ export default function NotificationPage() {
         </section>
       </section>
       <div className="container notifications-list my-5">
-        {isLoading ? (
-          <DataLoader />
-        ) : notifications && notifications.length > 0 ? (
-          notifications.map((notification) => (
-            <NotificationCard
-              key={notification.id}
-              notification={notification}
-            />
-          ))
-        ) : (
-          <EmptyData>{t("noNotifications")}</EmptyData>
-        )}
+        <div className="row">
+          {isLoading ? (
+            <DataLoader />
+          ) : notifications && notifications.length > 0 ? (
+            notifications.map((notification) => (
+              <div className="col-lg-6 col-12 p-2" key={notification.id}>
+                <NotificationCard notification={notification} />
+              </div>
+            ))
+          ) : (
+            <EmptyData>{t("noNotifications")}</EmptyData>
+          )}
+        </div>
       </div>
     </section>
   );

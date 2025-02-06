@@ -99,11 +99,9 @@
       text-decoration: none;
       margin: 0;
       padding: 0 3rem;
-      gap: 2rem;
+      gap: 1rem;
 
       li {
-        padding: 10px 0;
-
         &:last-child {
           button {
             white-space: nowrap;
@@ -111,16 +109,20 @@
         }
 
         a {
+          padding: 10px 16px;
           color: var(--gray-color);
           text-decoration: none;
+          border-radius: 8px;
           white-space: nowrap;
+          background: #f8f9fa;
 
           &.active {
-            color: var(--color-black);
+            background: var(--main-color);
+            color: var(--white-color);
           }
 
-          &:hover {
-            color: var(--gray-color);
+          &:hover:not(.active) {
+            background: #d3d4d5;
           }
         }
       }
