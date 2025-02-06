@@ -1,11 +1,10 @@
-import React, { useState } from "react";
-import FormInput from "../form/FormInput";
+import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { setStep } from "../../redux/slices/authModalSlice";
-import FormButton from "../form/FormButton";
-import { PhoneInput } from "react-international-phone";
 import { useTranslation } from "react-i18next";
 import { toast } from "react-toastify";
+import FormInput from "../form/FormInput";
+import FormButton from "../form/FormButton";
 import axiosInstance from "../../utils/axios";
 import BackButton from "./BackButton";
 
@@ -80,7 +79,7 @@ export default function UserNameEntry({
         >
           {t("auth.alreadyRegistered")}
         </button>{" "}
-        <FormButton content={t("next")} type="submit" disabled={isLoading} />
+        <FormButton content={t("next")} type="submit" loading={isLoading} />
       </form>
     </div>
   );

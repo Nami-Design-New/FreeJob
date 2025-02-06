@@ -18,7 +18,7 @@ const AppleSigninButton = ({ t, handleAppleAuth }) => (
     iconProp={{ style: { marginTop: "10px" } }}
     render={(props) => (
       <button {...props} className="">
-        <img src={"/icons/Apple.svg"} alt="apple" />
+        <img src={"/images/Apple.svg"} alt="apple" />
         <span>{t("auth.appleAccount")}</span>
       </button>
     )}

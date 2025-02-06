@@ -2,7 +2,7 @@ import { useState } from "react";
 import { toast } from "react-toastify";
 import { useTranslation } from "react-i18next";
 import { useDispatch, useSelector } from "react-redux";
-import { setStep } from "../../redux/slices/authModalSlice";
+import { closeModal, setStep } from "../../redux/slices/authModalSlice";
 import { useCookies } from "react-cookie";
 import { FaChevronLeft } from "react-icons/fa";
 import { setIsLogged, setUser } from "../../redux/slices/authedUserSlice";
@@ -70,7 +70,6 @@ export default function EmailVerification({
               password: formData.password,
             });
             if (login.data.code === 200) {
-              toast.success(t("auth.loginSuccess"));
               dispatch(setUser(login.data.data));
               dispatch(setIsLogged(true));
               setCookie("token", login.data.data.token, {
@@ -89,6 +88,8 @@ export default function EmailVerification({
             } else {
               toast.error(t("auth.emailOrPasswordWrong"));
             }
+
+            dispatch(closeModal());
           } else {
             toast.error(response.data.message);
           }

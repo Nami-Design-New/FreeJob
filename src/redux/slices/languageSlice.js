@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-const initialLang = localStorage.getItem("lang") || "en";
+const initialLang = localStorage.getItem("lang") || "ar";
 
 export const language = createSlice({
   name: "language",

@@ -281,7 +281,7 @@ export default function AddProject() {
                               src={
                                 file?.type?.startsWith("image/")
                                   ? URL.createObjectURL(file)
-                                  : "./icons/doc.svg"
+                                  : "./images/doc.svg"
                               }
                               alt="icon"
                             />

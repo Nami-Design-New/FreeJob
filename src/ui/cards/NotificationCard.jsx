@@ -15,7 +15,7 @@ export default function NotificationCard({ notification }) {
         <div className="d-flex gap-3">
           <div className="notification me-3">
             <img
-              src="/images/bell.png"
+              src={notification?.image}
               alt="Notification Icon"
               className="notification-icon "
             />
@@ -29,7 +29,7 @@ export default function NotificationCard({ notification }) {
         </div>
         <small className="notification-time ">
           <img
-            src="./icons/simple-line-icons_calender.svg"
+            src="./images/simple-line-icons_calender.svg"
             alt="Clock Icon"
             className="me-1"
             style={{ width: "16px", height: "16px" }}

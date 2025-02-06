@@ -1,12 +1,12 @@
+import { useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
-import "swiper/css";
+import { useTranslation } from "react-i18next";
 import SectionCard from "../cards/SectionCard";
 import ShowAll from "../ShowAll";
-import { useTranslation } from "react-i18next";
-import useCategoriesList from "../../hooks/categories/useCategoriesList";
 import DataLoader from "../DataLoader";
 import ChooseCategoryPath from "../modals/ChooseCategoryPath";
-import { useEffect, useState } from "react";
+import useCategoriesList from "../../hooks/categories/useCategoriesList";
+import "swiper/css";
 
 export default function SectionsSwiper() {
   const { categories, isLoading } = useCategoriesList();

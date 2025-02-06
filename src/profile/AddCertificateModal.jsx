@@ -29,7 +29,7 @@ const AddCertificateModal = ({
         image: targetCertificate?.image,
         id: targetCertificate?.id,
       });
-      imgRef.current.src = targetCertificate?.image || "/icons/galleryIcon.svg";
+      imgRef.current.src = targetCertificate?.image || "/images/galleryIcon.svg";
     }
   }, [targetCertificate]);
 
@@ -57,7 +57,7 @@ const AddCertificateModal = ({
         title: "",
         image: "",
       });
-      imgRef.current.src = "/icons/galleryIcon.svg";
+      imgRef.current.src = "/images/galleryIcon.svg";
       toast.success(
         targetCertificate?.id
           ? t("profile.certificateUpdatedSuccessfully")
@@ -112,7 +112,7 @@ const AddCertificateModal = ({
                     />
                     <div className="img">
                       <img
-                        src="/icons/galleryIcon.svg"
+                        src="/images/galleryIcon.svg"
                         ref={imgRef}
                         alt="gallery"
                       />

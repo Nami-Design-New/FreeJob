@@ -1,14 +1,14 @@
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
-import { useLocation, useNavigate, useParams } from "react-router-dom";
-import useCommunityPosts from "../hooks/community/useCommunityPosts";
+import { openModal } from "../redux/slices/authModalSlice";
+import { useLocation, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
+import useCommunityPosts from "../hooks/community/useCommunityPosts";
 import DataLoader from "../ui/DataLoader";
 import DetailsHeader from "../ui/servicesComponents/serviceDetails/DetailsHeader";
 import CommunitySubjectCard from "../ui/cards/CommunitySubjectCard";
 import EmptyData from "../ui/EmptyData";
 import AddSubjectModal from "../ui/modals/AddSubjectModal";
-import { openModal } from "../redux/slices/authModalSlice";
 
 function CommunityPosts() {
   const { name } = useParams();
@@ -38,7 +38,7 @@ function CommunityPosts() {
       </section>
       {isLoading ? (
         <DataLoader />
-      ) : posts && posts?.length > 0 ? (
+      ) : (
         <section className="communityDetails">
           <div className="container">
             <div className="communityHeader">
@@ -57,9 +57,12 @@ function CommunityPosts() {
               ))}
             </div>
           </div>
+          {posts?.length === 0 && (
+            <div className="container">
+              <EmptyData>{t("communities.noSubjects")}</EmptyData>
+            </div>
+          )}
         </section>
-      ) : (
-        <EmptyData>{t("communities.noSubjects")}</EmptyData>
       )}
       <AddSubjectModal
         showModal={showAddSubjectModal}

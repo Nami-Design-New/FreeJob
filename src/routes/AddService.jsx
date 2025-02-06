@@ -1,12 +1,12 @@
 import { useEffect, useState } from "react";
 import { ProgressBar } from "react-bootstrap";
-import FirstStep from "../ui/AddService/FirstStep";
-import SecondStep from "../ui/AddService/SecondStep";
 import { toast } from "react-toastify";
 import { useTranslation } from "react-i18next";
 import { createService, updateService } from "../services/apiServices";
 import { useQueryClient } from "@tanstack/react-query";
 import { useNavigate, useParams } from "react-router-dom";
+import FirstStep from "../ui/AddService/FirstStep";
+import SecondStep from "../ui/AddService/SecondStep";
 import useServiceDetails from "../hooks/services/useServiceDetails";
 import ErrorPage from "../routes/ErrorPage";
 import useGetSkills from "../hooks/settings/useGetSkills";
@@ -83,7 +83,6 @@ const AddServices = () => {
     e.preventDefault();
     setLoading(true);
 
-    // check if data is changed
     const isDataChanged =
       JSON.stringify(formData) !== JSON.stringify(originalData);
     if (!isDataChanged) {
@@ -107,21 +106,13 @@ const AddServices = () => {
 
     try {
       if (service?.id) {
-        const res = await updateService(dataToSendForUpdate, queryClient);
-        if (res.status === 200) {
-          toast.success(t("addService.updateSuccess"));
-          navigate("/profile");
-        } else {
-          toast.error(res.message);
-        }
+        await updateService(dataToSendForUpdate, queryClient);
+        toast.success(t("addService.updateSuccess"));
+        navigate("/profile");
       } else {
-        const res = await createService(formData, queryClient);
-        if (res.status === 200) {
-          toast.success(t("addService.success"));
-          navigate("/profile");
-        } else {
-          toast.error(res.message);
-        }
+        await createService(formData, queryClient);
+        toast.success(t("addService.success"));
+        navigate("/profile");
       }
     } catch (error) {
       toast.error(error.message);

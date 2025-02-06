@@ -27,6 +27,8 @@ const authModalSlice = createSlice({
     },
     closeModal: (state) => {
       state.show = false;
+      state.formData = {};
+      state.previousStep = null;
       state.currentStep = 1;
     },
   },

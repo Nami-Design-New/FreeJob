@@ -1,16 +1,16 @@
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { toast } from "react-toastify";
+import { useQueryClient } from "@tanstack/react-query";
+import { useNavigate, useParams } from "react-router";
+import { addBank, editBank } from "../services/apiBanks";
 import FormInput from "../ui/form/FormInput";
 import DetailsHeader from "../ui/servicesComponents/serviceDetails/DetailsHeader";
 import FormSelector from "../ui/form/FormSelector";
 import FormButton from "../ui/form/FormButton";
-import { useNavigate, useParams } from "react-router";
 import useCountriesList from "../hooks/settings/useCountries";
 import useBanksList from "../hooks/accounts/useBankList";
-import { addBank, editBank } from "../services/apiBanks";
 import DataLoader from "../ui/DataLoader";
-import { useQueryClient } from "@tanstack/react-query";
 
 export default function AddBankAccount() {
   const { t } = useTranslation();
@@ -30,7 +30,7 @@ export default function AddBankAccount() {
     city: "",
     area: "",
   });
-  const { isLoading: isCountriesLoading, data: countries } = useCountriesList();
+  const { data: countries } = useCountriesList();
   const [countryId, setCountryId] = useState("");
   useEffect(() => {
     const bank = banks?.find((bank) => String(bank?.id) === id);
@@ -95,9 +95,10 @@ export default function AddBankAccount() {
     <section className="mb-5">
       <section className="header_container ">
         <section className="container-md  ">
-          <DetailsHeader links="Manage Account" />
+          <DetailsHeader links={t("routes.addBank")} />
         </section>
       </section>
+
       <section className="add_banks_form_container">
         {isLoading ? (
           <DataLoader />
@@ -218,19 +219,19 @@ export default function AddBankAccount() {
               </div>
               <div className="mt-3 mb-3 ">
                 <div className="checkbox-group">
-                  <input type="checkbox" name="" id="fees" />
+                  <input type="checkbox" name="" id="fees" checked />
                   <label htmlFor="fees">
                     {t("manageAccounts.nameMatchingCondition")}
                   </label>
                 </div>
                 <div className="checkbox-group">
-                  <input type="checkbox" name="" id="duration" />
+                  <input type="checkbox" name="" id="duration" checked />
                   <label htmlFor="duration">
                     {t("balance.durationCondition")}
                   </label>
                 </div>
                 <div className="checkbox-group">
-                  <input type="checkbox" name="" id="responsibility" />
+                  <input type="checkbox" name="" id="responsibility" checked />
                   <label htmlFor="responsibility">
                     {t("manageAccounts.responsibilityCondition")}
                   </label>
@@ -243,7 +244,7 @@ export default function AddBankAccount() {
                       ? t("manageAccounts.edit")
                       : t("manageAccounts.add")
                   }
-                  loading={isLoading}
+                  loading={loading}
                   className="submit_add_account_button"
                 />
               </div>

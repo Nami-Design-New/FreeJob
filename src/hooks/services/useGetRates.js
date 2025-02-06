@@ -3,10 +3,12 @@ import { useParams } from "react-router";
 import { getRates } from "../../services/apiServices";
 
 function useGetRates() {
-  const { id } = useParams();
+  const { title } = useParams();
   const { isLoading, data, error } = useQuery({
-    queryKey: ["serviceRates", id],
-    queryFn: () => getRates(id),
+    queryKey: ["serviceRates", title],
+    queryFn: () => getRates(title),
+
+    enabled: !!title,
     retry: false,
     refetchOnWindowFocus: false,
     refetchOnMount: false,

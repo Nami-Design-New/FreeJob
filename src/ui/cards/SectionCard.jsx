@@ -3,7 +3,7 @@ export default function SectionCard({ section }) {
     <section
       className="sections_card"
       style={{
-        backgroundColor: section.color ? "#" + section.color : "#00732E",
+        backgroundColor: section?.color || "#00732E",
       }}
     >
       <h3 className="section_card_title">{section.name}</h3>

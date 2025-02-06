@@ -57,7 +57,7 @@ const VerifyStep3 = ({ setStep }) => {
     <form className="form" onSubmit={handleSubmit}>
       <div className="advice">
         <div className="icon">
-          <img src="/icons/id.svg" alt="icon" />
+          <img src="/images/id.svg" alt="icon" />
         </div>
         <h6>{t("auth.idAdvice")}</h6>
         <ul>
@@ -83,7 +83,7 @@ const VerifyStep3 = ({ setStep }) => {
             onChange={handleChange}
           />
           <div className="img">
-            <img src="/icons/fileup1.svg" ref={frontIdImage} alt="gallery" />
+            <img src="/images/fileup1.svg" ref={frontIdImage} alt="gallery" />
           </div>
         </label>
       </div>
@@ -101,7 +101,7 @@ const VerifyStep3 = ({ setStep }) => {
             onChange={handleChange}
           />
           <div className="img">
-            <img src="/icons/fileup1.svg" ref={backIdImage} alt="gallery" />
+            <img src="/images/fileup1.svg" ref={backIdImage} alt="gallery" />
           </div>
         </label>
       </div>
@@ -119,7 +119,7 @@ const VerifyStep3 = ({ setStep }) => {
             onChange={handleChange}
           />
           <div className="img">
-            <img src="/icons/fileup1.svg" ref={selfieImage} alt="gallery" />
+            <img src="/images/fileup1.svg" ref={selfieImage} alt="gallery" />
           </div>
         </label>
       </div>

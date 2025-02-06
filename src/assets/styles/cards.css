@@ -1229,13 +1229,15 @@
     }
   }
   label {
-    background-color: var(--gray-background);
-    border: 2px solid var(--gray-background);
+    background-color: #e8faf4;
     width: 100%;
     padding: 16px;
+    flex-direction: column;
     border-radius: 12px;
     display: flex;
+    height: 100%;
     gap: 24px;
+    border: 2px solid transparent;
     position: relative;
     cursor: pointer;
     transition: var(--transition);

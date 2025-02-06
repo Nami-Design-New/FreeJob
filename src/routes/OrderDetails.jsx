@@ -27,20 +27,6 @@ import DataLoader from "../ui/DataLoader";
 import ErrorPage from "./ErrorPage";
 import useGetOrder from "../hooks/orders/useGetOrder";
 import SubmitButton from "../ui/form/SubmitButton";
-const order = {
-  id: "5",
-  title: "Songs and broadcasting application",
-  price: "200",
-  status: "ready",
-  imageUrl: "/images/order.png",
-  orderNumber: "123456",
-  deliverTime: "30-12-2025",
-  created_at: "30-12-2024",
-  user: {
-    image: "/images/user.png",
-    name: "Mohamed Ahmed",
-  },
-};
 
 const OrderDetails = () => {
   const lang = useSelector((state) => state.language.lang);
@@ -55,7 +41,7 @@ const OrderDetails = () => {
 
   const [userType, setUserType] = useState(null);
   const [btn1Loading, setBtn1Loading] = useState(false);
-  const [showRateModal, setShowRateModal] = useState(false);
+  const [, setShowRateModal] = useState(false);
   const [loading, setLoading] = useState(false);
   const queryClient = useQueryClient();
   const user = useSelector((state) => state.authedUser.user);

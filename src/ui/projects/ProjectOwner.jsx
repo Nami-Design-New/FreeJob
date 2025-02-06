@@ -22,9 +22,7 @@ export default function ServiseOwner({ project }) {
       <ul className="card_ul">
         <li className="rate d-flex justify-content-between">
           <p>{t("projects.status")}</p>
-          <Badge bg="success" p>
-            {project.status}
-          </Badge>
+          <Badge bg="success">{t(project.status)}</Badge>
         </li>
         <li className="rate d-flex justify-content-between">
           <p>{t("projects.publishTime")}</p>

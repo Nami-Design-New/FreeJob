@@ -177,7 +177,7 @@ const AddWorkModal = ({
                           multiple
                           onChange={handleImagesChange}
                         />
-                        <img src="./icons/galleryIcon.svg" alt="upload" />
+                        <img src="./images/galleryIcon.svg" alt="upload" />
                         <div className="file_upload_dimensions">
                           9 <span>X</span> 16
                         </div>

@@ -1,7 +1,6 @@
 import { useTranslation } from "react-i18next";
 import NotificationCard from "../ui/cards/NotificationCard";
 import DetailsHeader from "../ui/servicesComponents/serviceDetails/DetailsHeader";
-import { useLocation } from "react-router";
 import useGetNotifications from "../hooks/useGetNotifications";
 import DataLoader from "../ui/DataLoader";
 import EmptyData from "../ui/EmptyData";

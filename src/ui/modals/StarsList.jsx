@@ -18,8 +18,8 @@ export default function StarsRate({ rate, onRateChange }) {
                 key={starValue}
                 src={
                   starValue <= rate
-                    ? "/icons/star-filled.svg"
-                    : "/icons/star.svg"
+                    ? "/images/star-filled.svg"
+                    : "/images/star.svg"
                 }
                 alt={starValue <= rate ? "filled star" : "empty star"}
                 onClick={() => onRateChange(starValue)} 

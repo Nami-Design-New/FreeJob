@@ -23,9 +23,11 @@ function ProfileTabs({ user, isMyAccount }) {
   const { t } = useTranslation();
   const [serviceId, setServiceId] = useState(null);
   const [loading, setLoading] = useState(false);
+
   const { data: services } = useUserServices(user?.id);
   const { data: myProjects, isLoading } = useGetUserProjects(user?.id);
   const { data: works } = useGetWorks(user?.id);
+
   const [showConfirmation, setShowConfirmation] = useState(false);
   const lang = useSelector((state) => state.language.lang);
   const handleDelete = (id) => {

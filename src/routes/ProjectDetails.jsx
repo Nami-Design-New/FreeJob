@@ -58,12 +58,14 @@ const ProjectDetails = () => {
               {t("projects.gotoProfile")}
             </Link>
           </section>
+
           <section className="col-lg-8">
             <ProjectDetailsComponent project={project} />
             {!project?.is_my_project && !project?.added_request && (
               <>{!project?.added_request && <AddOffer id={project?.id} />}</>
             )}
           </section>
+          
           {requests && requests.length > 0 && (
             <section className="row g-2  rating_container">
               <h6 className="header_rate d-flex align-items-center gap-3">

@@ -5,7 +5,7 @@ const VerifyStep4 = () => {
   const { t } = useTranslation();
   return (
     <div className="verify_done">
-      <img src="/icons/7efs.gif" />
+      <img src="/images/7efs.gif" />
       <div className="row justify-content-center">
         <div className="col-10 text-center">
           <h5 className="text-center">{t("auth.verificationSuccess")}</h5>

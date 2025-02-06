@@ -6,14 +6,12 @@ import { useState } from "react";
 import { toast } from "react-toastify";
 import { useDispatch } from "react-redux";
 import axiosInstance from "../../utils/axios";
-import { useNavigate } from "react-router";
 import BackButton from "./BackButton";
 
 export default function ForgetPassword({ userId }) {
   const { t } = useTranslation();
   const [loading, setLoading] = useState(false);
   const dispatch = useDispatch();
-  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     id: userId,
     password: "",
@@ -44,21 +42,6 @@ export default function ForgetPassword({ userId }) {
         <p className="title">{t("auth.newPasswordSubTitle")}</p>
       </header>
       <form onSubmit={handleSubmit}>
-        {/* {" "}
-           <label className="fw-normal">Phone Number</label>
-           <PhoneInput
-             required
-             defaultCountry="sa"
-             onChange={(value) => handlePhoneChange(value)}
-             style={{ width: "100%", marginTop: "0.5rem" }}
-             inputStyle={{
-               border: "none",
-               width: "100%",
-               marginLeft: "0.75rem",
-               borderRadius: "0.5rem",
-               backgroundColor: "#E8FAF4",
-             }}
-           /> */}
         <FormInput
           label={t("auth.password")}
           placeholder={t("auth.passwordPlaceholder")}

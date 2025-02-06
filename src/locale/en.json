@@ -1,6 +1,7 @@
 {
   "routes": {
     "home": "Home",
+    "addBank": "Add Bank",
     "service": "Service",
     "add-service": "Add Service",
     "edit-service": "Edit Service",
@@ -131,9 +132,8 @@
     "passwordChanged": "Password changed successfully"
   },
   "navbar": {
-    "abday": "About FREEJOB",
+    "abday": "About ABDAY",
     "addService": "Add Service",
-
     "categories": "Categories",
     "sections": "Sections",
     "purchase": "Purchases",
@@ -160,7 +160,7 @@
     "bestFreelancers": "Best Verified Freelancers",
     "services": "Services",
     "portfolios": "Portfolios",
-    "communities": "FREEJOB Community",
+    "communities": "ABDAY Community",
     "blogs": "Blogs",
     "freelancers": "Find Freelancers",
     "bids": "My Bids",
@@ -171,6 +171,7 @@
   "home": {
     "searchFor": "Search for...",
     "search": "Search",
+    "viewServices": "View Services",
     "searchPlaceHolder": "Try: app design or website..",
     "heroSectionTitle": "The Largest Arab Market for Services and Projects",
     "heroSectionSubTitle": "Open your doors to profit by offering your services",
@@ -205,27 +206,27 @@
     "yenjzApp": "abday App",
     "downloadAppDesc": "Start a different experience on the abday app, where you can inquire about your projects.",
     "downloadAppDesc2": "Enable your team to hire freelancers to meet their skill requirements. Create the right hiring model for your company's workflow. Collaborate with your team on managing projects and freelancers from one place.",
-    "howItWorks": "How to Start Working with FREEJOB",
-    "howItWorksDesc": "Starting with FREEJOB is easy and simple! Follow these steps and start earning:",
+    "howItWorks": "How to Start Working with ABDAY",
+    "howItWorksDesc": "Starting with ABDAY is easy and simple! Follow these steps and start earning:",
     "joinNow": "Join Now",
     "whyYenjz": "Why Choose abday?",
     "whyYenjzDesc": "Because it combines ease and professionalism.",
     "findFreelancersYouNeed": "Find Professional Freelancers in All Fields.",
     "coverAllYourNeeds": "Cover all your skill needs in every specialty.",
-    "joinFREEJOB": "Join the FREEJOB Community",
-    "joinFREEJOBDesc": "Be part of a thriving network of professionals and clients. Whether you're a freelancer looking for new opportunities or a company needing skilled experts, FREEJOB connects you with the right people to get the job done.",
+    "joinABDAY": "Join the ABDAY Community",
+    "joinABDAYDesc": "Be part of a thriving network of professionals and clients. Whether you're a freelancer looking for new opportunities or a company needing skilled experts, ABDAY connects you with the right people to get the job done.",
     "freelancework": "Some freelance work",
     "freelanceworkSubTitle": "Most viewed and best-selling projects ever",
-    "withFREEJOB": "Join now and become FreeLancer with FREEJOB",
+    "withABDAY": "Join now and become FreeLancer with ABDAY",
     "searchServices": "Search for any Services..."
   },
   "howItWorks": {
     "title1": "Register Your Account",
-    "desc1": "Create a free account on FREEJOB in minutes. Enter your basic information and start customizing your profile.",
+    "desc1": "Create a free account on ABDAY in minutes. Enter your basic information and start customizing your profile.",
     "title2": "Specify Your Skills",
     "desc2": "Clearly showcase your skills and experience on your profile. The more accurate your information, the higher your chances of attracting the right clients.",
     "title3": "Browse Projects",
-    "desc3": "Whatever your skills or experience, you'll find opportunities that suit you on FREEJOB. Discover projects that match your abilities and start working on what you love.",
+    "desc3": "Whatever your skills or experience, you'll find opportunities that suit you on ABDAY. Discover projects that match your abilities and start working on what you love.",
     "title4": "Submit Your Proposals",
     "desc4": "Prepare professional proposals that demonstrate how you can achieve the client's goals. Make sure your proposal highlights your strengths and explains how you will add value to the project.",
     "title5": "Start Working",
@@ -757,5 +758,10 @@
   "clients": "Clients",
   "yourmessage": "Your Message",
   "view": "view",
-  "like": "like"
+  "like": "like",
+  "canceled": "Canceled",
+  "received":"Received",
+  "ready": "Ready for Review",
+  "progress": "In Progress",
+  "new": "New"
 }

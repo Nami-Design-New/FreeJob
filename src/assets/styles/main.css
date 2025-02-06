@@ -522,82 +522,7 @@ a {
     }
   }
 
-  .bank-transfer-box {
-    width: 100%;
-
-    input {
-      display: none;
-
-      &:checked+label {
-        border-color: var(--main-color);
-        border: 1px solid;
-      }
-    }
-
-    label {
-      background-color: var(--gray-background);
-      border: 2px solid var(--gray-background);
-      width: 100%;
-      padding: 16px;
-      border-radius: 12px;
-      display: flex;
-      gap: 24px;
-      position: relative;
-      cursor: pointer;
-      transition: var(--transition);
-    }
-
-    .image-wrapper {
-      width: 42px;
-      height: 42px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-
-      i {
-        font-size: 24px;
-      }
-    }
-
-    .info-wrapper {
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
-      position: relative;
-
-      h5 {
-        margin: 0;
-      }
-
-      .info-boxes-wrapper {
-        display: flex;
-        position: relative;
-        align-items: center;
-        flex-wrap: wrap;
-        gap: 0 24px;
-
-        .info-box {
-          display: flex;
-          align-items: center;
-          gap: 4px;
-          position: relative;
-          font-size: 14px;
-          margin: 0;
-          color: var(--text-color);
-
-          i {
-            font-size: 12px;
-            width: 16px;
-            height: 16px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            color: var(--text-color);
-          }
-        }
-      }
-    }
-  }
+  
 
   .btn {
     border: 1px solid var(--main-color);
@@ -852,16 +777,55 @@ a {
   background-color: #f8f8f8 !important;
   border-radius: 12px !important;
   height: 54px;
+
   &:hover {
     background-color: white !important;
   }
 }
+
 .css-13cymwt-control {
   border-color: #eeeeee !important;
 }
+
 .select__indicator-separator {
   display: none !important;
 }
+
 .select__menu {
   z-index: 999999 !important;
+}
+
+
+body[dir="rtl"] {
+  .close_modal {
+    right: initial;
+    left: 10px;
+  }
+
+  .back_button {
+    transform: scale(-1);
+  }
+}
+
+.Toastify__toast-body {
+  direction: ltr !important;
+}
+
+.Toastify__toast-body>div:last-child {
+  line-height: 24px;
+  flex: unset;
+}
+
+@media only screen and (max-width: 480px) {
+  .Toastify__toast-container {
+    right: 0;
+    left: initial;
+  }
+}
+
+.banks_grid {
+  display: grid;
+  width: 100%;
+  gap: 12px;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
 }

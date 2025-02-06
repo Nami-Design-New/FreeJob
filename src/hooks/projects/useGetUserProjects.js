@@ -5,6 +5,8 @@ export default function useGetUserProjects(id) {
   const { isLoading, data, error } = useQuery({
     queryKey: ["userProjects", id],
     queryFn: () => getUserProjects(id),
+
+    enabled: !!id,
     retry: false,
     refetchOnWindowFocus: false,
     refetchOnMount: false,

@@ -1,5 +1,5 @@
 import { useTranslation } from "react-i18next";
-import FormButton from "../form/FormButton";
+import { Link } from "react-router-dom";
 
 export default function Promote() {
   const { t } = useTranslation();
@@ -7,13 +7,16 @@ export default function Promote() {
     <div className="promote_card ">
       <div className="content  col-md-6">
         <div className="text_content">
-          <h1>{t("home.joinFREEJOB")}</h1>
-          <p>{t("home.joinFREEJOBDesc")}</p>
+          <h1>{t("home.joinABDAY")}</h1>
+          <p>{t("home.joinABDAYDesc")}</p>
         </div>
-        <FormButton
+        <Link
+          className="form_button"
           style={{ marginTop: "0", width: "fit-content" }}
-          content={t("home.joinNow")}
-        />
+          to={"/services"}
+        >
+          {t("home.viewServices")}
+        </Link>
       </div>
       <div className="d-none d-md-block col-6 rounded overflow-hidden">
         <img src="/images/card2.png" alt="" className="img-fluid rounded " />

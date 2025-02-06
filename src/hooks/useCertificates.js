@@ -6,6 +6,7 @@ export default function useGetCertificates(id) {
     queryKey: ["userCertificates", id],
     queryFn: () => getCertificates(id),
 
+    enabled: !!id,
     refetchOnWindowFocus: false,
     refetchOnMount: false,
     refetchOnReconnect: false,

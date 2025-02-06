@@ -1,18 +1,16 @@
-import { useCookies } from "react-cookie";
 import { useTranslation } from "react-i18next";
-import useBanksList from "../../hooks/accounts/useBankList";
 import { useState } from "react";
 import { useQueryClient } from "@tanstack/react-query";
 import { createWithdraw } from "../../services/apiBanks";
 import { toast } from "react-toastify";
 import { Modal, Nav, Row, Tab } from "react-bootstrap";
-import FormInput from "../form/FormInput";
 import { Link } from "react-router-dom";
+import useBanksList from "../../hooks/accounts/useBankList";
+import FormInput from "../form/FormInput";
 import BankTransferCard from "../cards/BankTransferCard";
 
 const WithdrawModal = ({ showModal, setShowModal, cartTotalPrice }) => {
   const { t } = useTranslation();
-  const [cookies] = useCookies(["token"]);
   const { data: banks } = useBanksList();
   const [activeTab, setActiveTab] = useState("bankTransfer");
   const [amount, setAmount] = useState("");
@@ -133,18 +131,20 @@ const WithdrawModal = ({ showModal, setShowModal, cartTotalPrice }) => {
                     required={true}
                   />
 
-                  {banks &&
-                    banks?.length > 0 &&
-                    banks.map((bank) => (
-                      <BankTransferCard
-                        key={bank.id}
-                        bank={bank}
-                        bankTransfer={bankId}
-                        onChange={(id) => setBankId(id)}
-                        disabled={loading}
-                        required={true}
-                      />
-                    ))}
+                  <div className="banks_grid">
+                    {banks &&
+                      banks?.length > 0 &&
+                      banks.map((bank) => (
+                        <BankTransferCard
+                          key={bank.id}
+                          bank={bank}
+                          bankTransfer={bankId}
+                          onChange={(id) => setBankId(id)}
+                          disabled={loading}
+                          required={true}
+                        />
+                      ))}
+                  </div>
 
                   <Link to="/manage-accounts" className="btn">
                     {t("manageAccount")}

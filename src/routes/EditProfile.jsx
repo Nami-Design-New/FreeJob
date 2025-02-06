@@ -332,7 +332,7 @@ const EditProfile = () => {
               {" "}
               <div className="question p-0 pt-2">
                 <label htmlFor="wantChangePassword" className="quest">
-                  <img src="/icons/Vector.svg" alt="isSeller" />
+                  <img src="/images/Vector.svg" alt="isSeller" />
                   {t("auth.doYouWantChangePassword")}
                 </label>
                 <Form.Switch

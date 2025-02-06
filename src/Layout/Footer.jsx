@@ -100,37 +100,6 @@ export default function Footer() {
               )}
               <div className="col-lg-3 col-md-6 col-12">
                 <div className="d-flex flex-column gap-lg-5 gap-4 pa-24">
-                  <div className="download-app">
-                    <h4>{t("footer.dowloadApp")}</h4>
-                    <ul>
-                      <li>
-                        <a
-                          target="_blank"
-                          href="https://apps.apple.com/app/id6605935240"
-                        >
-                          <div className="text">
-                            <p>App Store</p>
-                          </div>
-                          <div className="icon">
-                            <i className="fa-brands fa-apple"></i>
-                          </div>
-                        </a>
-                      </li>
-                      <li>
-                        <a
-                          target="_blank"
-                          href="https://play.google.com/store/apps/details?id=com.app.abday"
-                        >
-                          <div className="text">
-                            <p>Google Play</p>
-                          </div>
-                          <div className="icon">
-                            <i className="fa-brands fa-google-play"></i>
-                          </div>
-                        </a>
-                      </li>
-                    </ul>
-                  </div>
                   <div className="follow">
                     <ul>
                       <li>

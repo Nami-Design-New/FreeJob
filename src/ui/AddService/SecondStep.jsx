@@ -2,15 +2,14 @@ import { useEffect, useState } from "react";
 import { FaChevronRight, FaPlusCircle } from "react-icons/fa";
 import { FaChevronLeft } from "react-icons/fa6";
 import { IoCloseOutline } from "react-icons/io5";
+import { useTranslation } from "react-i18next";
+import { useSelector } from "react-redux";
 import FormButton from "../form/FormButton";
 import FormInput from "../form/FormInput";
 import FormTextArea from "../form/FormTextArea";
 import AddMoreDevelopCard from "./AddMoreDevelep";
 import useGetSettings from "../../hooks/settings/useGetSettings";
 import SubmitButton from "../form/SubmitButton";
-import { useTranslation } from "react-i18next";
-import { useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
 
 export default function SecondStep({
   formData,
@@ -20,9 +19,8 @@ export default function SecondStep({
   loading,
 }) {
   const { data: settings } = useGetSettings();
-  const [formValid, setFormValid] = useState(false);
+  const [, setFormValid] = useState(false);
   const lang = useSelector((state) => state.language.lang);
-  const navigate = useNavigate();
   const { t } = useTranslation();
   const developmentInitial = {
     description: "",
@@ -134,7 +132,7 @@ export default function SecondStep({
                 multiple
                 onChange={(e) => handleImagesChange(e)}
               />
-              <img src="./icons/galleryIcon.svg" alt="upload" />
+              <img src="./images/galleryIcon.svg" alt="upload" />
             </label>
           </section>
           {formData?.images && (
@@ -256,7 +254,6 @@ export default function SecondStep({
         <SubmitButton
           loading={loading}
           className={"add_service_button flex-grow-1"}
-          onClick={() => navigate("/profile")}
           name={
             isEdit
               ? t("addService.updateService")

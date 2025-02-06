@@ -44,11 +44,11 @@ const ChargeModal = ({ showModal, setShowModal, cartTotalPrice }) => {
             {t("cancel")}
           </button>
           <Link
-            className="order-now text-center"
+            className="order-now d-flex justify-content-center align-items-center"
             to={
               chargeValue === 0 || chargeValue === ""
                 ? ""
-                : `https://api.abday.com/payment/${chargeValue}?Authorization=${token}&Redirect_url=${window.location.href}`
+                : `https://api.abday.com.sa/payment/${chargeValue}?Authorization=${token}&Redirect_url=${window.location.href}`
             }
           >
             {t("cart.chargeWallet")}

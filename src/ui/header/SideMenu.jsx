@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { useRef, useEffect } from "react";
 import { Link, NavLink } from "react-router";
 import { useSelector } from "react-redux";
 import { useTranslation } from "react-i18next";
@@ -9,37 +9,57 @@ import Logo from "./Logo";
 import useGetCommunitiesList from "../../hooks/useGetCommunitiesList";
 import useGetAbout from "../../hooks/about/useGetAbout";
 
-export default function SideMenu({ state, onClose }) {
+export default function SideMenu({ state, onClose, menuButtonRef }) {
   const isLogin = useSelector((state) => state.authedUser.isLogged);
   const lang = useSelector((state) => state.language.lang);
   const { data: footerCategoriesList } = useGetAbout();
   const { data: communities } = useGetCommunitiesList();
-  const [, setIsOpen] = useState();
   const { t } = useTranslation();
   const dialogRef = useRef(null);
+
   function handleCloseMenu() {
     onClose();
   }
 
-  if (state) {
-    dialogRef.current?.showModal();
-  } else {
-    dialogRef.current?.close();
-  }
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (
+        dialogRef.current &&
+        !dialogRef.current.contains(event.target) &&
+        !menuButtonRef.current.contains(event.target)
+      ) {
+        handleCloseMenu();
+      }
+    };
+
+    if (state) {
+      dialogRef.current?.showModal();
+      document.addEventListener("mousedown", handleClickOutside);
+    } else {
+      dialogRef.current?.close();
+      document.removeEventListener("mousedown", handleClickOutside);
+    }
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [state, menuButtonRef]);
 
   return (
     <dialog
       ref={dialogRef}
       onClose={handleCloseMenu}
-      className={`side_menu  d-md-hidden  ${lang === "ar" ? "ar" : ""}    `}
+      className={`side_menu d-md-hidden ${lang === "ar" ? "ar" : ""}`}
     >
       <header onClick={handleCloseMenu} className="py-3">
         <Logo />
         <button aria-label="Close Menu">&#10005;</button>
       </header>
+
       {isLogin ? (
         <ul
-          className=" d-flex flex-column align-items-start"
+          className="d-flex flex-column align-items-start"
           onClick={handleCloseMenu}
         >
           <li>
@@ -52,7 +72,6 @@ export default function SideMenu({ state, onClose }) {
           </li>
           <li>
             <NavLink to="/projects-orders">
-              {" "}
               {t("navbar.projectsOrders")}
             </NavLink>
           </li>
@@ -68,18 +87,15 @@ export default function SideMenu({ state, onClose }) {
           <li>
             <NavLink to="/freelancers">{t("routes.freelancers")}</NavLink>
           </li>
-          <li
-            onClick={(event) => {
-              event.stopPropagation();
-            }}
-          >
+
+          <li onClick={(event) => event.stopPropagation()}>
             <Accordion>
               <Accordion.Item eventKey="0">
                 <Accordion.Header>
                   <span>{t("navbar.abday")}</span>
                 </Accordion.Header>
-                <Accordion.Body>
-                  <ul onClick={handleCloseMenu}>
+                <Accordion.Body className="p-0 pt-3">
+                  <ul onClick={handleCloseMenu} className="flex-column p-0">
                     {footerCategoriesList?.map((category) => (
                       <li key={category.id}>
                         <Link to={`/about/${category.id}`}>
@@ -90,19 +106,16 @@ export default function SideMenu({ state, onClose }) {
                   </ul>
                 </Accordion.Body>
               </Accordion.Item>
-              {communities && communities?.length > 0 && (
+              {communities?.length > 0 && (
                 <Accordion.Item eventKey="1">
                   <Accordion.Header>
                     <span>{t("navbar.communities")}</span>
                   </Accordion.Header>
-                  <Accordion.Body>
-                    <ul onClick={handleCloseMenu}>
-                      {communities?.map((community) => (
+                  <Accordion.Body className="p-0 pt-3">
+                    <ul onClick={handleCloseMenu} className="flex-column p-0">
+                      {communities.map((community) => (
                         <li key={community.id}>
-                          <Link
-                            to={`/community/${community.name}`}
-                            onClick={() => setIsOpen(false)}
-                          >
+                          <Link to={`/community/${community.name}`}>
                             {community.name}
                           </Link>
                         </li>
@@ -117,13 +130,13 @@ export default function SideMenu({ state, onClose }) {
           <li>
             <NavLink to="/blogs">{t("routes.blogs")}</NavLink>
           </li>
-          <li className="d-flex align-items-center justify-content-start ">
+          <li className="d-flex align-items-center justify-content-start">
             <LanguageToggle />
           </li>
         </ul>
       ) : (
         <ul
-          className=" d-flex flex-column align-items-start"
+          className="d-flex flex-column align-items-start"
           onClick={handleCloseMenu}
         >
           <li>
@@ -138,25 +151,17 @@ export default function SideMenu({ state, onClose }) {
           <li>
             <NavLink to="/freelancers">{t("routes.freelancers")}</NavLink>
           </li>
-          <li
-            onClick={(event) => {
-              event.stopPropagation();
-            }}
-          >
-            {" "}
+          <li onClick={(event) => event.stopPropagation()}>
             <Accordion>
               <Accordion.Item eventKey="0">
                 <Accordion.Header>
                   <span>{t("navbar.abday")}</span>
                 </Accordion.Header>
-                <Accordion.Body>
-                  <ul>
+                <Accordion.Body className="p-0 pt-3">
+                  <ul className="flex-column p-0">
                     {footerCategoriesList?.map((category) => (
                       <li key={category.id}>
-                        <Link
-                          to={`/about/${category.id}`}
-                          onClick={() => setIsOpen(false)}
-                        >
+                        <Link to={`/about/${category.id}`}>
                           {category.name}
                         </Link>
                       </li>
@@ -164,19 +169,16 @@ export default function SideMenu({ state, onClose }) {
                   </ul>
                 </Accordion.Body>
               </Accordion.Item>
-              {communities && communities?.length > 0 && (
+              {communities?.length > 0 && (
                 <Accordion.Item eventKey="1">
                   <Accordion.Header>
                     <span>{t("navbar.communities")}</span>
                   </Accordion.Header>
-                  <Accordion.Body>
-                    <ul>
-                      {communities?.map((community) => (
+                  <Accordion.Body className="p-0 pt-3">
+                    <ul className="flex-column p-0">
+                      {communities.map((community) => (
                         <li key={community.id}>
-                          <Link
-                            to={`/community/${community.name}`}
-                            onClick={() => setIsOpen(false)}
-                          >
+                          <Link to={`/community/${community.name}`}>
                             {community.name}
                           </Link>
                         </li>
@@ -191,21 +193,16 @@ export default function SideMenu({ state, onClose }) {
           <li>
             <NavLink to="/blogs">{t("routes.blogs")}</NavLink>
           </li>
-          <li className="d-flex align-items-center justify-content-start ">
+          <li className="d-flex align-items-center justify-content-start">
             <LanguageToggle />
           </li>
         </ul>
       )}
 
-      {isLogin ? (
+      {isLogin && (
         <div className="button-group d-sm-none d-flex gap-2 mt-2">
-          <Button className=" me-2 mb-2 mb-xs-0" content="Add Project" />
+          <Button className="me-2 mb-2 mb-xs-0" content="Add Project" />
           <Button content="Add Service" className="mb-2 mb-xs-0" />
-        </div>
-      ) : (
-        <div className="button-group d-sm-none ms-2 mt-3">
-          <button className="btn me-2 mb-2 mb-xs-0">Sign Up</button>
-          <Button content="Join" />
         </div>
       )}
     </dialog>
