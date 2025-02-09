@@ -6,17 +6,17 @@ import { useSelector } from "react-redux";
 import { Link } from "react-router";
 import { toast } from "react-toastify";
 import { Swiper, SwiperSlide } from "swiper/react";
+import { deleteService } from "../../services/apiServices";
 import useGetUserProjects from "../../hooks/projects/useGetUserProjects";
 import useUserServices from "../../hooks/services/useUserServices";
 import useGetWorks from "../../hooks/works/useGetWorks";
-import { deleteService } from "../../services/apiServices";
 import ProjectCard from "../cards/ProjectCard";
-import ShowAll from "../ShowAll";
 import ServiceCard from "./../cards/ServiceCard";
 import DataLoader from "./../DataLoader";
 import CertificatesTab from "./CertificatesTab";
 import ConfirmationModal from "./ConfirmationModal";
 import WorksTap from "./WorksTap";
+import { Navigation } from "swiper/modules";
 
 function ProfileTabs({ user, isMyAccount }) {
   const queryClient = useQueryClient();
@@ -78,7 +78,18 @@ function ProfileTabs({ user, isMyAccount }) {
         {/* services */}
         <div className="services-container">
           <>
-            <h6>{t("profile.services")}</h6>
+            <div className="d-flex justify-content-between align-items-center">
+              <h6>{t("profile.services")}</h6>
+
+              <div className="swiper_controls">
+                <button className="swiper-button-prev">
+                  <i className="fa-solid fa-arrow-right"></i>
+                </button>
+                <button className="swiper-button-next">
+                  <i className="fa-solid fa-arrow-left"></i>
+                </button>
+              </div>
+            </div>
 
             <Swiper
               slidesPerView={4}
@@ -98,6 +109,11 @@ function ProfileTabs({ user, isMyAccount }) {
                 1150: {
                   slidesPerView: 4,
                 },
+              }}
+              modules={[Navigation]}
+              navigation={{
+                nextEl: ".swiper-button-next",
+                prevEl: ".swiper-button-prev",
               }}
               dir={lang === "ar" ? "rtl" : "ltr"}
             >

@@ -976,3 +976,30 @@
     }
   }
 }
+
+.swiper_controls {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+
+  button {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #000;
+    border: 0;
+    position: relative;
+    right: initial;
+    top: initial;
+    bottom: initial;
+    left: initial;
+
+    &::after {
+      display: none;
+    }
+  }
+}

@@ -69,6 +69,7 @@
             align-items: center;
             gap: 0.5rem;
             border-radius: 4px;
+
             &:active {
               background-color: var(--white);
             }
@@ -111,13 +112,15 @@
           }
         }
 
-        a {
+        a,
+        .com_btn {
           padding: 10px 16px;
           color: var(--gray-color);
           text-decoration: none;
           border-radius: 8px;
           white-space: nowrap;
           background: #f8f9fa;
+          border: 0 !important;
 
           &.active {
             background: var(--main-color);

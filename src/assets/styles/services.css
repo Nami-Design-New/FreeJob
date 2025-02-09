@@ -5,6 +5,7 @@
   position: relative;
   gap: 1rem;
   grid-template-columns: 20rem 1fr;
+
   .services_header_mobile {
     display: flex;
     align-items: center;
@@ -233,6 +234,7 @@
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(16rem, 1fr));
   gap: 1rem;
+
   .service_card_filter {
     min-width: 16rem;
   }
@@ -700,6 +702,7 @@
     }
 
     &:hover {
+
       .swiper-button-next,
       .swiper-button-prev {
         opacity: 1;
@@ -730,10 +733,12 @@
     justify-content: center;
 
     .user_img {
-      width: 4rem;
-      height: 4rem;
+      width: 5rem;
+      height: 5rem;
+      background: #ffffff;
       object-fit: cover;
       border-radius: 50%;
+      border: 1px solid #e0e0e0;
     }
 
     .user_info {
@@ -798,6 +803,7 @@
     align-items: center;
     justify-content: center;
     gap: 1rem;
+
     button,
     a {
       height: 3rem;

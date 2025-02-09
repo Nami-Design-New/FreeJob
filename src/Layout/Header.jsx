@@ -1,12 +1,10 @@
 import { useEffect, useState } from "react";
-import { Dropdown } from "react-bootstrap";
 import { useTranslation } from "react-i18next";
 import { RiMenuFold4Fill, RiMenuUnfold4Fill } from "react-icons/ri";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, NavLink, useNavigate } from "react-router";
 import { openModal } from "../redux/slices/authModalSlice";
 import { useResponsiveState } from "./../hooks/helpers/useResponsiveHook";
-import useGetCommunitiesList from "../hooks/community/useGetCommunitiesList";
 import Button from "./../ui/Button";
 import HeaderSwiper from "./../ui/header/HeaderSwiper";
 import Logo from "./../ui/header/Logo";
@@ -15,6 +13,7 @@ import UserDropDown from "./../ui/header/UserDropDown";
 import LanguageToggle from "./../ui/LanguageToggle";
 import AuthModal from "./../ui/modals/AuthModal";
 import NotificationDropdown from "../ui/header/NotificationDropdown";
+import CommunityDropDown from "../ui/header/CommunityDropDown";
 
 export default function Header() {
   const isLogin = useSelector((state) => state.authedUser.isLogged);
@@ -26,7 +25,7 @@ export default function Header() {
   const dispatch = useDispatch();
   const show = useSelector((state) => state.authModal.show);
   const navigate = useNavigate();
-  const { data: communities } = useGetCommunitiesList();
+
   useEffect(() => {
     if (isMobile) {
       setIsOpen(false);
@@ -84,27 +83,7 @@ export default function Header() {
             <li>
               <NavLink to={"/services"}>{t("navbar.services")}</NavLink>
             </li>
-            <li>
-              <Dropdown className="actions">
-                <Dropdown.Toggle as="button" className="user_btn">
-                  {t("communities.community")}
-                </Dropdown.Toggle>
-                <Dropdown.Menu>
-                  {communities?.map((community) => (
-                    <li key={community.id}>
-                      <Dropdown.Item as={"p"}>
-                        <Link
-                          to={`/community/${community.name}`}
-                          onClick={() => setIsOpen(false)}
-                        >
-                          {community.name}
-                        </Link>
-                      </Dropdown.Item>
-                    </li>
-                  ))}
-                </Dropdown.Menu>
-              </Dropdown>
-            </li>
+            <CommunityDropDown />
             <li className="d-flex align-items-center justify-content-start ">
               <LanguageToggle />
             </li>

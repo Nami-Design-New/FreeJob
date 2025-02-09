@@ -835,8 +835,26 @@ body[dir="rtl"] {
     padding: 1rem .5rem;
     background: none;
     border: 1px solid var(--main-color);
-    &:focus{
+
+    &:focus {
       border: 1px solid var(--main-color);
     }
+  }
+}
+
+.dropdown-item:active {
+  background: none !important;
+}
+
+.community_dropdown {
+  padding: 8px !important;
+
+  a {
+    background: none !important;
+  }
+
+  p {
+    margin: 0 0 4px !important;
+    text-align: start !important;
   }
 }
