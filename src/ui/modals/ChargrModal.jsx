@@ -19,7 +19,7 @@ const ChargeModal = ({ showModal, setShowModal, cartTotalPrice }) => {
       <Modal.Body className="pay_modal">
         {cartTotalPrice && (
           <h3 className="text-center">
-            {t("cart.youDontHaveEnoughBalance")}
+            {t("cart.youDontHaveEnoughBallance")}
             <span>
               {cartTotalPrice}
               <i className="fa-solid fa-dollar-sign"></i>
