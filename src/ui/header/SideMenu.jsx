@@ -1,6 +1,6 @@
 import { useRef, useEffect } from "react";
 import { Link, NavLink } from "react-router";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useTranslation } from "react-i18next";
 import { Accordion } from "react-bootstrap";
 import Button from "../Button";
@@ -8,10 +8,12 @@ import LanguageToggle from "../LanguageToggle";
 import Logo from "./Logo";
 import useGetCommunitiesList from "../../hooks/useGetCommunitiesList";
 import useGetAbout from "../../hooks/about/useGetAbout";
+import { openModal } from "../../redux/slices/authModalSlice";
 
 export default function SideMenu({ state, onClose, menuButtonRef }) {
   const isLogin = useSelector((state) => state.authedUser.isLogged);
   const lang = useSelector((state) => state.language.lang);
+  const dispatch = useDispatch();
   const { data: footerCategoriesList } = useGetAbout();
   const { data: communities } = useGetCommunitiesList();
   const { t } = useTranslation();
@@ -197,6 +199,16 @@ export default function SideMenu({ state, onClose, menuButtonRef }) {
 
           <li>
             <NavLink to="/blogs">{t("routes.blogs")}</NavLink>
+          </li>
+
+          <li
+            onClick={(event) => {
+              event.stopPropagation();
+              handleCloseMenu();
+              dispatch(openModal());
+            }}
+          >
+            <NavLink>{t("routes.login")}</NavLink>
           </li>
           <li className="d-flex align-items-center justify-content-start">
             <LanguageToggle />

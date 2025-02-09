@@ -4,7 +4,7 @@ import { useDispatch } from "react-redux";
 import { toast } from "react-toastify";
 import { useGoogleLogin } from "@react-oauth/google";
 import { setIsLogged, setUser } from "../../redux/slices/authedUserSlice";
-import { setStep } from "../../redux/slices/authModalSlice";
+import { closeModal, setStep } from "../../redux/slices/authModalSlice";
 import axiosInstance from "../../utils/axios";
 import AppleSigninButton from "./AppleSigninButton";
 
@@ -13,57 +13,8 @@ export default function LoginOptions() {
   const dispatch = useDispatch();
   const [, setCookie] = useCookies(["token", "id"]);
 
-  const handleAppleAuth = async (response) => {
-    console.log("Apple Sign-In Response:", response);
-
-    const idToken = response?.authorization?.id_token;
-    if (!idToken) {
-      toast.error(t("auth.appleLoginError"));
-      return;
-    }
-
-    try {
-      const login = await axiosInstance.post("/user/social_login", {
-        login_from: "apple",
-        google_token: idToken,
-      });
-
-      if (login.data.code === 200) {
-        const userData = login.data.data;
-        toast.success(t("auth.loginSuccess"));
-        dispatch(setUser(userData));
-        dispatch(setIsLogged(true));
-
-        setCookie("token", userData.token, {
-          path: "/",
-          secure: true,
-          sameSite: "Strict",
-        });
-        setCookie("id", userData.id, {
-          path: "/",
-          secure: true,
-          sameSite: "Strict",
-        });
-
-        axiosInstance.defaults.headers.common["Authorization"] = userData.token;
-      } else {
-        toast.error(t("auth.appleLoginError"));
-      }
-    } catch (error) {
-      console.error("Apple Login Error:", error);
-      toast.error(t("auth.appleLoginError"));
-    }
-  };
-
   const handleGoogleLogin = useGoogleLogin({
     onSuccess: async (tokenResponse) => {
-      console.log("Google Sign-In Response:", tokenResponse);
-
-      if (!tokenResponse?.access_token) {
-        toast.error(t("auth.googleLoginError"));
-        return;
-      }
-
       try {
         const res = await axiosInstance.post("/user/social_login", {
           login_from: "google",
@@ -71,37 +22,67 @@ export default function LoginOptions() {
         });
 
         if (res.data.code === 200) {
-          const userData = res.data.data;
           toast.success(t("auth.loginSuccess"));
-          dispatch(setUser(userData));
+          dispatch(setUser(res.data.data));
           dispatch(setIsLogged(true));
-
-          setCookie("token", userData.token, {
+          dispatch(closeModal());
+          setCookie("token", res.data.data.token, {
             path: "/",
             secure: true,
             sameSite: "Strict",
           });
-          setCookie("id", userData.id, {
+          setCookie("id", res.data.data.id, {
             path: "/",
             secure: true,
             sameSite: "Strict",
           });
-
-          axiosInstance.defaults.headers.common["Authorization"] =
-            userData.token;
-        } else {
-          toast.error(t("auth.googleLoginError"));
+          axiosInstance.defaults.headers.common[
+            "Authorization"
+          ] = `${res.data.data.token}`;
         }
       } catch (error) {
-        console.error("Google Login Error:", error);
-        toast.error(t("auth.googleLoginError"));
+        toast.error(t("auth.loginErorr"));
+        throw new Error(error.message);
       }
     },
     onError: (error) => {
-      console.error("Google Login Error:", error);
+      console.log("Google Login Error:", error);
       toast.error(t("auth.googleLoginError"));
     },
   });
+
+  const handleAppleAuth = (response) => {
+    if (response?.authorization?.id_token) {
+      try {
+        const login = axiosInstance.post("/user/social_login", {
+          login_from: "apple",
+          google_token: response?.authorization?.id_token,
+        });
+        if (login.data.code === 200) {
+          toast.success(t("auth.loginSuccess"));
+          dispatch(setUser(login.data.data));
+          dispatch(setIsLogged(true));
+          dispatch(closeModal());
+          setCookie("token", login.data.data.token, {
+            path: "/",
+            secure: true,
+            sameSite: "Strict",
+          });
+          setCookie("id", login.data.data.id, {
+            path: "/",
+            secure: true,
+            sameSite: "Strict",
+          });
+          axiosInstance.defaults.headers.common[
+            "Authorization"
+          ] = `${login.data.data.token}`;
+        }
+      } catch (error) {
+        console.log(error);
+        throw new Error(error.message);
+      }
+    }
+  };
 
   return (
     <div className="left_side">
