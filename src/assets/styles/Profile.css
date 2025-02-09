@@ -84,12 +84,19 @@
   align-items: center;
   justify-content: space-between;
 
+  @media screen and (max-width: 768px) {
+    flex-direction: column;
+  }
 
   .userData {
     display: flex;
     flex-direction: column;
     gap: 8px;
     align-items: center;
+
+    @media screen and (max-width: 768px) {
+      order: 0;
+    }
 
     .user-avatar {
       width: 120px;
@@ -100,6 +107,10 @@
       border-radius: 50%;
       background: var(--white-color);
       border: 6px solid var(--white-color);
+
+      @media screen and (max-width: 768px) {
+        margin-top: -168px;
+      }
 
       img {
         object-fit: cover;
@@ -166,6 +177,14 @@
 
     @media (min-width: 992px) {
       flex-direction: column;
+    }
+
+    @media screen and (max-width: 768px) {
+      order: 3;
+      width: 100%;
+      .d-flex{
+        flex-wrap: wrap;
+      }
     }
 
     &.profile-country-box {
@@ -235,6 +254,10 @@
       width: 100%;
       height: 100%;
 
+      @media screen and (max-width: 768px) {
+        height: fit-content;
+      }
+
       h4 {
         font-size: 18px;
         display: flex;
@@ -276,6 +299,12 @@
       padding: 16px;
       border-radius: 8px;
 
+      @media (max-width: 576px) {
+        min-height: unset;
+        min-width: auto;
+        flex: 1;
+      }
+
       span {
         font-size: 14px;
         color: var(--white-color);
@@ -307,6 +336,10 @@
   .profile-country-box {
     display: flex;
     flex-direction: column;
+
+    @media screen and (max-width: 768px) {
+      order: 2;
+    }
 
     .country-wrapper {
       display: flex;

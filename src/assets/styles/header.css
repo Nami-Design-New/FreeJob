@@ -20,6 +20,14 @@
     align-items: center;
     justify-content: space-between;
 
+    @media screen and (max-width: 768px) {
+      justify-content: unset;
+    }
+
+    .logo {
+      margin-inline-end: auto;
+    }
+
     .actions {
       gap: 1rem;
       display: flex;
