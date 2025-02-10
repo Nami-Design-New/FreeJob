@@ -64,8 +64,9 @@ const EditProfile = () => {
 
   const handleUpload = (e) => {
     imgView.current.src = URL.createObjectURL(e.target.files[0]);
-    setFormData({ ...formData, [e.target.name]: e.target.files[0] });
+    setFormData({ ...formData, image: e.target.files[0] });
   };
+
   useEffect(() => {
     if (formData.categories?.length > 0) {
       const selectedOptions = formData.categories?.map((categoryId) => {
@@ -145,7 +146,6 @@ const EditProfile = () => {
 
   return (
     <section className="edit-profile">
-      {" "}
       <div className="container col-lg-8 my-5">
         <div className="profile-image-container text-center mb-4">
           <div className="profile-image-wrapper position-relative">
