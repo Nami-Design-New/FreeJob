@@ -39,6 +39,8 @@ export default function LoginOptions() {
           axiosInstance.defaults.headers.common[
             "Authorization"
           ] = `${res.data.data.token}`;
+        } else {
+          toast.error(res.data.message);
         }
       } catch (error) {
         toast.error(t("auth.loginErorr"));
@@ -76,6 +78,8 @@ export default function LoginOptions() {
           axiosInstance.defaults.headers.common[
             "Authorization"
           ] = `${login.data.data.token}`;
+        } else {
+          toast.error(login.data.message);
         }
       } catch (error) {
         console.log(error);
