@@ -193,7 +193,6 @@ const EditProfile = () => {
                 name="name"
                 type="text"
                 id="name"
-                required={true}
                 value={formData?.name}
                 onChange={(e) => handleChange(e)}
               />
@@ -204,7 +203,6 @@ const EditProfile = () => {
                 name="age"
                 type="date"
                 id="age"
-                required={true}
                 value={formData?.age}
                 onChange={(e) => handleChange(e)}
               />
@@ -216,7 +214,6 @@ const EditProfile = () => {
                 type="email"
                 name="email"
                 id="email"
-                required={true}
                 disabled={user?.login_from !== "user"}
                 value={formData?.email}
                 onChange={(e) => handleChange(e)}
@@ -248,7 +245,6 @@ const EditProfile = () => {
 
             <section className="col-12 p-2">
               <FormTextArea
-                required
                 placeholder={t("writeHere")}
                 name="about"
                 id="about"
@@ -328,21 +324,22 @@ const EditProfile = () => {
               </div>
             </section>
 
-            <section className="col-12 d-flex justify-content-center">
-              {" "}
-              <div className="question p-0 pt-2">
-                <label htmlFor="wantChangePassword" className="quest">
-                  <img src="/images/Vector.svg" alt="isSeller" />
-                  {t("auth.doYouWantChangePassword")}
-                </label>
-                <Form.Switch
-                  id="wantChangePassword"
-                  name="wantChangePassword"
-                  checked={wantChangePassword}
-                  onChange={() => setWantChangePassword(!wantChangePassword)}
-                />
-              </div>
-            </section>
+            {user?.login_from === "user" && (
+              <section className="col-12 d-flex justify-content-center">
+                <div className="question p-0 pt-2">
+                  <label htmlFor="wantChangePassword" className="quest">
+                    <img src="/images/Vector.svg" alt="isSeller" />
+                    {t("auth.doYouWantChangePassword")}
+                  </label>
+                  <Form.Switch
+                    id="wantChangePassword"
+                    name="wantChangePassword"
+                    checked={wantChangePassword}
+                    onChange={() => setWantChangePassword(!wantChangePassword)}
+                  />
+                </div>
+              </section>
+            )}
 
             {wantChangePassword && (
               <section className="col-12 p-2">

@@ -6,7 +6,7 @@ import { useGoogleLogin } from "@react-oauth/google";
 import { setIsLogged, setUser } from "../../redux/slices/authedUserSlice";
 import { closeModal, setStep } from "../../redux/slices/authModalSlice";
 import axiosInstance from "../../utils/axios";
-import AppleSigninButton from "./AppleSigninButton";
+// import AppleSigninButton from "./AppleSigninButton";
 
 export default function LoginOptions() {
   const { t } = useTranslation();
@@ -53,41 +53,41 @@ export default function LoginOptions() {
     },
   });
 
-  const handleAppleAuth = (response) => {
-    if (response?.authorization?.id_token) {
-      try {
-        const login = axiosInstance.post("/user/social_login", {
-          login_from: "apple",
-          google_token: response?.authorization?.id_token,
-        });
-        if (login.data.code === 200) {
-          toast.success(t("auth.loginSuccess"));
-          dispatch(setUser(login.data.data));
-          dispatch(setIsLogged(true));
-          dispatch(closeModal());
-          setCookie("token", login.data.data.token, {
-            path: "/",
-            secure: true,
-            sameSite: "Strict",
-          });
-          setCookie("id", login.data.data.id, {
-            path: "/",
-            secure: true,
-            sameSite: "Strict",
-          });
-          axiosInstance.defaults.headers.common[
-            "Authorization"
-          ] = `${login.data.data.token}`;
-        } else {
-          toast.error(login.data.message);
-        }
-      } catch (error) {
-        console.log(error);
-        toast.error(error.response.data.message);
-        throw new Error(error.message);
-      }
-    }
-  };
+  // const handleAppleAuth = (response) => {
+  //   if (response?.authorization?.id_token) {
+  //     try {
+  //       const login = axiosInstance.post("/user/social_login", {
+  //         login_from: "apple",
+  //         google_token: response?.authorization?.id_token,
+  //       });
+  //       if (login.data.code === 200) {
+  //         toast.success(t("auth.loginSuccess"));
+  //         dispatch(setUser(login.data.data));
+  //         dispatch(setIsLogged(true));
+  //         dispatch(closeModal());
+  //         setCookie("token", login.data.data.token, {
+  //           path: "/",
+  //           secure: true,
+  //           sameSite: "Strict",
+  //         });
+  //         setCookie("id", login.data.data.id, {
+  //           path: "/",
+  //           secure: true,
+  //           sameSite: "Strict",
+  //         });
+  //         axiosInstance.defaults.headers.common[
+  //           "Authorization"
+  //         ] = `${login.data.data.token}`;
+  //       } else {
+  //         toast.error(login.data.message);
+  //       }
+  //     } catch (error) {
+  //       console.log(error);
+  //       toast.error(error.response.data.message);
+  //       throw new Error(error.message);
+  //     }
+  //   }
+  // };
 
   return (
     <div className="left_side">
@@ -108,7 +108,7 @@ export default function LoginOptions() {
           <span>{t("auth.googleAccount")}</span>
         </button>
 
-        <AppleSigninButton t={t} handleAppleAuth={handleAppleAuth} />
+        {/* <AppleSigninButton t={t} handleAppleAuth={handleAppleAuth} /> */}
       </div>
     </div>
   );
