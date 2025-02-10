@@ -47,7 +47,7 @@ export default function LoginOptions() {
     },
     onError: (error) => {
       console.log("Google Login Error:", error);
-      toast.error(t("auth.googleLoginError"));
+      toast.error(error.response.data.message);
     },
   });
 
@@ -79,6 +79,7 @@ export default function LoginOptions() {
         }
       } catch (error) {
         console.log(error);
+        toast.error(error.response.data.message);
         throw new Error(error.message);
       }
     }

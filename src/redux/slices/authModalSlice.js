@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-  currentStep: 2,
+  currentStep: 1,
   previousStep: null,
   formData: {},
   show: false,

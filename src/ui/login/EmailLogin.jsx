@@ -65,8 +65,7 @@ export default function EmailLogin() {
 
   return (
     <div className="left_side">
-      {/* {" "}
-      <BackButton /> */}
+      <BackButton />
       <header className="modal_header ">
         <h1>{t("auth.loginPageTitle")}</h1>
         <p className="d-flex gap-1 align-items-center fs-6 flex-wrap">
