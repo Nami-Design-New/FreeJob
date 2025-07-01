@@ -1,22 +1,23 @@
 import { useState } from "react";
-import Breadcrumb from "react-bootstrap/Breadcrumb";
-import PaginationComponent from "../ui/PaginationComponent";
-import SectionCard from "../ui/cards/SectionCard";
-import ChooseCategoryPath from "../ui/modals/ChooseCategoryPath";
+import { useTranslation } from "react-i18next";
 import useCategoriesList from "../hooks/categories/useCategoriesList";
 import DataLoader from "../ui/DataLoader";
-import CustomPagination from "../ui/CustomPagination";
+import SectionCard from "../ui/cards/SectionCard";
+import ChooseCategoryPath from "../ui/modals/ChooseCategoryPath";
 import DetailsHeader from "../ui/servicesComponents/serviceDetails/DetailsHeader";
-import { useTranslation } from "react-i18next";
 
 export default function Sections() {
   const { categories, isLoading } = useCategoriesList();
   const { t } = useTranslation();
+  const [id, setId] = useState();
   const [show, setShow] = useState(false);
 
   const handleCloseModal = () => setShow(false);
   const handleOpenModal = () => setShow(true);
-
+  function handleClick(id) {
+    setId(id);
+    handleOpenModal();
+  }
   return (
     <section className="sections">
       <section className="header_container ">
@@ -32,7 +33,7 @@ export default function Sections() {
             {categories.map((section) => (
               <section
                 key={section.id}
-                onClick={handleOpenModal}
+                onClick={() => handleClick(section?.id)}
                 className="col-sm-6 col-md-4 col-lg-3 col-xl-2 g-3 section_link"
               >
                 <SectionCard
@@ -44,7 +45,11 @@ export default function Sections() {
           </section>
         )}
       </section>
-      <ChooseCategoryPath show={show} close={handleCloseModal} />
+      <ChooseCategoryPath
+        show={show}
+        close={handleCloseModal}
+        params={`categories=${id}`}
+      />
     </section>
   );
 }
