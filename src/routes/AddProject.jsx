@@ -14,9 +14,12 @@ import FormTextArea from "../ui/form/FormTextArea";
 import MultiSelect from "../ui/form/MaltiSelect";
 import ErrorPage from "./ErrorPage";
 import useGetSkills from "../hooks/settings/useGetSkills";
+import { truncateText } from "../utils/helper";
 
 export default function AddProject() {
   const { id } = useParams();
+  console.log(id);
+
   const { t } = useTranslation();
   const navigate = useNavigate();
   const queryClient = useQueryClient();
@@ -37,6 +40,7 @@ export default function AddProject() {
     delete_files: [],
     skills: [],
   });
+  const isEdit = !!projectDetails?.id;
   useEffect(() => {
     if (projectDetails) {
       setCategoryId(projectDetails?.category?.id);
@@ -128,7 +132,7 @@ export default function AddProject() {
     e.preventDefault();
     setLoading(true);
     try {
-      if (id) {
+      if (isEdit) {
         await editProject(dataToSendForUpdate, queryClient);
         toast.success(t("projects.projectEditedSuccessfully"));
       } else {
@@ -148,10 +152,10 @@ export default function AddProject() {
   }
 
   return (
-    <section>
-      <section className=" col-lg-8 container my-5">
-        <form className="form" onSubmit={handleSubmit}>
-          <section className="row m-0">
+    <section className="container my-5">
+      <div className="row justify-content-center">
+        <div className="col-12">
+          <form className=" row " onSubmit={handleSubmit}>
             <section className="col-12 p-2">
               <FormInput
                 label={t("projects.projectTitle")}
@@ -163,7 +167,7 @@ export default function AddProject() {
                 placeholder={t("writeHere")}
               />
             </section>
-            <section className="col-lg-6 col-12 p-2">
+            <section className="col-md-6  p-2">
               <FormInput
                 label={t("projects.price")}
                 id="price"
@@ -176,7 +180,7 @@ export default function AddProject() {
                 span={"$"}
               />
             </section>
-            <section className="col-lg-6 col-12 p-2">
+            <section className="col-md-6  p-2">
               <FormInput
                 label={t("projects.deliveryTime")}
                 id="days"
@@ -189,7 +193,7 @@ export default function AddProject() {
                 span={t("projects.days")}
               />
             </section>
-            <section className="col-lg-6 col-12 p-2">
+            <section className="col-md-6  p-2">
               <FormSelector
                 label={t("addService.serviceCategory")}
                 id="category"
@@ -211,7 +215,7 @@ export default function AddProject() {
                 }))}
               />
             </section>
-            <section className="col-lg-6 col-12 p-2">
+            <section className="col-md-6 p-2">
               <FormSelector
                 label={t("addService.serviceSubCategory")}
                 id="sub_category_id"
@@ -233,6 +237,7 @@ export default function AddProject() {
                 required
                 id="description"
                 name="description"
+                rows={10}
                 onChange={handleChange}
                 value={formData.description}
                 placeholder={t("writeHere")}
@@ -251,81 +256,82 @@ export default function AddProject() {
                 }))}
               />
             </section>
-
             <section className="col-12 p-2">
               <section className="content">
                 <h6>{t("projects.addAttachment")}</h6>
               </section>
             </section>
-            <section className="file_upload_grid">
-              <label className="upload_attachments">
-                <input
-                  type="file"
-                  name="project_files"
-                  id="project_files"
-                  multiple
-                  onChange={handleAttachments}
-                />
-                <section className="icon">
-                  <img src="/images/imageUpload.png" alt="icon" />
-                </section>
-              </label>
-              {formData?.project_files?.length > 0 && (
-                <section className="col-12 p-2">
-                  <section className="attachments">
-                    {formData?.project_files?.map((file, index) => (
-                      <section className="attachment" key={index}>
-                        <section className="d-flex align-items-center gap-3">
-                          <section className="icon-file">
-                            <img
-                              src={
-                                file?.type?.startsWith("image/")
-                                  ? URL.createObjectURL(file)
-                                  : "./images/doc.svg"
-                              }
-                              alt="icon"
-                            />
-                          </section>
-                          <section className="content">
-                            <h6>
-                              {file?.file ? (
-                                <Link target="_blank" to={file?.file}>
-                                  {file?.file}
-                                </Link>
-                              ) : (
-                                file?.name
-                              )}
-                            </h6>
-                            <p>
-                              {file?.file_size
-                                ? file?.file_size?.toFixed(2)
-                                : (file.size / 1024).toFixed(2)}{" "}
-                              MB
-                            </p>
-                          </section>
-                        </section>
-                        <button
-                          className="delete"
-                          onClick={() => removeFile(index, file)}
-                        >
-                          <IoIosCloseCircle />
-                        </button>
-                      </section>
-                    ))}
+            <div className="col-12 p-2">
+              <section className="file_upload_grid">
+                <label className="upload_attachments">
+                  <input
+                    type="file"
+                    name="project_files"
+                    id="project_files"
+                    multiple
+                    onChange={handleAttachments}
+                  />
+                  <section className="icon">
+                    <img src="/images/imageUpload.png" alt="icon" />
                   </section>
-                </section>
-              )}
-            </section>
-          </section>
-          <section className="col-12 p-2 d-flex justify-content-end">
-            <FormButton
-              loading={loading}
-              content={id ? t("projects.update") : t("projects.publish")}
-              type="submit"
-            />
-          </section>
-        </form>
-      </section>
+                </label>
+                {formData?.project_files?.length > 0 && (
+                  <section className="col-12 p-2">
+                    <section className="attachments">
+                      {formData?.project_files?.map((file, index) => (
+                        <section className="attachment" key={index}>
+                          <section className="d-flex align-items-center gap-3">
+                            <section className="icon-file">
+                              <img
+                                src={
+                                  file?.type?.startsWith("image/")
+                                    ? URL.createObjectURL(file)
+                                    : "./images/doc.svg"
+                                }
+                                alt="icon"
+                              />
+                            </section>
+                            <section className="content">
+                              <h6>
+                                {file?.file ? (
+                                  <Link target="_blank" to={file?.file}>
+                                    {truncateText(file?.file, 30)}
+                                  </Link>
+                                ) : (
+                                  truncateText(file?.name, 30)
+                                )}
+                              </h6>
+                              <p>
+                                {file?.file_size
+                                  ? file?.file_size?.toFixed(2)
+                                  : (file.size / 1024).toFixed(2)}{" "}
+                                MB
+                              </p>
+                            </section>
+                          </section>
+                          <button
+                            className="delete"
+                            onClick={() => removeFile(index, file)}
+                          >
+                            <IoIosCloseCircle />
+                          </button>
+                        </section>
+                      ))}
+                    </section>
+                  </section>
+                )}
+              </section>
+            </div>
+            <section className="col-12 p-2 d-flex justify-content-end">
+              <FormButton
+                loading={loading}
+                content={isEdit ? t("projects.update") : t("projects.publish")}
+                type="submit"
+              />
+            </section>{" "}
+          </form>
+        </div>
+      </div>
     </section>
   );
 }

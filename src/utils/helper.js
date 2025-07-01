@@ -92,6 +92,11 @@ export const formatMessageTime = (timestamp) => {
   return timeStr;
 };
 
+export function truncateText(text, maxLength) {
+  if (!text) return "";
+  if (text.length <= maxLength) return text;
+  return text.slice(0, maxLength) + "...";
+}
 export function formattedDate(date) {
   let formattedDate = new Date(date);
   formattedDate = new Intl.DateTimeFormat("en-US", {
