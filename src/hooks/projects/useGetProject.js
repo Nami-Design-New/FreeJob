@@ -1,14 +1,14 @@
 import { useQuery } from "@tanstack/react-query";
 import { useParams } from "react-router";
-import { getProjectByName } from "../../services/apiProjects";
+import { getProjectById } from "../../services/apiProjects";
 
 export default function useGetProject() {
-  const { title } = useParams();
-  console.log(title);
+  const { project_id } = useParams();
+  console.log(project_id);
 
   const { isLoading, data, error } = useQuery({
     queryKey: ["project", title],
-    queryFn: () => getProjectByName(title),
+    queryFn: () => getProjectById(project_id),
     retry: false,
     refetchOnWindowFocus: false,
     refetchOnMount: false,

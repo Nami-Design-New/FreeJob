@@ -62,10 +62,11 @@ export async function getUserServices(id) {
   }
 }
 
-export async function getServiceDetails(title) {
+
+export async function getServiceDetails(service_id) {
   try {
-    const req = await axiosInstance.post("/get_service_details", {
-      title,
+    const req = await axiosInstance.post("/get_service_id_details", {
+      service_id,
     });
     return req.data.data;
   } catch (error) {

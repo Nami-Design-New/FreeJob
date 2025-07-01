@@ -43,7 +43,7 @@ export default function HeaderSwiper() {
       <ChooseCategoryPath
         show={show}
         close={handleCloseModal}
-        params={`sub_categories=${id}`}
+        params={`categories=${id}`}
       />
     </>
   );

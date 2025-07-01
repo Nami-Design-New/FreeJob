@@ -105,9 +105,12 @@ export default function ProjectCard({ project, isProfile }) {
               </div>
             )}
           {!isProfile && (
+             <Link
+            to={`/profile/${project?.user?.id}`}>
             <button className="project_settings_button">
               {lang === "ar" ? <FaArrowLeft /> : <FaArrowRight />}
             </button>
+            </Link>
           )}
         </div>
       </section>
