@@ -140,11 +140,13 @@ function CommunitySubjectDetails() {
                       </div>
                     </div>
                     {post?.comments?.length > 0 ? (
-                      post?.comments?.map((comment) => (
-                        <div className="col-md-6" key={comment.id}>
-                          <SubjectCommentCard comment={comment} />
-                        </div>
-                      ))
+                      <div className="col-md-6" key={comment.id}>
+                        {post?.comments?.map((comment) => (
+                          <div key={comment.id}>
+                            <SubjectCommentCard comment={comment} />
+                          </div>
+                        ))}
+                      </div>
                     ) : (
                       <EmptyData>
                         <div className="py-4">
