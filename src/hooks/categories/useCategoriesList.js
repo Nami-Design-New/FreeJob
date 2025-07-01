@@ -14,6 +14,7 @@ function useCategoriesList() {
     refetchOnMount: false,
     refetchOnReconnect: false,
   });
+  console.log(categories);
 
   return { isLoading, categories, error };
 }

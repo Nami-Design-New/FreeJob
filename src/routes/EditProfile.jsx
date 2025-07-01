@@ -30,7 +30,9 @@ const EditProfile = () => {
   const [wantChangePassword, setWantChangePassword] = useState(false);
 
   const { data: skills } = useGetSkills();
-  const { data: categories } = useCategoriesList();
+  const { categories } = useCategoriesList();
+  console.log(categories?.data);
+
   const { data: countries } = useCountriesList();
 
   useEffect(() => {
@@ -76,18 +78,22 @@ const EditProfile = () => {
           label: option?.name,
         };
       });
+      console.log(selectedOptions);
+
       setSelectedOptions(selectedOptions);
     }
 
     if (formData.skills?.length > 0) {
-      const selectedOptions = formData.skills?.map((skillId) => {
+      const selectedOptionsSkills = formData.skills?.map((skillId) => {
         const option = skills?.find((opt) => opt.id === skillId);
         return {
           value: option?.id,
           label: option?.name,
         };
       });
-      setSkillsSelectedOptions(selectedOptions);
+      console.log(selectedOptionsSkills);
+
+      setSkillsSelectedOptions(selectedOptionsSkills);
     }
   }, [formData.categories, formData.skills, categories, skills]);
 
@@ -260,10 +266,14 @@ const EditProfile = () => {
                 label={t("auth.interestes")}
                 id="interest"
                 name="interest"
-                options={categories?.map((category) => ({
-                  value: category.id,
-                  label: category.name,
-                }))}
+                options={categories?.map((category) => {
+                  console.log(category);
+
+                  return {
+                    value: category.id,
+                    label: category.name,
+                  };
+                })}
                 selectedOptions={selectedOptions}
                 handleChange={handleSelect}
               />
