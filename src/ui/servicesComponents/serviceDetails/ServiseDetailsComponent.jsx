@@ -110,12 +110,12 @@ export default function ServiseDetailsComponent({
                 <h6> {totalPrice || 0}</h6>
               </div>
               <div className="d-flex w-100 gap-2">
-                {!inCart && (
-                  <button className="request_order" onClick={handleAddTocart}>
-                    <FaCartPlus />
-                    {t("services.addToCart")}
-                  </button>
-                )}
+                {/* {!inCart && ( */}
+                <button className="request_order" onClick={handleAddTocart}>
+                  <FaCartPlus />
+                  {t("services.addToCart")}
+                </button>
+                {/* )} */}
                 <button
                   className="request_order"
                   onClick={() => {
