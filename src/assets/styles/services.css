@@ -201,6 +201,34 @@
         }
       }
     }
+
+    .rate-range {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      li {
+        display: flex;
+        align-items: center;
+        gap: 16px;
+        input {
+          accent-color: var(--main-color);
+        }
+        .stars {
+          display: flex;
+
+          gap: 4px;
+          li {
+            color: var(--LightGray);
+            &.star {
+              color: var(--star-color);
+            }
+          }
+        }
+        span {
+          color: var(--black-color);
+        }
+      }
+    }
   }
 }
 
@@ -702,7 +730,6 @@
     }
 
     &:hover {
-
       .swiper-button-next,
       .swiper-button-prev {
         opacity: 1;

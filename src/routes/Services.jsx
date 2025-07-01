@@ -1,9 +1,8 @@
 import { useState } from "react";
+import { useTranslation } from "react-i18next";
 import { CiFilter } from "react-icons/ci";
-import { useSearchParams } from "react-router";
 import FilterSidebar from "../ui/servicesComponents/FilterSidebar";
 import ServicesList from "../ui/servicesComponents/ServicesList";
-import { useTranslation } from "react-i18next";
 
 export default function Services() {
   const [isOpen, setIsOpen] = useState(false);
@@ -11,22 +10,6 @@ export default function Services() {
   function toggleMenu() {
     setIsOpen(!isOpen);
   }
-  const [searchParams] = useSearchParams();
-  let filter = {
-    searchQuery: searchParams.get("search") || "",
-    selectedSections: searchParams.get("sections")
-      ? searchParams.get("sections").split(",")
-      : [],
-    selectedSkill: searchParams.get("skill") || "",
-    priceRange: [
-      parseInt(searchParams.get("priceMin")) || 0,
-      parseInt(searchParams.get("priceMax")) || 1000,
-    ],
-    deliveryDuration: [
-      parseInt(searchParams.get("deliveryMin")) || 1,
-      parseInt(searchParams.get("deliveryMax")) || 360,
-    ],
-  };
 
   return (
     <section className="container">
@@ -36,9 +19,13 @@ export default function Services() {
           <CiFilter className=" my-3 fs-3" onClick={toggleMenu} />
         </section>
         <section>
-          <FilterSidebar isOpen={isOpen} setIsOpen={setIsOpen} />
+          <FilterSidebar
+            isOpen={isOpen}
+            setIsOpen={setIsOpen}
+            type="services"
+          />
         </section>
-        <ServicesList filter={filter} />
+        <ServicesList />
       </section>
     </section>
   );

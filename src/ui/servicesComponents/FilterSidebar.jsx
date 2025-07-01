@@ -11,8 +11,9 @@ import FormInput from "../form/FormInput";
 import MultiSelect from "./MultiSelect";
 import RangeInput from "./RangeInput";
 import SectionsFilter from "./SectionsFilter";
+import RatingFilterBox from "./RatingFilterBox";
 
-const FilterSidebar = ({ isOpen, setIsOpen }) => {
+const FilterSidebar = ({ isOpen, setIsOpen, type }) => {
   const { t } = useTranslation();
   const { isLoading: categoriesIsLoading, data: categoriesWithSubCategories } =
     useCategorieListWithSub();
@@ -73,7 +74,10 @@ const FilterSidebar = ({ isOpen, setIsOpen }) => {
   const handleSearch = (e) => {
     setFilters((prev) => ({ ...prev, searchQuery: e.target.value }));
   };
-
+  const handleRatingChange = (e) => {
+    setFilters((prev) => ({ ...prev, rate: e.target.value }));
+    console.log("Selected Rating:", e.target.value);
+  };
   const handleSkillChange = (selectedItems) => {
     const selectedValues = selectedItems
       ? selectedItems?.map((option) => option.value)
@@ -150,28 +154,35 @@ const FilterSidebar = ({ isOpen, setIsOpen }) => {
             }))}
           />
         </section>
-        <section className="my-4">
-          <h3>{t("projects.price")}</h3>
-          <RangeInput
-            label="$"
-            min={1}
-            max={1000}
-            value={[filters.price_from, filters.price_to]}
-            handleSlide={(value) => handleSliderChange("price", value)}
-            aria-label="Select price range"
-          />
-        </section>
-        <section className="my-4">
-          <h3>{t("services.deliveryTime")}</h3>
-          <RangeInput
-            label={t("search.days")}
-            min={1}
-            max={360}
-            value={[filters.duration_from, filters.duration_to]}
-            handleSlide={(value) => handleSliderChange("duration", value)}
-            aria-label="Select delivery duration"
-          />
-        </section>
+        {type === "projects" && (
+          <>
+            <section className="my-4">
+              <h3>{t("projects.price")}</h3>
+              <RangeInput
+                label="$"
+                min={1}
+                max={1000}
+                value={[filters.price_from, filters.price_to]}
+                handleSlide={(value) => handleSliderChange("price", value)}
+                aria-label="Select price range"
+              />
+            </section>
+            <section className="my-4">
+              <h3>{t("services.deliveryTime")}</h3>
+              <RangeInput
+                label={t("search.days")}
+                min={1}
+                max={360}
+                value={[filters.duration_from, filters.duration_to]}
+                handleSlide={(value) => handleSliderChange("duration", value)}
+                aria-label="Select delivery duration"
+              />
+            </section>
+          </>
+        )}
+        {type === "services" && (
+          <RatingFilterBox value={filters.rate} onChange={handleRatingChange} />
+        )}
         <div className="d-flex align-item-center gap-2 justify-content-center p-0 pt-3">
           <FormButton
             content={t("search.apply")}

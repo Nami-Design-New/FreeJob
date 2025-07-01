@@ -19,7 +19,7 @@ export default function Projects() {
           <h6>{t("routes.projects")}</h6>
           <CiFilter className=" my-3 fs-3" onClick={toggleMenu} />
         </section>
-        <FilterSidebar isOpen={isOpen} setIsOpen={setIsOpen} />
+        <FilterSidebar isOpen={isOpen} setIsOpen={setIsOpen} type="projects" />
         <section className="project_list">
           <ProjectList />
         </section>
