@@ -6,9 +6,10 @@ import CategoryCard from "../cards/CategoryCard";
 import useCategoriesList from "../../hooks/categories/useCategoriesList";
 import DataLoader from "../DataLoader";
 import ChooseCategoryPath from "../modals/ChooseCategoryPath";
+import usePopularCategories from "../../hooks/categories/usePopularCategoris";
 
 export default function CategoriesSwiper() {
-  const { categories = [], isLoading } = useCategoriesList();
+  const { data: categories, isLoading } = usePopularCategories();
   const [selectedId, setSelectedId] = useState(null);
   const [showModal, setShowModal] = useState(false);
 
@@ -54,7 +55,7 @@ export default function CategoriesSwiper() {
         <ChooseCategoryPath
           show={showModal}
           close={handleCloseModal}
-          params={`categories=${selectedId}`}
+          params={`sub_categories=${selectedId}`}
         />
       )}
     </div>

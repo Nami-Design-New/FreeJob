@@ -1,38 +1,54 @@
-import React, { useEffect, useRef } from "react";
-import { useTranslation } from "react-i18next";
+import { useEffect, useRef } from "react";
+import { Form } from "react-bootstrap";
 import { FaEdit } from "react-icons/fa";
 
-const ImageUpload = ({ formData, setFormData, image }) => {
-  const { t } = useTranslation();
+const ImageUpload = ({ name = "image", label, image, error, onChange }) => {
   const imgView = useRef(null);
 
   useEffect(() => {
-    if (image) {
-      imgView.current.src = image;
+    if (image && imgView.current) {
+      const url =
+        typeof image === "string" ? image : URL.createObjectURL(image);
+      imgView.current.src = url;
     }
   }, [image]);
 
   const handleUpload = (e) => {
-    imgView.current.src = URL.createObjectURL(e.target.files[0]);
-    setFormData({ ...formData, [e.target.name]: e.target.files[0] });
+    const file = e.target.files[0];
+
+    if (file && imgView.current) {
+      imgView.current.src = URL.createObjectURL(file);
+    }
+
+    if (onChange) onChange(e);
   };
+
   return (
     <section className="image-change-wrapper">
-      <label className="upload">
-        <section className="img-wrap">
-          <img ref={imgView} src="/images/avatar.jpg" alt="avatar" />
-        </section>
-        <section className="plus">
-          <FaEdit />
-        </section>
-        <input
-          type="file"
-          name="image"
-          id="img-upload"
-          accept="image/*"
-          onChange={handleUpload}
-        />
-      </label>
+      {label && <label className="mb-2">{label}</label>}
+      <div>
+        <label className="upload">
+          <section className="img-wrap">
+            <img ref={imgView} src="/images/avatar.jpg" alt="avatar" />
+          </section>
+          <section className="plus">
+            <FaEdit />
+          </section>
+
+          <Form.Control
+            type="file"
+            name={name}
+            accept="image/*"
+            onChange={handleUpload}
+            isInvalid={!!error}
+          />
+        </label>
+      </div>
+      {error && (
+        <Form.Control.Feedback type="invalid" className="d-block">
+          {error}
+        </Form.Control.Feedback>
+      )}
     </section>
   );
 };

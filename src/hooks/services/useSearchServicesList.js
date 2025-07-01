@@ -7,7 +7,7 @@ function useSearchServicesList(refetchPage) {
   const page = refetchPage
     ? refetchPage
     : Number(searchParams.get("page")) || 1;
-  const search = searchParams.get("search");
+  const search = searchParams.get("searchQuery");
   const rate = Number(searchParams.get("rate"));
   const user_verification = Number(searchParams.get("user_verification"));
   const skills = searchParams.get("skills")?.split("-");
