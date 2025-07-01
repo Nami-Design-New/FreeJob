@@ -1,3 +1,4 @@
+import { toast } from "react-toastify";
 import axiosInstance from "../utils/axios";
 
 export async function getBanks() {
@@ -17,7 +18,9 @@ export async function createWithdraw(requestBody, queryClient) {
     );
     queryClient.invalidateQueries(["profile"]);
   } catch (error) {
-    throw new Error(error.message);
+    console.log(error);
+    toast.error(error?.response?.data?.message);
+    throw new Error(error);
   }
 }
 

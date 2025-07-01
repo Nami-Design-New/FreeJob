@@ -64,15 +64,28 @@ const WithdrawModal = ({ showModal, setShowModal, cartTotalPrice }) => {
           conditionsCheck.fees &&
           conditionsCheck.duration)
       ) {
-        await createWithdraw(requestBody, queryClint);
+        const res = await createWithdraw(requestBody, queryClint);
+        console.log(res);
+
         toast.success(t("balance.withdrawSuccessfully"));
         setShowModal(false);
+        if (res?.code === 500) {
+          toast.error(res?.message);
+        }
       }
     } catch (error) {
-      console.error("Register error:", error);
-      throw new Error(error.message);
+      console.error("Register error:", error?.response);
+      toast.error(error?.response?.data?.message);
+      throw new Error(error?.response?.data?.message);
     } finally {
       setLoading(false);
+      setAmount("");
+      setBankId("");
+      setConditionsCheck({
+        responsibility: false,
+        duration: false,
+        fees: false,
+      });
     }
   };
 
@@ -297,6 +310,7 @@ const WithdrawModal = ({ showModal, setShowModal, cartTotalPrice }) => {
             type="submit"
             onClick={handleSubmit}
           >
+            <i className={loading ? "fa-solid fa-spinner fa-spin" : ""} />
             {t("balance.withdrawBalance")}
           </button>
         </div>

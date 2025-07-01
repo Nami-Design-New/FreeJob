@@ -1,7 +1,4 @@
 function BankTransferCard({ bank, bankTransfer, onChange, disabled }) {
-  console.log(bankTransfer, bank.id);
-  console.log(Number(bankTransfer) === Number(bank.id));
-
   return (
     <div className="bank-transfer-box">
       <input
