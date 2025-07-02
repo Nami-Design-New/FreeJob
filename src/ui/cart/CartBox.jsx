@@ -94,10 +94,7 @@ function CartBox({ item, cartObjList }) {
           <FaTrash />
         </button>
         <div className="service-head col-md-6 col-lg-4 p-0">
-          <Link
-            to={`/services/${item?.service?.id}/${item?.service?.title}`}
-            className="img"
-          >
+          <Link to={`/services/${item?.service?.id}`} className="img">
             <img src={item?.service?.image} alt="service" />
           </Link>{" "}
           <div className="owner">

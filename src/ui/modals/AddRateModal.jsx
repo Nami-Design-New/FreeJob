@@ -15,6 +15,7 @@ export default function AddRateModal({ showModal, setShowModal, order }) {
     rate: 0,
     comment: "",
     service_id: order?.service?.id,
+    service_order_id: order?.id,
   });
 
   const handleRatingChange = (value) => {

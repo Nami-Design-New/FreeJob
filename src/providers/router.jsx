@@ -97,7 +97,7 @@ export const router = createBrowserRouter([
           { path: "/recieved-orders", element: <RecievedOrders /> },
           { path: "/recieved-orders/:id", element: <OrderDetails /> },
           { path: "/add-project", element: <AddProject /> },
-          { path: "/edit-project/:title", element: <AddProject /> },
+          { path: "/edit-project/:id", element: <AddProject /> },
           { path: "/projects-orders", element: <ProjectsOrders /> },
           {
             path: "/projects-orders/:id",

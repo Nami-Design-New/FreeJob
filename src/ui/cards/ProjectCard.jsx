@@ -90,7 +90,7 @@ export default function ProjectCard({ project, isProfile }) {
           {user?.id === project?.user?.id &&
             (project?.status === "جديد" || project?.status === "new") && (
               <div className="projectCardSection">
-                <Link to={`/edit-project/${project?.title}`}>
+                <Link to={`/edit-project/${project?.id}`}>
                   <FaEdit />
                 </Link>
                 <button

@@ -244,15 +244,17 @@ const OrderDetails = () => {
                   icon={<i className="fa-sharp fa-light fa-circle-xmark"></i>}
                 />
               )}
-              {userType === "seller" &&
-                !order?.service?.is_rated &&
-                order?.status === "received" && (
-                  <SubmitButton
-                    className="report-order"
-                    name={t("recievedOrders.RateService")}
-                    onClick={() => setShowRateModal(true)}
-                  />
-                )}
+              {
+                // userType === "seller" &&
+                // !order?.service?.is_rated && (
+                // order?.status === "received" &&
+                <SubmitButton
+                  className="report-order"
+                  name={t("recievedOrders.RateService")}
+                  onClick={() => setShowRateModal(true)}
+                />
+                // )
+              }
             </div>
           </section>
         </section>
