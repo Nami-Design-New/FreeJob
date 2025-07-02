@@ -719,6 +719,18 @@
     "withdraw_balance_request": "Balance Withdrawal Requested",
     "withdraw_balance_canceled": "Balance Withdrawal Canceled"
   },
+  "validation": {
+    "email": "Email",
+    "send": "Send",
+    "sending": "Sending...",
+    "name_required": "Name is required",
+    "email_required": "Email is required",
+    "invalid_email": "Please enter a valid email",
+    "phone_required": "Phone number is required",
+    "message_required": "Message is required",
+    "contact_success": "Your message was sent successfully!",
+    "contact_error": "Failed to send your message. Please try again."
+  },
   "password": "Enter password",
   "cancel": "Cancel",
   "homePage": "Home",

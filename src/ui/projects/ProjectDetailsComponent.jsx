@@ -1,7 +1,8 @@
 import { useTranslation } from "react-i18next";
 import { LiaFileSolid } from "react-icons/lia";
-import { useNavigate } from "react-router";
+import { Link, useNavigate } from "react-router";
 import { TiAttachment } from "react-icons/ti";
+import { truncateText } from "../../utils/helper";
 const files = [
   {
     image: ".images/image.png",
@@ -45,11 +46,14 @@ export default function ServiseDetailsComponent({ project }) {
             </h6>
             <section className="file_container">
               {project?.files.map((file) => (
-                <div key={file.name} className="file_card">
-                  <img src={`/images/${file.image}`} alt={file.name} />
+                <div key={file?.file} className="file_card">
+                  <i className="fa-regular fa-file"></i>
+                  {/* <img src={`/images/${file?.file}`} alt={file.name} /> */}
                   <section className="img_info">
-                    <p>{file.name}</p>
-                    <p>{file.size}</p>
+                    <Link target="_blank" to={file?.file}>
+                      <p>{truncateText(file?.file_path, 30)}</p>
+                    </Link>
+                    {/* <p>{file?.file_size}</p> */}
                   </section>
                 </div>
               ))}

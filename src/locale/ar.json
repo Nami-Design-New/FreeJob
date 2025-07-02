@@ -714,6 +714,19 @@
     "withdraw_balance_request": "طلب سحب الرصيد",
     "withdraw_balance_canceled": "إلغاء سحب الرصيد"
   },
+  "validation": {
+    "name": "الاسم",
+    "email": "البريد الإلكتروني",
+    "send": "إرسال",
+    "sending": "جارٍ الإرسال...",
+    "name_required": "الاسم مطلوب",
+    "email_required": "البريد الإلكتروني مطلوب",
+    "invalid_email": "يرجى إدخال بريد إلكتروني صالح",
+    "phone_required": "رقم الهاتف مطلوب",
+    "message_required": "الرسالة مطلوبة",
+    "contact_success": "تم إرسال رسالتك بنجاح!",
+    "contact_error": "فشل في إرسال رسالتك. يرجى المحاولة مرة أخرى."
+  },
   "password": "ادخل كلمة المرور ",
   "cancel": "الغاء",
   "homePage": "الرئيسية",
@@ -754,7 +767,7 @@
   "view": "مشاهدة",
   "like": "اعجاب",
   "canceled": "ملغى",
-  "received":"تم تسليمه",
+  "received": "تم تسليمه",
   "ready": "جاهز للمراجعة",
   "progress": "جاري التحضير",
   "new": "جديد",

@@ -16,7 +16,7 @@ function BidCard({ bid }) {
   );
 
   return (
-    <Link to={`/bids/${bid?.id}`} className="bid-card">
+    <Link to={`/projects/${bid?.project?.title}`} className="bid-card">
       <div className="d-flex align-items-center w-100 justify-content-between">
         <h4>{bid?.project?.title}</h4>
         <span className={`bid-status ${bid?.status}`}>
