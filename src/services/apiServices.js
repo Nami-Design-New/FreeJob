@@ -10,7 +10,9 @@ export async function getServicesByFilter(
   sub_categories,
   is_old,
   skills,
-  sort
+  sort,
+  price_from,
+  price_to
 ) {
   const requestBody = {
     skip: 12,
@@ -19,6 +21,8 @@ export async function getServicesByFilter(
   if (skills?.length > 0) requestBody.skills = skills.map((id) => Number(id));
   if (page) requestBody.page = page;
   if (search) requestBody.search = search;
+  if (price_from) requestBody.price_from = price_from;
+  if (price_to) requestBody.price_to = price_to;
   if (rate !== undefined && rate !== null && rate !== "")
     requestBody.rate = rate;
   if (
@@ -61,7 +65,6 @@ export async function getUserServices(id) {
     throw new Error(error.message);
   }
 }
-
 
 export async function getServiceDetails(service_id) {
   try {
@@ -159,9 +162,9 @@ export async function getHomeServices() {
   }
 }
 
-export async function getProjectsPriceRange() {
+export async function getServicesPriceRange() {
   try {
-    const req = await axiosInstance.get("/get_projects_price_change");
+    const req = await axiosInstance.get("/get_services_price_change");
     return req.data.data;
   } catch (error) {
     throw new Error(error);

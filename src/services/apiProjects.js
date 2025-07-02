@@ -205,3 +205,11 @@ export async function updateProject(id, status, queryClient) {
     throw new Error(error.message);
   }
 }
+export async function getProjectsPriceRange() {
+  try {
+    const req = await axiosInstance.get("/get_projects_price_change");
+    return req.data.data;
+  } catch (error) {
+    throw new Error(error);
+  }
+}

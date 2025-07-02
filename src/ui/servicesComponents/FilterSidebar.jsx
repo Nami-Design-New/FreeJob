@@ -12,22 +12,41 @@ import MultiSelect from "./MultiSelect";
 import RangeInput from "./RangeInput";
 import RatingFilterBox from "./RatingFilterBox";
 import SectionsFilter from "./SectionsFilter";
-import useGetProjectPrice from "../../hooks/services/useGetServicePrice";
+import useGetProjectPrice from "../../hooks/projects/useGetProjectPrice";
+import useGetServicePrice from "../../hooks/services/useGetServicePrice";
 
 const FilterSidebar = ({ isOpen, setIsOpen, type }) => {
   const { t } = useTranslation();
   const { isLoading: categoriesIsLoading, data: categoriesWithSubCategories } =
     useCategorieListWithSub();
   const { data: skills } = useGetSkills();
-  const { data: priceRange, isLoading } = useGetProjectPrice();
-  console.log(priceRange);
+  const { data: priceRange } = useGetProjectPrice();
+  const { data: servicePriceRange } = useGetServicePrice();
+  console.log(servicePriceRange);
+  useEffect(() => {
+    const priceMin =
+      type === "services" ? servicePriceRange?.min : priceRange?.min;
+    const priceMax =
+      type === "services" ? servicePriceRange?.max : priceRange?.max;
 
+    if (priceMin !== undefined && priceMax !== undefined) {
+      setFilters((prev) => ({
+        ...prev,
+        price_from: prev.price_from ?? priceMin,
+        price_to: prev.price_to ?? priceMax,
+      }));
+    }
+  }, [type, priceRange, servicePriceRange]);
   const [selectedOptions, setSelectedOptions] = useState([]);
   const [searchParams, setSearchParams] = useSearchParams();
   const [filters, setFilters] = useState({
     searchQuery: searchParams.get("searchQuery") || "",
-    price_from: Number(searchParams.get("price_from")) || priceRange?.min,
-    price_to: Number(searchParams.get("price_to")) || priceRange?.max,
+    price_from:
+      Number(searchParams.get("price_from")) ||
+      (type === "services" ? servicePriceRange?.min : priceRange?.min),
+    price_to:
+      Number(searchParams.get("price_to")) ||
+      (type === "services" ? servicePriceRange?.max : priceRange?.max),
     duration_from: Number(searchParams.get("duration_from")) || 1,
     duration_to: Number(searchParams.get("duration_to")) || 360,
     page: Number(searchParams.get("page")) || null,
@@ -183,6 +202,19 @@ const FilterSidebar = ({ isOpen, setIsOpen, type }) => {
               />
             </section>
           </>
+        )}
+        {type === "services" && (
+          <section className="my-4">
+            <h3>{t("projects.price")}</h3>
+            <RangeInput
+              label="$"
+              min={servicePriceRange?.min}
+              max={servicePriceRange?.max}
+              value={[filters.price_from, filters.price_to]}
+              handleSlide={(value) => handleSliderChange("price", value)}
+              aria-label="Select price range"
+            />
+          </section>
         )}
         {type === "services" && (
           <RatingFilterBox value={filters.rate} onChange={handleRatingChange} />

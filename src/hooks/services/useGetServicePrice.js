@@ -1,10 +1,10 @@
 import { useQuery } from "@tanstack/react-query";
-import { getProjectsPriceRange } from "../../services/apiServices";
+import { getServicesPriceRange } from "../../services/apiServices";
 
-export default function useGetProjectPrice() {
+export default function useGetServicePrice() {
   const { data, isLoading } = useQuery({
-    queryKey: ["price-range"],
-    queryFn: getProjectsPriceRange,
+    queryKey: ["service-price-range"],
+    queryFn: getServicesPriceRange,
   });
   return { data, isLoading };
 }

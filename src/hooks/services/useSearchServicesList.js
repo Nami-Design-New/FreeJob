@@ -1,6 +1,6 @@
-import { useInfiniteQuery, useQuery } from "@tanstack/react-query";
-import { getServicesByFilter } from "../../services/apiServices";
+import { useQuery } from "@tanstack/react-query";
 import { useSearchParams } from "react-router";
+import { getServicesByFilter } from "../../services/apiServices";
 
 function useSearchServicesList(refetchPage) {
   const [searchParams] = useSearchParams();
@@ -8,10 +8,13 @@ function useSearchServicesList(refetchPage) {
     ? refetchPage
     : Number(searchParams.get("page")) || 1;
   const search = searchParams.get("searchQuery");
+  const price_from = Number(searchParams.get("price_from"));
+  const price_to = Number(searchParams.get("price_to"));
   const rate = Number(searchParams.get("rate"));
   const user_verification = Number(searchParams.get("user_verification"));
   const skills = searchParams.get("skills")?.split("-");
   const user_available = Number(searchParams.get("user_available"));
+  console.log(price_from, price_to);
 
   const categories =
     searchParams.get("categories") &&
@@ -43,6 +46,8 @@ function useSearchServicesList(refetchPage) {
       is_old,
       skills,
       sort,
+      price_from,
+      price_to,
     },
   ];
 
@@ -60,7 +65,9 @@ function useSearchServicesList(refetchPage) {
           sub_categories,
           is_old,
           skills,
-          sort
+          sort,
+          price_from,
+          price_to
         ),
 
       keepPreviousData: true,
