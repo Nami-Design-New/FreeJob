@@ -36,7 +36,7 @@ const ChatRoom = ({ chat }) => {
       }
 
       socketRef.current = new WebSocket(
-        "wss://api.abday.com.sa/app/nb9shwzjuyd3inhumkzz?protocol=7&client=js&version=8.4.0&flash=false"
+        "wss://api.Ebday.com.sa/app/nb9shwzjuyd3inhumkzz?protocol=7&client=js&version=8.4.0&flash=false"
       );
 
       socketRef.current.onopen = () => {

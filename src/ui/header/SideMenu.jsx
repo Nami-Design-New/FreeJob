@@ -99,7 +99,7 @@ export default function SideMenu({ state, onClose, menuButtonRef }) {
             <Accordion>
               <Accordion.Item eventKey="0">
                 <Accordion.Header>
-                  <span>{t("navbar.abday")}</span>
+                  <span>{t("navbar.Ebday")}</span>
                 </Accordion.Header>
                 <Accordion.Body className="p-0 pt-3">
                   <ul onClick={handleCloseMenu} className="flex-column p-0">
@@ -162,7 +162,7 @@ export default function SideMenu({ state, onClose, menuButtonRef }) {
             <Accordion>
               <Accordion.Item eventKey="0">
                 <Accordion.Header>
-                  <span>{t("navbar.abday")}</span>
+                  <span>{t("navbar.Ebday")}</span>
                 </Accordion.Header>
                 <Accordion.Body className="p-0 pt-3">
                   <ul className="flex-column p-0">

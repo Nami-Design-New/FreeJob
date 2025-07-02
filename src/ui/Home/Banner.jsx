@@ -6,7 +6,7 @@ export default function Banner() {
   return (
     <>
       <div className="banner_home">
-        <h1>{t("home.withABDAY")}</h1>
+        <h1>{t("home.withEbday")}</h1>
         <Link
           to={"/services"}
           className="form_button"

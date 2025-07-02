@@ -109,7 +109,7 @@ export default function InProgressCard({ order }) {
             ></div>{" "}
           </section>
           <button
-            onClick={() => navigate(`${order.title}?page=${page || 1}`)}
+            onClick={() => navigate(`${order.id}?page=${page || 1}`)}
             className={`${lang === "ar" ? "ar" : ""} orders_details_button `}
           >
             {t("details")}

@@ -3,12 +3,12 @@ import { useParams } from "react-router";
 import { getProjectById } from "../../services/apiProjects";
 
 export default function useGetProject() {
-  const { project_id } = useParams();
-  console.log(project_id);
+  const { id } = useParams();
+  console.log(id);
 
   const { isLoading, data, error } = useQuery({
-    queryKey: ["project", title],
-    queryFn: () => getProjectById(project_id),
+    queryKey: ["project", id],
+    queryFn: () => getProjectById(id),
     retry: false,
     refetchOnWindowFocus: false,
     refetchOnMount: false,

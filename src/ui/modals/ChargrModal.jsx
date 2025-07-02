@@ -48,7 +48,7 @@ const ChargeModal = ({ showModal, setShowModal, cartTotalPrice }) => {
             to={
               chargeValue === 0 || chargeValue === ""
                 ? ""
-                : `https://api.abday.com.sa/payment/${chargeValue}?Authorization=${token}&Redirect_url=${window.location.href}`
+                : `https://api.Ebday.com.sa/payment/${chargeValue}?Authorization=${token}&Redirect_url=${window.location.href}`
             }
           >
             {t("cart.chargeWallet")}

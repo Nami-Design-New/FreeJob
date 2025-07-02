@@ -7,8 +7,8 @@ export default function Promote() {
     <div className="promote_card ">
       <div className="content  col-md-6">
         <div className="text_content">
-          <h1>{t("home.joinABDAY")}</h1>
-          <p>{t("home.joinABDAYDesc")}</p>
+          <h1>{t("home.joinEbday")}</h1>
+          <p>{t("home.joinEbdayDesc")}</p>
         </div>
         <Link
           className="form_button"

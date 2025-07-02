@@ -101,7 +101,7 @@ export const router = createBrowserRouter([
           { path: "/edit-project/:title", element: <AddProject /> },
           { path: "/projects-orders", element: <ProjectsOrders /> },
           {
-            path: "/projects-orders/:title",
+            path: "/projects-orders/:id",
             element: <ProjectsOrdersDetails />,
           },
           { path: "/profile", element: <Profile /> },
