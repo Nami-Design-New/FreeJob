@@ -10,20 +10,24 @@ import FormButton from "../form/FormButton";
 import FormInput from "../form/FormInput";
 import MultiSelect from "./MultiSelect";
 import RangeInput from "./RangeInput";
-import SectionsFilter from "./SectionsFilter";
 import RatingFilterBox from "./RatingFilterBox";
+import SectionsFilter from "./SectionsFilter";
+import useGetProjectPrice from "../../hooks/services/useGetServicePrice";
 
 const FilterSidebar = ({ isOpen, setIsOpen, type }) => {
   const { t } = useTranslation();
   const { isLoading: categoriesIsLoading, data: categoriesWithSubCategories } =
     useCategorieListWithSub();
   const { data: skills } = useGetSkills();
+  const { data: priceRange, isLoading } = useGetProjectPrice();
+  console.log(priceRange);
+
   const [selectedOptions, setSelectedOptions] = useState([]);
   const [searchParams, setSearchParams] = useSearchParams();
   const [filters, setFilters] = useState({
     searchQuery: searchParams.get("searchQuery") || "",
-    price_from: Number(searchParams.get("price_from")) || 5,
-    price_to: Number(searchParams.get("price_to")) || 2000,
+    price_from: Number(searchParams.get("price_from")) || priceRange?.min,
+    price_to: Number(searchParams.get("price_to")) || priceRange?.max,
     duration_from: Number(searchParams.get("duration_from")) || 1,
     duration_to: Number(searchParams.get("duration_to")) || 360,
     page: Number(searchParams.get("page")) || null,
@@ -160,8 +164,8 @@ const FilterSidebar = ({ isOpen, setIsOpen, type }) => {
               <h3>{t("projects.price")}</h3>
               <RangeInput
                 label="$"
-                min={1}
-                max={1000}
+                min={priceRange?.min}
+                max={priceRange?.max}
                 value={[filters.price_from, filters.price_to]}
                 handleSlide={(value) => handleSliderChange("price", value)}
                 aria-label="Select price range"
