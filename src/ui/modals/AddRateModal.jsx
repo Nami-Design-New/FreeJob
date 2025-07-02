@@ -50,9 +50,9 @@ export default function AddRateModal({ showModal, setShowModal, order }) {
       <Modal.Header className="border-0" closeButton>
         <Modal.Title>{t("comments.addComment")}</Modal.Title>
       </Modal.Header>
-      <Modal.Body className="add-work">
-        <div className="login-section">
-          <form className="form" onSubmit={handleSubmit}>
+      <Modal.Body className="add-work ">
+        <div className="login-section p-3 pt-0">
+          <form className="form align-items-stretch" onSubmit={handleSubmit}>
             <div className="stars">
               <div className="star-rating-service">
                 {[5, 4, 3, 2, 1].map((star) => (
@@ -76,7 +76,6 @@ export default function AddRateModal({ showModal, setShowModal, order }) {
                 ))}
               </div>
             </div>
-            <label>{t("comments.addComment")}</label>
             <FormTextArea
               label={t("comments.addComment")}
               value={formData.comment}

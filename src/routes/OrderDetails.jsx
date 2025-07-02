@@ -27,6 +27,7 @@ import DataLoader from "../ui/DataLoader";
 import ErrorPage from "./ErrorPage";
 import useGetOrder from "../hooks/orders/useGetOrder";
 import SubmitButton from "../ui/form/SubmitButton";
+import AddRateModal from "../ui/modals/AddRateModal";
 
 const OrderDetails = () => {
   const lang = useSelector((state) => state.language.lang);
@@ -41,7 +42,7 @@ const OrderDetails = () => {
 
   const [userType, setUserType] = useState(null);
   const [btn1Loading, setBtn1Loading] = useState(false);
-  const [, setShowRateModal] = useState(false);
+  const [showRateModal, setShowRateModal] = useState(false);
   const [loading, setLoading] = useState(false);
   const queryClient = useQueryClient();
   const user = useSelector((state) => state.authedUser.user);
@@ -75,7 +76,7 @@ const OrderDetails = () => {
     try {
       status === "canceled" ? setBtn1Loading(true) : setLoading(true);
       await updateOrder(order?.id, status, queryClient);
-      
+
       refetchOrders();
       refetchPurchases();
     } catch (error) {
@@ -251,11 +252,16 @@ const OrderDetails = () => {
                     name={t("recievedOrders.RateService")}
                     onClick={() => setShowRateModal(true)}
                   />
-                )}{" "}
+                )}
             </div>
           </section>
         </section>
       </section>
+      <AddRateModal
+        order={order}
+        showModal={showRateModal}
+        setShowModal={setShowRateModal}
+      />
     </section>
   );
 };
