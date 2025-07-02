@@ -28,7 +28,7 @@ export default function NotificationDropdown() {
         id="dropdown-basic"
       >
         <i className="fa-regular fa-bell " style={{ color: "#000" }}></i>
-        <span className="num-count">{user?.receive_notification || 0}</span>
+        {/* <span className="num-count">{user?.receive_notification || 0}</span> */}
       </Dropdown.Toggle>
       <Dropdown.Menu align="start">
         <div className="scroll_menu">

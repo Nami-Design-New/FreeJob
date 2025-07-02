@@ -686,6 +686,7 @@
     "area": "Area",
     "edit": "Save",
     "add": "Add",
+     "noBank":"There Is No Bank Account",
     "nameMatchingCondition": "This is my account, and the beneficiary's name matches the name registered in my verified ID",
     "bankMatchingCondition": "The account information I entered is provided by the bank and exactly matches what is registered with it",
     "responsibilityCondition": "I alone am responsible for any loss resulting from entering incorrect or inaccurate information",

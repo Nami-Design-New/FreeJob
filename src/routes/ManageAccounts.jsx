@@ -36,7 +36,9 @@ const ManageAccounts = () => {
         <section className="empty_bank_account">
           <img src="/images/bank-building.png" />
           <section className="add_bank_account">
-            <h3>There Is No Bank Account</h3>
+            <h3>
+              {t("manageAccounts.noBank")}
+            </h3>
             <button
               className="add_btn"
               onClick={() => navigate("/add-bank-account")}

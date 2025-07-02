@@ -112,17 +112,26 @@ export async function getLatestProjects() {
   }
 }
 
-export async function getProjectByName(title) {
+// export async function getProjectByName(title) {
+//   try {
+//     const req = await axiosInstance.post("/get_project_details", {
+//       title,
+//     });
+//     return req.data.data;
+//   } catch (error) {
+//     throw new Error(error.message);
+//   }
+// }
+export async function getProjectById(project_id) {
   try {
-    const req = await axiosInstance.post("/get_project_details", {
-      title,
+    const req = await axiosInstance.post("/get_project_id_details", {
+      project_id,
     });
     return req.data.data;
   } catch (error) {
     throw new Error(error.message);
   }
 }
-
 export async function getProjectRequests(id, type) {
   try {
     const req = await axiosInstance.post(

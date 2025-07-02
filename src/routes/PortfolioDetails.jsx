@@ -18,6 +18,12 @@ export default function PortfolioDetails() {
   const { t } = useTranslation();
   const { data, isLoading } = useGetWork();
   const [mainImage, setMainImage] = useState(null);
+  const [isLoved, setIsLoved] = useState(false);
+
+  function toggleLove() {
+    setIsLoved(!isLoved);
+  }
+
   useEffect(() => {
     if (data?.images?.length) {
       setMainImage(data.images[0].image);
@@ -47,18 +53,19 @@ export default function PortfolioDetails() {
           <section className="portfolio_details row">
             <section className="col-md-5">
               <section className="gallery-container ">
+
                 <div className="main-image">
                   <img src={mainImage} alt="Main" />
                 </div>
                 <div className="thumbnail-container">
+
                   {data?.images.map((img) => (
                     <img
                       key={img.id}
                       src={img?.image}
                       alt={`Thumbnail ${img.id + 1}`}
-                      className={`thumbnail ${
-                        mainImage === img?.image ? "active" : ""
-                      }`}
+                      className={`thumbnail ${mainImage === img?.image ? "active" : ""
+                        }`}
                       onClick={() => setMainImage(img.image)}
                     />
                   ))}
@@ -66,8 +73,18 @@ export default function PortfolioDetails() {
               </section>
             </section>
             <section className="about mt-3 mt-md-0 col-md-7">
-              <h6>{data?.title}</h6>
+              <h6> <button
+                className={`likes like-btn ${isLoved ? "active" : ""}`}
+                onClick={toggleLove}
+              >
+              <i className="fa-solid fa-thumbs-up"></i>
+              </button> {data?.title}  </h6>
               <p>{data?.description}</p>
+              <section className="likes-wrap">
+
+
+              </section>
+
               <section className="info">
                 {" "}
                 <div className="info-item">
