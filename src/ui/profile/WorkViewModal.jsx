@@ -109,14 +109,17 @@ function WorkViewModal({ showModal, setShowModal, targetWork }) {
                 <>
                   {isLike ? (
                     <button
-                      className="like-btn liked can-like"
+                      className="like-btn liked liked"
                       onClick={handleRemoveLike}
                     >
-                      <i className="fa-sharp fa-solid fa-heart can-like"></i>{" "}
+                      <i className="fa-sharp fa-solid fa-heart"></i>{" "}
                       {t("likeIt")}
                     </button>
                   ) : (
-                    <button className="like-btn" onClick={handleAddLike}>
+                    <button
+                      className="like-btn can-like"
+                      onClick={handleAddLike}
+                    >
                       <i className="fa-sharp fa-solid fa-heart"></i>{" "}
                       {t("notLikeIt")}
                     </button>

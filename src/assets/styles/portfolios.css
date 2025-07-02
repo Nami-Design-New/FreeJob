@@ -346,7 +346,6 @@
       line-height: 1.6;
     }
 
-
     .info {
       display: flex;
       gap: 30px;
@@ -396,16 +395,25 @@
   background-color: transparent;
   padding: 6px;
   border-radius: 6px;
-  color: #333; 
+  color: #333;
   font-size: 1.2rem;
   cursor: pointer;
   transition: color 0.3s, transform 0.2s;
-
+  &.liked {
+    i {
+      color: red;
+    }
+  }
+  &.can-like {
+    i {
+      color: black;
+    }
+  }
   &:hover {
     transform: scale(1.1);
   }
 
   &.active {
-    color: #3967e6; 
+    color: #3967e6;
   }
 }

@@ -5,24 +5,45 @@ import { useEffect, useState } from "react";
 import { calculateDate } from "../utils/helper";
 import { Link } from "react-router-dom";
 import DataLoader from "../ui/DataLoader";
-// const images = [
-//   " https://placehold.co/400",
-//   " https://placehold.co/500x400",
-//   " https://placehold.co/100",
-//   " https://placehold.co/200",
-//   " https://placehold.co/700",
-//   " https://placehold.co/300",
-// ];
+import axiosInstance from "../utils/axios";
+import { useSelector } from "react-redux";
+import { useQueryClient } from "@tanstack/react-query";
 
 export default function PortfolioDetails() {
   const { t } = useTranslation();
   const { data, isLoading } = useGetWork();
   const [mainImage, setMainImage] = useState(null);
-  const [isLoved, setIsLoved] = useState(false);
+  // const [isLike, setIsLike] = useState(data?.liked);
+  const logged = useSelector((state) => state.authedUser.isLogged);
+  const queryClient = useQueryClient();
 
-  function toggleLove() {
-    setIsLoved(!isLoved);
-  }
+  const handleAddLike = async (id) => {
+    try {
+      const res = await axiosInstance.post("/user/addLike", {
+        my_work_id: id,
+      });
+      if (res.data.code === 200) {
+        queryClient.invalidateQueries({ queryKey: ["work"] });
+        // refetch();
+      }
+    } catch (error) {
+      throw new Error(error.message);
+    }
+  };
+
+  const handleRemoveLike = async (id) => {
+    try {
+      const res = await axiosInstance.post("/user/deleteLike", {
+        my_work_id: id,
+      });
+      if (res.data.code === 200) {
+        queryClient.invalidateQueries({ queryKey: ["work"] });
+        // refetch();
+      }
+    } catch (error) {
+      throw new Error(error.message);
+    }
+  };
 
   useEffect(() => {
     if (data?.images?.length) {
@@ -53,19 +74,18 @@ export default function PortfolioDetails() {
           <section className="portfolio_details row">
             <section className="col-md-5">
               <section className="gallery-container ">
-
                 <div className="main-image">
                   <img src={mainImage} alt="Main" />
                 </div>
                 <div className="thumbnail-container">
-
                   {data?.images.map((img) => (
                     <img
                       key={img.id}
                       src={img?.image}
                       alt={`Thumbnail ${img.id + 1}`}
-                      className={`thumbnail ${mainImage === img?.image ? "active" : ""
-                        }`}
+                      className={`thumbnail ${
+                        mainImage === img?.image ? "active" : ""
+                      }`}
                       onClick={() => setMainImage(img.image)}
                     />
                   ))}
@@ -73,17 +93,33 @@ export default function PortfolioDetails() {
               </section>
             </section>
             <section className="about mt-3 mt-md-0 col-md-7">
-              <h6> <button
-                className={`likes like-btn ${isLoved ? "active" : ""}`}
-                onClick={toggleLove}
-              >
-              <i className="fa-solid fa-thumbs-up"></i>
-              </button> {data?.title}  </h6>
+              <div className="d-flex align-items-center justify-content-between">
+                <h6>{data?.title} </h6>
+                {logged && !data?.is_my_work && (
+                  <>
+                    {data.liked ? (
+                      <button
+                        className="like-btn liked liked"
+                        onClick={() => handleRemoveLike(data?.id)}
+                      >
+                        <i className="fa-sharp fa-solid fa-heart "></i>{" "}
+                        {t("likeIt")}
+                      </button>
+                    ) : (
+                      <button
+                        className="like-btn can-like"
+                        onClick={() => handleAddLike(data?.id)}
+                      >
+                        <i className="fa-sharp fa-solid fa-heart"></i>{" "}
+                        {t("notLikeIt")}
+                      </button>
+                    )}
+                  </>
+                )}
+              </div>
+
               <p>{data?.description}</p>
-              <section className="likes-wrap">
-
-
-              </section>
+              <section className="likes-wrap"></section>
 
               <section className="info">
                 {" "}
