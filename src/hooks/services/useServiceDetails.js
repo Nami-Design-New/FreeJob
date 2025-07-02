@@ -3,11 +3,11 @@ import { useParams } from "react-router";
 import { getServiceDetails } from "../../services/apiServices";
 
 function useServiceDetails() {
-  const { service_id } = useParams();
+  const { id } = useParams();
 
   const { isLoading, data, error } = useQuery({
-    queryKey: ["serviceDetails", service_id],
-    queryFn: () => getServiceDetails(service_id),
+    queryKey: ["serviceDetails", id],
+    queryFn: () => getServiceDetails(id),
     retry: false,
     refetchOnWindowFocus: false,
     refetchOnMount: false,

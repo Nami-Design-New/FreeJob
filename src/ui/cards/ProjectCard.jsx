@@ -57,7 +57,7 @@ export default function ProjectCard({ project, isProfile }) {
         <div>
           {" "}
           <div className="project_content">
-            <Link to={`/projects/${title}`}>
+            <Link to={`/projects/${project?.id}`}>
               <h1>{title}</h1>
               <p>{truncateText}</p>
             </Link>
@@ -105,11 +105,11 @@ export default function ProjectCard({ project, isProfile }) {
               </div>
             )}
           {!isProfile && (
-             <Link
-            to={`/profile/${project?.user?.id}`}>
-            <button className="project_settings_button">
+            <Link
+              className="project_settings_button"
+              to={`/projects/${project?.id}`}
+            >
               {lang === "ar" ? <FaArrowLeft /> : <FaArrowRight />}
-            </button>
             </Link>
           )}
         </div>

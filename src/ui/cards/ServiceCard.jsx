@@ -9,7 +9,7 @@ export default function ServiceCard({ service, canEdit, handleDelete }) {
   const { t } = useTranslation();
   const navigate = useNavigate();
   return (
-    <Link to={`/services/${service.id}/${service.title}`} className="w-100">
+    <Link to={`/services/${service.id}`} className="w-100">
       <section className="service_card">
         <section className="image_container ">
           <img src={service.image} />
